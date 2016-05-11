@@ -2,7 +2,7 @@
 #'
 #' @param ip IP Address (String)
 #' 
-#' @return data frame
+#' @return list
 #'  
 #' @export
 #' @references \url{https://www.virustotal.com/en/documentation/public-api/}
@@ -15,7 +15,10 @@ ip_report <- function(ip = NULL) {
 	key <- Sys.getenv("VirustotalToken")
     
     params <- list(ip = ip, apikey=key)
-    res    <- GET("https://www.virustotal.com/vtapi/v2/ip/report", query = params)
-    as.data.frame(do.call(cbind,content(res)))
+    res    <- GET("http://www.virustotal.com/vtapi/v2/ip-address/report", query = params)
+
+    if (identical(content(res), NULL)) return(NULL)
+
+    content(res)
 }
 

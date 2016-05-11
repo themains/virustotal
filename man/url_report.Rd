@@ -7,7 +7,7 @@
 url_report(url = NULL)
 }
 \arguments{
-\item{url}{}
+\item{url}{url}
 }
 \value{
 data frame

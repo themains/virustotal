@@ -7,7 +7,7 @@
 domain_report(domain = NULL)
 }
 \arguments{
-\item{domain}{}
+\item{domain}{domain name (string)}
 }
 \value{
 data frame

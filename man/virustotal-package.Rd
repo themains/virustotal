@@ -6,16 +6,13 @@
 \alias{virustotal-package}
 \title{virustotal: Access Virustotal API}
 \description{
-Get Description of Images. Understand what is in the images. See \url{http://clarifai.com/}. 
-Details about results of calls to the API can be found at \url{https://developer.clarifai.com}.
+Access virustotal API. See \url{https://www.virustotal.com/}. 
+Details about results of calls to the API can be found at \url{https://www.virustotal.com/en/documentation/public-api/}.
 
 Your need credentials to use this application. 
-If you haven't already, you can get this at \url{https://developer.clarifai.com/}.
+If you haven't already, you can get this at \url{https://www.virustotal.com/}.
 }
 \author{
 Gaurav Sood
-}
-\seealso{
-\code{\link{get_token}}
 }
 

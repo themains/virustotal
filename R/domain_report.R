@@ -1,6 +1,6 @@
 #' Get Domain Report
 #'
-#' @param domain
+#' @param domain domain name (string)
 #' 
 #' @return data frame
 #'  

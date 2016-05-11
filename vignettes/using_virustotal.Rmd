@@ -22,7 +22,7 @@ install_github("soodoku/virustotal")
 
 #### Load up the lib:
 
-```{r, eval=F}
+```{r load}
 library(virustotal)
 ```
 
@@ -47,11 +47,16 @@ domain_report("http://www.google.com")
 Get report on a domain, including URL:
 
 ```{r, url}
-url_report("http://www.google.com")
+head(url_report("http://www.google.com"), 10)
 ```
 
 #### Get IP report
 
 ```{r, ip}
-ip_report("8.8.8.8")
+head(ip_report("8.8.8.8"), 10)
+```
+#### Get File Report
+
+```{r, file}
+head(file_report("99017f6eebbac24f351415dd410d522d"), 10)
 ```

@@ -1,6 +1,6 @@
 #' Get URL Report
 #'
-#' @param url 
+#' @param url url
 #' 
 #' @return data frame
 #'  
@@ -14,10 +14,7 @@ url_report <- function(url = NULL) {
 
 	key <- Sys.getenv("VirustotalToken")
     
-    path   <- "url/report"
-    params <- list(resource = url,
-                   scan = "1",
-                   apikey=key)
+    params <- list(resource = url, scan = "1", apikey=key)
     res <- POST("https://www.virustotal.com/vtapi/v2/url/report", body = params)
     as.data.frame(do.call(cbind,content(res)))
 }
