@@ -1,0 +1,21 @@
+Package: virustotal
+Title: Access Virustotal API from R
+Version: 0.2
+Authors@R: person("Gaurav", "Sood", email = "gsood07@gmail.com", role = c("aut", "cre"))
+Maintainer: Gaurav Sood <gsood07@gmail.com>
+Description: Access Virustotal API. 
+URL: http://github.com/soodoku/virustotal
+BugReports: http://github.com/soodoku/virustotal/issues
+Depends:
+    R (>= 3.3.0)
+License: MIT + file LICENSE
+LazyData: true
+VignetteBuilder: knitr
+Imports:
+    curl,
+    jsonlite
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat
+RoxygenNote: 5.0.1

@@ -1,0 +1,57 @@
+---
+title: "Using virustotal"
+author: "Gaurav Sood"
+date: "2015-11-10"
+vignette: >
+  %\VignetteIndexEntry{Using virustotal}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Using virustotal
+
+### Installation
+
+To get the current development version from GitHub:
+
+
+```{r, eval=F}
+#library("devtools")
+install_github("soodoku/virustotal")
+```
+
+#### Load up the lib:
+
+```{r, eval=F}
+library(virustotal)
+```
+
+#### Authentication
+
+Start by getting the API key from [https://www.virustotal.com/](https://www.virustotal.com/). Next, set it:
+
+```{r api_key}
+set_key("a02e20acc06810579d7ae83e6a3690aaa18bc0c072b31a1d9723da812ea1e017")
+```
+
+#### Get domain report
+
+Get report on a domain, including passive DNS:
+
+```{r domain}
+domain_report("http://www.google.com")
+```
+
+#### Get URL report
+
+Get report on a domain, including URL:
+
+```{r, url}
+url_report("http://www.google.com")
+```
+
+#### Get IP report
+
+```{r, ip}
+ip_report("8.8.8.8")
+```
