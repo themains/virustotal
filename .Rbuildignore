@@ -5,3 +5,4 @@ appveyor.yml
 ^\.httr-oauth$
 ^dev$
 ^cran-comments.md$
+^tests\testthat\virustotal_api_key.enc$
