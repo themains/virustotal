@@ -16,5 +16,6 @@ Imports:
 Suggests:
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    secure
 RoxygenNote: 5.0.1

@@ -30,8 +30,8 @@ library(virustotal)
 
 Start by getting the API key from [https://www.virustotal.com/](https://www.virustotal.com/). Next, set it:
 
-```{r api_key}
-set_key("a02e20acc06810579d7ae83e6a3690aaa18bc0c072b31a1d9723da812ea1e017")
+```{r, eval=F, api_key}
+set_key("")
 ```
 
 #### Get domain report
