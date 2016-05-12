@@ -31,14 +31,14 @@ library(virustotal)
 Start by getting the API key from [https://www.virustotal.com/](https://www.virustotal.com/). Next, set it:
 
 ```{r, eval=F, api_key}
-set_key("")
+set_key("your_key")
 ```
 
 #### Get domain report
 
 Get report on a domain, including passive DNS:
 
-```{r domain}
+```{r, eval=F,  domain}
 domain_report("http://www.google.com")
 ```
 
@@ -46,17 +46,17 @@ domain_report("http://www.google.com")
 
 Get report on a domain, including URL:
 
-```{r, url}
+```{r, eval=F, url}
 head(url_report("http://www.google.com"), 10)
 ```
 
 #### Get IP report
 
-```{r, ip}
+```{r, eval=F, ip}
 head(ip_report("8.8.8.8"), 10)
 ```
 #### Get File Report
 
-```{r, file}
+```{r, eval=F, file}
 head(file_report("99017f6eebbac24f351415dd410d522d"), 10)
 ```
