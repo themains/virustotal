@@ -16,6 +16,9 @@ url_report <- function(url = NULL) {
     
     params <- list(resource = url, scan = "1", apikey=key)
     res <- POST("https://www.virustotal.com/vtapi/v2/url/report", body = params)
+    
+    if (identical(content(res), NULL)) return(NULL)
+
     as.data.frame(do.call(cbind,content(res)))
 }
 
