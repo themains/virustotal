@@ -10,5 +10,5 @@ test_that("can decrypt secrets", {
 
     set_key(token)
     report <- url_report("http://www.google.com")
-  	expect_that(report, is_a("list"))
+  	expect_that(report, is_a("data.frame"))
   })
