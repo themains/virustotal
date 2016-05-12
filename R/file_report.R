@@ -16,6 +16,9 @@ file_report <- function(hash = NULL) {
     
     params <- list(resource = hash, apikey=key)
     res    <- GET("https://www.virustotal.com/vtapi/v2/file/report", query = params)
+
+    if (identical(content(res), NULL)) return(NULL)
+
     as.data.frame(do.call(cbind,content(res)))
 }
 
