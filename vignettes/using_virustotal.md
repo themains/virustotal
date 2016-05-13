@@ -1,7 +1,7 @@
 ---
 title: "Using virustotal"
 author: "Gaurav Sood"
-date: "`r Sys.Date()`"
+date: "2016-05-13"
 vignette: >
   %\VignetteIndexEntry{Using virustotal}
   %\VignetteEngine{knitr::rmarkdown}
@@ -15,22 +15,29 @@ vignette: >
 To get the current development version from GitHub:
 
 
-```{r, eval=F}
+
+```r
 #library("devtools")
 install_github("soodoku/virustotal")
 ```
 
 #### Load up the lib:
 
-```{r load}
+
+```r
 library(virustotal)
+```
+
+```
+## Error in library(virustotal): there is no package called 'virustotal'
 ```
 
 #### Authentication
 
 Start by getting the API key from [https://www.virustotal.com/](https://www.virustotal.com/). Next, set it:
 
-```{r, eval=F, api_key}
+
+```r
 set_key("your_key")
 ```
 
@@ -38,7 +45,8 @@ set_key("your_key")
 
 Get report on a domain, including passive DNS:
 
-```{r, eval=F,  domain}
+
+```r
 domain_report("http://www.google.com")
 ```
 
@@ -46,17 +54,20 @@ domain_report("http://www.google.com")
 
 Get report on a domain, including URL:
 
-```{r, eval=F, url}
+
+```r
 head(url_report("http://www.google.com"), 10)
 ```
 
 #### Get IP report
 
-```{r, eval=F, ip}
+
+```r
 head(ip_report("8.8.8.8"), 10)
 ```
 #### Get File Report
 
-```{r, eval=F, file}
+
+```r
 head(file_report("99017f6eebbac24f351415dd410d522d"), 10)
 ```

@@ -12,3 +12,4 @@ test_that("can decrypt secrets", {
     report <- url_report("http://www.google.com")
   	expect_that(report, is_a("data.frame"))
   })
+
