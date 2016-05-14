@@ -14,3 +14,16 @@
 #' @docType package
 #' @author Gaurav Sood
 NULL
+
+#'
+#' Request Response Verification
+#' 
+#' @param  req request
+#' @return in case of failure, a message
+
+virustotal_check <- 
+function(req) {
+  if (req$status_code < 400) return(invisible())
+
+  stop("HTTP failure: ", req$status_code, "\n", call. = FALSE)
+} 

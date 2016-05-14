@@ -10,14 +10,14 @@ file_report(hash = NULL)
 \item{hash}{Hash for the scan}
 }
 \value{
-data frame
+data.frame
 }
 \description{
 Get File Scan Report
 }
 \examples{
 \dontrun{
-file_report(hash='hash')
+file_report(hash='99017f6eebbac24f351415dd410d522d')
 }
 }
 \references{

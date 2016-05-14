@@ -17,7 +17,7 @@ ip_report <- function(ip = NULL) {
     params <- list(ip = ip, apikey=key)
     res    <- GET("http://www.virustotal.com/vtapi/v2/ip-address/report", query = params)
 
-    if (identical(content(res), NULL)) return(NULL)
+    virustotal_check(res)
 
     content(res)
 }

@@ -14,7 +14,7 @@ Set API Key
 }
 \examples{
 \dontrun{
-set_token('api_key_here')
+set_key('api_key_here')
 }
 }
 \references{

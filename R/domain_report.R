@@ -14,11 +14,13 @@ domain_report <- function(domain = NULL) {
 
 	key <- Sys.getenv("VirustotalToken")
     
+    if (identical(key, "")) stop("Set API Key using set_key()")
+
     params <- list(domain = domain, apikey=key)
     
     res <- GET("http://www.virustotal.com/vtapi/v2/domain/report", body = params)
 
-    if (identical(content(res), NULL)) return(NULL)
+    virustotal_check(res)
 
     as.data.frame(do.call(cbind, content(res)))
 }
