@@ -10,7 +10,7 @@
 #' If you haven't already, you can get this at \url{https://www.virustotal.com/}.
 #'
 #'  
-#' @importFrom httr GET content POST
+#' @importFrom httr GET content POST upload_file
 #' @docType package
 #' @author Gaurav Sood
 NULL
