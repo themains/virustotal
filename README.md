@@ -5,6 +5,8 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/virustotal)](http://cran.r-project.org/package=virustotal)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/virustotal)
 
+Access VirusTotal, a Google service that analyzes files and URLs for viruses, worms, trojans etc. and also provides category of the content hosted by domain via websense (need a private API key for that). 
+
 ### Installation
 
 To get the current released version from CRAN:
@@ -19,12 +21,12 @@ install.packages("devtools")
 devtools::install_github("soodoku/virustotal", build_vignettes = TRUE)
 ```
 
-You can also launch vignettes within R:
+Read a [vignette](vignettes/using_virustotal.md) about how to use virustotal. Or launch the vignette within R:
 
 ```r
 # Using virustotal
 vignette("using_virustotal", package = "virustotal")
 ```
------------------------------------
+
 ### License
 Scripts are released under [MIT License](https://opensource.org/licenses/MIT).
