@@ -12,8 +12,7 @@
 
 domain_report <- function(domain = NULL) {
 
-	key <- Sys.getenv("VirustotalToken")
-    
+	key <- Sys.getenv("VirustotalToken")    
     if (identical(key, "")) stop("Set API Key using set_key()")
 
     params <- list(domain = domain, apikey=key)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ip_report.R
 \name{ip_report}
 \alias{ip_report}
-\title{Get URL Report}
+\title{Get IP Report}
 \usage{
 ip_report(ip = NULL)
 }
@@ -10,10 +10,10 @@ ip_report(ip = NULL)
 \item{ip}{IP Address (String)}
 }
 \value{
-list
+named list with the following items: undetected_referrer_samples, detected_downloaded_samples, detected_referrer_samples, undetected_downloaded_samples, detected_urls, undetected_downloaded_samples,
 }
 \description{
-Get URL Report
+Get passive DNS data and URLs detected by URL scanners
 }
 \examples{
 \dontrun{

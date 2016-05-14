@@ -4,16 +4,18 @@
 \alias{url_report}
 \title{Get URL Report}
 \usage{
-url_report(url = NULL)
+url_report(url = NULL, scan = 1)
 }
 \arguments{
-\item{url}{url}
+\item{url}{url; string; required}
+
+\item{scan}{numeric; optional; when set to 1, submits url for scan if no existing reports are found}
 }
 \value{
 data frame
 }
 \description{
-Get URL Report
+Retrieve a scan report on a given URL
 }
 \examples{
 \dontrun{

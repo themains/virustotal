@@ -1,8 +1,10 @@
-#' Get URL Report
+#' Get IP Report
+#' 
+#' Get passive DNS data and URLs detected by URL scanners 
 #'
 #' @param ip IP Address (String)
 #' 
-#' @return list
+#' @return named list with the following items: undetected_referrer_samples, detected_downloaded_samples, detected_referrer_samples, undetected_downloaded_samples, detected_urls, undetected_downloaded_samples, 
 #'  
 #' @export
 #' @references \url{https://www.virustotal.com/en/documentation/public-api/}
@@ -19,6 +21,10 @@ ip_report <- function(ip = NULL) {
 
     virustotal_check(res)
 
-    content(res)
+    res_list <- content(res)
+
+    # undetected_downloaded_samples <- as.data.frame(do.call(rbind, res_list$undetected_downloaded_samples))
+
+    res_list 
 }
 
