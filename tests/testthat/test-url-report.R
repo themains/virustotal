@@ -7,7 +7,8 @@ test_that("can decrypt secrets", {
 
     token_file <- file("virustotal_api_key", "r")
     token <- suppressWarnings(readLines(token_file))
-
+    close(token_file)
+    
     set_key(token)
     report <- url_report("http://www.google.com")
   	expect_that(report, is_a("data.frame"))
