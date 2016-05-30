@@ -29,4 +29,4 @@ vignette("using_virustotal", package = "virustotal")
 ```
 
 ### License
-Scripts are released under [MIT License](https://opensource.org/licenses/MIT).
+Scripts are released under the [MIT License](https://opensource.org/licenses/MIT).
