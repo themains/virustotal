@@ -4,10 +4,12 @@
 \alias{scan_url}
 \title{Submit URL for Scanning}
 \usage{
-scan_url(url = NULL)
+scan_url(url = NULL, ...)
 }
 \arguments{
 \item{url}{url; string; required}
+
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
 \value{
 data frame

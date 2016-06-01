@@ -4,10 +4,12 @@
 \alias{rescan_file}
 \title{Rescan already submitted files}
 \usage{
-rescan_file(hash = NULL)
+rescan_file(hash = NULL, ...)
 }
 \arguments{
 \item{hash}{Hash for the scan}
+
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
 \value{
 data.frame with 12 columns: scans, scan_id, sha1, resource, response_code, scan_date

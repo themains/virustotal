@@ -4,10 +4,12 @@
 \alias{ip_report}
 \title{Get IP Report}
 \usage{
-ip_report(ip = NULL)
+ip_report(ip = NULL, ...)
 }
 \arguments{
 \item{ip}{IP Address (String)}
+
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
 named list with the following items: undetected_referrer_samples, detected_downloaded_samples, detected_referrer_samples, undetected_downloaded_samples, detected_urls, undetected_downloaded_samples,

@@ -8,6 +8,8 @@ file_report(hash = NULL)
 }
 \arguments{
 \item{hash}{Hash for the scan}
+
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
 data.frame with 12 columns: scans, scan_id, sha1, resource, response_code, scan_date

@@ -9,8 +9,8 @@
 Access virustotal API. See \url{https://www.virustotal.com/}. 
 Details about results of calls to the API can be found at \url{https://www.virustotal.com/en/documentation/public-api/}.
 
-Your need credentials to use this application. 
-If you haven't already, you can get this at \url{https://www.virustotal.com/}.
+You will need credentials to use this application. 
+If you haven't already, get the API Key at \url{https://www.virustotal.com/}.
 }
 \author{
 Gaurav Sood

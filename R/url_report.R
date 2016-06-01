@@ -4,7 +4,8 @@
 #' 
 #' @param url url; string; required
 #' @param scan numeric; optional; when set to 1, submits url for scan if no existing reports are found
-#' 
+#' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
+#'  
 #' @return data frame
 #'  
 #' @export
@@ -13,17 +14,16 @@
 #' url_report(url="http://www.google.com")
 #' }
 
-url_report <- function(url = NULL, scan=1) {
+url_report <- function(url = NULL, scan=1, ...) {
 
-	key <- Sys.getenv("VirustotalToken")
+	if (!is.character(url)) {
+        stop("Must specify url")
+    }
+
+    params <- list(resource = url, scan = scan)
     
-    if (identical(key, "")) stop("Set API Key using set_key()")
-
-    params <- list(resource = url, scan = scan, apikey=key)
-    res    <- POST("https://www.virustotal.com/vtapi/v2/url/report", body = params)
+    res   <- virustotal_POST(path="url/report", query = params, ...)
     
-    virustotal_check(res)
-
     if (identical(content(res), NULL)) return(NULL)
 
     as.data.frame(do.call(cbind,content(res)))

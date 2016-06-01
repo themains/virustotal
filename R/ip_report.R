@@ -3,6 +3,7 @@
 #' Get passive DNS data and URLs detected by URL scanners 
 #'
 #' @param ip IP Address (String)
+#' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
 #' @return named list with the following items: undetected_referrer_samples, detected_downloaded_samples, detected_referrer_samples, undetected_downloaded_samples, detected_urls, undetected_downloaded_samples, 
 #'  
@@ -12,19 +13,16 @@
 #' ip_report(ip="8.8.8.8")
 #' }
 
-ip_report <- function(ip = NULL) {
+ip_report <- function(ip = NULL, ...) {
 
-	key <- Sys.getenv("VirustotalToken")
-    
-    params <- list(ip = ip, apikey=key)
-    res    <- GET("http://www.virustotal.com/vtapi/v2/ip-address/report", query = params)
+    if (!is.character(ip)) {
+        stop("Must specify IP")
+    }
 
-    virustotal_check(res)
+    params <- list(ip = ip)
 
-    res_list <- content(res)
+    res   <- virustotal_GET(path="ip-address/report", query = params, ...)
 
-    # undetected_downloaded_samples <- as.data.frame(do.call(rbind, res_list$undetected_downloaded_samples))
-
-    res_list 
+    res
 }
 

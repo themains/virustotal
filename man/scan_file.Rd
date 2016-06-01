@@ -4,10 +4,12 @@
 \alias{scan_file}
 \title{Submit file for scanning}
 \usage{
-scan_file(file_path = NULL)
+scan_file(file_path = NULL, ...)
 }
 \arguments{
 \item{file_path}{Required; Path to the document}
+
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
 \value{
 data.frame

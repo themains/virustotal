@@ -1,6 +1,7 @@
 #' Submit file for scanning
 #'
 #' @param file_path Required; Path to the document
+#' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #' 
 #' @return data.frame
 #'  
@@ -10,20 +11,13 @@
 #' scan_file(file_path='path_to_suspicious_file')
 #' }
 
-scan_file <- function(file_path = NULL) {
-
-	key <- Sys.getenv("VirustotalToken")
-    
-    if (identical(key, "")) stop("Set API Key using set_key()")
+scan_file <- function(file_path = NULL, ...) {
 
 	if (!file.exists(file_path)) stop("File Doesn't Exist. Please check the path.")
 
-    params <- list(apikey=key)
-	body   <- upload_file(file_path)
+	body  <- upload_file(file_path)
 
-    res    <- POST("http://www.virustotal.com/vtapi/v2/file/scan", query=params, body=body)
-
-    virustotal_check(res)
+    res   <- virustotal_POST(path="file/scan", query = list(), body=body, ...)
 
     as.data.frame(do.call(cbind, content(res)))
 }

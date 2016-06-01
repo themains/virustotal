@@ -4,16 +4,19 @@
 \alias{domain_report}
 \title{Get Domain Report}
 \usage{
-domain_report(domain = NULL)
+domain_report(domain = NULL, ...)
 }
 \arguments{
 \item{domain}{domain name (string)}
+
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-data frame
+data.frame
 }
 \description{
-Get Domain Report
+Retrieves report on a given domain, including passive DNS, urls detected by at least one url scanner. 
+Currently seems to not respond to
 }
 \examples{
 \dontrun{

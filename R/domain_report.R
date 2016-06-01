@@ -1,26 +1,29 @@
 #' Get Domain Report
 #'
-#' @param domain domain name (string)
+#' Retrieves report on a given domain, including passive DNS, urls detected by at least one url scanner. 
+#' Currently seems to not respond to 
 #' 
-#' @return data frame
+#' @param domain domain name (string)
+#' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
+#' 
+#' @return data.frame
 #'  
 #' @export
 #' @references \url{https://www.virustotal.com/en/documentation/public-api/}
 #' @examples \dontrun{
-#' domain_report(domain="http://www.google.com")
+#' domain_report("http://www.google.com")
 #' }
 
-domain_report <- function(domain = NULL) {
+domain_report <- function(domain = NULL, ...) {
 
-	key <- Sys.getenv("VirustotalToken")    
-    if (identical(key, "")) stop("Set API Key using set_key()")
+    if (!is.character(domain)) {
+        stop("Must specify domain")
+    }
 
-    params <- list(domain = domain, apikey=key)
-    
-    res <- GET("http://www.virustotal.com/vtapi/v2/domain/report", body = params)
+    params <- list(domain = domain)
 
-    virustotal_check(res)
+    res   <- virustotal_GET(path="domain/report", query = params, ...)
 
-    as.data.frame(do.call(cbind, content(res)))
+    res
 }
 

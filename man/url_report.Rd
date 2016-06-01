@@ -4,12 +4,14 @@
 \alias{url_report}
 \title{Get URL Report}
 \usage{
-url_report(url = NULL, scan = 1)
+url_report(url = NULL, scan = 1, ...)
 }
 \arguments{
 \item{url}{url; string; required}
 
 \item{scan}{numeric; optional; when set to 1, submits url for scan if no existing reports are found}
+
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
 data frame
