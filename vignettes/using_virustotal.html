@@ -142,7 +142,9 @@ install_github(&quot;soodoku/virustotal&quot;)</code></pre>
 <div id="get-domain-report" class="section level4">
 <h4>Get domain report</h4>
 <p>Get report on a domain, including passive DNS:</p>
-<pre class="r"><code>domain_report(&quot;http://www.google.com&quot;)</code></pre>
+<pre class="r"><code>domain_report(&quot;http://www.google.com&quot;)$categories</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;searchengines&quot;</code></pre>
 </div>
 <div id="scan-url" class="section level4">
 <h4>Scan URL</h4>

@@ -38,9 +38,12 @@ set_key("your_key")
 Get report on a domain, including passive DNS:
 
 ```{r, eval=F,  domain}
-domain_report("http://www.google.com")
+domain_report("http://www.google.com")$categories
 ```
-
+```
+## [[1]]
+## [1] "searchengines"
+```
 #### Scan URL 
 
 ```{r, eval=F, scan_url}

@@ -12,11 +12,15 @@ domain_report(domain = NULL, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-data.frame
+names list with the following items: `BitDefender category`, undetected_referrer_samples, whois_timestamp,
+detected_downloaded_samples, detected_referrer_samples, `Webutation domain info`, `Alexa category`, undetected_downloaded_samples,
+resolutions, detected_communicating_samples, `Opera domain info`, `TrendMicro category`, categories, domain_siblings, 
+`BitDefender domain info`, whois, `Alexa domain info`, response_code, verbose_msg, `Websense ThreatSeeker category`, subdomains,
+`WOT domain info`, detected_urls, `Alexa rank`, undetected_communicating_samples, `Dr.Web category`, pcaps
 }
 \description{
 Retrieves report on a given domain, including passive DNS, urls detected by at least one url scanner. 
-Currently seems to not respond to
+Gives category of the domain from \url{http://www.bitdefender.com/}
 }
 \examples{
 \dontrun{

@@ -42,9 +42,12 @@ Get report on a domain, including passive DNS:
 
 
 ```r
-domain_report("http://www.google.com")
+domain_report("http://www.google.com")$categories
 ```
-
+```
+## [[1]]
+## [1] "searchengines"
+```
 #### Scan URL 
 
 

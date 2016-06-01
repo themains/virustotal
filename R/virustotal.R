@@ -37,7 +37,7 @@ function(query=list(), path = path, key = Sys.getenv("VirustotalToken"), ...) {
 	query$apikey <- key
 
 	res <- GET("http://www.virustotal.com/", path = paste0("vtapi/v2/", path), query = query, ...)
-	#virustotal_check(res)
+	virustotal_check(res)
 	res <- content(res)
 
 	res
