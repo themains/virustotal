@@ -1,9 +1,9 @@
 Package: virustotal
-Title: R client for the virustotal API
+Title: R Client for the Virustotal API
 Version: 0.1.0
 Authors@R: person("Gaurav", "Sood", email = "gsood07@gmail.com", role = c("aut", "cre"))
 Maintainer: Gaurav Sood <gsood07@gmail.com>
-Description: Access VirusTotal, a Google service that analyzes files and URLs for viruses, worms, trojans etc. and also provides category of the content hosted by domain via websense (need a private API key for that). 
+Description: Access VirusTotal, a Google service that analyzes files and URLs for viruses, worms, trojans etc. and also provides category of the content hosted by domain via websense, ALexa, bitdefender, among others. 
 URL: http://github.com/soodoku/virustotal
 BugReports: http://github.com/soodoku/virustotal/issues
 Depends:

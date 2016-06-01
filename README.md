@@ -5,7 +5,7 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/virustotal)](http://cran.r-project.org/package=virustotal)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/virustotal)
 
-Access VirusTotal, a Google service that analyzes files and URLs for viruses, worms, trojans etc. and also provides category of the content hosted by domain via websense (need a private API key for that). 
+Access VirusTotal, a Google service that analyzes files and URLs for viruses, worms, trojans etc. and also provides category of the content hosted by domain via websense, Alexa, BitDefender, among others.  
 
 ### Installation
 
