@@ -11,7 +11,7 @@ virustotal_GET(query, path = path, key = Sys.getenv("VirustotalToken"), ...)
 
 \item{path}{path to the specific API service url}
 
-\item{key}{A character string containing an AWS Access Key ID. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.}
+\item{key}{A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.}
 
 \item{\dots}{Additional arguments passed to \code{\link[httr]{GET}}.}
 }

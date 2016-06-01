@@ -1,3 +1,5 @@
-# virustotal .1
+# virustotal 0.1.0
+
+* Initial release
 
   

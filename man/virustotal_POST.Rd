@@ -2,7 +2,7 @@
 % Please edit documentation in R/virustotal.R
 \name{virustotal_POST}
 \alias{virustotal_POST}
-\title{Base POST AND GET functions. Not exported.}
+\title{POST}
 \usage{
 virustotal_POST(query, path = path, key = Sys.getenv("VirustotalToken"),
   ...)
@@ -12,7 +12,7 @@ virustotal_POST(query, path = path, key = Sys.getenv("VirustotalToken"),
 
 \item{path}{path to the specific API service url}
 
-\item{key}{A character string containing an AWS Access Key ID. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.}
+\item{key}{A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.}
 
 \item{\dots}{Additional arguments passed to \code{\link[httr]{POST}}.}
 }

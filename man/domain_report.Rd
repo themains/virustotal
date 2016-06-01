@@ -20,7 +20,7 @@ Currently seems to not respond to
 }
 \examples{
 \dontrun{
-domain_report(domain="http://www.google.com")
+domain_report("http://www.google.com")
 }
 }
 \references{

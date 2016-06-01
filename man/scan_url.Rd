@@ -19,7 +19,7 @@ Submit URL for Scanning
 }
 \examples{
 \dontrun{
-scan_url(url="http://www.google.com")
+scan_url("http://www.google.com")
 }
 }
 \references{

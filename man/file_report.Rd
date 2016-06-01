@@ -4,7 +4,7 @@
 \alias{file_report}
 \title{Get File Scan Report}
 \usage{
-file_report(hash = NULL)
+file_report(hash = NULL, ...)
 }
 \arguments{
 \item{hash}{Hash for the scan}
