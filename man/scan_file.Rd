@@ -12,7 +12,7 @@ scan_file(file_path = NULL, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
 \value{
-data.frame
+data.frame with the following columns: scan_id, sha1, resource, response_code, sha256, permalink, md5, verbose_msg
 }
 \description{
 Submit file for scanning

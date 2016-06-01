@@ -104,6 +104,16 @@ head(file_report("99017f6eebbac24f351415dd410d522d")[,1:2], 10)
 ## SUPERAntiSpyware                               FALSE, 5.6.0.1032, 20160601 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947
 ```
 
+#### Scan File 
+
+```{r, eval=F, scan_file}
+scan_file("using_virustotal.Rmd")[,1:2]
+```
+```
+##                                                                      scan_id                                     sha1
+## 1 a9e60cd4d1e3ea00a78f7e92b77f250b26297d79e387e30916de3973a03b28a0-1464822937 303e723fd79416c3a8f3ac8247f82ed2f22e635d
+```
+
 #### Rescan File
 
 ```{r, eval=F, rescan_file}

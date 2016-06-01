@@ -188,6 +188,12 @@ install_github(&quot;soodoku/virustotal&quot;)</code></pre>
 ## Zillya                   TRUE, 2.0.0.2901, Trojan.VB.Win32.33493, 20160531 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947
 ## SUPERAntiSpyware                               FALSE, 5.6.0.1032, 20160601 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947</code></pre>
 </div>
+<div id="scan-file" class="section level4">
+<h4>Scan File</h4>
+<pre class="r"><code>scan_file(&quot;using_virustotal.Rmd&quot;)[,1:2]</code></pre>
+<pre><code>##                                                                      scan_id                                     sha1
+## 1 a9e60cd4d1e3ea00a78f7e92b77f250b26297d79e387e30916de3973a03b28a0-1464822937 303e723fd79416c3a8f3ac8247f82ed2f22e635d</code></pre>
+</div>
 <div id="rescan-file" class="section level4">
 <h4>Rescan File</h4>
 <pre class="r"><code>rescan_file(hash='99017f6eebbac24f351415dd410d522d')[,1:2]</code></pre>
