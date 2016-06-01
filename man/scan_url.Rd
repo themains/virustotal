@@ -2,7 +2,7 @@
 % Please edit documentation in R/scan_url.R
 \name{scan_url}
 \alias{scan_url}
-\title{Submit URL for Scanning}
+\title{Submit URL for scanning}
 \usage{
 scan_url(url = NULL, ...)
 }
@@ -12,10 +12,10 @@ scan_url(url = NULL, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
 \value{
-data frame
+data.frame with 7 columns: permalink, resource, url, response_code, scan_date, scan_id, verbose_msg
 }
 \description{
-Submit URL for Scanning
+Submit URL for scanning
 }
 \examples{
 \dontrun{

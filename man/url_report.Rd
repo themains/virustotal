@@ -9,19 +9,19 @@ url_report(url = NULL, scan = 1, ...)
 \arguments{
 \item{url}{url; string; required}
 
-\item{scan}{numeric; optional; when set to 1, submits url for scan if no existing reports are found}
+\item{scan}{numeric; optional; when set to 1, submits url for scan if no existing reports are found; default is 1.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-data frame
+data.frame with 12 columns: scan_id, resource, url, response_code, scan_date, permalink, verbose_msg, positives, total, detected, result, detail
 }
 \description{
-Retrieve a scan report on a given URL
+Retrieve a scan report for a given URL
 }
 \examples{
 \dontrun{
-url_report(url="http://www.google.com")
+url_report("http://www.google.com")
 }
 }
 \references{

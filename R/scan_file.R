@@ -16,9 +16,11 @@ scan_file <- function(file_path = NULL, ...) {
 	if (!file.exists(file_path)) stop("File Doesn't Exist. Please check the path.")
 
 	body  <- upload_file(file_path)
+	file_name <- basename(file_path)
+	file <- paste("file", file_name, body)
 
-    res   <- virustotal_POST(path="file/scan", query = list(), body=body, ...)
+    res   <- virustotal_POST(path="file/scan", query=list(file=file_name), body= upload_file(file_path), encode="multipart", ...)
 
-    as.data.frame(do.call(cbind, content(res)))
+    as.data.frame(do.call(cbind, res))
 }
 

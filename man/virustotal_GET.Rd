@@ -4,7 +4,8 @@
 \alias{virustotal_GET}
 \title{Base POST AND GET functions. Not exported.}
 \usage{
-virustotal_GET(query, path = path, key = Sys.getenv("VirustotalToken"), ...)
+virustotal_GET(query = list(), path = path,
+  key = Sys.getenv("VirustotalToken"), ...)
 }
 \arguments{
 \item{query}{query list}

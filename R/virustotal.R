@@ -11,6 +11,7 @@
 #'
 #'  
 #' @importFrom httr GET content POST upload_file
+#' @importFrom plyr rbind.fill
 #' @docType package
 #' @author Gaurav Sood
 NULL
@@ -27,7 +28,7 @@ NULL
 #' @return list
 
 virustotal_GET <- 
-function(query, path = path, key = Sys.getenv("VirustotalToken"), ...) {
+function(query=list(), path = path, key = Sys.getenv("VirustotalToken"), ...) {
 
 	if (identical(key, "")) {
         stop("Please set application id and password using set_key(key='key')).")
@@ -36,7 +37,7 @@ function(query, path = path, key = Sys.getenv("VirustotalToken"), ...) {
 	query$apikey <- key
 
 	res <- GET("http://www.virustotal.com/", path = paste0("vtapi/v2/", path), query = query, ...)
-	virustotal_check(res)
+	#virustotal_check(res)
 	res <- content(res)
 
 	res
@@ -46,13 +47,14 @@ function(query, path = path, key = Sys.getenv("VirustotalToken"), ...) {
 #' POST
 #' 
 #' @param query query list 
+#' @param body file 
 #' @param path  path to the specific API service url
 #' @param key A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.
 #' @param \dots Additional arguments passed to \code{\link[httr]{POST}}.
 #' @return list
 
 virustotal_POST <- 
-function(query, path = path, key = Sys.getenv("VirustotalToken"), ...) {
+function(query=list(), path = path, body=NULL, key = Sys.getenv("VirustotalToken"), ...) {
 
 	if (identical(key, "")) {
         stop("Please set application id and password using set_key(key='key')).")
@@ -60,7 +62,7 @@ function(query, path = path, key = Sys.getenv("VirustotalToken"), ...) {
 
 	query$apikey <- key
 
-	res <- POST("http://www.virustotal.com/", path = paste0("vtapi/v2/", path), query = query, ...)
+	res <- POST("http://www.virustotal.com/", path = paste0("vtapi/v2/", path), query = query, body = body, ...)
 	virustotal_check(res)
 	res <- content(res)
 

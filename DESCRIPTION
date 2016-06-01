@@ -12,7 +12,8 @@ License: MIT + file LICENSE
 LazyData: true
 VignetteBuilder: knitr
 Imports:
-    httr
+    httr,
+    plyr
 Suggests:
     knitr,
     rmarkdown,

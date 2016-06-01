@@ -4,13 +4,15 @@
 \alias{virustotal_POST}
 \title{POST}
 \usage{
-virustotal_POST(query, path = path, key = Sys.getenv("VirustotalToken"),
-  ...)
+virustotal_POST(query = list(), path = path, body = NULL,
+  key = Sys.getenv("VirustotalToken"), ...)
 }
 \arguments{
 \item{query}{query list}
 
 \item{path}{path to the specific API service url}
+
+\item{body}{file}
 
 \item{key}{A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.}
 

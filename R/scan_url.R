@@ -1,9 +1,9 @@
-#' Submit URL for Scanning
+#' Submit URL for scanning
 #' 
 #' @param url url; string; required
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #' 
-#' @return data frame
+#' @return data.frame with 7 columns: permalink, resource, url, response_code, scan_date, scan_id, verbose_msg
 #'  
 #' @export
 #' @references \url{https://www.virustotal.com/en/documentation/public-api/}
@@ -19,6 +19,6 @@ scan_url <- function(url = NULL, ...) {
 
     res    <- virustotal_POST(path="url/scan", query = list(url = url), ...)
     
-    as.data.frame(do.call(cbind,content(res)))
+    as.data.frame(do.call(cbind, res))
 }
 

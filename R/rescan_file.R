@@ -22,6 +22,6 @@ rescan_file <- function(hash = NULL, ...) {
 
     res   <- virustotal_POST(path="file/rescan", query = params, ...)
 
-    as.data.frame(do.call(cbind, content(res)))
+    as.data.frame(do.call(cbind, res))
 }
 

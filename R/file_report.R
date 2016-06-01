@@ -21,6 +21,6 @@ file_report <- function(hash = NULL, ...) {
     params <- list(resource = hash)
     res    <- virustotal_GET(path="file/report", query = params, ...)
 
-    as.data.frame(do.call(cbind, content(res)))
+    as.data.frame(do.call(cbind, res))
 }
 
