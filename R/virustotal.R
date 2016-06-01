@@ -62,7 +62,7 @@ function(query, path = path, key = Sys.getenv("VirustotalToken"), ...) {
 
 	res <- POST("http://www.virustotal.com/", path = paste0("vtapi/v2/", path), query = query, ...)
 	virustotal_check(res)
-	res <- content(res, encoding="utf-8")
+	res <- content(res)
 
 	res
 }
