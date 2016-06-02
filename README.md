@@ -1,11 +1,21 @@
-## virustotal: R Client for the Virustotal Public API
+## virustotal: R Client for the Virustotal Public API 2.0
 
 [![Build Status](https://travis-ci.org/soodoku/virustotal.svg?branch=master)](https://travis-ci.org/soodoku/virustotal)
 [![Build status](https://ci.appveyor.com/api/projects/status/4aa0x74ggm51075o?svg=true)](https://ci.appveyor.com/project/soodoku/virustotal)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/virustotal)](http://cran.r-project.org/package=virustotal)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/virustotal)
 
-Use VirusTotal, a Google service that analyzes files and URLs for viruses, worms, trojans etc., provides category of the content hosted by a domain from a variety of prominent services, provides passive DNS information, among other things. See [http://www.virustotal.com](http://www.virustotal.com) for more information. 
+Use VirusTotal, a Google service that analyzes files and URLs for viruses, worms, trojans etc., provides category of the content hosted by a domain from a variety of prominent services, provides passive DNS information, among other things. 
+
+As of June, 2016, Public API 2.0 had the following rate limits:
+
+|---------------|-----------------------|
+| Request rate  | 4 requests/minute     |
+| Daily quota   | 5760 requests/day     |
+| Monthly quota | 178560 requests/month |
+|---------------|-----------------------|
+
+See [http://www.virustotal.com](http://www.virustotal.com) for more information. 
 
 ### Installation
 
