@@ -11,9 +11,9 @@ As of June, 2016, Public API 2.0 had the following rate limits:
 
 |  Unit of time | Rate Limit            |
 | ------------- | --------------------- |
-| Request rate  | 4 requests/minute     |
-| Daily quota   | 5760 requests/day     |
-| Monthly quota | 178560 requests/month |
+| Minute        | 4 requests/minute     |
+| Day           | 5760 requests/day     |
+| Month         | 178560 requests/month |
 
 See [http://www.virustotal.com](http://www.virustotal.com) for more information. 
 
