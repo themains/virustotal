@@ -9,11 +9,9 @@ Use VirusTotal, a Google service that analyzes files and URLs for viruses, worms
 
 As of June, 2016, Public API 2.0 had the following rate limits:
 
-|---------------|-----------------------|
 | Request rate  | 4 requests/minute     |
 | Daily quota   | 5760 requests/day     |
 | Monthly quota | 178560 requests/month |
-|---------------|-----------------------|
 
 See [http://www.virustotal.com](http://www.virustotal.com) for more information. 
 
