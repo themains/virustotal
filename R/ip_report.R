@@ -2,7 +2,7 @@
 #' 
 #' Get passive DNS data and URLs detected by URL scanners 
 #'
-#' @param ip IP Address (String)
+#' @param ip a valid IPv4 address in dotted quad notation; String; Required 
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
 #' @return named list with the following items: undetected_referrer_samples, detected_downloaded_samples, detected_referrer_samples, 
