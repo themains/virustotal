@@ -31,6 +31,8 @@ install.packages("devtools")
 devtools::install_github("soodoku/virustotal", build_vignettes = TRUE)
 ```
 
+### Usage
+
 To learn about how to use the package, read the [vignette](vignettes/using_virustotal.md). Or launch the vignette within R:
 
 ```r
