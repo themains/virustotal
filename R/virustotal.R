@@ -36,6 +36,8 @@ function(query=list(), path = path, key = Sys.getenv("VirustotalToken"), ...) {
 
 	query$apikey <- key
 
+	rate_limit()
+
 	res <- GET("http://www.virustotal.com/", path = paste0("vtapi/v2/", path), query = query, ...)
 	virustotal_check(res)
 	res <- content(res)
@@ -62,6 +64,8 @@ function(query=list(), path = path, body=NULL, key = Sys.getenv("VirustotalToken
 
 	query$apikey <- key
 
+	rate_limit()
+
 	res <- POST("http://www.virustotal.com/", path = paste0("vtapi/v2/", path), query = query, body = body, ...)
 	virustotal_check(res)
 	res <- content(res)
@@ -77,7 +81,33 @@ function(query=list(), path = path, body=NULL, key = Sys.getenv("VirustotalToken
 
 virustotal_check <- 
 function(req) {
+
+  if (req$status_code == 204) stop("Rate Limit Exceeded. Only 4 Queries per minute allowed. Please try with rate_limit = TRUE.")
   if (req$status_code < 400) return(invisible())
 
   stop("HTTP failure: ", req$status_code, "\n", call. = FALSE)
 } 
+
+#' 
+#' Rate Limits
+#' 
+#' Virustotal requests throttled at 4 per minute. This function creates an env. variable 
+#' that tracks number of requests per minute, and institutes waiting appropriately.
+#' 
+
+rate_limit <- function() {
+
+	# First request --- initialize time of first request and request count
+	if (Sys.getenv("VT_RATE_LIMIT")=="") Sys.setenv(VT_RATE_LIMIT = paste0(1, ",", Sys.time()))
+
+	rate_lim   <- Sys.getenv("VT_RATE_LIMIT") 
+	req_count  <- as.numeric(gsub(",.*", "", rate_lim)) + 1
+	duration   <- difftime(Sys.time(), as.POSIXct(strsplit(rate_lim, ",")[[1]][2]), units = "mins")
+
+	Sys.setenv(VT_RATE_LIMIT = paste0(req_count, ",", Sys.time()))
+
+	if (req_count == 4 & duration < 1) { 
+		Sys.sleep(60 -  as.numeric(duration, units="secs"))
+		Sys.unsetenv("VT_RATE_LIMIT")
+	}
+}
