@@ -12,18 +12,24 @@ file_report(hash = NULL, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-data.frame with 12 columns: scans, scan_id, sha1, resource, response_code, scan_date
-permalink, verbose_msg, total, positives, sha256, md5
+data.frame with 12 columns: 
+\code{scans, scan_id, sha1, resource, response_code, scan_date, permalink, verbose_msg, total, positives, sha256, md5}
 }
 \description{
 Get File Scan Report
 }
 \examples{
 \dontrun{
+
+# Before calling the function, set the API key using set_key('api_key_here')
+
 file_report(hash='99017f6eebbac24f351415dd410d522d')
 }
 }
 \references{
 \url{https://www.virustotal.com/en/documentation/public-api/}
+}
+\seealso{
+\code{\link{set_key}} for setting the API key
 }
 

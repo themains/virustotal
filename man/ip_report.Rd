@@ -12,19 +12,26 @@ ip_report(ip = NULL, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-named list with the following items: undetected_referrer_samples, detected_downloaded_samples, detected_referrer_samples, 
+named list with the following items: 
+\code{undetected_referrer_samples, detected_downloaded_samples, detected_referrer_samples, 
 undetected_downloaded_samples, detected_urls, undetected_downloaded_samples, response_code, as_owner, verbose_msg, country, 
-undetected_referrer_samples, detected_communicating_samples, resolutions, undetected_communicating_samples, asn
+undetected_referrer_samples, detected_communicating_samples, resolutions, undetected_communicating_samples, asn}
 }
 \description{
 Get passive DNS data and URLs detected by URL scanners
 }
 \examples{
 \dontrun{
+
+# Before calling the function, set the API key using set_key('api_key_here')
+
 ip_report(ip="8.8.8.8")
 }
 }
 \references{
 \url{https://www.virustotal.com/en/documentation/public-api/}
+}
+\seealso{
+\code{\link{set_key}} for setting the API key
 }
 

@@ -7,14 +7,18 @@
 set_key(api_key = NULL)
 }
 \arguments{
-\item{api_key}{String (API Key)}
+\item{api_key}{API key. String. Required.}
 }
 \description{
-Set API Key
+Before anything else, get the API key from \url{https://www.virustotal.com/en/}.
+Next, use \code{\link{set_key}} to store the API key in an environment variable \code{VirustotalToken}. 
+Once you have set the API key, you can use any of the functions.
 }
 \examples{
 \dontrun{
+
 set_key('api_key_here')
+
 }
 }
 \references{

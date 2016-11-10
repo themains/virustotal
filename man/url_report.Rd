@@ -9,22 +9,29 @@ url_report(url = NULL, scan = 1, ...)
 \arguments{
 \item{url}{url; string; required}
 
-\item{scan}{numeric; optional; when set to 1, submits url for scan if no existing reports are found; default is 1.}
+\item{scan}{numeric; optional; when set to \code{1}, submits url for scan if no existing reports are found; default is \code{1}.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-data.frame with 12 columns: scan_id, resource, url, response_code, scan_date, permalink, verbose_msg, positives, total, detected, result, detail
+data.frame with 12 columns: 
+\code{scan_id, resource, url, response_code, scan_date, permalink, verbose_msg, positives, total, detected, result, detail}
 }
 \description{
 Retrieve a scan report for a given URL
 }
 \examples{
 \dontrun{
+
+# Before calling the function, set the API key using set_key('api_key_here')
+
 url_report("http://www.google.com")
 }
 }
 \references{
 \url{https://www.virustotal.com/en/documentation/public-api/}
+}
+\seealso{
+\code{\link{set_key}} for setting the API key
 }
 

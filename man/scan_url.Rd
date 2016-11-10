@@ -12,17 +12,24 @@ scan_url(url = NULL, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
 \value{
-data.frame with 7 columns: permalink, resource, url, response_code, scan_date, scan_id, verbose_msg
+data.frame with 7 columns: 
+\code{permalink, resource, url, response_code, scan_date, scan_id, verbose_msg}
 }
 \description{
 Submit URL for scanning
 }
 \examples{
 \dontrun{
+
+# Before calling the function, set the API key using set_key('api_key_here')
+
 scan_url("http://www.google.com")
 }
 }
 \references{
 \url{https://www.virustotal.com/en/documentation/public-api/}
+}
+\seealso{
+\code{\link{set_key}} for setting the API key
 }
 
