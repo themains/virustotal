@@ -2,7 +2,7 @@
 % Please edit documentation in R/scan_file.R
 \name{scan_file}
 \alias{scan_file}
-\title{Submit file for scanning}
+\title{Submit a file for scanning}
 \usage{
 scan_file(file_path = NULL, ...)
 }
@@ -16,7 +16,7 @@ data.frame with the following columns:
 \code{scan_id, sha1, resource, response_code, sha256, permalink, md5, verbose_msg}
 }
 \description{
-Submit file for scanning
+Submit a file for scanning
 }
 \examples{
 \dontrun{

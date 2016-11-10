@@ -7,16 +7,18 @@
 rescan_file(hash = NULL, ...)
 }
 \arguments{
-\item{hash}{Hash for the scan}
+\item{hash}{Hash for the scan. String. Required.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
 \value{
 data.frame with 12 columns: 
-\code{scans, scan_id, sha1, resource, response_code, scan_date, permalink, verbose_msg, total, positives, sha256, md5}
+\code{scans, scan_id, sha1, resource, response_code, scan_date, permalink, verbose_msg, total, positives, sha256, md5}   
+\code{response_code} is 0 if the file is not in the database (hash can't be found).
 }
 \description{
-Rescan already submitted files
+The function returns a data.frame with a \code{scan_id} and \code{sha256}, \code{sha1}, \code{md5} hashes,
+all of which can be used to retrieve the report using \code{\link{file_report}}
 }
 \examples{
 \dontrun{
@@ -24,6 +26,7 @@ Rescan already submitted files
 # Before calling the function, set the API key using set_key('api_key_here')
 
 rescan_file(hash='99017f6eebbac24f351415dd410d522d')
+rescan_file(hash='99017f6ee51415dd410d522d') # incorrect hash
 }
 }
 \references{

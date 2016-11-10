@@ -18,7 +18,7 @@
 
 set_key <- function(api_key=NULL) {
 	
-	if (!is.character(api_key)) stop("Get API Key")
+	if (!is.character(api_key)) stop("Must specify API Key.\n")
 
     Sys.setenv(VirustotalToken = api_key)
 

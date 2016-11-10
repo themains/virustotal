@@ -1,4 +1,4 @@
-#' Submit file for scanning
+#' Submit a file for scanning
 #'
 #' @param file_path Required; Path to the document
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
@@ -21,10 +21,10 @@
 
 scan_file <- function(file_path = NULL, ...) {
 
-	if (!file.exists(file_path)) stop("File Doesn't Exist. Please check the path.")
+	if (!file.exists(file_path)) stop("File Doesn't Exist. Please check the path.\n")
 
     res   <- virustotal_POST(path="file/scan", body=list(file=upload_file(file_path)))
 
-    as.data.frame(do.call(cbind, res))
+    as.data.frame(res)
 }
 

@@ -12,7 +12,7 @@ domain_report(domain = NULL, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-names list with the following items: 
+named list with the following possible items: 
 \code{`BitDefender category`, undetected_referrer_samples, whois_timestamp,
 detected_downloaded_samples, detected_referrer_samples, `Webutation domain info`, `Alexa category`, undetected_downloaded_samples,
 resolutions, detected_communicating_samples, `Opera domain info`, `TrendMicro category`, categories, domain_siblings, 
@@ -29,6 +29,7 @@ Gives category of the domain from \url{http://www.bitdefender.com/}
 # Before calling the function, set the API key using set_key('api_key_here')
    
 domain_report("http://www.google.com")
+domain_report("http://www.goodsfwrfw.com") # Domain not found
 }
 }
 \references{

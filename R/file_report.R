@@ -3,8 +3,9 @@
 #' @param hash Hash for the scan
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
-#' @return data.frame with 12 columns: 
-#' \code{scans, scan_id, sha1, resource, response_code, scan_date, permalink, verbose_msg, total, positives, sha256, md5}   
+#' @return data.frame with 16 columns: 
+#' \code{service, detected, version, update, result, scan_id, sha1, resource, response_code, 
+#' scan_date, permalink, verbose_msg, total, positives, sha256, md5}   
 #'  
 #' @export
 #' 
@@ -22,12 +23,22 @@
 file_report <- function(hash = NULL, ...) {
 
     if (!is.character(hash)) {
-        stop("Must specify hash")
+        stop("Must specify hash.\n")
     }
 
     params <- list(resource = hash)
     res    <- virustotal_GET(path="file/report", query = params, ...)
 
-    as.data.frame(do.call(cbind, res))
+    if (res$response_code == 0 ){
+    	res_df <- read.table(text = "", 
+    					 col.names = c("service", "detected", "version", "update", "result", "scan_id", "sha1", "resource", "response_code", 
+										"scan_date", "permalink", "verbose_msg", "total, positives", "sha256", "md5"))
+    	res_df[1, match(names(res), names(res_df))] <- res
+    	return(res_df)
+    }
+    
+    scan_results <- ldply(lapply(res$scans, unlist), rbind, .id="service")
+    res_df       <- as.data.frame(cbind(scan_results, res[2:length(res)]))
+    res_df 
 }
 

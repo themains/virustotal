@@ -16,7 +16,8 @@ data.frame with 7 columns:
 \code{permalink, resource, url, response_code, scan_date, scan_id, verbose_msg}
 }
 \description{
-Submit URL for scanning
+Submit a URL for scanning. Returns a data.frame with \code{scan_id} which can be used to 
+fetch the report using \code{\link{url_report}}
 }
 \examples{
 \dontrun{

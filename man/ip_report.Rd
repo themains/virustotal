@@ -12,7 +12,7 @@ ip_report(ip = NULL, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-named list with the following items: 
+named list with the following potential items: 
 \code{undetected_referrer_samples, detected_downloaded_samples, detected_referrer_samples, 
 undetected_downloaded_samples, detected_urls, undetected_downloaded_samples, response_code, as_owner, verbose_msg, country, 
 undetected_referrer_samples, detected_communicating_samples, resolutions, undetected_communicating_samples, asn}

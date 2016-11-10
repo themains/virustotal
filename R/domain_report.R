@@ -6,7 +6,7 @@
 #' @param domain domain name. String. Required.  
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
-#' @return names list with the following items: 
+#' @return named list with the following possible items: 
 #' \code{`BitDefender category`, undetected_referrer_samples, whois_timestamp,
 #' detected_downloaded_samples, detected_referrer_samples, `Webutation domain info`, `Alexa category`, undetected_downloaded_samples,
 #' resolutions, detected_communicating_samples, `Opera domain info`, `TrendMicro category`, categories, domain_siblings, 
@@ -24,12 +24,13 @@
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'    
 #' domain_report("http://www.google.com")
+#' domain_report("http://www.goodsfwrfw.com") # Domain not found
 #' }
 
 domain_report <- function(domain = NULL, ...) {
 
     if (!is.character(domain)) {
-        stop("Must specify domain")
+        stop("Must specify domain.\n")
     }
 
     domain = gsub("^http://", "", domain)

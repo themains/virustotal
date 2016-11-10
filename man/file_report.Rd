@@ -12,8 +12,9 @@ file_report(hash = NULL, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-data.frame with 12 columns: 
-\code{scans, scan_id, sha1, resource, response_code, scan_date, permalink, verbose_msg, total, positives, sha256, md5}
+data.frame with 16 columns: 
+\code{service, detected, version, update, result, scan_id, sha1, resource, response_code, 
+scan_date, permalink, verbose_msg, total, positives, sha256, md5}
 }
 \description{
 Get File Scan Report

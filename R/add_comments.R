@@ -33,17 +33,17 @@
 add_comments <- function(hash = NULL, comment = NULL, ...) {
 
 	if (!is.character(hash)) {
-        stop("Must specify the hash.")
+        stop("Must specify the hash.\n")
     }
 
 	if (!is.character(comment)) {
-        stop("Must provide an actual comment.")
+        stop("Must provide an actual comment.\n")
     }
 
     params <- list(resource = hash, comment= comment)
     
     res   <- virustotal_POST(path="comments/put", query = params, ...)
     
-    as.data.frame(do.call(cbind, res))
+    as.data.frame(res)
 }
 

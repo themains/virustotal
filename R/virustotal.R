@@ -11,7 +11,8 @@
 #'
 #'  
 #' @importFrom httr GET content POST upload_file
-#' @importFrom plyr rbind.fill
+#' @importFrom plyr rbind.fill ldply
+#' @importFrom utils read.table
 #' @docType package
 #' @author Gaurav Sood
 NULL
@@ -82,7 +83,7 @@ function(query=list(), path = path, body=NULL, key = Sys.getenv("VirustotalToken
 virustotal_check <- 
 function(req) {
 
-  if (req$status_code == 204) stop("Rate Limit Exceeded. Only 4 Queries per minute allowed. Please try with rate_limit = TRUE.")
+  if (req$status_code == 204) stop("Rate Limit Exceeded. Only 4 Queries per minute allowed.")
   if (req$status_code < 400) return(invisible())
 
   stop("HTTP failure: ", req$status_code, "\n", call. = FALSE)
@@ -98,16 +99,20 @@ function(req) {
 rate_limit <- function() {
 
 	# First request --- initialize time of first request and request count
-	if (Sys.getenv("VT_RATE_LIMIT")=="") Sys.setenv(VT_RATE_LIMIT = paste0(1, ",", Sys.time()))
+	if (Sys.getenv("VT_RATE_LIMIT")=="") Sys.setenv(VT_RATE_LIMIT = paste0(0, ",", Sys.time(), ",", 0))
 
 	rate_lim   <- Sys.getenv("VT_RATE_LIMIT") 
 	req_count  <- as.numeric(gsub(",.*", "", rate_lim)) + 1
-	duration   <- difftime(Sys.time(), as.POSIXct(strsplit(rate_lim, ",")[[1]][2]), units = "mins")
+	duration   <- as.numeric(strsplit(rate_lim, ",")[[1]][3], units="secs")	
 
-	Sys.setenv(VT_RATE_LIMIT = paste0(req_count, ",", Sys.time()))
+	if (duration >= 60) duration <- 0
 
-	if (req_count == 4 & duration < 1) { 
-		Sys.sleep(60 -  as.numeric(duration, units="secs"))
-		Sys.unsetenv("VT_RATE_LIMIT")
+	net_duration  <- duration + difftime(Sys.time(), as.POSIXct(strsplit(rate_lim, ",")[[1]][2]), units = "secs")
+
+	Sys.setenv(VT_RATE_LIMIT = paste0(req_count, ",", Sys.time(), ",", net_duration))
+
+	if (req_count > 4 & net_duration <= 60) { 
+		Sys.sleep(60 -  net_duration)
+		Sys.setenv(VT_RATE_LIMIT = paste0(0, ",", Sys.time(), ",", 0))
 	}
 }
