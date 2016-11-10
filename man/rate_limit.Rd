@@ -8,6 +8,6 @@ rate_limit()
 }
 \description{
 Virustotal requests throttled at 4 per minute. This function creates an env. variable 
-that tracks number of requests per minute, and institutes waiting appropriately.
+that tracks number of requests per minute, and enforces appropriate waiting.
 }
 

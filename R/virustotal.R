@@ -93,26 +93,27 @@ function(req) {
 #' Rate Limits
 #' 
 #' Virustotal requests throttled at 4 per minute. This function creates an env. variable 
-#' that tracks number of requests per minute, and institutes waiting appropriately.
+#' that tracks number of requests per minute, and enforces appropriate waiting.
 #' 
 
 rate_limit <- function() {
 
 	# First request --- initialize time of first request and request count
-	if (Sys.getenv("VT_RATE_LIMIT")=="") Sys.setenv(VT_RATE_LIMIT = paste0(0, ",", Sys.time(), ",", 0))
+	if (Sys.getenv("VT_RATE_LIMIT") == "") return(Sys.setenv(VT_RATE_LIMIT = paste0(0, ",", Sys.time(), ",", 0)))
 
-	rate_lim   <- Sys.getenv("VT_RATE_LIMIT") 
-	req_count  <- as.numeric(gsub(",.*", "", rate_lim)) + 1
-	duration   <- as.numeric(strsplit(rate_lim, ",")[[1]][3], units="secs")	
+	rate_lim         <- Sys.getenv("VT_RATE_LIMIT") 
+	req_count        <- as.numeric(gsub(",.*", "", rate_lim)) + 1
+	past_duration    <- as.numeric(strsplit(rate_lim, ",")[[1]][3], units="secs")	
+	current_duration <- difftime(Sys.time(), as.POSIXct(strsplit(rate_lim, ",")[[1]][2]), units = "secs") 
 
-	if (duration >= 60) duration <- 0
+	if (current_duration > 60) return(Sys.setenv(VT_RATE_LIMIT = paste0(1, ",", Sys.time(), ",", 0)))
 
-	net_duration  <- duration + difftime(Sys.time(), as.POSIXct(strsplit(rate_lim, ",")[[1]][2]), units = "secs")
-
-	Sys.setenv(VT_RATE_LIMIT = paste0(req_count, ",", Sys.time(), ",", net_duration))
+	net_duration     <- past_duration + current_duration
 
 	if (req_count > 4 & net_duration <= 60) { 
 		Sys.sleep(60 -  net_duration)
-		Sys.setenv(VT_RATE_LIMIT = paste0(0, ",", Sys.time(), ",", 0))
+		return(Sys.setenv(VT_RATE_LIMIT = paste0(1, ",", Sys.time(), ",", 0)))
 	}
+
+	return(Sys.setenv(VT_RATE_LIMIT = paste0(req_count, ",", Sys.time(), ",", net_duration)))
 }
