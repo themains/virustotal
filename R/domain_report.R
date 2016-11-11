@@ -1,7 +1,7 @@
 #' Get Domain Report
 #'
 #' Retrieves report on a given domain, including passive DNS, urls detected by at least one url scanner. 
-#' Gives category of the domain from \url{http://www.bitdefender.com/}
+#' Gives category of the domain from bitdefender.
 #' 
 #' @param domain domain name. String. Required.  
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
