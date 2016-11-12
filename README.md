@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/soodoku/virustotal.svg?branch=master)](https://travis-ci.org/soodoku/virustotal)
 [![Build status](https://ci.appveyor.com/api/projects/status/pvqoje98iq6dee3q?svg=true)](https://ci.appveyor.com/project/soodoku/virustotal)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/virustotal)](http://cran.r-project.org/package=virustotal)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/virustotal)](https://cran.r-project.org/package=virustotal)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/virustotal)
 [![codecov](https://codecov.io/gh/soodoku/virustotal/branch/master/graph/badge.svg)](https://codecov.io/gh/soodoku/virustotal)
 
