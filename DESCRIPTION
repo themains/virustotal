@@ -1,5 +1,5 @@
 Package: virustotal
-Title: R Client for the Virustotal API
+Title: R Client for the VirusTotal API
 Version: 0.2.0
 Authors@R: person("Gaurav", "Sood", email = "gsood07@gmail.com", role = c("aut", "cre"))
 Maintainer: Gaurav Sood <gsood07@gmail.com>
