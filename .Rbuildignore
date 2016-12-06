@@ -8,3 +8,4 @@ appveyor.yml
 ^docs$
 ^cran-comments.md$
 ^tests\testthat\virustotal_api_key.enc$
+^_pkgdown\.yml$
