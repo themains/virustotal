@@ -38,4 +38,3 @@ domain_report("http://www.goodsfwrfw.com") # Domain not found
 \seealso{
 \code{\link{set_key}} for setting the API key
 }
-

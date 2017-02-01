@@ -10,4 +10,3 @@ rate_limit()
 Virustotal requests throttled at 4 per minute. This function creates an env. variable 
 that tracks number of requests per minute, and enforces appropriate waiting.
 }
-

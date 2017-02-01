@@ -33,4 +33,3 @@ file_report(hash='99017f6eebbac24f351415dd410d522d')
 \seealso{
 \code{\link{set_key}} for setting the API key
 }
-

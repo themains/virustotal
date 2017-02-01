@@ -39,4 +39,3 @@ url_report(scan_id = "ebdd15c397d2b0c6f50c3f2df531357d1201ff5976802316405e60880d
 \seealso{
 \code{\link{set_key}} for setting the API key
 }
-

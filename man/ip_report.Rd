@@ -34,4 +34,3 @@ ip_report(ip="8.8.8.8")
 \seealso{
 \code{\link{set_key}} for setting the API key
 }
-

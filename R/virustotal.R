@@ -32,7 +32,7 @@ virustotal_GET <-
 function(query=list(), path = path, key = Sys.getenv("VirustotalToken"), ...) {
 
 	if (identical(key, "")) {
-        stop("Please set application id and password using set_key(key='key')).")
+        stop("Please set application id and password using set_key(key='key')).\n")
 	}
 
 	query$apikey <- key
@@ -60,7 +60,7 @@ virustotal_POST <-
 function(query=list(), path = path, body=NULL, key = Sys.getenv("VirustotalToken"), ...) {
 
 	if (identical(key, "")) {
-        stop("Please set application id and password using set_key(key='key')).")
+        stop("Please set application id and password using set_key(key='key')).\n")
 	}
 
 	query$apikey <- key
@@ -83,7 +83,7 @@ function(query=list(), path = path, body=NULL, key = Sys.getenv("VirustotalToken
 virustotal_check <- 
 function(req) {
 
-  if (req$status_code == 204) stop("Rate Limit Exceeded. Only 4 Queries per minute allowed.")
+  if (req$status_code == 204) stop("Rate Limit Exceeded. Only 4 Queries per minute allowed.\n")
   if (req$status_code < 400) return(invisible())
 
   stop("HTTP failure: ", req$status_code, "\n", call. = FALSE)

@@ -42,4 +42,3 @@ add_comments(hash='99017f6eebbac24f351415dd410d522d', comment="This is great.")
 \seealso{
 \code{\link{set_key}} for setting the API key
 }
-

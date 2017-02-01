@@ -32,4 +32,3 @@ scan_file(file_path='path_to_suspicious_file')
 \seealso{
 \code{\link{set_key}} for setting the API key
 }
-

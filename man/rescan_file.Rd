@@ -35,4 +35,3 @@ rescan_file(hash='99017f6ee51415dd410d522d') # incorrect hash
 \seealso{
 \code{\link{set_key}} for setting the API key
 }
-

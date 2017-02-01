@@ -33,4 +33,3 @@ scan_url("http://www.google.com")
 \seealso{
 \code{\link{set_key}} for setting the API key
 }
-

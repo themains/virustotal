@@ -24,4 +24,3 @@ set_key('api_key_here')
 \references{
 \url{https://www.virustotal.com/en/documentation/public-api/}
 }
-
