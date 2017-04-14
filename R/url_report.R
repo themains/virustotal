@@ -42,18 +42,24 @@ url_report <- function(url = NULL, scan_id = NULL, scan = 1, ...) {
     res_df <- read.table(text = "", 
     					 col.names = c("scan_id", "resource", "url", "response_code", "scan_date", "permalink", "verbose_msg", "positives", "total", "detected", "result", "detail"))
 
-    if (length(res)==0) {
-    	cat("No results returned. Likely cause: incorrect scan_id.\n")
+    if ( !is.null(scan_id) & length(res) == 0) {
+    	warning("No results returned. Likely cause: incorrect scan_id.\n")
     	res_df[1, "scan_id"] <- scan_id
     	return(res_df)
-    } else if (res$response_code == 0 ) {
-    	cat("No reports for the URL available. Set scan to 1 to submit URL for scanning.\n")
+
+    } else if (res$response_code == 0) {
+    	warning("No reports for the URL available. Set scan to 1 to submit URL for scanning.\n")
  		res_df[1, match(names(res), names(res_df))] <- res
  		return(res_df)
+
+    } else if (!is.null(url) & length(res) < 11) {
+        warning("No reports for the URL available. The URL has been successfully submitted for scanning. Come back later for results.\n")
+        res_df[1, match(names(res), names(res_df))] <- res
+        return(res_df)
     }
 
     res_10 <- do.call(cbind, lapply(res[1:10], unlist))
-    res_11 <- do.call(rbind.fill, lapply(res[[11]], as.data.frame))
+    res_11 <- do.call(rbind.fill, lapply(res$scans, as.data.frame))
     cbind(res_10, res_11)
 }
 
