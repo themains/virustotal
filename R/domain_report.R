@@ -33,13 +33,9 @@ domain_report <- function(domain = NULL, ...) {
         stop("Must specify domain.\n")
     }
 
-    domain = gsub("^http://", "", domain)
+    domain <- gsub("^http://", "", domain)
 
-    res   <- virustotal_GET(path="domain/report", query = list(domain = domain), ...)
+    res   <- virustotal_GET(path = "domain/report", query = list(domain = domain), ...)
 
     res
 }
-
-
-
-

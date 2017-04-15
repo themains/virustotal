@@ -27,18 +27,15 @@ file_report <- function(hash = NULL, ...) {
     }
 
     params <- list(resource = hash)
-    res    <- virustotal_GET(path="file/report", query = params, ...)
+    res    <- virustotal_GET(path = "file/report", query = params, ...)
 
     if (res$response_code == 0 ){
-    	res_df <- read.table(text = "", 
-    					 col.names = c("service", "detected", "version", "update", "result", "scan_id", "sha1", "resource", "response_code", 
-										"scan_date", "permalink", "verbose_msg", "total, positives", "sha256", "md5"))
-    	res_df[1, match(names(res), names(res_df))] <- res
-    	return(res_df)
+      res_df <- read.table(text = "", col.names = c("service", "detected", "version", "update", "result", "scan_id", "sha1", "resource", "response_code", "scan_date", "permalink", "verbose_msg", "total, positives", "sha256", "md5"))
+      res_df[1, match(names(res), names(res_df))] <- res
+      return(res_df)
     }
-    
-    scan_results <- ldply(lapply(res$scans, unlist), rbind, .id="service")
-    res_df       <- as.data.frame(cbind(scan_results, res[2:length(res)]))
-    res_df 
-}
 
+    scan_results <- ldply(lapply(res$scans, unlist), rbind, .id = "service")
+    res_df       <- as.data.frame(cbind(scan_results, res[2:length(res)]))
+    res_df
+}

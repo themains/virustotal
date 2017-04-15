@@ -26,22 +26,19 @@
 
 rescan_file <- function(hash = NULL, ...) {
 
-	if (!is.character(hash)) {
+  if (!is.character(hash)) {
         stop("Must specify the hash.")
     }
 
     params <- list(resource = hash)
 
-    res   <- virustotal_POST(path="file/rescan", query = params, ...)
+    res   <- virustotal_POST(path = "file/rescan", query = params, ...)
 
     if (res$response_code == 0 ){
-    	res_df <- read.table(text = "", 
-    					 col.names = c("scans", "scan_id", "sha1", "resource", "response_code", "scan_date", "permalink", "verbose_msg", "total", "positives", "sha256", "md5"))
-    	res_df[1, match(names(res), names(res_df))] <- res
-    	return(res_df)
+      res_df <- read.table(text = "", col.names = c("scans", "scan_id", "sha1", "resource", "response_code", "scan_date", "permalink", "verbose_msg", "total", "positives", "sha256", "md5"))
+      res_df[1, match(names(res), names(res_df))] <- res
+      return(res_df)
     }
-    
 
     as.data.frame(res)
 }
-

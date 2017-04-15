@@ -31,7 +31,7 @@ ip_report <- function(ip = NULL, ...) {
 
     params <- list(ip = ip)
 
-    res   <- virustotal_GET(path="ip-address/report", query = params, ...)
+    res   <- virustotal_GET(path = "ip-address/report", query = params, ...)
 
     res
 }

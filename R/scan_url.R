@@ -24,12 +24,11 @@
 
 scan_url <- function(url = NULL, ...) {
 
-    if (!is.character(url)) {
-        stop("Must specify a valid url.\n")
-    }
+  if (!is.character(url)) {
+    stop("Must specify a valid url.\n")
+  }
 
-    res    <- virustotal_POST(path="url/scan", query = list(url = url), ...)
-    
-    as.data.frame(res)
+  res    <- virustotal_POST(path = "url/scan", query = list(url = url), ...)
+
+  as.data.frame(res)
 }
-

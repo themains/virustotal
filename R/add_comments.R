@@ -32,18 +32,17 @@
 
 add_comments <- function(hash = NULL, comment = NULL, ...) {
 
-	if (!is.character(hash)) {
+  if (!is.character(hash)) {
         stop("Must specify the hash.\n")
     }
 
-	if (!is.character(comment)) {
+  if (!is.character(comment)) {
         stop("Must provide an actual comment.\n")
     }
 
-    params <- list(resource = hash, comment= comment)
-    
-    res   <- virustotal_POST(path="comments/put", query = params, ...)
-    
+    params <- list(resource = hash, comment = comment)
+
+    res   <- virustotal_POST(path = "comments/put", query = params, ...)
+
     as.data.frame(res)
 }
-

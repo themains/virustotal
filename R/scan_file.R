@@ -21,10 +21,9 @@
 
 scan_file <- function(file_path = NULL, ...) {
 
-	if (!file.exists(file_path)) stop("File Doesn't Exist. Please check the path.\n")
+  if (!file.exists(file_path)) stop("File Doesn't Exist. Please check the path.\n")
 
-    res   <- virustotal_POST(path="file/scan", body=list(file=upload_file(file_path)))
+    res   <- virustotal_POST(path = "file/scan", body = list(file = upload_file(file_path)))
 
     as.data.frame(res)
 }
-
