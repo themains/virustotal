@@ -16,17 +16,19 @@ test_that("can decrypt secrets and data structures verified", {
   report <- url_report("http://www.google.com")
   expect_that(report, is_a("data.frame"))
 
-  report <- url_report(scan_id = "ebdd15c397d2b0c6f50c3f2df531357d1201ff5976802316405e60880d6bf5ec-1478786749")
+  report <- url_report(scan_id =
+  "ebdd15c397d2b0c6f50c3f2df531357d1201ff5976802316405e60880d6bf5ec-1478786749")
   expect_that(report, is_a("data.frame"))
 
   # Specify incorrect scan_id
-  report <- url_report(scan_id = "ebdd15c397d2b0c6f50c3f2df531357d1201ff59768786749")
-  expect_that(report, is_a("data.frame"))
+  expect_warning(url_report(scan_id =
+                           "ebdd15c397d2b0c6f50c3f2df531357d1201ff59768786749"))
   # --------------------------------
 
   # Testing comments
   # --------------------------------
-  comments <- add_comments(hash = "99017f6eebbac24f351415dd410d522d", comment = "This is great.")
+  comments <- add_comments(hash =
+                 "99017f6eebbac24f351415dd410d522d", comment = "This is great.")
   expect_that(comments, is_a("data.frame"))
 
   # Testing file report

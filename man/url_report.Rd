@@ -18,8 +18,8 @@ When scan is set to \code{1}, the result includes a \code{scan_id} field, which 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-data.frame with 12 columns: 
-\code{scan_id, resource, url, response_code, scan_date, permalink, verbose_msg, positives, total, detected, result, detail}
+data.frame with 13 columns: 
+\code{scan_id, resource, url, response_code, scan_date, permalink, verbose_msg, positives, total, .id, detected, result, detail}
 }
 \description{
 Retrieve a scan report for a given URL. If no scan report is available, set \code{scan} to \code{1} to get a new report.

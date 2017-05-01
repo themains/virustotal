@@ -1,3 +1,8 @@
+# virustotal 0.2.1
+
+* extensive linting, passes expect_no_lint
+* url_report now returns service name
+
 # virustotal 0.2.0
 
 * Removed link to bitdefender because CRAN was having issues
