@@ -5,6 +5,8 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/virustotal)](https://cran.r-project.org/package=virustotal)
 ![](https://cranlogs.r-pkg.org/badges/grand-total/virustotal)
 [![codecov](https://codecov.io/gh/soodoku/virustotal/branch/master/graph/badge.svg)](https://codecov.io/gh/soodoku/virustotal)
+[![Research software impact](http://depsy.org/api/package/cran/virustotal/badge.svg)](http://depsy.org/package/r/virustotal)
+[![Github Stars](https://img.shields.io/github/stars/soodoku/virustotal.svg?style=social&label=Github)](https://github.com/soodoku/virustotal)
 
 Use [VirusTotal](http://www.virustotal.com), a Google service that analyzes files and URLs for viruses, worms, trojans etc., provides category of the content hosted by a domain from a variety of prominent services, provides passive DNS information, among other things. 
 
