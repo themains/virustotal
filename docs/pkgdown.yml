@@ -1,0 +1,6 @@
+urls:
+  reference: http://themains.github.io/virustotal//reference
+  article: http://themains.github.io/virustotal//articles
+articles:
+  using_virustotal: using_virustotal.html
+
