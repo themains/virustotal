@@ -3,3 +3,10 @@ url: http://themains.github.io/virustotal/
 template:
   params:
     bootswatch: cosmo
+  docsearch:
+    api_key: 
+    index_name: virustotal
+
+authors:
+  Gaurav Sood:
+    href: https://github.com/soodoku
