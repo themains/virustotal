@@ -18,13 +18,16 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Function reference" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -32,6 +35,8 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 
 
   </head>
@@ -47,8 +52,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">virustotal</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">virustotal</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -73,7 +82,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -85,6 +94,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -92,204 +102,107 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.2.1</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-authentication" class="hasAnchor"><a href="#section-authentication" class="anchor"></a>Authentication</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="set_key.html">set_key</a></code> </p>
-          </td>
-          <td><p>Set API Key</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-report" class="hasAnchor"><a href="#section-report" class="anchor"></a>Report</h2>
-            <p class="section-desc"><p>Get reports on IP, Domain, or URL</p></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="domain_report.html">domain_report</a></code> </p>
-          </td>
-          <td><p>Get Domain Report</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="file_report.html">file_report</a></code> </p>
-          </td>
-          <td><p>Get File Scan Report</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ip_report.html">ip_report</a></code> </p>
-          </td>
-          <td><p>Get IP Report</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="url_report.html">url_report</a></code> </p>
-          </td>
-          <td><p>Get URL Report</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-scan-file-or-url" class="hasAnchor"><a href="#section-scan-file-or-url" class="anchor"></a>Scan File or URL</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="scan_file.html">scan_file</a></code> </p>
-          </td>
-          <td><p>Submit a file for scanning</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="scan_url.html">scan_url</a></code> </p>
-          </td>
-          <td><p>Submit URL for scanning</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rescan_file.html">rescan_file</a></code> </p>
-          </td>
-          <td><p>Rescan already submitted files</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-add-comment" class="hasAnchor"><a href="#section-add-comment" class="anchor"></a>Add Comment</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_comments.html">add_comments</a></code> </p>
-          </td>
-          <td><p>Add comments on Files and URLs</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-regression-tests" class="hasAnchor"><a href="#section-regression-tests" class="anchor"></a>Regression tests</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="add_comments.html">add_comments</a></code> </p>
-          </td>
-          <td><p>Add comments on Files and URLs</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="domain_report.html">domain_report</a></code> </p>
-          </td>
-          <td><p>Get Domain Report</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="file_report.html">file_report</a></code> </p>
-          </td>
-          <td><p>Get File Scan Report</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ip_report.html">ip_report</a></code> </p>
-          </td>
-          <td><p>Get IP Report</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rate_limit.html">rate_limit</a></code> </p>
-          </td>
-          <td><p>Rate Limits</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="rescan_file.html">rescan_file</a></code> </p>
-          </td>
-          <td><p>Rescan already submitted files</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="scan_file.html">scan_file</a></code> </p>
-          </td>
-          <td><p>Submit a file for scanning</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="scan_url.html">scan_url</a></code> </p>
-          </td>
-          <td><p>Submit URL for scanning</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="set_key.html">set_key</a></code> </p>
-          </td>
-          <td><p>Set API Key</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="url_report.html">url_report</a></code> </p>
-          </td>
-          <td><p>Get URL Report</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="virustotal-package.html">virustotal-package</a></code> </p>
-          </td>
-          <td><p>virustotal: Access Virustotal API</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="virustotal_check.html">virustotal_check</a></code> </p>
-          </td>
-          <td><p>Request Response Verification</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="virustotal_GET.html">virustotal_GET</a></code> </p>
-          </td>
-          <td><p>Base POST AND GET functions. Not exported.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="virustotal_POST.html">virustotal_POST</a></code> </p>
-          </td>
-          <td><p>POST</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-authentication" class="hasAnchor"><a href="#section-authentication" class="anchor"></a>Authentication</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="set_key.html">set_key()</a></code> </p>
+        </td>
+        <td><p>Set API Key</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-report" class="hasAnchor"><a href="#section-report" class="anchor"></a>Report</h2>
+          <p class="section-desc"><p>Get reports on IP, Domain, or URL</p></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="domain_report.html">domain_report()</a></code> </p>
+        </td>
+        <td><p>Get Domain Report</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="file_report.html">file_report()</a></code> </p>
+        </td>
+        <td><p>Get File Scan Report</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ip_report.html">ip_report()</a></code> </p>
+        </td>
+        <td><p>Get IP Report</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="url_report.html">url_report()</a></code> </p>
+        </td>
+        <td><p>Get URL Report</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-scan-file-or-url" class="hasAnchor"><a href="#section-scan-file-or-url" class="anchor"></a>Scan File or URL</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="scan_file.html">scan_file()</a></code> </p>
+        </td>
+        <td><p>Submit a file for scanning</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="scan_url.html">scan_url()</a></code> </p>
+        </td>
+        <td><p>Submit URL for scanning</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="rescan_file.html">rescan_file()</a></code> </p>
+        </td>
+        <td><p>Rescan already submitted files</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-add-comment" class="hasAnchor"><a href="#section-add-comment" class="anchor"></a>Add Comment</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="add_comments.html">add_comments()</a></code> </p>
+        </td>
+        <td><p>Add comments on Files and URLs</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -299,7 +212,6 @@
       <li><a href="#section-report">Report</a></li>
       <li><a href="#section-scan-file-or-url">Scan File or URL</a></li>
       <li><a href="#section-add-comment">Add Comment</a></li>
-      <li><a href="#section-regression-tests">Regression tests</a></li>
     </ul>
   </div>
 </div>
@@ -310,11 +222,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

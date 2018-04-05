@@ -26,6 +26,3 @@ reference:
   - title: Add Comment
     contents:
     - add_comments
-  - title: Regression tests
-    contents:
-    - starts_with("test", internal = TRUE)
