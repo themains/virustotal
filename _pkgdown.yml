@@ -3,9 +3,9 @@ url: http://themains.github.io/virustotal/
 template:
   params:
     bootswatch: cosmo
-  docsearch:
-    api_key: 59f51aa86ec968850d822427e20517d5
-    index_name: virustotal
+    docsearch:
+      api_key: 59f51aa86ec968850d822427e20517d5
+      index_name: virustotal
 
 authors:
   Gaurav Sood:
