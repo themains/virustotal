@@ -28,6 +28,36 @@ NULL
 #' @param \dots Additional arguments passed to \code{\link[httr]{GET}}.
 #' @return list
 
+virustotal2_GET <- function(query=list(), path = path,
+                                     key = Sys.getenv("VirustotalToken"), ...) {
+
+  if (identical(key, "")) {
+        stop("Please set application key via set_key(key='key')).\n")
+  }
+
+  query$apikey <- key
+
+  rate_limit()
+
+  res <- GET("https://www.virustotal.com/", path = paste0("vtapi/v2/", path),
+                                                             query = query, ...)
+  virustotal_check(res)
+  res <- content(res)
+
+  res
+}
+
+#' 
+#' Base POST AND GET functions. Not exported.
+#'
+#' GET
+#' 
+#' @param query query list 
+#' @param path  path to the specific API service url
+#' @param key  A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.
+#' @param \dots Additional arguments passed to \code{\link[httr]{GET}}.
+#' @return list
+
 virustotal_GET <- function(query=list(), path = path,
                                      key = Sys.getenv("VirustotalToken"), ...) {
 
@@ -39,8 +69,9 @@ virustotal_GET <- function(query=list(), path = path,
 
   rate_limit()
 
-  res <- GET("http://www.virustotal.com/", path = paste0("vtapi/v2/", path),
-                                                             query = query, ...)
+  res <- GET("https://virustotal.com/", path = paste0("api/v3/domains/", domain),
+                                                             , add_headers('x-apikey' = key), ...)
+
   virustotal_check(res)
   res <- content(res)
 
@@ -68,7 +99,7 @@ virustotal_POST <- function(query=list(), path = path, body=NULL,
 
   rate_limit()
 
-  res <- POST("http://www.virustotal.com/", path = paste0("vtapi/v2/", path),
+  res <- POST("https://www.virustotal.com/", path = paste0("vtapi/v2/", path),
                                                 query = query, body = body, ...)
   virustotal_check(res)
   res <- content(res)
