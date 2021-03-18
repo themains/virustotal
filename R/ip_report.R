@@ -3,7 +3,7 @@
 #' Get passive DNS data and URLs detected by URL scanners 
 #'
 #' @param ip a valid IPv4 address in dotted quad notation; String; Required 
-#' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
+#' @param \dots Additional arguments passed to \code{\link{virustotal2_GET}}.
 #' 
 #' @return named list with the following potential items: 
 #' \code{undetected_referrer_samples, detected_downloaded_samples, detected_referrer_samples, 
@@ -29,9 +29,11 @@ ip_report <- function(ip = NULL, ...) {
         stop("Must specify a valid IP.\n")
     }
 
+    .Deprecated("ip")
+
     params <- list(ip = ip)
 
-    res   <- virustotal_GET(path = "ip-address/report", query = params, ...)
+    res   <- virustotal2_GET(path = "ip-address/report", query = params, ...)
 
     res
 }

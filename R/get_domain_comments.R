@@ -1,7 +1,5 @@
-#' Retrieve information about an Internet domain
+#' Retrieve comments for an Internet domain
 #'
-#' Retrieves report on a given domain, including passive DNS, urls detected by at least one url scanner. 
-#' Gives category of the domain from bitdefender.
 #' 
 #' @param domain domain name. String. Required.  
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
@@ -23,11 +21,11 @@
 #' 
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'    
-#' domains("http://www.google.com")
-#' domains("http://www.goodsfwrfw.com") # Domain not found
+#' get_domain_comments("http://www.google.com")
+#' get_domain_comments("http://www.goodsfwrfw.com") # Domain not found
 #' }
 
-domains <- function(domain = NULL, ...) {
+get_domain_comments <- function(domain = NULL, ...) {
 
     if (!is.character(domain)) {
         stop("Must specify domain.\n")
@@ -35,7 +33,7 @@ domains <- function(domain = NULL, ...) {
 
     domain <- gsub("^http://", "", domain)
 
-    res   <- virustotal_GET(path = paste0("domains/", domain),
+    res   <- virustotal_GET(path = paste0("domains/", domain, "/comments"),
                                              query = list(domain = domain), ...)
 
     res

@@ -4,7 +4,7 @@
 #' all of which can be used to retrieve the report using \code{\link{file_report}}
 #' 
 #' @param hash Hash for the scan. String. Required.
-#' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
+#' @param \dots Additional arguments passed to \code{\link{virustotal2_POST}}.
 #' 
 #' @return data.frame with 12 columns: 
 #' \code{scans, scan_id, sha1, resource, response_code, scan_date, permalink, verbose_msg, total, positives, sha256, md5}   
@@ -32,7 +32,9 @@ rescan_file <- function(hash = NULL, ...) {
 
     params <- list(resource = hash)
 
-    res   <- virustotal_POST(path = "file/rescan", query = params, ...)
+    .Deprecated("")
+
+    res   <- virustotal2_POST(path = "file/rescan", query = params, ...)
 
     if (res$response_code == 0 ){
       res_df <- read.table(text = "", col.names = c("scans", "scan_id", "sha1",

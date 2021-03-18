@@ -20,7 +20,7 @@ NULL
 #' 
 #' Base POST AND GET functions. Not exported.
 #'
-#' GET
+#' GET for the v2 API
 #' 
 #' @param query query list 
 #' @param path  path to the specific API service url
@@ -47,10 +47,8 @@ virustotal2_GET <- function(query=list(), path = path,
   res
 }
 
-#' 
-#' Base POST AND GET functions. Not exported.
 #'
-#' GET
+#' GET for the Current V3 API
 #' 
 #' @param query query list 
 #' @param path  path to the specific API service url
@@ -69,17 +67,20 @@ virustotal_GET <- function(query=list(), path = path,
 
   rate_limit()
 
-  res <- GET("https://virustotal.com/", path = paste0("api/v3/domains/", domain),
-                                                             , add_headers('x-apikey' = key), ...)
+  res <- GET("https://virustotal.com/", 
+               path = paste0("api/v3/", path),
+               query = query, 
+               add_headers('x-apikey' = key), ...)
 
   virustotal_check(res)
-  res <- content(res)
+  res <- content(res, as = "parsed", type = "application/json")
 
   res
 }
 
+
 #'
-#' POST
+#' POST for the Current V3 API
 #' 
 #' @param query query list 
 #' @param body file 
@@ -89,6 +90,39 @@ virustotal_GET <- function(query=list(), path = path,
 #' @return list
 
 virustotal_POST <- function(query=list(), path = path, body=NULL,
+                                     key = Sys.getenv("VirustotalToken"), ...) {
+
+  if (identical(key, "")) {
+        stop("Please set application key via set_key(key='key')).\n")
+  }
+
+  query$apikey <- key
+
+  rate_limit()
+
+  res <- POST("https://virustotal.com/", 
+               path = paste0("api/v3/", path),
+               query = query, 
+               body = body,
+               add_headers('x-apikey' = key), ...)
+
+  virustotal_check(res)
+  res <- content(res)
+
+  res
+}
+
+#'
+#' POST for V2 API
+#' 
+#' @param query query list 
+#' @param body file 
+#' @param path  path to the specific API service url
+#' @param key A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.
+#' @param \dots Additional arguments passed to \code{\link[httr]{POST}}.
+#' @return list
+
+virustotal2_POST <- function(query=list(), path = path, body=NULL,
                                      key = Sys.getenv("VirustotalToken"), ...) {
 
   if (identical(key, "")) {

@@ -4,7 +4,7 @@
 #' 
 #' @param hash hash for the resource you want to comment on; Required; String
 #' @param comment review; Required; String
-#' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
+#' @param \dots Additional arguments passed to \code{\link{virustotal2_GET}}.
 #'  
 #' @return data.frame with 2 columns: \code{response_code}, \code{verbose_msg} 
 #' \itemize{
@@ -42,7 +42,9 @@ add_comments <- function(hash = NULL, comment = NULL, ...) {
 
     params <- list(resource = hash, comment = comment)
 
-    res   <- virustotal_POST(path = "comments/put", query = params, ...)
+    .Deprecated("")
+
+    res   <- virustotal2_POST(path = "comments/put", query = params, ...)
 
     as.data.frame(res)
 }

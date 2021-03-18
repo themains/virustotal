@@ -4,7 +4,7 @@
 #' Gives category of the domain from bitdefender.
 #' 
 #' @param domain domain name. String. Required.  
-#' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
+#' @param \dots Additional arguments passed to \code{\link{virustotal2_GET}}.
 #' 
 #' @return named list with the following possible items: 
 #' \code{`BitDefender category`, undetected_referrer_samples, whois_timestamp,
@@ -35,7 +35,9 @@ domain_report <- function(domain = NULL, ...) {
 
     domain <- gsub("^http://", "", domain)
 
-    res   <- virustotal_GET(path = "domain/report",
+    .Deprecated("domains")
+
+    res   <- virustotal2_GET(path = "domain/report",
                                              query = list(domain = domain), ...)
 
     res
