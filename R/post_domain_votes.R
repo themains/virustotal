@@ -1,7 +1,8 @@
 #' Add a vote for a hostname or domain
 #'
 #' 
-#' @param domain domain name. String. Required.  
+#' @param domain domain name. String. Required.
+#' @param domain vote. String. Required.  
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #' 
 #' @return named list 
