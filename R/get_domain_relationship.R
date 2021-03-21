@@ -30,7 +30,7 @@ domain_relationship <- function(domain = NULL, relationship = "subdomains", limi
 
     domain <- gsub("^http://", "", domain)
 
-    res   <- virustotal_GET(path = paste0("domains/", domain, "/", relationship),
+    res   <- virustotal_GET(path = paste0("domains/", domain, "/relationship"),
                                              query = list(limit = limit, cursor = cursor), ...)
 
     res

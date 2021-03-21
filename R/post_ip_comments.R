@@ -18,8 +18,7 @@
 #' 
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'    
-#' post_ip_comments("http://www.google.com")
-#' post_ip_comments("http://www.goodsfwrfw.com") # Domain not found
+#' post_ip_comments("64.233.160.0")
 #' }
 
 post_ip_comments <- function(ip = NULL, comment = NULL, limit = NULL, ...) {
