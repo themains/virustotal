@@ -89,21 +89,19 @@ virustotal_GET <- function(query=list(), path = path,
 #' @param \dots Additional arguments passed to \code{\link[httr]{POST}}.
 #' @return list
 
-virustotal_POST <- function(query=list(), path = path, body=NULL,
+virustotal_POST <- function(query=list(), path = path, body = NULL,
                                      key = Sys.getenv("VirustotalToken"), ...) {
 
   if (identical(key, "")) {
         stop("Please set application key via set_key(key='key')).\n")
   }
 
-  query$apikey <- key
-
   rate_limit()
 
   res <- POST("https://virustotal.com/", 
                path = paste0("api/v3/", path),
-               query = query, 
                body = body,
+               encode = "json",
                add_headers('x-apikey' = key), ...)
 
   virustotal_check(res)
