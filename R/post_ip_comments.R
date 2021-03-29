@@ -29,7 +29,7 @@ post_ip_comments <- function(ip = NULL, comment = NULL, limit = NULL, ...) {
 
 	comment = list("type" = "vote", "attributes" = list("text" = comment))
 
-    res   <- virustotal_POST(path = paste0("ip/", domain, "/comments",
+    res   <- virustotal_POST(path = paste0("ip/", domain, "/comments"),
                                              query = list(limit = limit), ...)
 
     res

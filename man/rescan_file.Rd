@@ -9,7 +9,7 @@ rescan_file(hash = NULL, ...)
 \arguments{
 \item{hash}{Hash for the scan. String. Required.}
 
-\item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
+\item{\dots}{Additional arguments passed to \code{\link{virustotal2_POST}}.}
 }
 \value{
 data.frame with 12 columns: 

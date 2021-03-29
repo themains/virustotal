@@ -9,7 +9,7 @@ scan_file(file_path = NULL, ...)
 \arguments{
 \item{file_path}{Required; Path to the document}
 
-\item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
+\item{\dots}{Additional arguments passed to \code{\link{virustotal2_POST}}.}
 }
 \value{
 data.frame with the following columns: 

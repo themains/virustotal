@@ -2,10 +2,15 @@
 % Please edit documentation in R/virustotal.R
 \name{virustotal_POST}
 \alias{virustotal_POST}
-\title{POST}
+\title{POST for the Current V3 API}
 \usage{
-virustotal_POST(query = list(), path = path, body = NULL,
-  key = Sys.getenv("VirustotalToken"), ...)
+virustotal_POST(
+  query = list(),
+  path = path,
+  body = NULL,
+  key = Sys.getenv("VirustotalToken"),
+  ...
+)
 }
 \arguments{
 \item{query}{query list}
@@ -22,5 +27,5 @@ virustotal_POST(query = list(), path = path, body = NULL,
 list
 }
 \description{
-POST
+POST for the Current V3 API
 }

@@ -27,7 +27,7 @@ get_ip_comments <- function(ip = NULL, limit = NULL, ...) {
         stop("Must specify an IP address.\n")
     }
 
-    res   <- virustotal_GET(path = paste0("ip/", domain, "/comments",
+    res   <- virustotal_GET(path = paste0("ip/", domain, "/comments"),
                                              query = list(limit = limit), ...)
 
     res

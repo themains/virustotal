@@ -15,7 +15,7 @@ url_report(url = NULL, scan_id = NULL, scan = 1, ...)
 When \code{1}, submits \code{url} for scanning if no existing reports are found. 
 When scan is set to \code{1}, the result includes a \code{scan_id} field, which can be used again to retrieve the report.}
 
-\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
+\item{\dots}{Additional arguments passed to \code{\link{virustotal2_GET}}.}
 }
 \value{
 data.frame with 13 columns: 
