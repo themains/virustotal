@@ -17,22 +17,22 @@
 #' 
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'    
-#' post_domain_votes("http://www.google.com")
-#' post_domain_votes("http://www.goodsfwrfw.com") # Domain not found
+#' post_domain_votes("http://google.com", vote = "malicious")
 #' }
 
-post_domain_votes <- function(domain = NULL, limit = NULL, cursor = NULL, vote = NULL, ...) {
+post_domain_votes <- function(domain = NULL, vote = NULL, limit = NULL, cursor = NULL, ...) {
 
     if (!is.character(domain)) {
         stop("Must specify domain.\n")
     }
 
-	vote = list("type" = "vote", "attributes" = list("verdict" = vote))
+    domain <- gsub("^http://|^https://", "", domain)
 
-    domain <- gsub("^http://", "", domain)
+	vote_r = list("data" = list("type" = "vote", "attributes" = list("verdict" = vote)))
 
     res   <- virustotal_POST(path = paste0("domains/", domain, "/votes"),
-                                             query = list(limit = limit, cursor = cursor, vote = vote), ...)
+    	                     body  = vote_r,
+                             query = list(limit = limit), ...)
 
     res
 }

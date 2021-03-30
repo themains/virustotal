@@ -5,7 +5,7 @@
 #' 
 #' @param ip IP address. String. Required.  
 #' @param vote vote. String. Required.  
-#' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
+#' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #' 
 #' @return named list
 #' @export
@@ -18,7 +18,7 @@
 #' 
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'    
-#' post_ip_comments("64.233.160.0")
+#' post_ip_comments(ip = "64.233.160.0", comment = "test")
 #' }
 
 post_ip_comments <- function(ip = NULL, comment = NULL, limit = NULL, ...) {
@@ -27,10 +27,11 @@ post_ip_comments <- function(ip = NULL, comment = NULL, limit = NULL, ...) {
         stop("Must specify an IP address.\n")
     }
 
-	comment = list("type" = "vote", "attributes" = list("text" = comment))
+	comment_r = list("data" = list("type" = "comment", "attributes" = list("text" = comment)))
 
-    res   <- virustotal_POST(path = paste0("ip/", domain, "/comments"),
-                                             query = list(limit = limit), ...)
+    res   <- virustotal_POST(path = paste0("ip_addresses/", ip, "/comments"),
+                             body  = comment_r,
+                             query = list(limit = limit), ...)
 
     res
 }

@@ -4,7 +4,7 @@
 #' 
 #' @param hash hash for the resource you want to comment on; Required; String
 #' @param comment review; Required; String
-#' @param \dots Additional arguments passed to \code{\link{virustotal2_GET}}.
+#' @param \dots Additional arguments passed to \code{\link{virustotal2_POST}}.
 #'  
 #' @return data.frame with 2 columns: \code{response_code}, \code{verbose_msg} 
 #' \itemize{

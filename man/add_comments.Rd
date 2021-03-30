@@ -11,7 +11,7 @@ add_comments(hash = NULL, comment = NULL, ...)
 
 \item{comment}{review; Required; String}
 
-\item{\dots}{Additional arguments passed to \code{\link{virustotal2_GET}}.}
+\item{\dots}{Additional arguments passed to \code{\link{virustotal2_POST}}.}
 }
 \value{
 data.frame with 2 columns: \code{response_code}, \code{verbose_msg} 
