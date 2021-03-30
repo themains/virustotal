@@ -1,3 +1,8 @@
+# virustotal 0.2.2
+
+* support for domain and ip v3
+* deprecate v2 domain and ip functions 
+
 # virustotal 0.2.1
 
 * extensive linting, passes expect_no_lint
