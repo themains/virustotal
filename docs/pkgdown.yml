@@ -1,8 +1,9 @@
-pandoc: 1.17.1
-pkgdown: 0.1.0.9000
-pkgdown_sha: d6ebaea156244a88bee4f14b4e8bcfb9e36f7727
+pandoc: 2.2.1
+pkgdown: 1.6.1
+pkgdown_sha: ~
 articles:
   using_virustotal: using_virustotal.html
+last_built: 2021-03-30T02:55Z
 urls:
   reference: http://themains.github.io/virustotal//reference
   article: http://themains.github.io/virustotal//articles

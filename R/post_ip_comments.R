@@ -1,7 +1,5 @@
 #' Add a comment to an IP address
 #'
-#' Retrieves report on a given domain, including passive DNS, urls detected by at least one url scanner. 
-#' Gives category of the domain from bitdefender.
 #' 
 #' @param ip IP address. String. Required.  
 #' @param vote vote. String. Required.  

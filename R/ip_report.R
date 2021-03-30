@@ -29,7 +29,7 @@ ip_report <- function(ip = NULL, ...) {
         stop("Must specify a valid IP.\n")
     }
 
-    .Deprecated("ip")
+    .Deprecated("get_ip_info")
 
     params <- list(ip = ip)
 

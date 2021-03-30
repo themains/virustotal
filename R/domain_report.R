@@ -35,7 +35,7 @@ domain_report <- function(domain = NULL, ...) {
 
     domain <- gsub("^http://", "", domain)
 
-    .Deprecated("domains")
+    .Deprecated("get_domain_info")
 
     res   <- virustotal2_GET(path = "domain/report",
                                              query = list(domain = domain), ...)

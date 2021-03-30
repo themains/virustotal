@@ -17,8 +17,7 @@ post_ip_comments(ip = NULL, comment = NULL, limit = NULL, ...)
 named list
 }
 \description{
-Retrieves report on a given domain, including passive DNS, urls detected by at least one url scanner. 
-Gives category of the domain from bitdefender.
+Add a comment to an IP address
 }
 \examples{
 \dontrun{

@@ -31,10 +31,10 @@ get_domain_comments <- function(domain = NULL, ...) {
         stop("Must specify domain.\n")
     }
 
-    domain <- gsub("^http://", "", domain)
+    domain <- gsub("^http://|^https://", "", domain)
 
     res   <- virustotal_GET(path = paste0("domains/", domain, "/comments"),
-                                             query = list(domain = domain), ...)
+                                             query = list(limit = limit, cursor = cursor), ...)
 
     res
 }

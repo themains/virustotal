@@ -3,15 +3,10 @@
 #' Retrieves report on a given domain, including passive DNS, urls detected by at least one url scanner. 
 #' Gives category of the domain from bitdefender.
 #' 
-#' @param domain domain name. String. Required.  
+#' @param ip IP address. String. Required.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
-#' @return named list with the following possible items: 
-#' \code{`BitDefender category`, undetected_referrer_samples, whois_timestamp,
-#' detected_downloaded_samples, detected_referrer_samples, `Webutation domain info`, `Alexa category`, undetected_downloaded_samples,
-#' resolutions, detected_communicating_samples, `Opera domain info`, `TrendMicro category`, categories, domain_siblings, 
-#' `BitDefender domain info`, whois, `Alexa domain info`, response_code, verbose_msg, `Websense ThreatSeeker category`, subdomains,
-#' `WOT domain info`, detected_urls, `Alexa rank`, undetected_communicating_samples, `Dr.Web category`, pcaps}
+#' @return named list
 #'   
 #' @export
 #' 
@@ -23,8 +18,7 @@
 #' 
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'    
-#' domains("http://www.google.com")
-#' domains("http://www.goodsfwrfw.com") # Domain not found
+#' get_ip_info("64.233.160.0")
 #' }
 
 get_ip_info <- function(ip = NULL, limit = NULL, ...) {
@@ -33,7 +27,7 @@ get_ip_info <- function(ip = NULL, limit = NULL, ...) {
         stop("Must specify an IP address.\n")
     }
 
-    res   <- virustotal_GET(path = paste0("ip/", ip),
+    res   <- virustotal_GET(path = paste0("ip_addresses/", ip),
                                              query = list(limit = limit), ...)
 
     res

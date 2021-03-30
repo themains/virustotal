@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://themains.github.io/virustotal//index.html</loc>
+  </url>
+  <url>
     <loc>http://themains.github.io/virustotal//reference/add_comments.html</loc>
   </url>
   <url>
@@ -10,7 +13,40 @@
     <loc>http://themains.github.io/virustotal//reference/file_report.html</loc>
   </url>
   <url>
+    <loc>http://themains.github.io/virustotal//reference/get_domain_comments.html</loc>
+  </url>
+  <url>
+    <loc>http://themains.github.io/virustotal//reference/get_domain_info.html</loc>
+  </url>
+  <url>
+    <loc>http://themains.github.io/virustotal//reference/get_domain_relationship.html</loc>
+  </url>
+  <url>
+    <loc>http://themains.github.io/virustotal//reference/get_domain_votes.html</loc>
+  </url>
+  <url>
+    <loc>http://themains.github.io/virustotal//reference/get_ip_comments.html</loc>
+  </url>
+  <url>
+    <loc>http://themains.github.io/virustotal//reference/get_ip_info.html</loc>
+  </url>
+  <url>
+    <loc>http://themains.github.io/virustotal//reference/get_ip_votes.html</loc>
+  </url>
+  <url>
     <loc>http://themains.github.io/virustotal//reference/ip_report.html</loc>
+  </url>
+  <url>
+    <loc>http://themains.github.io/virustotal//reference/post_domain_comments.html</loc>
+  </url>
+  <url>
+    <loc>http://themains.github.io/virustotal//reference/post_domain_votes.html</loc>
+  </url>
+  <url>
+    <loc>http://themains.github.io/virustotal//reference/post_ip_comments.html</loc>
+  </url>
+  <url>
+    <loc>http://themains.github.io/virustotal//reference/post_ip_votes.html</loc>
   </url>
   <url>
     <loc>http://themains.github.io/virustotal//reference/rate_limit.html</loc>
@@ -32,6 +68,12 @@
   </url>
   <url>
     <loc>http://themains.github.io/virustotal//reference/virustotal-package.html</loc>
+  </url>
+  <url>
+    <loc>http://themains.github.io/virustotal//reference/virustotal2_GET.html</loc>
+  </url>
+  <url>
+    <loc>http://themains.github.io/virustotal//reference/virustotal2_POST.html</loc>
   </url>
   <url>
     <loc>http://themains.github.io/virustotal//reference/virustotal_check.html</loc>
