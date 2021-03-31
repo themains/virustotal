@@ -10,7 +10,7 @@
 #' If you haven't already, get the API Key at \url{https://www.virustotal.com/}.
 #'
 #'  
-#' @importFrom httr GET content POST upload_file
+#' @importFrom httr GET content POST upload_file add_headers
 #' @importFrom plyr rbind.fill ldply
 #' @importFrom utils read.table
 #' @docType package

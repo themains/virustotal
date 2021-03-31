@@ -10,3 +10,5 @@ appveyor.yml
 ^tests\testthat\virustotal_api_key.enc$
 ^_pkgdown\.yml$
 .lintr.*
+^CRAN-RELEASE$
+^.github$

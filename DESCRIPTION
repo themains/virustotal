@@ -7,8 +7,8 @@ Description: Use VirusTotal, a Google service that analyzes files and URLs
     for viruses, worms, trojans etc., provides category of the content hosted by a 
     domain from a variety of prominent services, provides passive DNS information,
     among other things. See <http://www.virustotal.com> for more information. 
-URL: http://github.com/soodoku/virustotal
-BugReports: http://github.com/soodoku/virustotal/issues
+URL: http://github.com/themains/virustotal
+BugReports: http://github.com/themains/virustotal/issues
 Depends:
     R (>= 3.3.0)
 License: MIT + file LICENSE
