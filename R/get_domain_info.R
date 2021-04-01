@@ -2,6 +2,8 @@
 #'
 #' 
 #' @param domain domain name. String. Required.  
+#' @param limit  Number of entries. Integer. Optional.  Default is 10.  
+#' @param cursor String. Optional.  
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
 #' @return named list
@@ -20,7 +22,7 @@
 #' get_domain_info("http://www.goodsfwrfw.com") # Domain not found
 #' }
 
-get_domain_info <- function(domain = NULL, ...) {
+get_domain_info <- function(domain = NULL,  limit = NULL, cursor = NULL, ...) {
 
     if (!is.character(domain)) {
         stop("Must specify domain.\n")
