@@ -2,7 +2,9 @@
 #'
 #' 
 #' @param domain domain name. String. Required.
-#' @param domain vote. String. Required.  
+#' @param domain vote. String. Required. 
+#' @param limit  Number of entries. Integer. Optional.  Default is 10.  
+#' @param cursor String. Optional. 
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #' 
 #' @return named list 
@@ -32,7 +34,7 @@ post_domain_votes <- function(domain = NULL, vote = NULL, limit = NULL, cursor =
 
     res   <- virustotal_POST(path = paste0("domains/", domain, "/votes"),
     	                     body  = vote_r,
-                             query = list(limit = limit), ...)
+                             query = list(limit = limit, cursor = cursor), ...)
 
     res
 }

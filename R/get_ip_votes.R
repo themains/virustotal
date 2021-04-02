@@ -1,6 +1,8 @@
 #' Retrieve votes for an IP address
 #'
-#' @param ip IP address. String. Required.  
+#' @param ip IP address. String. Required. 
+#' @param limit  Number of entries. Integer. Optional.  Default is 10.  
+#' @param cursor String. Optional.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
 #' @return named list 
@@ -25,7 +27,7 @@ get_ip_votes <- function(ip = NULL, limit = NULL, cursor = NULL, ...) {
     }
 
     res   <- virustotal_GET(path = paste0("ip_addresses/", ip, "/votes"),
-                             query = list(limit = limit), ...)
+                             query = list(limit = limit, cursor = cursor), ...)
 
     res
 }

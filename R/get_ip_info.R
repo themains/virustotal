@@ -4,6 +4,8 @@
 #' Gives category of the domain from bitdefender.
 #' 
 #' @param ip IP address. String. Required.
+#' @param limit  Number of entries. Integer. Optional.  Default is 10.  
+#' @param cursor String. Optional.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
 #' @return named list
@@ -21,14 +23,14 @@
 #' get_ip_info("64.233.160.0")
 #' }
 
-get_ip_info <- function(ip = NULL, limit = NULL, ...) {
+get_ip_info <- function(ip = NULL, limit = NULL, cursor = NULL, ...) {
 
     if (!is.character(ip)) {
         stop("Must specify an IP address.\n")
     }
 
     res   <- virustotal_GET(path = paste0("ip_addresses/", ip),
-                                             query = list(limit = limit), ...)
+                                             query = list(limit = limit, cursor = cursor), ...)
 
     res
 }

@@ -2,7 +2,9 @@
 #'
 #' 
 #' @param ip IP address. String. Required.  
-#' @param vote vote. String. Required.  
+#' @param vote vote. String. Required.
+#' @param limit  Number of entries. Integer. Optional.  Default is 10.  
+#' @param cursor String. Optional.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #' 
 #' @return named list
@@ -19,7 +21,7 @@
 #' post_ip_comments(ip = "64.233.160.0", comment = "test")
 #' }
 
-post_ip_comments <- function(ip = NULL, comment = NULL, limit = NULL, ...) {
+post_ip_comments <- function(ip = NULL, comment = NULL, limit = NULL, cursor = NULL, ...) {
 
     if (!is.character(ip)) {
         stop("Must specify an IP address.\n")
@@ -29,7 +31,7 @@ post_ip_comments <- function(ip = NULL, comment = NULL, limit = NULL, ...) {
 
     res   <- virustotal_POST(path = paste0("ip_addresses/", ip, "/comments"),
                              body  = comment_r,
-                             query = list(limit = limit), ...)
+                             query = list(limit = limit, cursor = cursor), ...)
 
     res
 }

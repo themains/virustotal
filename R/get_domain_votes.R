@@ -1,7 +1,9 @@
 #' Retrieve votes for an Internet domain
 #'
 #' 
-#' @param domain domain name. String. Required.  
+#' @param domain domain name. String. Required.
+#' @param limit  Number of entries. Integer. Optional.  Default is 10.  
+#' @param cursor String. Optional.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
 #' @return named list 

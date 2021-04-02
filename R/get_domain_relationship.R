@@ -1,6 +1,8 @@
 #' Retrieve related objects to an Internet domain
 #'
-#' @param domain domain name. String. Required.  
+#' @param domain domain name. String. Required. 
+#' @param limit  Number of entries. Integer. Optional.  Default is 10.  
+#' @param cursor String. Optional.
 #' @param relationship relationship name. String. Required. Default is \code{subdomains}. 
 #' For all the options see \link{https://developers.virustotal.com/v3.0/reference#domains-relationships}
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
