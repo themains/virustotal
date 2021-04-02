@@ -3,8 +3,6 @@
 #' 
 #' @param domain domain name. String. Required.  
 #' @param comment vote. String. Required.  Any word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.
-#' @param limit  Number of entries. Integer. Optional.  Default is 10.  
-#' @param cursor String. Optional.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #' 
 #' @return named list
@@ -21,7 +19,7 @@
 #' post_domain_comments(domain = "https://google.com", comment = "Great!")
 #' }
 
-post_domain_comments <- function(domain = NULL, comment = NULL, limit = NULL, ...) {
+post_domain_comments <- function(domain = NULL, comment = NULL,...) {
 
     if (!is.character(domain)) {
         stop("Must specify domain.\n")
@@ -32,8 +30,7 @@ post_domain_comments <- function(domain = NULL, comment = NULL, limit = NULL, ..
 	comment_r = list("data" = list("type" = "comment", "attributes" = list("text" = comment)))
 
     res   <- virustotal_POST(path = paste0("domains/", domain, "/comments"),
-    	                     body  = comment_r,
-                             query = list(limit = limit, cursor = cursor), ...)
+    	                     body  = comment_r,...)
 
     res
 }

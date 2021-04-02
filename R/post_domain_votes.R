@@ -3,8 +3,6 @@
 #' 
 #' @param domain domain name. String. Required.
 #' @param domain vote. String. Required. 
-#' @param limit  Number of entries. Integer. Optional.  Default is 10.  
-#' @param cursor String. Optional. 
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #' 
 #' @return named list 
@@ -22,7 +20,7 @@
 #' post_domain_votes("http://google.com", vote = "malicious")
 #' }
 
-post_domain_votes <- function(domain = NULL, vote = NULL, limit = NULL, cursor = NULL, ...) {
+post_domain_votes <- function(domain = NULL, vote = NULL,...) {
 
     if (!is.character(domain)) {
         stop("Must specify domain.\n")
@@ -33,8 +31,7 @@ post_domain_votes <- function(domain = NULL, vote = NULL, limit = NULL, cursor =
 	vote_r = list("data" = list("type" = "vote", "attributes" = list("verdict" = vote)))
 
     res   <- virustotal_POST(path = paste0("domains/", domain, "/votes"),
-    	                     body  = vote_r,
-                             query = list(limit = limit, cursor = cursor), ...)
+    	                     body  = vote_r, ...)
 
     res
 }
