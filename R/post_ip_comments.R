@@ -2,7 +2,7 @@
 #'
 #' 
 #' @param ip IP address. String. Required.  
-#' @param vote vote. String. Required.
+#' @param comment Comment. String. Required.  
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #' 
 #' @return named list
