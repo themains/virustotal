@@ -4,14 +4,14 @@
 \alias{post_ip_comments}
 \title{Add a comment to an IP address}
 \usage{
-post_ip_comments(ip = NULL, comment = NULL, limit = NULL, ...)
+post_ip_comments(ip = NULL, comment = NULL, ...)
 }
 \arguments{
 \item{ip}{IP address. String. Required.}
 
-\item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
+\item{comment}{Comment. String. Required.}
 
-\item{vote}{vote. String. Required.}
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
 \value{
 named list

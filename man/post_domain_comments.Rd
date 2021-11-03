@@ -4,7 +4,7 @@
 \alias{post_domain_comments}
 \title{Add a comment to an Internet domain}
 \usage{
-post_domain_comments(domain = NULL, comment = NULL, limit = NULL, ...)
+post_domain_comments(domain = NULL, comment = NULL, ...)
 }
 \arguments{
 \item{domain}{domain name. String. Required.}

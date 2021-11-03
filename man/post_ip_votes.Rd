@@ -4,7 +4,7 @@
 \alias{post_ip_votes}
 \title{Add a vote for a IP address}
 \usage{
-post_ip_votes(ip = NULL, vote = NULL, limit = NULL, ...)
+post_ip_votes(ip = NULL, vote = NULL, ...)
 }
 \arguments{
 \item{ip}{IP address. String. Required.}

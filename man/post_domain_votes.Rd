@@ -4,10 +4,12 @@
 \alias{post_domain_votes}
 \title{Add a vote for a hostname or domain}
 \usage{
-post_domain_votes(domain = NULL, vote = NULL, limit = NULL, cursor = NULL, ...)
+post_domain_votes(domain = NULL, vote = NULL, ...)
 }
 \arguments{
-\item{domain}{vote. String. Required.}
+\item{domain}{domain name. String. Required.}
+
+\item{vote}{vote. String. Required.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }

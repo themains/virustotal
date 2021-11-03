@@ -1,7 +1,9 @@
 #' Retrieve comments for an Internet domain
 #'
 #' 
-#' @param domain domain name. String. Required.  
+#' @param domain domain name. String. Required.
+#' @param limit  Number of entries. Integer. Optional.  Default is 10.  
+#' @param cursor String. Optional.  
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
 #' @return named list with the following possible items: 
@@ -25,7 +27,7 @@
 #' get_domain_comments("http://www.goodsfwrfw.com") # Domain not found
 #' }
 
-get_domain_comments <- function(domain = NULL, ...) {
+get_domain_comments <- function(domain = NULL, limit = limit, cursor = cursor, ...) {
 
     if (!is.character(domain)) {
         stop("Must specify domain.\n")

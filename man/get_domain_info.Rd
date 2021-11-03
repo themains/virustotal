@@ -4,10 +4,14 @@
 \alias{get_domain_info}
 \title{Retrieve information about an Internet domain}
 \usage{
-get_domain_info(domain = NULL, ...)
+get_domain_info(domain = NULL, limit = NULL, cursor = NULL, ...)
 }
 \arguments{
 \item{domain}{domain name. String. Required.}
+
+\item{limit}{Number of entries. Integer. Optional.  Default is 10.}
+
+\item{cursor}{String. Optional.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }

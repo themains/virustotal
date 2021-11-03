@@ -9,6 +9,10 @@ get_ip_votes(ip = NULL, limit = NULL, cursor = NULL, ...)
 \arguments{
 \item{ip}{IP address. String. Required.}
 
+\item{limit}{Number of entries. Integer. Optional.  Default is 10.}
+
+\item{cursor}{String. Optional.}
+
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{

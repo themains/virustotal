@@ -12,7 +12,7 @@ BugReports: http://github.com/themains/virustotal/issues
 Depends:
     R (>= 3.3.0)
 License: MIT + file LICENSE
-LazyData: true
+LazyData: false
 VignetteBuilder: knitr
 Imports:
     httr,
@@ -22,4 +22,4 @@ Suggests:
     rmarkdown,
     testthat,
     lintr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

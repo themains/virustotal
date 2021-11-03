@@ -4,10 +4,14 @@
 \alias{get_domain_comments}
 \title{Retrieve comments for an Internet domain}
 \usage{
-get_domain_comments(domain = NULL, ...)
+get_domain_comments(domain = NULL, limit = limit, cursor = cursor, ...)
 }
 \arguments{
 \item{domain}{domain name. String. Required.}
+
+\item{limit}{Number of entries. Integer. Optional.  Default is 10.}
+
+\item{cursor}{String. Optional.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
