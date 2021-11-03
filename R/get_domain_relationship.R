@@ -4,7 +4,7 @@
 #' @param limit  Number of entries. Integer. Optional.  Default is 10.  
 #' @param cursor String. Optional.
 #' @param relationship relationship name. String. Required. Default is \code{subdomains}. 
-#' For all the options see \link{https://developers.virustotal.com/v3.0/reference#domains-relationships}
+#' For all the options see \url{https://developers.virustotal.com/v3.0/reference#domains-relationships}
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
 #' @return named list
