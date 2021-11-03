@@ -19,7 +19,7 @@
 #'   
 #' @export
 #' 
-#' @references \url{https://www.virustotal.com/en/documentation/public-api/}
+#' @references \url{https://developers.virustotal.com/v2.0/reference}
 #' 
 #' @examples \dontrun{
 #' 

@@ -28,7 +28,7 @@ file_report(hash='99017f6eebbac24f351415dd410d522d')
 }
 }
 \references{
-\url{https://www.virustotal.com/en/documentation/public-api/}
+\url{https://developers.virustotal.com/v2.0/reference}
 }
 \seealso{
 \code{\link{set_key}} for setting the API key

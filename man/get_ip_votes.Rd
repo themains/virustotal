@@ -30,7 +30,7 @@ get_ip_votes("64.233.160.0")
 }
 }
 \references{
-\url{https://www.virustotal.com/en/documentation/public-api/}
+\url{https://developers.virustotal.com/v2.0/reference}
 }
 \seealso{
 \code{\link{set_key}} for setting the API key

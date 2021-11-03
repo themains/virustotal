@@ -34,7 +34,7 @@ url_report(scan_id = "ebdd15c397d2b0c6f50c3f2df531357d1201ff5976802316405e60880d
 }
 }
 \references{
-\url{https://www.virustotal.com/en/documentation/public-api/}
+\url{https://developers.virustotal.com/v2.0/reference}
 }
 \seealso{
 \code{\link{set_key}} for setting the API key

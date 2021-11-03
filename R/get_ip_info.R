@@ -12,7 +12,7 @@
 #'   
 #' @export
 #' 
-#' @references \url{https://www.virustotal.com/en/documentation/public-api/}
+#' @references \url{https://developers.virustotal.com/v2.0/reference}
 #'
 #' @seealso \code{\link{set_key}} for setting the API key
 #' 
