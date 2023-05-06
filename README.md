@@ -1,6 +1,5 @@
 ## virustotal: R Client for the VirusTotal Public API 2.0
 
-[![Build Status](https://travis-ci.org/themains/virustotal.svg?branch=master)](https://travis-ci.org/themains/virustotal)
 [![Build status](https://ci.appveyor.com/api/projects/status/5o45rcviuuxtobo7?svg=true)](https://ci.appveyor.com/project/soodoku/virustotal-6owbf)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/virustotal)](https://cran.r-project.org/package=virustotal)
 ![](https://cranlogs.r-pkg.org/badges/grand-total/virustotal)
