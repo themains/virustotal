@@ -1,21 +1,17 @@
 #' Get Domain Report
 #'
-#' Retrieves report on a given domain, including passive DNS, urls detected by at least one url scanner. 
-#' Gives category of the domain from bitdefender.
+#' Retrieves comprehensive analysis report for a given domain, including 
+#' WHOIS information, DNS resolutions, detected URLs, and threat intelligence data.
 #' 
 #' @param domain domain name. String. Required.  
-#' @param \dots Additional arguments passed to \code{\link{virustotal2_GET}}.
+#' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
-#' @return named list with the following possible items: 
-#' \code{`BitDefender category`, undetected_referrer_samples, whois_timestamp,
-#' detected_downloaded_samples, detected_referrer_samples, `Webutation domain info`, `Alexa category`, undetected_downloaded_samples,
-#' resolutions, detected_communicating_samples, `Opera domain info`, `TrendMicro category`, categories, domain_siblings, 
-#' `BitDefender domain info`, whois, `Alexa domain info`, response_code, verbose_msg, `Websense ThreatSeeker category`, subdomains,
-#' `WOT domain info`, detected_urls, `Alexa rank`, undetected_communicating_samples, `Dr.Web category`, pcaps}
+#' @return list containing domain analysis results including WHOIS data,
+#' DNS resolutions, detected URLs, categories, and threat intelligence
 #'   
 #' @export
 #' 
-#' @references \url{https://developers.virustotal.com/v2.0/reference}
+#' @references \url{https://docs.virustotal.com/reference}
 #'
 #' @seealso \code{\link{set_key}} for setting the API key
 #' 
@@ -23,22 +19,22 @@
 #' 
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'    
-#' domain_report("http://www.google.com")
-#' domain_report("http://www.goodsfwrfw.com") # Domain not found
+#' domain_report("google.com")
+#' domain_report("example.com")
 #' }
 
 domain_report <- function(domain = NULL, ...) {
 
-    if (!is.character(domain)) {
-        stop("Must specify domain.\n")
+    if (is.null(domain) || !is.character(domain) || nchar(domain) == 0) {
+        stop("Must specify a valid domain name.\n")
     }
 
-    domain <- gsub("^http://", "", domain)
+    # Clean up domain (remove protocol if present)
+    domain <- gsub("^https?://", "", domain)
+    domain <- gsub("^www\\.", "", domain)
+    domain <- gsub("/.*$", "", domain)  # Remove any path
 
-    .Deprecated("get_domain_info")
-
-    res   <- virustotal2_GET(path = "domain/report",
-                                             query = list(domain = domain), ...)
+    res <- virustotal_GET(path = paste0("domains/", domain), ...)
 
     res
 }

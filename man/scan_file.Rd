@@ -9,11 +9,11 @@ scan_file(file_path = NULL, ...)
 \arguments{
 \item{file_path}{Required; Path to the document}
 
-\item{\dots}{Additional arguments passed to \code{\link{virustotal2_POST}}.}
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
 \value{
 data.frame with the following columns: 
-\code{scan_id, sha1, resource, response_code, sha256, permalink, md5, verbose_msg}
+\code{type, id, links}
 }
 \description{
 Submit a file for scanning
@@ -27,7 +27,7 @@ scan_file(file_path='path_to_suspicious_file')
 }
 }
 \references{
-\url{https://developers.virustotal.com/v2.0/reference}
+\url{https://docs.virustotal.com/reference}
 }
 \seealso{
 \code{\link{set_key}} for setting the API key

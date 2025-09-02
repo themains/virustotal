@@ -1,17 +1,16 @@
 #' Submit URL for scanning
 #' 
-#' Submit a URL for scanning. Returns a data.frame with \code{scan_id} which can be used to 
-#' fetch the report using \code{\link{url_report}}
+#' Submit a URL for analysis. Returns analysis details including an ID that can be used to 
+#' retrieve the report using \code{\link{url_report}}
 #' 
-#' @param url url; string; required
+#' @param url URL to scan; string; required
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #' 
-#' @return data.frame with 7 columns: 
-#' \code{permalink, resource, url, response_code, scan_date, scan_id, verbose_msg}
+#' @return list containing analysis details and ID
 #'  
 #' @export
 #' 
-#' @references \url{https://developers.virustotal.com/v2.0/reference}
+#' @references \url{https://docs.virustotal.com/reference}
 #' 
 #' @seealso \code{\link{set_key}} for setting the API key
 #'
@@ -24,11 +23,12 @@
 
 scan_url <- function(url = NULL, ...) {
 
-  if (!is.character(url)) {
-    stop("Must specify a valid url.\n")
+  if (is.null(url) || !is.character(url) || nchar(url) == 0) {
+    stop("Must specify a valid URL.\n")
   }
 
-  res    <- virustotal_POST(path = "url/scan", query = list(url = url), ...)
+  res <- virustotal_POST(path = "urls", 
+                        body = list(url = url), ...)
 
-  as.data.frame(res)
+  res
 }

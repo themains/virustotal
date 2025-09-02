@@ -10,16 +10,22 @@ vignette: >
 
 ## Using virustotal
 
+The virustotal package provides access to the VirusTotal API v3, allowing you to scan files and URLs for malware, get domain and IP intelligence, and retrieve comprehensive threat analysis reports.
+
 ### Installation
 
 To get the current development version from GitHub:
 
 ```{r, eval=F, install}
-#library(devtools)
-install_github("soodoku/virustotal")
+# Install from CRAN
+install.packages("virustotal")
+
+# Or install development version
+# library(devtools)
+# install_github("themains/virustotal")
 ```
 
-#### Load up the lib:
+#### Load the library:
 
 ```{r, eval=F, load}
 library(virustotal)
@@ -27,101 +33,99 @@ library(virustotal)
 
 #### Authentication
 
-Start by getting the API key from [https://www.virustotal.com/](https://www.virustotal.com/). Next, set it:
+1. Get your free API key from [VirusTotal](https://www.virustotal.com/)
+2. Set the API key in your R session:
 
 ```{r, eval=F, api_key}
-set_key("your_key")
+set_key("your_api_key_here")
 ```
 
-#### Get domain report
+### Core Functions
 
-Get report on a domain, including passive DNS:
+#### File Analysis
 
-```{r, eval=F,  domain}
-domain_report("http://www.google.com")$categories
-```
-```
-## [[1]]
-## [1] "searchengines"
-```
-#### Scan URL 
-
-```{r, eval=F, scan_url}
-scan_url("http://www.google.com")
-```
-
-```
-##                                                                                                             permalink               resource
-## 1 https://www.virustotal.com/url/dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf/analysis/1464817664/ http://www.google.com/
-```
-
-#### Get URL report
-
-Get report on a domain, including URL:
-
-```{r, eval=F, url}
-head(url_report("http://www.google.com")[, 1:2], 10)
-```
-```
-##                                                                        scan_id              resource
-## 1  dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf-1464816996 http://www.google.com
-## 2  dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf-1464816996 http://www.google.com
-## 3  dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf-1464816996 http://www.google.com
-## 4  dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf-1464816996 http://www.google.com
-## 5  dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf-1464816996 http://www.google.com
-## 6  dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf-1464816996 http://www.google.com
-## 7  dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf-1464816996 http://www.google.com
-## 8  dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf-1464816996 http://www.google.com
-## 9  dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf-1464816996 http://www.google.com
-## 10 dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf-1464816996 http://www.google.com
-```
-#### Get IP report
-
-```{r, eval=F, ip}
-ip_report("8.8.8.8")$country
-```
-```
-## [1] "US"
-```
-
-#### Get File Report
-
-```{r, eval=F, file}
-head(file_report("99017f6eebbac24f351415dd410d522d")[,1:2], 10)
-```
-
-```
-                                                                    scans                                                                     scan_id
-## Bkav                                           FALSE, 1.3.0.8042, 20160601 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947
-## TotalDefense               TRUE, 37.1.62.1, Win32/ASuspect.HDBBD, 20160601 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947
-## MicroWorld-eScan  TRUE, 12.0.250.0, Generic.Malware.V!w.7232B058, 20160601 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947
-## nProtect         TRUE, 2016-06-01.01, Trojan/W32.Small.28672.BJA, 20160601 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947
-## CMC                           TRUE, 1.1.0.977, Trojan.Win32.VB!O, 20160530 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947
-## CAT-QuickHeal                      TRUE, 14.00, Trojan.Comame.r3, 20160601 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947
-## ALYac                TRUE, 1.0.1.9, Generic.Malware.V!w.7232B058, 20160601 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947
-## Malwarebytes                      TRUE, 2.1.1.1115, Trojan.Qhost, 20160601 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947
-## Zillya                   TRUE, 2.0.0.2901, Trojan.VB.Win32.33493, 20160531 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947
-## SUPERAntiSpyware                               FALSE, 5.6.0.1032, 20160601 52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c-1464797947
-```
-
-#### Scan File 
+**Scan a file for malware:**
 
 ```{r, eval=F, scan_file}
-scan_file("using_virustotal.Rmd")[,1:2]
-```
-```
-##                                                                      scan_id                                     sha1
-## 1 a9e60cd4d1e3ea00a78f7e92b77f250b26297d79e387e30916de3973a03b28a0-1464822937 303e723fd79416c3a8f3ac8247f82ed2f22e635d
+# Submit a file for analysis
+result <- scan_file("path/to/suspicious_file.exe")
+analysis_id <- result$data$id
 ```
 
-#### Rescan File
+**Get file analysis report:**
+
+```{r, eval=F, file_report}
+# Get analysis results using file hash
+report <- file_report("99017f6eebbac24f351415dd410d522d")
+
+# Access scan results
+scan_results <- report$data$attributes$last_analysis_results
+total_engines <- length(scan_results)
+detections <- sum(sapply(scan_results, function(x) x$category == "malicious"))
+```
+
+**Request file rescan:**
 
 ```{r, eval=F, rescan_file}
-rescan_file(hash='99017f6eebbac24f351415dd410d522d')[,1:2]
+# Request new analysis of existing file
+rescan_result <- rescan_file("99017f6eebbac24f351415dd410d522d")
+new_analysis_id <- rescan_result$data$id
 ```
 
+#### URL Analysis
+
+**Scan a URL:**
+
+```{r, eval=F, scan_url}
+# Submit URL for analysis
+url_result <- scan_url("http://suspicious-site.com")
+analysis_id <- url_result$data$id
 ```
-##                                                                                                               permalink response_code
-## 1 https://www.virustotal.com/file/52d3df0ed60c46f336c131bf2ca454f73bafdc4b04dfa2aea80746f5ba9e6d1c/analysis/1464817836/             1
+
+**Get URL analysis report:**
+
+```{r, eval=F, url_report}
+# Get analysis results using URL
+report <- url_report("http://www.google.com")
+
+# Access scan results
+scan_results <- report$data$attributes$last_analysis_results
+threat_score <- report$data$attributes$stats
 ```
+
+#### Domain Intelligence
+
+**Get domain information:**
+
+```{r, eval=F, domain}
+# Get comprehensive domain analysis
+domain_info <- domain_report("google.com")
+
+# Access various data points
+categories <- domain_info$data$attributes$categories
+whois_data <- domain_info$data$attributes$whois
+dns_records <- domain_info$data$attributes$dns_records
+```
+
+#### IP Address Intelligence
+
+**Get IP address information:**
+
+```{r, eval=F, ip}
+# Get IP analysis including geolocation and ASN
+ip_info <- ip_report("8.8.8.8")
+
+# Access geo and network information
+country <- ip_info$data$attributes$country
+asn <- ip_info$data$attributes$asn
+network <- ip_info$data$attributes$network
+```
+
+### Rate Limiting
+
+The package automatically handles VirusTotal's rate limits (4 requests per minute for free accounts). You don't need to implement your own rate limiting.
+
+### Error Handling
+
+All functions include comprehensive input validation and will provide clear error messages for common issues like missing API keys or invalid parameters.
 

@@ -4,38 +4,35 @@
 \alias{url_report}
 \title{Get URL Report}
 \usage{
-url_report(url = NULL, scan_id = NULL, scan = 1, ...)
+url_report(url_id = NULL, ...)
 }
 \arguments{
-\item{url}{URL. String. \code{url} or \code{scan_id} must be specified.}
+\item{url_id}{URL or URL ID from VirusTotal. String. Required.}
 
-\item{scan_id}{scan id for a particular url scan. String. \code{url} or \code{scan_id} must be specified.}
-
-\item{scan}{String. Optional. Can be 0 or 1. Default is \code{1}. 
-When \code{1}, submits \code{url} for scanning if no existing reports are found. 
-When scan is set to \code{1}, the result includes a \code{scan_id} field, which can be used again to retrieve the report.}
-
-\item{\dots}{Additional arguments passed to \code{\link{virustotal2_GET}}.}
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-data.frame with 13 columns: 
-\code{scan_id, resource, url, response_code, scan_date, permalink, verbose_msg, positives, total, .id, detected, result, detail}
+list containing URL analysis results including scan details,
+detection information, and metadata
 }
 \description{
-Retrieve a scan report for a given URL. If no scan report is available, set \code{scan} to \code{1} to get a new report.
+Retrieve a scan report for a given URL or URL ID from VirusTotal.
 }
 \examples{
 \dontrun{
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
+# Get report using URL
 url_report("http://www.google.com")
-url_report(scan_id = "ebdd15c397d2b0c6f50c3f2df531357d1201ff5976802316405e60880d6bf5ec-1478786749")
+
+# Get report using URL ID (base64 encoded URL without padding)
+url_report("687474703a2f2f7777772e676f6f676c652e636f6d2f")
 }
 }
 \references{
-\url{https://developers.virustotal.com/v2.0/reference}
+\url{https://docs.virustotal.com/reference}
 }
 \seealso{
-\code{\link{set_key}} for setting the API key
+\code{\link{set_key}} for setting the API key, \code{\link{scan_url}} for submitting URLs
 }

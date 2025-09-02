@@ -5,19 +5,19 @@
 \title{POST for the Current V3 API}
 \usage{
 virustotal_POST(
-  query = list(),
-  path = path,
+  path,
   body = NULL,
+  query = list(),
   key = Sys.getenv("VirustotalToken"),
   ...
 )
 }
 \arguments{
-\item{query}{query list}
-
 \item{path}{path to the specific API service url}
 
-\item{body}{file}
+\item{body}{request body (file upload or JSON data)}
+
+\item{query}{query list}
 
 \item{key}{A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.}
 

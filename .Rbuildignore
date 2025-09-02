@@ -12,3 +12,5 @@ appveyor.yml
 .lintr.*
 ^CRAN-RELEASE$
 ^.github$
+^doc$
+^Meta$

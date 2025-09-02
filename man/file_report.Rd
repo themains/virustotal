@@ -7,14 +7,13 @@
 file_report(hash = NULL, ...)
 }
 \arguments{
-\item{hash}{Hash for the scan}
+\item{hash}{File hash (MD5, SHA1, or SHA256) or file ID}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-data.frame with 16 columns: 
-\code{service, detected, version, update, result, scan_id, sha1, resource, response_code, 
-scan_date, permalink, verbose_msg, total, positives, sha256, md5}
+list containing file analysis results including antivirus scans, 
+file metadata, and threat detection information
 }
 \description{
 Get File Scan Report
@@ -28,7 +27,7 @@ file_report(hash='99017f6eebbac24f351415dd410d522d')
 }
 }
 \references{
-\url{https://developers.virustotal.com/v2.0/reference}
+\url{https://docs.virustotal.com/reference}
 }
 \seealso{
 \code{\link{set_key}} for setting the API key

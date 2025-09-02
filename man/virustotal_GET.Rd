@@ -4,17 +4,12 @@
 \alias{virustotal_GET}
 \title{GET for the Current V3 API}
 \usage{
-virustotal_GET(
-  query = list(),
-  path = path,
-  key = Sys.getenv("VirustotalToken"),
-  ...
-)
+virustotal_GET(path, query = list(), key = Sys.getenv("VirustotalToken"), ...)
 }
 \arguments{
-\item{query}{query list}
-
 \item{path}{path to the specific API service url}
+
+\item{query}{query list}
 
 \item{key}{A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.}
 

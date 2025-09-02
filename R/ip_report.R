@@ -1,18 +1,17 @@
-#' Get IP Report
+#' Get IP Address Report
 #' 
-#' Get passive DNS data and URLs detected by URL scanners 
+#' Retrieves comprehensive analysis report for an IP address, including 
+#' geolocation, ASN information, DNS resolutions, and detected URLs.
 #'
-#' @param ip a valid IPv4 address in dotted quad notation; String; Required 
-#' @param \dots Additional arguments passed to \code{\link{virustotal2_GET}}.
+#' @param ip a valid IPv4 or IPv6 address; String; Required 
+#' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
-#' @return named list with the following potential items: 
-#' \code{undetected_referrer_samples, detected_downloaded_samples, detected_referrer_samples, 
-#' undetected_downloaded_samples, detected_urls, undetected_downloaded_samples, response_code, as_owner, verbose_msg, country, 
-#' undetected_referrer_samples, detected_communicating_samples, resolutions, undetected_communicating_samples, asn}
+#' @return list containing IP analysis results including geolocation,
+#' ASN information, DNS resolutions, detected URLs, and threat intelligence
 #'  
 #' @export
 #' 
-#' @references \url{https://developers.virustotal.com/v2.0/reference}
+#' @references \url{https://docs.virustotal.com/reference}
 #' 
 #' @seealso \code{\link{set_key}} for setting the API key
 #'
@@ -21,19 +20,16 @@
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #' 
 #' ip_report(ip="8.8.8.8")
+#' ip_report(ip="2001:4860:4860::8888")  # IPv6 example
 #' }
 
 ip_report <- function(ip = NULL, ...) {
 
-    if (!is.character(ip)) {
-        stop("Must specify a valid IP.\n")
+    if (is.null(ip) || !is.character(ip) || nchar(ip) == 0) {
+        stop("Must specify a valid IP address.\n")
     }
 
-    .Deprecated("get_ip_info")
-
-    params <- list(ip = ip)
-
-    res   <- virustotal2_GET(path = "ip-address/report", query = params, ...)
+    res <- virustotal_GET(path = paste0("ip_addresses/", ip), ...)
 
     res
 }

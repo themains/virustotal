@@ -1,15 +1,14 @@
 #' Get File Scan Report
 #'
-#' @param hash Hash for the scan
+#' @param hash File hash (MD5, SHA1, or SHA256) or file ID
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
-#' @return data.frame with 16 columns: 
-#' \code{service, detected, version, update, result, scan_id, sha1, resource, response_code, 
-#' scan_date, permalink, verbose_msg, total, positives, sha256, md5}   
+#' @return list containing file analysis results including antivirus scans, 
+#' file metadata, and threat detection information
 #'  
 #' @export
 #' 
-#' @references \url{https://developers.virustotal.com/v2.0/reference}
+#' @references \url{https://docs.virustotal.com/reference}
 #' 
 #' @seealso \code{\link{set_key}} for setting the API key
 #' 
@@ -22,28 +21,11 @@
 
 file_report <- function(hash = NULL, ...) {
 
-    if (!is.character(hash)) {
-        stop("Must specify hash.\n")
+    if (is.null(hash) || !is.character(hash) || nchar(hash) == 0) {
+        stop("Must specify a valid file hash (MD5, SHA1, or SHA256).\n")
     }
 
-    params <- list(resource = hash)
-    res    <- virustotal_GET(path = "file/report", query = params, ...)
+    res <- virustotal_GET(path = paste0("files/", hash), ...)
 
-    if (res$response_code == 0 ){
-      res_df <- read.table(text = "", col.names = c("service", "detected",
-                                                    "version", "update",
-                                                    "result", "scan_id",
-                                                    "sha1", "resource",
-                                                    "response_code",
-                                                    "scan_date", "permalink",
-                                                    "verbose_msg",
-                                                    "total, positives",
-                                                    "sha256", "md5"))
-      res_df[1, match(names(res), names(res_df))] <- res
-      return(res_df)
-    }
-
-    scan_results <- ldply(lapply(res$scans, unlist), rbind, .id = "service")
-    res_df       <- as.data.frame(cbind(scan_results, res[2:length(res)]))
-    res_df
+    res
 }

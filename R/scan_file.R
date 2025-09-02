@@ -1,14 +1,14 @@
 #' Submit a file for scanning
 #'
 #' @param file_path Required; Path to the document
-#' @param \dots Additional arguments passed to \code{\link{virustotal2_POST}}.
+#' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #' 
 #' @return data.frame with the following columns: 
-#' \code{scan_id, sha1, resource, response_code, sha256, permalink, md5, verbose_msg}
+#' \code{type, id, links}
 #'  
 #' @export
 #' 
-#' @references \url{https://developers.virustotal.com/v2.0/reference}
+#' @references \url{https://docs.virustotal.com/reference}
 #' 
 #' @seealso \code{\link{set_key}} for setting the API key
 #'
@@ -21,12 +21,17 @@
 
 scan_file <- function(file_path = NULL, ...) {
 
-  if (!file.exists(file_path)) stop("The file doesn't Exist.
-                                                      Please check the path.\n")
-    .Deprecated("")
+  if (is.null(file_path) || !is.character(file_path)) {
+    stop("file_path must be a character string pointing to a valid file.\n")
+  }
+  
+  if (!file.exists(file_path)) {
+    stop("The file doesn't exist. Please check the path.\n")
+  }
 
-    res   <- virustotal2_POST(path = "file/scan", body =
-                                            list(file = upload_file(file_path)))
+  res <- virustotal_POST(path = "files", 
+                        body = list(file = upload_file(file_path)),
+                        ...)
 
-    as.data.frame(res)
+  as.data.frame(res)
 }

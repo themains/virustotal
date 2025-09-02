@@ -4,7 +4,7 @@
 #' @aliases virustotal
 #'
 #' @description Access virustotal API. See \url{https://www.virustotal.com/}. 
-#' Details about results of calls to the API can be found at \url{https://developers.virustotal.com/v2.0/reference}.
+#' Details about results of calls to the API can be found at \url{https://docs.virustotal.com/reference}.
 #'
 #' You will need credentials to use this application. 
 #' If you haven't already, get the API Key at \url{https://www.virustotal.com/}.
@@ -50,27 +50,25 @@ virustotal2_GET <- function(query=list(), path = path,
 #'
 #' GET for the Current V3 API
 #' 
-#' @param query query list 
 #' @param path  path to the specific API service url
+#' @param query query list 
 #' @param key  A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.
 #' @param \dots Additional arguments passed to \code{\link[httr]{GET}}.
 #' @return list
 
-virustotal_GET <- function(query=list(), path = path,
-                                     key = Sys.getenv("VirustotalToken"), ...) {
+virustotal_GET <- function(path, query = list(),
+                          key = Sys.getenv("VirustotalToken"), ...) {
 
   if (identical(key, "")) {
         stop("Please set application key via set_key(key='key')).\n")
   }
 
-  query$apikey <- key
-
   rate_limit()
 
-  res <- GET("https://virustotal.com/", 
-               path = paste0("api/v3/", path),
-               query = query, 
-               add_headers('x-apikey' = key), ...)
+  res <- GET("https://www.virustotal.com/", 
+             path = paste0("api/v3/", path),
+             query = query, 
+             add_headers('x-apikey' = key), ...)
 
   virustotal_check(res)
   res <- content(res, as = "parsed", type = "application/json")
@@ -82,15 +80,15 @@ virustotal_GET <- function(query=list(), path = path,
 #'
 #' POST for the Current V3 API
 #' 
-#' @param query query list 
-#' @param body file 
 #' @param path  path to the specific API service url
+#' @param body request body (file upload or JSON data)
+#' @param query query list 
 #' @param key A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.
 #' @param \dots Additional arguments passed to \code{\link[httr]{POST}}.
 #' @return list
 
-virustotal_POST <- function(query=list(), path = path, body = NULL,
-                                     key = Sys.getenv("VirustotalToken"), ...) {
+virustotal_POST <- function(path, body = NULL, query = list(),
+                           key = Sys.getenv("VirustotalToken"), ...) {
 
   if (identical(key, "")) {
         stop("Please set application key via set_key(key='key')).\n")
@@ -98,14 +96,15 @@ virustotal_POST <- function(query=list(), path = path, body = NULL,
 
   rate_limit()
 
-  res <- POST("https://virustotal.com/", 
-               path = paste0("api/v3/", path),
-               body = body,
-               encode = "json",
-               add_headers('x-apikey' = key), ...)
+  res <- POST("https://www.virustotal.com/", 
+              path = paste0("api/v3/", path),
+              body = body,
+              encode = "json",
+              query = query,
+              add_headers('x-apikey' = key), ...)
 
   virustotal_check(res)
-  res <- content(res)
+  res <- content(res, as = "parsed", type = "application/json")
 
   res
 }

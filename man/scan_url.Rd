@@ -7,17 +7,16 @@
 scan_url(url = NULL, ...)
 }
 \arguments{
-\item{url}{url; string; required}
+\item{url}{URL to scan; string; required}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
 \value{
-data.frame with 7 columns: 
-\code{permalink, resource, url, response_code, scan_date, scan_id, verbose_msg}
+list containing analysis details and ID
 }
 \description{
-Submit a URL for scanning. Returns a data.frame with \code{scan_id} which can be used to 
-fetch the report using \code{\link{url_report}}
+Submit a URL for analysis. Returns analysis details including an ID that can be used to 
+retrieve the report using \code{\link{url_report}}
 }
 \examples{
 \dontrun{
@@ -28,7 +27,7 @@ scan_url("http://www.google.com")
 }
 }
 \references{
-\url{https://developers.virustotal.com/v2.0/reference}
+\url{https://docs.virustotal.com/reference}
 }
 \seealso{
 \code{\link{set_key}} for setting the API key

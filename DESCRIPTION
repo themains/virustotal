@@ -1,12 +1,13 @@
 Package: virustotal
 Title: R Client for the VirusTotal API
-Version: 0.2.2
+Version: 0.3.0
 Authors@R: person("Gaurav", "Sood", email = "gsood07@gmail.com", role = c("aut", "cre"))
+Author: Gaurav Sood [aut, cre]
 Maintainer: Gaurav Sood <gsood07@gmail.com>
 Description: Use VirusTotal, a Google service that analyzes files and URLs 
     for viruses, worms, trojans etc., provides category of the content hosted by a 
     domain from a variety of prominent services, provides passive DNS information,
-    among other things. See <http://www.virustotal.com> for more information. 
+    among other things. See <https://www.virustotal.com> for more information. 
 URL: https://github.com/themains/virustotal
 BugReports: https://github.com/themains/virustotal/issues
 Depends:
@@ -14,12 +15,15 @@ Depends:
 License: MIT + file LICENSE
 LazyData: false
 VignetteBuilder: knitr
+Encoding: UTF-8
 Imports:
     httr,
-    plyr
+    plyr,
+    base64enc
 Suggests:
     knitr,
     rmarkdown,
     testthat,
-    lintr
-RoxygenNote: 7.1.2
+    lintr,
+    httptest
+RoxygenNote: 7.3.2
