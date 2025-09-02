@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.httr-oauth
+dev/
+tests/testthat/virustotal_api_key
+.lintr_cache
+/doc/
+/Meta/
+/virustotal.Rcheck
+*.gz

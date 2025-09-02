@@ -1,0 +1,131 @@
+---
+title: "Using virustotal"
+author: "Gaurav Sood"
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{Using virustotal}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Using virustotal
+
+The virustotal package provides access to the VirusTotal API v3, allowing you to scan files and URLs for malware, get domain and IP intelligence, and retrieve comprehensive threat analysis reports.
+
+### Installation
+
+To get the current development version from GitHub:
+
+```{r, eval=F, install}
+# Install from CRAN
+install.packages("virustotal")
+
+# Or install development version
+# library(devtools)
+# install_github("themains/virustotal")
+```
+
+#### Load the library:
+
+```{r, eval=F, load}
+library(virustotal)
+```
+
+#### Authentication
+
+1. Get your free API key from [VirusTotal](https://www.virustotal.com/)
+2. Set the API key in your R session:
+
+```{r, eval=F, api_key}
+set_key("your_api_key_here")
+```
+
+### Core Functions
+
+#### File Analysis
+
+**Scan a file for malware:**
+
+```{r, eval=F, scan_file}
+# Submit a file for analysis
+result <- scan_file("path/to/suspicious_file.exe")
+analysis_id <- result$data$id
+```
+
+**Get file analysis report:**
+
+```{r, eval=F, file_report}
+# Get analysis results using file hash
+report <- file_report("99017f6eebbac24f351415dd410d522d")
+
+# Access scan results
+scan_results <- report$data$attributes$last_analysis_results
+total_engines <- length(scan_results)
+detections <- sum(sapply(scan_results, function(x) x$category == "malicious"))
+```
+
+**Request file rescan:**
+
+```{r, eval=F, rescan_file}
+# Request new analysis of existing file
+rescan_result <- rescan_file("99017f6eebbac24f351415dd410d522d")
+new_analysis_id <- rescan_result$data$id
+```
+
+#### URL Analysis
+
+**Scan a URL:**
+
+```{r, eval=F, scan_url}
+# Submit URL for analysis
+url_result <- scan_url("http://suspicious-site.com")
+analysis_id <- url_result$data$id
+```
+
+**Get URL analysis report:**
+
+```{r, eval=F, url_report}
+# Get analysis results using URL
+report <- url_report("http://www.google.com")
+
+# Access scan results
+scan_results <- report$data$attributes$last_analysis_results
+threat_score <- report$data$attributes$stats
+```
+
+#### Domain Intelligence
+
+**Get domain information:**
+
+```{r, eval=F, domain}
+# Get comprehensive domain analysis
+domain_info <- domain_report("google.com")
+
+# Access various data points
+categories <- domain_info$data$attributes$categories
+whois_data <- domain_info$data$attributes$whois
+dns_records <- domain_info$data$attributes$dns_records
+```
+
+#### IP Address Intelligence
+
+**Get IP address information:**
+
+```{r, eval=F, ip}
+# Get IP analysis including geolocation and ASN
+ip_info <- ip_report("8.8.8.8")
+
+# Access geo and network information
+country <- ip_info$data$attributes$country
+asn <- ip_info$data$attributes$asn
+network <- ip_info$data$attributes$network
+```
+
+### Rate Limiting
+
+The package automatically handles VirusTotal's rate limits (4 requests per minute for free accounts). You don't need to implement your own rate limiting.
+
+### Error Handling
+
+All functions include comprehensive input validation and will provide clear error messages for common issues like missing API keys or invalid parameters.
+
