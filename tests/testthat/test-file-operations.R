@@ -46,6 +46,53 @@ test_that("rescan_file validates input correctly", {
   expect_error(rescan_file(""), "Must specify a valid file hash")
 })
 
+# Test new v3 file functions
+test_that("get_file_upload_url validates correctly", {
+  expect_true(exists("get_file_upload_url"))
+})
+
+test_that("get_file_comments validates input correctly", {
+  expect_error(get_file_comments(), "Must specify a valid file hash")
+  expect_error(get_file_comments(NULL), "Must specify a valid file hash")
+  expect_error(get_file_comments(""), "Must specify a valid file hash")
+})
+
+test_that("post_file_comments validates input correctly", {
+  expect_error(post_file_comments(), "Must specify a valid file hash")
+  expect_error(post_file_comments("hash123"), "Must specify a comment")
+  expect_error(post_file_comments("hash123", ""), "Must specify a comment")
+})
+
+test_that("get_file_votes validates input correctly", {
+  expect_error(get_file_votes(), "Must specify a valid file hash")
+  expect_error(get_file_votes(NULL), "Must specify a valid file hash")
+  expect_error(get_file_votes(""), "Must specify a valid file hash")
+})
+
+test_that("post_file_votes validates input correctly", {
+  expect_error(post_file_votes(), "Must specify a valid file hash")
+  expect_error(post_file_votes("hash123"), "Verdict must be either 'harmless' or 'malicious'")
+  expect_error(post_file_votes("hash123", "invalid"), "Verdict must be either 'harmless' or 'malicious'")
+})
+
+test_that("get_file_relationships validates input correctly", {
+  expect_error(get_file_relationships(), "Must specify a valid file hash")
+  expect_error(get_file_relationships("hash123"), "Must specify a relationship type")
+  expect_error(get_file_relationships("hash123", "invalid"), "Invalid relationship type")
+})
+
+test_that("download_file validates input correctly", {
+  expect_error(download_file(), "Must specify a valid file hash")
+  expect_error(download_file(NULL), "Must specify a valid file hash")
+  expect_error(download_file(""), "Must specify a valid file hash")
+})
+
+test_that("get_file_download_url validates input correctly", {
+  expect_error(get_file_download_url(), "Must specify a valid file hash")
+  expect_error(get_file_download_url(NULL), "Must specify a valid file hash")
+  expect_error(get_file_download_url(""), "Must specify a valid file hash")
+})
+
 # Mock tests require httptest package and API key setup
 test_that("file operations work with mocked responses", {
   skip_if_not_installed("httptest")
@@ -56,4 +103,12 @@ test_that("file operations work with mocked responses", {
   expect_true(exists("scan_file"))
   expect_true(exists("file_report"))
   expect_true(exists("rescan_file"))
+  expect_true(exists("get_file_upload_url"))
+  expect_true(exists("get_file_comments"))
+  expect_true(exists("post_file_comments"))
+  expect_true(exists("get_file_votes"))
+  expect_true(exists("post_file_votes"))
+  expect_true(exists("get_file_relationships"))
+  expect_true(exists("download_file"))
+  expect_true(exists("get_file_download_url"))
 })

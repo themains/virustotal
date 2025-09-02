@@ -16,7 +16,7 @@ get_domain_relationship(
 \item{domain}{domain name. String. Required.}
 
 \item{relationship}{relationship name. String. Required. Default is \code{subdomains}. 
-For all the options see \url{https://developers.virustotal.com/v3.0/reference#domains-relationships}}
+For all the options see \url{https://docs.virustotal.com/reference}}
 
 \item{limit}{Number of entries. Integer. Optional.  Default is 10.}
 
@@ -40,7 +40,7 @@ get_domain_relationship("https://www.goodsfwrfw.com") # Domain not found
 }
 }
 \references{
-\url{https://developers.virustotal.com/v2.0/reference}
+\url{https://docs.virustotal.com/reference}
 }
 \seealso{
 \code{\link{set_key}} for setting the API key

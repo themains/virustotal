@@ -23,6 +23,51 @@ reference:
     contents:
     - starts_with("scan_")
     - rescan_file
-  - title: Add Comment
+  - title: File Operations
+    desc: V3 API file operations
+    contents:
+    - get_file_upload_url
+    - download_file
+    - get_file_download_url
+    - get_file_comments
+    - post_file_comments
+    - get_file_votes
+    - post_file_votes
+    - get_file_relationships
+  - title: URL Operations
+    desc: V3 API URL operations
+    contents:
+    - get_url_comments
+    - post_url_comments
+    - get_url_votes
+    - post_url_votes
+    - get_url_relationships
+  - title: Domain Operations
+    desc: V3 API domain operations
+    contents:
+    - get_domain_info
+    - get_domain_comments
+    - post_domain_comments
+    - get_domain_votes
+    - post_domain_votes
+    - get_domain_relationship
+  - title: IP Operations
+    desc: V3 API IP operations
+    contents:
+    - get_ip_info
+    - get_ip_comments
+    - post_ip_comments
+    - get_ip_votes
+    - post_ip_votes
+  - title: Add Comment (Legacy)
     contents:
     - add_comments
+  - title: Internal Functions
+    contents:
+    - virustotal_GET
+    - virustotal_POST
+    - virustotal_check
+    - rate_limit
+    - virustotal2_GET
+    - virustotal2_POST
+    - virustotal-package

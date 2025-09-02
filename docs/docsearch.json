@@ -2,21 +2,21 @@
   "index_name": "virustotal",
   "start_urls": [
     {
-      "url": "http://themains.github.io/virustotal//index.html",
+      "url": "http://themains.github.io/virustotal/index.html",
       "selectors_key": "homepage",
       "tags": [
         "homepage"
       ]
     },
     {
-      "url": "http://themains.github.io/virustotal//reference",
+      "url": "http://themains.github.io/virustotal/reference",
       "selectors_key": "reference",
       "tags": [
         "reference"
       ]
     },
     {
-      "url": "http://themains.github.io/virustotal//articles",
+      "url": "http://themains.github.io/virustotal/articles",
       "selectors_key": "articles",
       "tags": [
         "articles"
@@ -30,7 +30,7 @@
     "/articles/index.html"
   ],
   "sitemap_urls": [
-    "http://themains.github.io/virustotal//sitemap.xml"
+    "http://themains.github.io/virustotal/sitemap.xml"
   ],
   "selectors": {
     "homepage": {

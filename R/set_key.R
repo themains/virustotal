@@ -8,7 +8,7 @@
 #' 
 #' @export
 #' 
-#' @references \url{https://developers.virustotal.com/v2.0/reference}
+#' @references \url{https://docs.virustotal.com/reference}
 #' 
 #' @examples \dontrun{
 #' 

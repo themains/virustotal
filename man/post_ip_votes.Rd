@@ -28,7 +28,7 @@ post_ip_votes(ip = "64.233.160.0", vote = "malicious")
 }
 }
 \references{
-\url{https://developers.virustotal.com/v2.0/reference}
+\url{https://docs.virustotal.com/reference}
 }
 \seealso{
 \code{\link{set_key}} for setting the API key

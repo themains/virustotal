@@ -31,7 +31,7 @@ get_domain_info("http://www.goodsfwrfw.com") # Domain not found
 }
 }
 \references{
-\url{https://developers.virustotal.com/v2.0/reference}
+\url{https://docs.virustotal.com/reference}
 }
 \seealso{
 \code{\link{set_key}} for setting the API key

@@ -22,5 +22,5 @@ set_key('api_key_here')
 }
 }
 \references{
-\url{https://developers.virustotal.com/v2.0/reference}
+\url{https://docs.virustotal.com/reference}
 }

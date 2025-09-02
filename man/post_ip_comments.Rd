@@ -28,7 +28,7 @@ post_ip_comments(ip = "64.233.160.0", comment = "test")
 }
 }
 \references{
-\url{https://developers.virustotal.com/v2.0/reference}
+\url{https://docs.virustotal.com/reference}
 }
 \seealso{
 \code{\link{set_key}} for setting the API key

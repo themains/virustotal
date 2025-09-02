@@ -2,8 +2,8 @@
 % Please edit documentation in R/virustotal.R
 \docType{package}
 \name{virustotal-package}
-\alias{virustotal-package}
 \alias{virustotal}
+\alias{virustotal-package}
 \title{virustotal: Access Virustotal API}
 \description{
 Access virustotal API. See \url{https://www.virustotal.com/}. 

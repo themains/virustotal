@@ -1,8 +1,5 @@
 #' @title virustotal: Access Virustotal API
 #' 
-#' @name virustotal-package
-#' @aliases virustotal
-#'
 #' @description Access virustotal API. See \url{https://www.virustotal.com/}. 
 #' Details about results of calls to the API can be found at \url{https://docs.virustotal.com/reference}.
 #'
@@ -13,9 +10,8 @@
 #' @importFrom httr GET content POST upload_file add_headers
 #' @importFrom plyr rbind.fill ldply
 #' @importFrom utils read.table
-#' @docType package
 #' @author Gaurav Sood
-NULL
+"_PACKAGE"
 
 #' 
 #' Base POST AND GET functions. Not exported.
