@@ -14,3 +14,5 @@ appveyor.yml
 ^.github$
 ^doc$
 ^Meta$
+^CLAUDE\.md$
+^Citation\.cff$
