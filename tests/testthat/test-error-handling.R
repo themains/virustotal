@@ -48,8 +48,7 @@ test_that("virustotal_check handles HTTP status codes", {
   server_error_resp <- list(status_code = 500)
   expect_error(virustotal_check(server_error_resp), class = "virustotal_error")
   
-  # Test rate limit - simple case (will use default retry_after = 60)
-  # We don't need to mock httr::headers, just test the basic error flow
+  # Test rate limit - the function should handle cases where headers might not be available
   rate_limit_resp <- list(status_code = 204)
   expect_error(virustotal_check(rate_limit_resp), class = "virustotal_rate_limit_error")
 })

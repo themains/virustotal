@@ -155,9 +155,15 @@ virustotal_check <- function(req) {
   if (req$status_code == 204 || req$status_code == 429) {
     # Try to get retry-after header, with fallback to 60 if anything fails
     retry_after <- tryCatch({
-      as.numeric(httr::headers(req)[["retry-after"]]) %||% 60
+      # Check if this is a real httr response or a mock object
+      if (inherits(req, "response")) {
+        as.numeric(httr::headers(req)[["retry-after"]]) %||% 60
+      } else {
+        # For test mock objects, use a default
+        60
+      }
     }, error = function(e) {
-      60  # Default fallback
+      60  # Default fallback for any error
     })
     
     stop(virustotal_rate_limit_error(
