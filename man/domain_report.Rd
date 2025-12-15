@@ -12,21 +12,23 @@ domain_report(domain, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}}
 }
 \value{
-A \code{virustotal_domain_report} object containing domain analysis results
-including WHOIS data, DNS resolutions, detected URLs, categories, and threat intelligence
+A \code{virustotal_domain_report} object containing domain analysis
+results including WHOIS data, DNS resolutions, detected URLs, categories,
+and threat intelligence
 }
 \description{
 Retrieves comprehensive analysis report for a given domain, including
-WHOIS information, DNS resolutions, detected URLs, and threat intelligence data.
+WHOIS information, DNS resolutions, detected URLs, and threat intelligence
+data.
 }
 \examples{
 \dontrun{
 # Set API key first
 set_key('your_api_key_here')
-   
+
 # Get domain reports
 report1 <- domain_report("google.com")
-report2 <- domain_report("https://www.example.com/path")  # URL will be cleaned
+report2 <- domain_report("https://www.example.com/path")
 
 print(report1)
 summary(report1)

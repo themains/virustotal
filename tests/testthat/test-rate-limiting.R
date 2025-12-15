@@ -40,8 +40,8 @@ test_that("rate limiting enforces limits", {
   expect_equal(status$requests_remaining, 0)
   
   # Next request should trigger waiting (we can't easily test the actual waiting)
-  # Just verify the function doesn't error
-  expect_silent(rate_limit())
+  # Just verify the function doesn't error - expect message about rate limiting
+  expect_message(rate_limit(), "Rate limit reached")
 })
 
 test_that("rate limiting window slides correctly", {

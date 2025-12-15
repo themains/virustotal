@@ -17,3 +17,4 @@ appveyor.yml
 ^CLAUDE\.md$
 ^Citation\.cff$
 ^CRAN-SUBMISSION$
+^\.claude$

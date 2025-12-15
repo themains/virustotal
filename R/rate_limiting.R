@@ -15,7 +15,7 @@ NULL
 #' 
 #' @keywords internal
 init_rate_limit <- function() {
-  .virustotal_state$requests <- character(0)
+  .virustotal_state$requests <- numeric(0)
   .virustotal_state$window_size <- 60  # 60 seconds
   .virustotal_state$max_requests <- 4
 }
@@ -39,9 +39,8 @@ rate_limit <- function(force_wait = FALSE) {
   window_start <- current_time - .virustotal_state$window_size
   
   # Clean old requests outside the window
-  .virustotal_state$requests <- .virustotal_state$requests[
-    .virustotal_state$requests > window_start
-  ]
+  active_requests <- .virustotal_state$requests[.virustotal_state$requests > window_start]
+  .virustotal_state$requests <- active_requests
   
   # Check if we're at the limit
   if (length(.virustotal_state$requests) >= .virustotal_state$max_requests || force_wait) {
@@ -57,9 +56,8 @@ rate_limit <- function(force_wait = FALSE) {
         # Update current time and clean requests again
         current_time <- as.numeric(Sys.time())
         window_start <- current_time - .virustotal_state$window_size
-        .virustotal_state$requests <- .virustotal_state$requests[
-          .virustotal_state$requests > window_start
-        ]
+        active_requests <- .virustotal_state$requests[.virustotal_state$requests > window_start]
+        .virustotal_state$requests <- active_requests
       }
     }
   }
@@ -106,7 +104,7 @@ get_rate_limit_status <- function() {
 #' @export
 #' @family rate limiting
 reset_rate_limit <- function() {
-  .virustotal_state$requests <- character(0)
+  init_rate_limit()
   message("Rate limiting state reset.")
   invisible(TRUE)
 }

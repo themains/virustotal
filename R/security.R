@@ -31,7 +31,8 @@ sanitize_file_path <- function(file_path, allow_relative = FALSE) {
   }
   
   # Check for absolute vs relative paths
-  if (!allow_relative && !file.path.is.absolute(file_path)) {
+  is_absolute <- grepl("^(/|[A-Za-z]:)", file_path)
+  if (!allow_relative && !is_absolute) {
     stop(virustotal_validation_error(
       message = "Relative file paths are not allowed for security reasons",
       parameter = "file_path", 

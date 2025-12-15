@@ -157,9 +157,9 @@ virustotal_info <- function() {
   # API key status
   cat("API Key Status: ")
   if (is_api_key_configured()) {
-    cat("✓ Configured\n")
+    cat("\u2713 Configured\n")
   } else {
-    cat("✗ Not configured (use set_key())\n")
+    cat("\u2717 Not configured (use set_key())\n")
   }
   
   # Rate limiting status
@@ -172,9 +172,9 @@ virustotal_info <- function() {
   # Environment info
   cat("\nEnvironment: ")
   if (is_safe_environment()) {
-    cat("✓ Safe\n")
+    cat("\u2713 Safe\n")
   } else {
-    cat("⚠ CI/Non-interactive\n")
+    cat("\u26A0 CI/Non-interactive\n")
   }
   
   cat("\nFor help, see: ?virustotal or https://docs.virustotal.com/reference\n")
