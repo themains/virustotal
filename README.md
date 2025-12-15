@@ -1,6 +1,7 @@
 ## virustotal: R Client for the VirusTotal Public API v2.0 and v3.0
 
 [![R-CMD-check](https://github.com/themains/virustotal/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/themains/virustotal/actions/workflows/R-CMD-check.yml)
+[![pkgdown](https://github.com/themains/virustotal/actions/workflows/pkgdown.yml/badge.svg)](https://github.com/themains/virustotal/actions/workflows/pkgdown.yml)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/virustotal)](https://cran.r-project.org/package=virustotal)
 ![](https://cranlogs.r-pkg.org/badges/grand-total/virustotal)
 
