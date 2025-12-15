@@ -19,3 +19,4 @@ Other rate limiting:
 \code{\link{reset_rate_limit}()}
 }
 \concept{rate limiting}
+\keyword{internal}

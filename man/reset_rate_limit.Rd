@@ -16,3 +16,4 @@ Other rate limiting:
 \code{\link{rate_limit}()}
 }
 \concept{rate limiting}
+\keyword{internal}

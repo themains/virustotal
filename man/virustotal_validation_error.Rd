@@ -35,3 +35,4 @@ Other error handling:
 \code{\link{virustotal_rate_limit_error}()}
 }
 \concept{error handling}
+\keyword{internal}

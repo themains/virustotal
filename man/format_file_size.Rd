@@ -26,3 +26,4 @@ Other utilities:
 \code{\link{virustotal_version}()}
 }
 \concept{utilities}
+\keyword{internal}

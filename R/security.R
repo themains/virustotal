@@ -5,6 +5,7 @@
 #' common security issues when working with potentially malicious inputs.
 #' 
 #' @name security-utilities
+#' @keywords internal
 #' @family security
 NULL
 

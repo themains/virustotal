@@ -5,6 +5,7 @@
 #' when working with VirusTotal API results.
 #' 
 #' @name virustotal-classes
+#' @keywords internal
 #' @family response classes
 NULL
 

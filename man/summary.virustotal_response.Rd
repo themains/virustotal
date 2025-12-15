@@ -14,3 +14,4 @@
 \description{
 Summary method for VirusTotal responses
 }
+\keyword{internal}

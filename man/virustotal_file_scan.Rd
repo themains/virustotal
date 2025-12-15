@@ -24,3 +24,4 @@ Other response classes:
 \code{\link{virustotal_url_scan}()}
 }
 \concept{response classes}
+\keyword{internal}

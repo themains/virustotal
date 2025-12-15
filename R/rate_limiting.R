@@ -5,6 +5,7 @@
 #' VirusTotal public API allows 4 requests per minute.
 #' 
 #' @name rate-limiting
+#' @keywords internal
 #' @family rate limiting
 NULL
 

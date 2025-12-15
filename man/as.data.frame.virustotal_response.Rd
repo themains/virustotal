@@ -17,3 +17,4 @@ A data.frame representation of the response
 \description{
 Convert VirusTotal response to data.frame
 }
+\keyword{internal}

@@ -24,3 +24,4 @@ Other response classes:
 \code{\link{virustotal_ip_report}()}
 }
 \concept{response classes}
+\keyword{internal}

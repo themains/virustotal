@@ -4,6 +4,7 @@
 #' Custom error classes for structured error handling in the virustotal package.
 #' 
 #' @name virustotal-errors
+#' @keywords internal
 #' @family error handling
 NULL
 

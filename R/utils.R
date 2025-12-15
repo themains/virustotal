@@ -4,6 +4,7 @@
 #' Helper functions and utilities for the VirusTotal package.
 #' 
 #' @name utilities
+#' @keywords internal
 #' @family utilities
 NULL
 

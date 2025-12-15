@@ -29,3 +29,4 @@ Other error handling:
 \code{\link{virustotal_validation_error}()}
 }
 \concept{error handling}
+\keyword{internal}
