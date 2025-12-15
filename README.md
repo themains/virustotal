@@ -1,9 +1,8 @@
 ## virustotal: R Client for the VirusTotal Public API v2.0 and v3.0
 
-[![Build status](https://ci.appveyor.com/api/projects/status/5o45rcviuuxtobo7?svg=true)](https://ci.appveyor.com/project/soodoku/virustotal-6owbf)
+[![R-CMD-check](https://github.com/themains/virustotal/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/themains/virustotal/actions/workflows/R-CMD-check.yml)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/virustotal)](https://cran.r-project.org/package=virustotal)
 ![](https://cranlogs.r-pkg.org/badges/grand-total/virustotal)
-[![codecov](https://codecov.io/gh/themains/virustotal/branch/master/graph/badge.svg)](https://app.codecov.io/gh/themains/virustotal)
 
 
 Use [VirusTotal](https://www.virustotal.com), a Google service that analyzes files and URLs for viruses, worms, trojans etc., provides category of the content hosted by a domain from a variety of prominent services, provides passive DNS information, among other things.
