@@ -9,3 +9,5 @@ tests/testthat/virustotal_api_key
 /Meta/
 /virustotal.Rcheck
 *.gz
+/docs/
+docs

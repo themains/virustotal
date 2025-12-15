@@ -4,31 +4,34 @@
 \alias{scan_file}
 \title{Submit a file for scanning}
 \usage{
-scan_file(file_path = NULL, ...)
+scan_file(file_path, ...)
 }
 \arguments{
-\item{file_path}{Required; Path to the document}
+\item{file_path}{Required; Path to the file to be scanned}
 
-\item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}}
 }
 \value{
-data.frame with the following columns: 
-\code{type, id, links}
+A \code{virustotal_file_scan} object containing scan submission results
+with analysis ID and links for tracking the scan progress
 }
 \description{
-Submit a file for scanning
+Uploads a file to VirusTotal for malware analysis using the v3 API.
 }
 \examples{
 \dontrun{
+# Set API key first
+set_key('your_api_key_here')
 
-# Before calling the function, set the API key using set_key('api_key_here')
-
-scan_file(file_path='path_to_suspicious_file')
+# Scan a file
+result <- scan_file(file_path = 'suspicious_file.exe')
+print(result)
 }
 }
 \references{
-\url{https://docs.virustotal.com/reference}
+\url{https://docs.virustotal.com/reference/files-scan}
 }
 \seealso{
-\code{\link{set_key}} for setting the API key
+\code{\link{set_key}} for setting the API key, \code{\link{file_report}} for retrieving scan results
 }
+\concept{scanning functions}

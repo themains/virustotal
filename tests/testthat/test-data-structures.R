@@ -1,4 +1,4 @@
-context("Integration Tests")
+# Integration Tests
 
 test_that("integration tests with real API", {
   skip_on_cran()
@@ -25,3 +25,4 @@ test_that("integration tests with real API", {
   expect_type(report, "list")
 
 })
+

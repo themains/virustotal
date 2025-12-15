@@ -16,7 +16,7 @@ get_domain_comments(domain = NULL, limit = limit, cursor = cursor, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-named list with the following possible items: 
+named list with the following possible items:
 \code{`BitDefender category`, undetected_referrer_samples, whois_timestamp,
 detected_downloaded_samples, detected_referrer_samples, `Webutation domain info`, `Alexa category`, undetected_downloaded_samples,
 resolutions, detected_communicating_samples, `Opera domain info`, `TrendMicro category`, categories, domain_siblings, 

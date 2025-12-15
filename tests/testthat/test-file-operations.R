@@ -1,4 +1,4 @@
-context("File Operations")
+# File Operations Tests
 
 # Mock response data for file operations
 file_scan_response <- list(
@@ -26,17 +26,31 @@ file_report_response <- list(
 )
 
 test_that("scan_file validates input correctly", {
-  expect_error(scan_file(), "file_path must be a character string")
-  expect_error(scan_file(NULL), "file_path must be a character string")
-  expect_error(scan_file(123), "file_path must be a character string")
-  expect_error(scan_file("nonexistent_file.txt"), "The file doesn't exist")
+  expect_error(scan_file(), "argument \"file_path\" is missing")
+  expect_error(scan_file(NULL), "Must be of type 'character'")
+  expect_error(scan_file(123), "Must be of type 'character'")
+  expect_error(scan_file(character(0)), "Must have length 1")
+  expect_error(scan_file("nonexistent_file.txt"), "File does not exist")
+  
+  # Test file size validation with temporary large file (if we create one)
+  # This would need a very large temp file to test the 650MB limit
 })
 
 test_that("file_report validates input correctly", {
-  expect_error(file_report(), "Must specify a valid file hash")
-  expect_error(file_report(NULL), "Must specify a valid file hash")
-  expect_error(file_report(123), "Must specify a valid file hash")
-  expect_error(file_report(""), "Must specify a valid file hash")
+  expect_error(file_report(), class = "virustotal_validation_error")
+  expect_error(file_report(NULL), class = "virustotal_validation_error")
+  expect_error(file_report(123), class = "virustotal_validation_error")
+  expect_error(file_report(""), class = "virustotal_validation_error")
+  
+  # Test with invalid hash format (but valid API key unset for auth error)
+  old_key <- Sys.getenv("VirustotalToken")
+  Sys.unsetenv("VirustotalToken")
+  expect_error(file_report("dummy_hash"), class = "virustotal_auth_error")
+  
+  # Restore API key
+  if (old_key != "") {
+    Sys.setenv(VirustotalToken = old_key)
+  }
 })
 
 test_that("rescan_file validates input correctly", {

@@ -1,10 +1,11 @@
-context("Domain Operations")
+# Domain Operations Tests
 
 test_that("domain_report validates input correctly", {
-  expect_error(domain_report(), "Must specify a valid domain name")
-  expect_error(domain_report(NULL), "Must specify a valid domain name")
-  expect_error(domain_report(123), "Must specify a valid domain name")
-  expect_error(domain_report(""), "Must specify a valid domain name")
+  expect_error(domain_report(), class = "virustotal_validation_error")
+  expect_error(domain_report(NULL), class = "virustotal_validation_error")
+  expect_error(domain_report(123), class = "virustotal_validation_error")
+  expect_error(domain_report(""), class = "virustotal_validation_error")
+  expect_error(domain_report("invalid..domain"), class = "virustotal_validation_error")
 })
 
 test_that("domain cleaning works correctly", {

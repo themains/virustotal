@@ -7,11 +7,21 @@
 virustotal_check(req)
 }
 \arguments{
-\item{req}{request}
+\item{req}{HTTP response object from httr}
 }
 \value{
-in case of failure, a message
+Invisible NULL on success, throws structured errors on failure
 }
 \description{
-Request Response Verification
+Enhanced error checking with structured error classes
 }
+\seealso{
+Other error handling: 
+\code{\link{virustotal-errors}},
+\code{\link{virustotal_auth_error}()},
+\code{\link{virustotal_error}()},
+\code{\link{virustotal_rate_limit_error}()},
+\code{\link{virustotal_validation_error}()}
+}
+\concept{error handling}
+\keyword{internal}
