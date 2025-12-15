@@ -1,7 +1,14 @@
 test_that("rate limiting initialization works", {
-  # Reset state
+  # Reset state and explicitly check initialization
   reset_rate_limit()
   
+  # Verify environment is properly set up
+  expect_true(.virustotal_state$initialized)
+  expect_equal(.virustotal_state$max_requests, 4)
+  expect_equal(.virustotal_state$window_size, 60)
+  expect_length(.virustotal_state$requests, 0)
+  
+  # Test status function
   status <- get_rate_limit_status()
   expect_equal(status$requests_used, 0)
   expect_equal(status$max_requests, 4)
@@ -55,4 +62,22 @@ test_that("rate limiting window slides correctly", {
   # Check that old requests are cleaned
   status <- get_rate_limit_status()
   expect_equal(status$requests_used, 0)  # Old requests should be cleaned
+})
+
+test_that("rate limiting handles NULL/empty states gracefully", {
+  # Test what happens if environment is in a bad state
+  .virustotal_state$requests <- NULL
+  .virustotal_state$max_requests <- NULL
+  .virustotal_state$window_size <- NULL
+  .virustotal_state$initialized <- NULL
+  
+  # Should not error and should reinitialize
+  expect_no_error({
+    status <- get_rate_limit_status()
+    expect_equal(status$max_requests, 4)
+    expect_equal(status$requests_used, 0)
+  })
+  
+  # Rate limit should also work
+  expect_no_error(rate_limit())
 })

@@ -36,13 +36,15 @@ test_that("virustotal_check handles different HTTP status codes", {
   
   # Mock response objects
   success_resp <- list(status_code = 200)
-  rate_limit_resp <- list(status_code = 204, headers = list())
+  rate_limit_resp <- list(status_code = 204, headers = list("retry-after" = "60"))
   auth_resp <- list(status_code = 401)
   not_found_resp <- list(status_code = 404)
   server_error_resp <- list(status_code = 500)
   
   # Mock httr::headers function for rate limit test
-  mockery::stub(virustotal_check, "httr::headers", function(x) list())
+  mockery::stub(virustotal_check, "httr::headers", function(x) {
+    if (!is.null(x$headers)) x$headers else list()
+  })
   
   # Test success
   expect_silent(virustotal_check(success_resp))
