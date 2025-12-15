@@ -4,33 +4,38 @@
 \alias{domain_report}
 \title{Get Domain Report}
 \usage{
-domain_report(domain = NULL, ...)
+domain_report(domain, ...)
 }
 \arguments{
-\item{domain}{domain name. String. Required.}
+\item{domain}{Domain name (character string). Required.}
 
-\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}}
 }
 \value{
-list containing domain analysis results including WHOIS data,
-DNS resolutions, detected URLs, categories, and threat intelligence
+A \code{virustotal_domain_report} object containing domain analysis results
+including WHOIS data, DNS resolutions, detected URLs, categories, and threat intelligence
 }
 \description{
-Retrieves comprehensive analysis report for a given domain, including 
+Retrieves comprehensive analysis report for a given domain, including
 WHOIS information, DNS resolutions, detected URLs, and threat intelligence data.
 }
 \examples{
 \dontrun{
-
-# Before calling the function, set the API key using set_key('api_key_here')
+# Set API key first
+set_key('your_api_key_here')
    
-domain_report("google.com")
-domain_report("example.com")
+# Get domain reports
+report1 <- domain_report("google.com")
+report2 <- domain_report("https://www.example.com/path")  # URL will be cleaned
+
+print(report1)
+summary(report1)
 }
 }
 \references{
-\url{https://docs.virustotal.com/reference}
+\url{https://docs.virustotal.com/reference/domains}
 }
 \seealso{
 \code{\link{set_key}} for setting the API key
 }
+\concept{domain operations}

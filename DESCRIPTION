@@ -1,29 +1,44 @@
 Package: virustotal
 Title: R Client for the VirusTotal API
-Version: 0.3.0
-Authors@R: person("Gaurav", "Sood", email = "gsood07@gmail.com", role = c("aut", "cre"))
+Version: 0.5.0
+Authors@R: person("Gaurav", "Sood", email = "gsood07@gmail.com", 
+                  role = c("aut", "cre"))
 Author: Gaurav Sood [aut, cre]
 Maintainer: Gaurav Sood <gsood07@gmail.com>
-Description: Use VirusTotal, a Google service that analyzes files and URLs 
-    for viruses, worms, trojans etc., provides category of the content hosted by a 
-    domain from a variety of prominent services, provides passive DNS information,
-    among other things. See <https://www.virustotal.com> for more information. 
-URL: https://github.com/themains/virustotal
+Description: Provides a comprehensive R interface to the VirusTotal API (v2 and v3), 
+    a Google service that analyzes files and URLs for viruses, worms, trojans and 
+    other malware. Features include file/URL scanning, domain categorization, 
+    passive DNS information, IP reputation analysis, and comment/voting systems.
+    Implements rate limiting, error handling, and response validation for robust 
+    security analysis workflows.
+URL: https://github.com/themains/virustotal, 
+     https://themains.github.io/virustotal/
 BugReports: https://github.com/themains/virustotal/issues
 Depends:
-    R (>= 3.3.0)
+    R (>= 4.0.0)
 License: MIT + file LICENSE
 LazyData: false
 VignetteBuilder: knitr
 Encoding: UTF-8
+Language: en-US
 Imports:
-    httr,
-    plyr,
-    base64enc
+    httr (>= 1.4.0),
+    dplyr (>= 1.0.0),
+    base64enc (>= 0.1-3),
+    jsonlite (>= 1.7.0),
+    checkmate (>= 2.0.0),
+    rlang (>= 1.0.0)
 Suggests:
-    knitr,
-    rmarkdown,
-    testthat,
-    lintr,
-    httptest
-RoxygenNote: 7.3.2
+    knitr (>= 1.30),
+    rmarkdown (>= 2.0),
+    testthat (>= 3.0.0),
+    lintr (>= 3.0.0),
+    httptest (>= 4.0.0),
+    covr,
+    pkgdown,
+    spelling,
+    mockery
+RoxygenNote: 7.3.3
+Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3
+Config/Needs/website: pkgdown

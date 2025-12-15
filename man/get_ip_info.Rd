@@ -19,7 +19,7 @@ get_ip_info(ip = NULL, limit = NULL, cursor = NULL, ...)
 named list
 }
 \description{
-Retrieves report on a given domain, including passive DNS, urls detected by at least one url scanner. 
+Retrieves report on a given domain, including passive DNS, urls detected by at least one url scanner.
 Gives category of the domain from bitdefender.
 }
 \examples{

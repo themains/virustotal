@@ -1,4 +1,4 @@
-context("URL Operations")
+# URL Operations Tests
 
 test_that("scan_url validates input correctly", {
   expect_error(scan_url(), "Must specify a valid URL")

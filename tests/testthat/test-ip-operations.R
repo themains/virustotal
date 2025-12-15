@@ -1,4 +1,4 @@
-context("IP Operations")
+# IP Operations Tests
 
 test_that("ip_report validates input correctly", {
   expect_error(ip_report(), "Must specify a valid IP address")

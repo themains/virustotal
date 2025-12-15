@@ -16,7 +16,7 @@ list containing IP analysis results including geolocation,
 ASN information, DNS resolutions, detected URLs, and threat intelligence
 }
 \description{
-Retrieves comprehensive analysis report for an IP address, including 
+Retrieves comprehensive analysis report for an IP address, including
 geolocation, ASN information, DNS resolutions, and detected URLs.
 }
 \examples{

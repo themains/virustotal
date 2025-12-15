@@ -4,31 +4,38 @@
 \alias{file_report}
 \title{Get File Scan Report}
 \usage{
-file_report(hash = NULL, ...)
+file_report(hash, ...)
 }
 \arguments{
-\item{hash}{File hash (MD5, SHA1, or SHA256) or file ID}
+\item{hash}{File hash (MD5, SHA1, or SHA256) or analysis ID}
 
-\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
+\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}}
 }
 \value{
-list containing file analysis results including antivirus scans, 
-file metadata, and threat detection information
+A \code{virustotal_file_report} object containing file analysis results
+including antivirus scans, file metadata, and threat detection information
 }
 \description{
-Get File Scan Report
+Retrieves detailed analysis results for a file from VirusTotal using the v3 API.
 }
 \examples{
 \dontrun{
+# Set API key first
+set_key('your_api_key_here')
 
-# Before calling the function, set the API key using set_key('api_key_here')
+# Get file report using hash
+report <- file_report(hash = '99017f6eebbac24f351415dd410d522d')
+print(report)
+summary(report)
 
-file_report(hash='99017f6eebbac24f351415dd410d522d')
+# Convert to data.frame if needed
+df <- as.data.frame(report)
 }
 }
 \references{
-\url{https://docs.virustotal.com/reference}
+\url{https://docs.virustotal.com/reference/files}
 }
 \seealso{
-\code{\link{set_key}} for setting the API key
+\code{\link{set_key}} for setting the API key, \code{\link{scan_file}} for submitting files
 }
+\concept{file operations}

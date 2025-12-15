@@ -15,7 +15,7 @@ get_domain_relationship(
 \arguments{
 \item{domain}{domain name. String. Required.}
 
-\item{relationship}{relationship name. String. Required. Default is \code{subdomains}. 
+\item{relationship}{relationship name. String. Required. Default is \code{subdomains}.
 For all the options see \url{https://docs.virustotal.com/reference}}
 
 \item{limit}{Number of entries. Integer. Optional.  Default is 10.}

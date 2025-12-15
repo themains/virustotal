@@ -2,25 +2,30 @@
 % Please edit documentation in R/set_key.R
 \name{set_key}
 \alias{set_key}
-\title{Set API Key}
+\title{Set VirusTotal API Key}
 \usage{
-set_key(api_key = NULL)
+set_key(api_key)
 }
 \arguments{
-\item{api_key}{API key. String. Required.}
+\item{api_key}{VirusTotal API key (character string). Required.}
+}
+\value{
+Invisibly returns TRUE on success
 }
 \description{
-Before anything else, get the API key from \url{https://www.virustotal.com/en/}.
-Next, use \code{\link{set_key}} to store the API key in an environment variable \code{VirustotalToken}. 
-Once you have set the API key, you can use any of the functions.
+Stores your VirusTotal API key in an environment variable for use by other
+package functions. Get your API key from \url{https://www.virustotal.com/}.
 }
 \examples{
 \dontrun{
+# Set your API key
+set_key('your_64_character_api_key_here')
 
-set_key('api_key_here')
-
+# Verify it's set
+Sys.getenv("VirustotalToken")
 }
 }
 \references{
 \url{https://docs.virustotal.com/reference}
 }
+\concept{authentication}

@@ -24,9 +24,16 @@
 #' }
 
 ip_report <- function(ip = NULL, ...) {
-
+    # Input validation first (before API key for proper test precedence)
     if (is.null(ip) || !is.character(ip) || nchar(ip) == 0) {
         stop("Must specify a valid IP address.\n")
+    }
+    
+    # Check API key after basic validation
+    if (identical(Sys.getenv("VirustotalToken"), "")) {
+        stop(virustotal_auth_error(
+            message = "Authentication failed. Please check your API key."
+        ))
     }
 
     res <- virustotal_GET(path = paste0("ip_addresses/", ip), ...)

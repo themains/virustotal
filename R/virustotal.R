@@ -8,8 +8,11 @@
 #'
 #'  
 #' @importFrom httr GET content POST upload_file add_headers
-#' @importFrom plyr rbind.fill ldply
+#' @importFrom dplyr bind_rows
 #' @importFrom utils read.table
+#' @importFrom jsonlite fromJSON toJSON
+#' @importFrom checkmate assert_character assert_file_exists
+#' @importFrom rlang .data
 #' @author Gaurav Sood
 "_PACKAGE"
 
@@ -134,54 +137,72 @@ virustotal2_POST <- function(query=list(), path = path, body=NULL,
   res
 }
 
-#'
 #' Request Response Verification
 #' 
-#' @param  req request
-#' @return in case of failure, a message
+#' Enhanced error checking with structured error classes
+#' 
+#' @param req HTTP response object from httr
+#' @return Invisible NULL on success, throws structured errors on failure
+#' @family error handling
+#' @keywords internal
 
 virustotal_check <- function(req) {
-
-  if (req$status_code == 204) stop("Rate Limit Exceeded.
-                                          Only 4 Queries per minute allowed.\n")
+  # Success cases
   if (req$status_code < 400) return(invisible())
-
-  stop("HTTP failure: ", req$status_code, "\n", call. = FALSE)
+  
+  # Rate limit errors
+  if (req$status_code == 204 || req$status_code == 429) {
+    retry_after <- as.numeric(httr::headers(req)[["retry-after"]]) %||% 60
+    stop(virustotal_rate_limit_error(
+      message = "Rate limit exceeded. Only 4 requests per minute allowed.",
+      retry_after = retry_after
+    ))
+  }
+  
+  # Authentication errors
+  if (req$status_code == 401 || req$status_code == 403) {
+    stop(virustotal_auth_error(
+      message = "Authentication failed. Please check your API key."
+    ))
+  }
+  
+  # Not found errors
+  if (req$status_code == 404) {
+    stop(virustotal_error(
+      message = "Resource not found.",
+      status_code = req$status_code,
+      response = req
+    ))
+  }
+  
+  # Server errors
+  if (req$status_code >= 500) {
+    stop(virustotal_error(
+      message = paste("VirusTotal server error:", req$status_code),
+      status_code = req$status_code,
+      response = req
+    ))
+  }
+  
+  # Generic client errors
+  stop(virustotal_error(
+    message = paste("HTTP request failed with status", req$status_code),
+    status_code = req$status_code,
+    response = req
+  ))
 }
 
+# Helper operator for default values
+`%||%` <- function(x, y) if (is.null(x)) y else x
+
+# The rate limiting function is now implemented in rate_limiting.R
+# This legacy function is kept for backward compatibility but redirects to new implementation
+
+#' Legacy rate limiting function
 #' 
-#' Rate Limits
-#' 
-#' Virustotal requests throttled at 4 per min. The function creates an env. var.
-#' that tracks number of requests per minute, and enforces appropriate waiting.
-#' 
-
-rate_limit <- function() {
-
-  # First request --- initialize time of first request and request count
-  if (Sys.getenv("VT_RATE_LIMIT") == "") {
-    return(Sys.setenv(VT_RATE_LIMIT = paste0(0, ",", Sys.time(), ",", 0)))
-  }
-
-  rate_lim         <- Sys.getenv("VT_RATE_LIMIT")
-  req_count        <- as.numeric(gsub(",.*", "", rate_lim)) + 1
-  past_duration    <- as.numeric(strsplit(rate_lim, ",")[[1]][3],
-                                                                 units = "secs")
-  current_duration <- difftime(Sys.time(),
-                    as.POSIXct(strsplit(rate_lim, ",")[[1]][2]), units = "secs")
-
-  if (current_duration > 60) {
-    return(Sys.setenv(VT_RATE_LIMIT = paste0(1, ",", Sys.time(), ",", 0)))
-  }
-
-  net_duration     <- past_duration + current_duration
-
-  if (req_count > 4 & net_duration <= 60) {
-
-    Sys.sleep(60 -  net_duration)
-    return(Sys.setenv(VT_RATE_LIMIT = paste0(1, ",", Sys.time(), ",", 0)))
-  }
-
-  return(Sys.setenv(VT_RATE_LIMIT =
-                         paste0(req_count, ",", Sys.time(), ",", net_duration)))
+#' @keywords internal
+rate_limit_legacy <- function() {
+  .Deprecated("rate_limit", package = "virustotal", 
+              msg = "Legacy rate limiting deprecated. Using modern implementation.")
+  rate_limit()
 }
