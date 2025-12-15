@@ -54,10 +54,10 @@ test_that("file_report validates input correctly", {
 })
 
 test_that("rescan_file validates input correctly", {
-  expect_error(rescan_file(), "Must specify a valid file hash")
-  expect_error(rescan_file(NULL), "Must specify a valid file hash")
-  expect_error(rescan_file(123), "Must specify a valid file hash")
-  expect_error(rescan_file(""), "Must specify a valid file hash")
+  expect_error(rescan_file(), "Assertion on 'hash' failed")
+  expect_error(rescan_file(NULL), "Assertion on 'hash' failed")
+  expect_error(rescan_file(123), "Assertion on 'hash' failed")
+  expect_error(rescan_file(""), "All elements must have at least 1 characters")
 })
 
 # Test new v3 file functions
@@ -66,45 +66,45 @@ test_that("get_file_upload_url validates correctly", {
 })
 
 test_that("get_file_comments validates input correctly", {
-  expect_error(get_file_comments(), "Must specify a valid file hash")
-  expect_error(get_file_comments(NULL), "Must specify a valid file hash")
-  expect_error(get_file_comments(""), "Must specify a valid file hash")
+  expect_error(get_file_comments(), "Assertion on 'hash' failed")
+  expect_error(get_file_comments(NULL), "Assertion on 'hash' failed")
+  expect_error(get_file_comments(""), "All elements must have at least 1 characters")
 })
 
 test_that("post_file_comments validates input correctly", {
-  expect_error(post_file_comments(), "Must specify a valid file hash")
-  expect_error(post_file_comments("hash123"), "Must specify a comment")
-  expect_error(post_file_comments("hash123", ""), "Must specify a comment")
+  expect_error(post_file_comments(), "Assertion on 'hash' failed")
+  expect_error(post_file_comments("hash123"), "Assertion on 'comment' failed")
+  expect_error(post_file_comments("hash123", ""), "All elements must have at least 1 characters")
 })
 
 test_that("get_file_votes validates input correctly", {
-  expect_error(get_file_votes(), "Must specify a valid file hash")
-  expect_error(get_file_votes(NULL), "Must specify a valid file hash")
-  expect_error(get_file_votes(""), "Must specify a valid file hash")
+  expect_error(get_file_votes(), "Assertion on 'hash' failed")
+  expect_error(get_file_votes(NULL), "Assertion on 'hash' failed")
+  expect_error(get_file_votes(""), "All elements must have at least 1 characters")
 })
 
 test_that("post_file_votes validates input correctly", {
-  expect_error(post_file_votes(), "Must specify a valid file hash")
-  expect_error(post_file_votes("hash123"), "Verdict must be either 'harmless' or 'malicious'")
+  expect_error(post_file_votes(), "Assertion on 'hash' failed")
+  expect_error(post_file_votes("hash123"), "Assertion on 'verdict' failed")
   expect_error(post_file_votes("hash123", "invalid"), "Verdict must be either 'harmless' or 'malicious'")
 })
 
 test_that("get_file_relationships validates input correctly", {
-  expect_error(get_file_relationships(), "Must specify a valid file hash")
-  expect_error(get_file_relationships("hash123"), "Must specify a relationship type")
+  expect_error(get_file_relationships(), "Assertion on 'hash' failed")
+  expect_error(get_file_relationships("hash123"), "Assertion on 'relationship' failed")
   expect_error(get_file_relationships("hash123", "invalid"), "Invalid relationship type")
 })
 
 test_that("download_file validates input correctly", {
-  expect_error(download_file(), "Must specify a valid file hash")
-  expect_error(download_file(NULL), "Must specify a valid file hash")
-  expect_error(download_file(""), "Must specify a valid file hash")
+  expect_error(download_file(), "Assertion on 'hash' failed")
+  expect_error(download_file(NULL), "Assertion on 'hash' failed")
+  expect_error(download_file(""), "All elements must have at least 1 characters")
 })
 
 test_that("get_file_download_url validates input correctly", {
-  expect_error(get_file_download_url(), "Must specify a valid file hash")
-  expect_error(get_file_download_url(NULL), "Must specify a valid file hash")
-  expect_error(get_file_download_url(""), "Must specify a valid file hash")
+  expect_error(get_file_download_url(), "Assertion on 'hash' failed")
+  expect_error(get_file_download_url(NULL), "Assertion on 'hash' failed")
+  expect_error(get_file_download_url(""), "All elements must have at least 1 characters")
 })
 
 # Mock tests require httptest package and API key setup

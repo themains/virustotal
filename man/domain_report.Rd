@@ -4,7 +4,7 @@
 \alias{domain_report}
 \title{Get Domain Report}
 \usage{
-domain_report(domain, ...)
+domain_report(domain = NULL, ...)
 }
 \arguments{
 \item{domain}{Domain name (character string). Required.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/virustotal.R
 \name{virustotal_GET}
 \alias{virustotal_GET}
-\title{GET for the Current V3 API}
+\title{Base POST AND GET functions. Not exported.}
 \usage{
 virustotal_GET(path, query = list(), key = Sys.getenv("VirustotalToken"), ...)
 }

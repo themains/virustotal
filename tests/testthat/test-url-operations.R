@@ -1,17 +1,17 @@
 # URL Operations Tests
 
 test_that("scan_url validates input correctly", {
-  expect_error(scan_url(), "Must specify a valid URL")
-  expect_error(scan_url(NULL), "Must specify a valid URL")
-  expect_error(scan_url(123), "Must specify a valid URL")
-  expect_error(scan_url(""), "Must specify a valid URL")
+  expect_error(scan_url(), "Assertion on 'url' failed")
+  expect_error(scan_url(NULL), "Assertion on 'url' failed")
+  expect_error(scan_url(123), "Assertion on 'url' failed")
+  expect_error(scan_url(""), "All elements must have at least 1 characters")
 })
 
 test_that("url_report validates input correctly", {
-  expect_error(url_report(), "Must specify a valid URL or URL ID")
-  expect_error(url_report(NULL), "Must specify a valid URL or URL ID")
-  expect_error(url_report(123), "Must specify a valid URL or URL ID")
-  expect_error(url_report(""), "Must specify a valid URL or URL ID")
+  expect_error(url_report(), "Assertion on 'url_id' failed")
+  expect_error(url_report(NULL), "Assertion on 'url_id' failed")
+  expect_error(url_report(123), "Assertion on 'url_id' failed")
+  expect_error(url_report(""), "All elements must have at least 1 characters")
 })
 
 test_that("URL encoding works correctly", {
