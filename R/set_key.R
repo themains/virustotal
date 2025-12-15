@@ -19,13 +19,13 @@
 #' Sys.getenv("VirustotalToken")
 #' }
 
-set_key <- function(api_key) {
-  # Handle missing argument
-  if (missing(api_key)) {
+set_key <- function(api_key = NULL) {
+  # Handle NULL argument
+  if (is.null(api_key)) {
     stop(virustotal_validation_error(
       message = "API key must be provided",
       parameter = "api_key",
-      value = "missing"
+      value = "NULL"
     ))
   }
   

@@ -27,9 +27,8 @@
 
 url_report <- function(url_id = NULL, ...) {
 
-  if (is.null(url_id) || !is.character(url_id) || nchar(url_id) == 0) {
-        stop("Must specify a valid URL or URL ID.\n")
-  }
+  # Validate URL ID using checkmate
+  assert_character(url_id, len = 1, any.missing = FALSE, min.chars = 1)
 
   # If it looks like a URL, encode it to base64 (VirusTotal v3 requirement)
   if (grepl("^https?://", url_id)) {

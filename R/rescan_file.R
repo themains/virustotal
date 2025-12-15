@@ -23,9 +23,8 @@
 
 rescan_file <- function(hash = NULL, ...) {
 
-    if (is.null(hash) || !is.character(hash) || nchar(hash) == 0) {
-        stop("Must specify a valid file hash (MD5, SHA1, or SHA256).\n")
-    }
+    # Validate hash using checkmate
+    assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
 
     res <- virustotal_POST(path = paste0("files/", hash, "/analyse"), ...)
 

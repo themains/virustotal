@@ -30,20 +30,11 @@
 #' summary(report1)
 #' }
 
-domain_report <- function(domain, ...) {
-  # Handle missing argument
-  if (missing(domain)) {
-    stop(virustotal_validation_error(
-      message = "Domain must be provided",
-      parameter = "domain",
-      value = "missing"
-    ))
-  }
-  
-  # Handle NULL before checkmate validation
+domain_report <- function(domain = NULL, ...) {
+  # Handle NULL argument
   if (is.null(domain)) {
     stop(virustotal_validation_error(
-      message = "Domain cannot be NULL",
+      message = "Domain must be provided",
       parameter = "domain",
       value = "NULL"
     ))

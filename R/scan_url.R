@@ -23,9 +23,8 @@
 
 scan_url <- function(url = NULL, ...) {
 
-  if (is.null(url) || !is.character(url) || nchar(url) == 0) {
-    stop("Must specify a valid URL.\n")
-  }
+  # Validate URL using checkmate
+  assert_character(url, len = 1, any.missing = FALSE, min.chars = 1)
 
   res <- virustotal_POST(path = "urls", 
                         body = list(url = url), ...)
