@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Helper functions and utilities for the VirusTotal package.
-#' 
+#'
 #' @name utilities
 #' @keywords internal
 #' @family utilities
@@ -12,7 +12,7 @@ NULL
 #'
 #' Basic input validation and sanitization for VirusTotal API calls.
 #' Replaces over-engineered security functions with simpler checks.
-#' 
+#'
 #' @param input Character string to validate
 #' @return Cleaned input string
 #' @keywords internal
@@ -27,10 +27,10 @@ validate_input <- function(input) {
       value = input
     ))
   })
-  
+
   # Basic cleanup - remove leading/trailing whitespace
   input <- trimws(input)
-  
+
   return(input)
 }
 
@@ -38,7 +38,7 @@ validate_input <- function(input) {
 #'
 #' Verifies that the package is running in an appropriate environment
 #' for security analysis work.
-#' 
+#'
 #' @return Logical indicating if environment is considered safe
 #' @keywords internal
 #' @family utilities
@@ -47,14 +47,14 @@ is_safe_environment <- function() {
   if (!interactive()) {
     warning("Running in non-interactive mode. Be cautious with file operations.")
   }
-  
+
   # Check for common CI environments where we should be extra careful
   ci_vars <- c("CI", "GITHUB_ACTIONS", "TRAVIS", "APPVEYOR", "GITLAB_CI")
   if (any(Sys.getenv(ci_vars) != "")) {
     message("Detected CI environment. Some functions may be disabled for security.")
     return(FALSE)
   }
-  
+
   return(TRUE)
 }
 
@@ -66,23 +66,23 @@ is_safe_environment <- function() {
 #' @family utilities
 format_file_size <- function(size_bytes) {
   assert_numeric(size_bytes, len = 1, lower = 0)
-  
+
   units <- c("B", "KB", "MB", "GB", "TB")
   unit_index <- 1
   size <- size_bytes
-  
+
   while (size >= 1024 && unit_index < length(units)) {
     size <- size / 1024
     unit_index <- unit_index + 1
   }
-  
+
   sprintf("%.2f %s", size, units[unit_index])
 }
 
 #' Validate VirusTotal response structure
 #'
 #' Checks if a response from VirusTotal API has the expected structure.
-#' 
+#'
 #' @param response Response object from VirusTotal API
 #' @return Logical indicating if response structure is valid
 #' @keywords internal
@@ -91,17 +91,17 @@ validate_vt_response <- function(response) {
   if (!is.list(response)) {
     return(FALSE)
   }
-  
+
   # Check for common VirusTotal response fields
   if (is.null(response$data)) {
     return(FALSE)
   }
-  
+
   # Basic structure validation
   if (!is.list(response$data)) {
     return(FALSE)
   }
-  
+
   return(TRUE)
 }
 
@@ -109,19 +109,19 @@ validate_vt_response <- function(response) {
 #'
 #' Creates a temporary directory with restricted permissions for secure
 #' file operations during malware analysis.
-#' 
+#'
 #' @return Path to the temporary directory
 #' @keywords internal
 #' @family utilities
 create_safe_temp_dir <- function() {
   temp_dir <- tempfile(pattern = "virustotal_")
   dir.create(temp_dir, mode = "0700")  # Owner read/write/execute only
-  
+
   # Set stricter permissions if on Unix-like system
   if (.Platform$OS.type == "unix") {
     Sys.chmod(temp_dir, mode = "0700")
   }
-  
+
   message("Created secure temporary directory: ", temp_dir)
   return(temp_dir)
 }
@@ -130,14 +130,14 @@ create_safe_temp_dir <- function() {
 #'
 #' Safely removes temporary files and directories created during
 #' VirusTotal operations.
-#' 
+#'
 #' @param paths Character vector of file/directory paths to clean up
 #' @return Logical indicating success
 #' @keywords internal
 #' @family utilities
 cleanup_temp_files <- function(paths) {
   assert_character(paths, any.missing = FALSE)
-  
+
   success <- TRUE
   for (path in paths) {
     if (file.exists(path)) {
@@ -154,7 +154,7 @@ cleanup_temp_files <- function(paths) {
       })
     }
   }
-  
+
   return(success)
 }
 
@@ -164,7 +164,7 @@ cleanup_temp_files <- function(paths) {
 #' @export
 #' @family utilities
 virustotal_version <- function() {
-  desc <- utils::packageDescription("virustotal")
+  desc <- packageDescription("virustotal")
   paste0("virustotal ", desc$Version)
 }
 
@@ -176,11 +176,11 @@ virustotal_version <- function() {
 virustotal_info <- function() {
   cat("VirusTotal R Package Information\n")
   cat("================================\n\n")
-  
+
   # Version info
-  cat("Version:", utils::packageDescription("virustotal")$Version, "\n")
+  cat("Version:", packageDescription("virustotal")$Version, "\n")
   cat("R Version:", R.version.string, "\n\n")
-  
+
   # API key status
   cat("API Key Status: ")
   if (is_api_key_configured()) {
@@ -188,14 +188,14 @@ virustotal_info <- function() {
   } else {
     cat("\u2717 Not configured (use set_key())\n")
   }
-  
+
   # Rate limiting status
   rate_status <- get_rate_limit_status()
   cat("Rate Limit Status:\n")
-  cat(sprintf("  Requests used: %d/%d\n", 
+  cat(sprintf("  Requests used: %d/%d\n",
              rate_status$requests_used, rate_status$max_requests))
   cat(sprintf("  Requests remaining: %d\n", rate_status$requests_remaining))
-  
+
   # Environment info
   cat("\nEnvironment: ")
   if (is_safe_environment()) {
@@ -203,8 +203,8 @@ virustotal_info <- function() {
   } else {
     cat("\u26A0 CI/Non-interactive\n")
   }
-  
+
   cat("\nFor help, see: ?virustotal or https://docs.virustotal.com/reference\n")
-  
+
   invisible(NULL)
 }
