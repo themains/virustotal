@@ -1,5 +1,14 @@
 url: https://themains.github.io/virustotal/
 
+exclude: |
+  CLAUDE.md
+  .claude/
+  dev/
+  tests/testthat/virustotal_api_key.enc
+  cran-comments.md
+  CRAN-SUBMISSION
+  CRAN-RELEASE
+
 template:
   bootstrap: 5
   bslib:
