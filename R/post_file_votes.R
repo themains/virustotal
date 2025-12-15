@@ -21,12 +21,17 @@
 
 post_file_votes <- function(hash = NULL, verdict = NULL, ...) {
 
-  if (is.null(hash) || !is.character(hash) || nchar(hash) == 0) {
-    stop("Must specify a valid file hash (MD5, SHA1, or SHA256).\n")
-  }
-
-  if (is.null(verdict) || !verdict %in% c("harmless", "malicious")) {
-    stop("Verdict must be either 'harmless' or 'malicious'.\n")
+  # Validate inputs using checkmate
+  assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
+  assert_character(verdict, len = 1, any.missing = FALSE)
+  
+  # Validate verdict value
+  if (!verdict %in% c("harmless", "malicious")) {
+    stop(virustotal_validation_error(
+      message = "Verdict must be either 'harmless' or 'malicious'",
+      parameter = "verdict", 
+      value = verdict
+    ))
   }
 
   res <- virustotal_POST(path = paste0("files/", hash, "/votes"),

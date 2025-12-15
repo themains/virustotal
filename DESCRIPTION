@@ -1,16 +1,16 @@
 Package: virustotal
 Title: R Client for the VirusTotal API
-Version: 0.5.0
+Version: 0.6.0
 Authors@R: person("Gaurav", "Sood", email = "gsood07@gmail.com", 
                   role = c("aut", "cre"))
 Author: Gaurav Sood [aut, cre]
 Maintainer: Gaurav Sood <gsood07@gmail.com>
-Description: Provides a comprehensive R interface to the VirusTotal API (v2 and v3), 
+Description: Provides a comprehensive R interface to the VirusTotal API v3.0, 
     a Google service that analyzes files and URLs for viruses, worms, trojans and 
     other malware. Features include file/URL scanning, domain categorization, 
-    passive DNS information, IP reputation analysis, and comment/voting systems.
-    Implements rate limiting, error handling, and response validation for robust 
-    security analysis workflows.
+    passive DNS information, IP reputation analysis, IoC relationships, 
+    sandbox analysis, and comment/voting systems. Implements rate limiting, 
+    error handling, and response validation for robust security analysis workflows.
 URL: https://github.com/themains/virustotal, https://themains.github.io/virustotal/, http://themains.github.io/virustotal/
 BugReports: https://github.com/themains/virustotal/issues
 Depends:

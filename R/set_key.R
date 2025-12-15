@@ -31,7 +31,7 @@ set_key <- function(api_key) {
   
   # Input validation with proper error handling
   tryCatch({
-    checkmate::assert_character(api_key, len = 1, any.missing = FALSE, min.chars = 1)
+    assert_character(api_key, len = 1, any.missing = FALSE, min.chars = 1)
   }, error = function(e) {
     stop(virustotal_validation_error(
       message = "API key must be a non-empty character string",

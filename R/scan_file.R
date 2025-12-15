@@ -26,8 +26,8 @@
 
 scan_file <- function(file_path, ...) {
   # Input validation using checkmate
-  checkmate::assert_character(file_path, len = 1, any.missing = FALSE)
-  checkmate::assert_file_exists(file_path, access = "r")
+  assert_character(file_path, len = 1, any.missing = FALSE)
+  assert_file_exists(file_path, access = "r")
   
   # Check file size (VirusTotal has a 650MB limit for public API)
   file_size <- file.info(file_path)$size

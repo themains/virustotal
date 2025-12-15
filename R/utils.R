@@ -8,6 +8,32 @@
 #' @family utilities
 NULL
 
+#' Simple input validation
+#'
+#' Basic input validation and sanitization for VirusTotal API calls.
+#' Replaces over-engineered security functions with simpler checks.
+#' 
+#' @param input Character string to validate
+#' @return Cleaned input string
+#' @keywords internal
+validate_input <- function(input) {
+  # Use checkmate for consistent validation
+  tryCatch({
+    assert_character(input, len = 1, any.missing = FALSE, min.chars = 1)
+  }, error = function(e) {
+    stop(virustotal_validation_error(
+      message = "Input must be a single non-empty character string",
+      parameter = "input",
+      value = input
+    ))
+  })
+  
+  # Basic cleanup - remove leading/trailing whitespace
+  input <- trimws(input)
+  
+  return(input)
+}
+
 #' Check if running in a safe environment
 #'
 #' Verifies that the package is running in an appropriate environment
@@ -39,7 +65,7 @@ is_safe_environment <- function() {
 #' @keywords internal
 #' @family utilities
 format_file_size <- function(size_bytes) {
-  checkmate::assert_numeric(size_bytes, len = 1, lower = 0)
+  assert_numeric(size_bytes, len = 1, lower = 0)
   
   units <- c("B", "KB", "MB", "GB", "TB")
   unit_index <- 1
@@ -110,7 +136,7 @@ create_safe_temp_dir <- function() {
 #' @keywords internal
 #' @family utilities
 cleanup_temp_files <- function(paths) {
-  checkmate::assert_character(paths, any.missing = FALSE)
+  assert_character(paths, any.missing = FALSE)
   
   success <- TRUE
   for (path in paths) {

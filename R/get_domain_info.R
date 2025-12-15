@@ -24,9 +24,8 @@
 
 get_domain_info <- function(domain = NULL,  limit = NULL, cursor = NULL, ...) {
 
-    if (!is.character(domain)) {
-        stop("Must specify domain.\n")
-    }
+    # Validate domain using checkmate
+    assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
 
     domain <- gsub("^http://|^https://", "", domain)
 

@@ -209,35 +209,3 @@ summary.virustotal_response <- function(object, ...) {
   invisible(object)
 }
 
-#' Convert VirusTotal response to data.frame
-#' 
-#' @param x A virustotal_response object
-#' @param ... Additional arguments (unused)
-#' @return A data.frame representation of the response
-#' @keywords internal
-#' @export
-as.data.frame.virustotal_response <- function(x, ...) {
-  # Convert complex nested structure to flat data.frame
-  if (!is.null(x$data)) {
-    # Start with basic attributes
-    result <- data.frame(
-      id = x$data$id %||% NA_character_,
-      type = x$data$type %||% NA_character_,
-      stringsAsFactors = FALSE
-    )
-    
-    # Add attributes if available
-    if (!is.null(x$data$attributes)) {
-      attrs <- x$data$attributes
-      
-      # Flatten simple attributes
-      simple_attrs <- attrs[sapply(attrs, function(x) is.atomic(x) && length(x) == 1)]
-      result <- cbind(result, as.data.frame(simple_attrs, stringsAsFactors = FALSE))
-    }
-    
-    return(result)
-  }
-  
-  # Fallback to generic conversion
-  as.data.frame.list(x)
-}

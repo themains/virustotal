@@ -51,7 +51,7 @@ domain_report <- function(domain, ...) {
   
   # Input validation with proper error handling (before API key for tests)
   tryCatch({
-    checkmate::assert_character(domain, len = 1, any.missing = FALSE,
+    assert_character(domain, len = 1, any.missing = FALSE,
                                  min.chars = 1)
   }, error = function(e) {
     stop(virustotal_validation_error(

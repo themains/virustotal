@@ -11,41 +11,13 @@
 #' @importFrom dplyr bind_rows
 #' @importFrom utils read.table
 #' @importFrom jsonlite fromJSON toJSON
-#' @importFrom checkmate assert_character assert_file_exists
+#' @importFrom checkmate assert_character assert_file_exists assert_numeric
 #' @importFrom rlang .data
 #' @author Gaurav Sood
 "_PACKAGE"
 
 #' 
 #' Base POST AND GET functions. Not exported.
-#'
-#' GET for the v2 API
-#' 
-#' @param query query list 
-#' @param path  path to the specific API service url
-#' @param key  A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.
-#' @param \dots Additional arguments passed to \code{\link[httr]{GET}}.
-#' @return list
-#' @keywords internal
-
-virustotal2_GET <- function(query=list(), path = path,
-                                     key = Sys.getenv("VirustotalToken"), ...) {
-
-  if (identical(key, "")) {
-        stop("Please set application key via set_key(key='key')).\n")
-  }
-
-  query$apikey <- key
-
-  rate_limit()
-
-  res <- GET("https://www.virustotal.com/", path = paste0("vtapi/v2/", path),
-                                                             query = query, ...)
-  virustotal_check(res)
-  res <- content(res)
-
-  res
-}
 
 #'
 #' GET for the Current V3 API
@@ -111,35 +83,6 @@ virustotal_POST <- function(path, body = NULL, query = list(),
   res
 }
 
-#'
-#' POST for V2 API
-#' 
-#' @param query query list 
-#' @param body file 
-#' @param path  path to the specific API service url
-#' @param key A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.
-#' @param \dots Additional arguments passed to \code{\link[httr]{POST}}.
-#' @return list
-#' @keywords internal
-
-virustotal2_POST <- function(query=list(), path = path, body=NULL,
-                                     key = Sys.getenv("VirustotalToken"), ...) {
-
-  if (identical(key, "")) {
-        stop("Please set application key via set_key(key='key')).\n")
-  }
-
-  query$apikey <- key
-
-  rate_limit()
-
-  res <- POST("https://www.virustotal.com/", path = paste0("vtapi/v2/", path),
-                                                query = query, body = body, ...)
-  virustotal_check(res)
-  res <- content(res)
-
-  res
-}
 
 #' Request Response Verification
 #' 
@@ -212,13 +155,3 @@ virustotal_check <- function(req) {
 `%||%` <- function(x, y) if (is.null(x)) y else x
 
 # The rate limiting function is now implemented in rate_limiting.R
-# This legacy function is kept for backward compatibility but redirects to new implementation
-
-#' Legacy rate limiting function
-#' 
-#' @keywords internal
-rate_limit_legacy <- function() {
-  .Deprecated("rate_limit", package = "virustotal", 
-              msg = "Legacy rate limiting deprecated. Using modern implementation.")
-  rate_limit()
-}

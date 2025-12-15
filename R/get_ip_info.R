@@ -25,9 +25,8 @@
 
 get_ip_info <- function(ip = NULL, limit = NULL, cursor = NULL, ...) {
 
-    if (!is.character(ip)) {
-        stop("Must specify an IP address.\n")
-    }
+    # Validate IP address using checkmate
+    assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
 
     res   <- virustotal_GET(path = paste0("ip_addresses/", ip),
                                              query = list(limit = limit, cursor = cursor), ...)

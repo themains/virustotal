@@ -1,4 +1,4 @@
-## virustotal: R Client for the VirusTotal Public API v2.0 and v3.0
+## virustotal: R Client for the VirusTotal Public API v3.0
 
 [![R-CMD-check](https://github.com/themains/virustotal/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/themains/virustotal/actions/workflows/R-CMD-check.yml)
 [![pkgdown](https://github.com/themains/virustotal/actions/workflows/pkgdown.yml/badge.svg)](https://github.com/themains/virustotal/actions/workflows/pkgdown.yml)
@@ -8,7 +8,7 @@
 
 Use [VirusTotal](https://www.virustotal.com), a Google service that analyzes files and URLs for viruses, worms, trojans etc., provides category of the content hosted by a domain from a variety of prominent services, provides passive DNS information, among other things.
 
-This package supports both VirusTotal API v2.0 (legacy) and v3.0 (current). The v3.0 API provides richer data including IoC relationships, sandbox dynamic analysis, static file information, YARA rules, and more comprehensive threat intelligence.
+This package provides comprehensive support for the VirusTotal API v3.0, which offers richer data including IoC relationships, sandbox dynamic analysis, static file information, YARA rules, and comprehensive threat intelligence.
 
 **API Rate Limits:**
 - **Public API**: 500 requests/day, 4 requests/minute

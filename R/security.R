@@ -20,7 +20,7 @@ NULL
 #' @keywords internal
 #' @family security
 sanitize_file_path <- function(file_path, allow_relative = FALSE) {
-  checkmate::assert_character(file_path, len = 1, any.missing = FALSE)
+  assert_character(file_path, len = 1, any.missing = FALSE)
   
   # Check for directory traversal attempts
   if (grepl("\\.\\.", file_path) || grepl("~", file_path)) {
@@ -68,7 +68,7 @@ sanitize_file_path <- function(file_path, allow_relative = FALSE) {
 #' @keywords internal
 #' @family security
 sanitize_url <- function(url) {
-  checkmate::assert_character(url, len = 1, any.missing = FALSE, min.chars = 1)
+  assert_character(url, len = 1, any.missing = FALSE, min.chars = 1)
   
   # Remove leading/trailing whitespace
   url <- trimws(url)
@@ -124,7 +124,7 @@ sanitize_url <- function(url) {
 #' @keywords internal
 #' @family security
 sanitize_hash <- function(hash) {
-  checkmate::assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
+  assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
   
   # Remove whitespace
   hash <- trimws(hash)
@@ -164,7 +164,7 @@ sanitize_hash <- function(hash) {
 #' @keywords internal
 #' @family security
 sanitize_domain <- function(domain) {
-  checkmate::assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
+  assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
   
   # Remove whitespace
   domain <- trimws(domain)
@@ -199,15 +199,7 @@ sanitize_domain <- function(domain) {
     ))
   }
   
-  # Check for localhost/private ranges that shouldn't be analyzed
-  private_domains <- c("localhost", "127.0.0.1", "::1", "0.0.0.0")
-  if (domain %in% private_domains) {
-    stop(virustotal_validation_error(
-      message = "Private/localhost domains cannot be analyzed",
-      parameter = "domain",
-      value = domain
-    ))
-  }
+  # Note: Allow private domains - users may want to analyze them in enterprise environments
   
   return(domain)
 }
@@ -222,7 +214,7 @@ sanitize_domain <- function(domain) {
 #' @keywords internal
 #' @family security
 sanitize_ip <- function(ip) {
-  checkmate::assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
+  assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
   
   # Remove whitespace
   ip <- trimws(ip)
@@ -241,38 +233,7 @@ sanitize_ip <- function(ip) {
     ))
   }
   
-  # Check for private IP ranges (IPv4)
-  if (is_ipv4) {
-    parts <- as.numeric(strsplit(ip, "\\.")[[1]])
-    
-    # RFC 1918 private addresses
-    if ((parts[1] == 10) ||
-        (parts[1] == 172 && parts[2] >= 16 && parts[2] <= 31) ||
-        (parts[1] == 192 && parts[2] == 168) ||
-        (parts[1] == 127) ||  # Loopback
-        (parts[1] == 169 && parts[2] == 254) ||  # Link-local
-        (ip == "0.0.0.0")) {  # Invalid/broadcast
-      stop(virustotal_validation_error(
-        message = "Private/reserved IP addresses cannot be analyzed",
-        parameter = "ip",
-        value = ip
-      ))
-    }
-  }
-  
-  # Check for private IPv6 ranges
-  if (is_ipv6) {
-    if (grepl("^::1$", ip) ||  # Loopback
-        grepl("^fc00:", tolower(ip)) ||  # Unique local
-        grepl("^fd00:", tolower(ip)) ||  # Unique local
-        grepl("^fe80:", tolower(ip))) {  # Link-local
-      stop(virustotal_validation_error(
-        message = "Private/reserved IPv6 addresses cannot be analyzed",
-        parameter = "ip",
-        value = ip
-      ))
-    }
-  }
+  # Note: Allow private/reserved IPs - users may want to analyze them in enterprise environments
   
   return(ip)
 }

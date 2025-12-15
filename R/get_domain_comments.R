@@ -6,12 +6,8 @@
 #' @param cursor String. Optional.  
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #' 
-#' @return named list with the following possible items: 
-#' \code{`BitDefender category`, undetected_referrer_samples, whois_timestamp,
-#' detected_downloaded_samples, detected_referrer_samples, `Webutation domain info`, `Alexa category`, undetected_downloaded_samples,
-#' resolutions, detected_communicating_samples, `Opera domain info`, `TrendMicro category`, categories, domain_siblings, 
-#' `BitDefender domain info`, whois, `Alexa domain info`, response_code, verbose_msg, `Websense ThreatSeeker category`, subdomains,
-#' `WOT domain info`, detected_urls, `Alexa rank`, undetected_communicating_samples, `Dr.Web category`, pcaps}
+#' @return list containing domain comment data including comment text, authors, dates, 
+#' and any associated metadata from the VirusTotal v3.0 API
 #'   
 #' @export
 #' 

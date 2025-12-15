@@ -22,13 +22,9 @@
 
 post_file_comments <- function(hash = NULL, comment = NULL, ...) {
 
-  if (is.null(hash) || !is.character(hash) || nchar(hash) == 0) {
-    stop("Must specify a valid file hash (MD5, SHA1, or SHA256).\n")
-  }
-
-  if (is.null(comment) || !is.character(comment) || nchar(comment) == 0) {
-    stop("Must specify a comment.\n")
-  }
+  # Validate inputs using checkmate
+  assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
+  assert_character(comment, len = 1, any.missing = FALSE, min.chars = 1)
 
   res <- virustotal_POST(path = paste0("files/", hash, "/comments"),
                         body = list(data = list(type = "comment", 

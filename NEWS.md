@@ -1,3 +1,20 @@
+# virustotal 0.6.0
+
+## Breaking Changes
+
+* **Removed VirusTotal API v2.0 Support**: Completely removed all v2.0 API functions (`virustotal2_GET()`, `virustotal2_POST()`) and deprecated functions (`add_comments()`). The package now exclusively uses VirusTotal API v3.0, aligning with VirusTotal's recommendation to migrate to v3.0 for enhanced functionality and data richness.
+
+## Package Simplification
+
+* **Streamlined Architecture**: Simplified codebase by removing dual API support, reducing complexity and maintenance overhead.
+* **Enhanced Documentation**: Updated all documentation, README, and package description to reflect v3.0-only support with clearer feature descriptions including IoC relationships and sandbox analysis.
+
+## Migration Guide
+
+Users upgrading from versions that used v2.0 functions should ensure their code uses the equivalent v3.0 functions. All core functionality remains available through the modernized v3.0 API endpoints.
+
+---
+
 # virustotal 0.5.0
 
 ## Major Updates
