@@ -281,6 +281,7 @@ sanitize_ip <- function(ip) {
 #' Verifies that the API key is set and appears to be valid format.
 #' 
 #' @return Logical indicating if API key is configured
+#' @keywords internal
 #' @export
 #' @family security
 is_api_key_configured <- function() {

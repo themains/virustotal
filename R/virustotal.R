@@ -26,6 +26,7 @@
 #' @param key  A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.
 #' @param \dots Additional arguments passed to \code{\link[httr]{GET}}.
 #' @return list
+#' @keywords internal
 
 virustotal2_GET <- function(query=list(), path = path,
                                      key = Sys.getenv("VirustotalToken"), ...) {
@@ -54,6 +55,7 @@ virustotal2_GET <- function(query=list(), path = path,
 #' @param key  A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.
 #' @param \dots Additional arguments passed to \code{\link[httr]{GET}}.
 #' @return list
+#' @keywords internal
 
 virustotal_GET <- function(path, query = list(),
                           key = Sys.getenv("VirustotalToken"), ...) {
@@ -85,6 +87,7 @@ virustotal_GET <- function(path, query = list(),
 #' @param key A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.
 #' @param \dots Additional arguments passed to \code{\link[httr]{POST}}.
 #' @return list
+#' @keywords internal
 
 virustotal_POST <- function(path, body = NULL, query = list(),
                            key = Sys.getenv("VirustotalToken"), ...) {
@@ -117,6 +120,7 @@ virustotal_POST <- function(path, body = NULL, query = list(),
 #' @param key A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.
 #' @param \dots Additional arguments passed to \code{\link[httr]{POST}}.
 #' @return list
+#' @keywords internal
 
 virustotal2_POST <- function(query=list(), path = path, body=NULL,
                                      key = Sys.getenv("VirustotalToken"), ...) {

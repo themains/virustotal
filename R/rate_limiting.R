@@ -102,7 +102,7 @@ rate_limit <- function(force_wait = FALSE) {
 #' Get current rate limit status
 #' 
 #' @return List with current status information
-#' @export
+#' @keywords internal
 #' @family rate limiting
 get_rate_limit_status <- function() {
   # Ensure complete initialization
@@ -148,7 +148,7 @@ get_rate_limit_status <- function() {
 #' 
 #' Clears all rate limiting history. Useful for testing.
 #' 
-#' @export
+#' @keywords internal
 #' @family rate limiting
 reset_rate_limit <- function() {
   init_rate_limit()

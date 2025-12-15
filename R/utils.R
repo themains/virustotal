@@ -35,7 +35,7 @@ is_safe_environment <- function() {
 #'
 #' @param size_bytes File size in bytes
 #' @return Character string with human-readable size
-#' @export
+#' @keywords internal
 #' @family utilities
 format_file_size <- function(size_bytes) {
   checkmate::assert_numeric(size_bytes, len = 1, lower = 0)
@@ -84,7 +84,7 @@ validate_vt_response <- function(response) {
 #' file operations during malware analysis.
 #' 
 #' @return Path to the temporary directory
-#' @export
+#' @keywords internal
 #' @family utilities
 create_safe_temp_dir <- function() {
   temp_dir <- tempfile(pattern = "virustotal_")
@@ -106,7 +106,7 @@ create_safe_temp_dir <- function() {
 #' 
 #' @param paths Character vector of file/directory paths to clean up
 #' @return Logical indicating success
-#' @export
+#' @keywords internal
 #' @family utilities
 cleanup_temp_files <- function(paths) {
   checkmate::assert_character(paths, any.missing = FALSE)

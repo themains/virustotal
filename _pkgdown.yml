@@ -1,8 +1,12 @@
-url: http://themains.github.io/virustotal/
+url: https://themains.github.io/virustotal/
 
 template:
+  bootstrap: 5
+  bslib:
+    primary: "#0969da"
+    border-radius: 0.5rem
+    btn-border-radius: 0.25rem
   params:
-    bootswatch: cosmo
     docsearch:
       api_key: 59f51aa86ec968850d822427e20517d5
       index_name: virustotal
@@ -62,12 +66,7 @@ reference:
   - title: Add Comment (Legacy)
     contents:
     - add_comments
-  - title: Internal Functions
+  - title: Package Utilities
     contents:
-    - virustotal_GET
-    - virustotal_POST
-    - virustotal_check
-    - rate_limit
-    - virustotal2_GET
-    - virustotal2_POST
-    - virustotal-package
+    - virustotal_version
+    - virustotal_info

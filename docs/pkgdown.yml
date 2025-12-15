@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   using_virustotal: using_virustotal.html
-last_built: 2025-09-02T23:15Z
+last_built: 2025-12-15T02:23Z
 urls:
-  reference: http://themains.github.io/virustotal/reference
-  article: http://themains.github.io/virustotal/articles
+  reference: https://themains.github.io/virustotal/reference
+  article: https://themains.github.io/virustotal/articles

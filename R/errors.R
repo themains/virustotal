@@ -15,6 +15,7 @@ NULL
 #' @param call The calling function (automatically detected)
 #'
 #' @return An error object of class \code{virustotal_error}
+#' @keywords internal
 #' @export
 #' @family error handling
 virustotal_error <- function(message, status_code = NULL, response = NULL, call = sys.call(-1)) {
@@ -36,6 +37,7 @@ virustotal_error <- function(message, status_code = NULL, response = NULL, call 
 #' @param call The calling function (automatically detected)
 #'
 #' @return An error object of class \code{virustotal_rate_limit_error}
+#' @keywords internal
 #' @export
 #' @family error handling
 virustotal_rate_limit_error <- function(message = "Rate limit exceeded", 
@@ -57,6 +59,7 @@ virustotal_rate_limit_error <- function(message = "Rate limit exceeded",
 #' @param call The calling function (automatically detected)
 #'
 #' @return An error object of class \code{virustotal_auth_error}
+#' @keywords internal
 #' @export
 #' @family error handling
 virustotal_auth_error <- function(message = "Invalid or missing API key", 
@@ -78,6 +81,7 @@ virustotal_auth_error <- function(message = "Invalid or missing API key",
 #' @param call The calling function (automatically detected)
 #'
 #' @return An error object of class \code{virustotal_validation_error}
+#' @keywords internal
 #' @export
 #' @family error handling
 virustotal_validation_error <- function(message, parameter = NULL, value = NULL, 
@@ -97,7 +101,7 @@ virustotal_validation_error <- function(message, parameter = NULL, value = NULL,
 #' 
 #' @param x A virustotal_error object
 #' @param ... Additional arguments (unused)
-#' @export
+#' @keywords internal
 print.virustotal_error <- function(x, ...) {
   cat("VirusTotal API Error: ", x$message, "\n", sep = "")
   if (!is.null(x$status_code)) {

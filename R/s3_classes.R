@@ -12,6 +12,7 @@ NULL
 #'
 #' @param data Raw API response data
 #' @return Object of class \code{virustotal_file_scan}
+#' @keywords internal
 #' @export
 #' @family response classes
 virustotal_file_scan <- function(data) {
@@ -25,6 +26,7 @@ virustotal_file_scan <- function(data) {
 #'
 #' @param data Raw API response data
 #' @return Object of class \code{virustotal_file_report}
+#' @keywords internal
 #' @export
 #' @family response classes
 virustotal_file_report <- function(data) {
@@ -38,6 +40,7 @@ virustotal_file_report <- function(data) {
 #'
 #' @param data Raw API response data
 #' @return Object of class \code{virustotal_url_scan}
+#' @keywords internal
 #' @export
 #' @family response classes
 virustotal_url_scan <- function(data) {
@@ -51,6 +54,7 @@ virustotal_url_scan <- function(data) {
 #'
 #' @param data Raw API response data
 #' @return Object of class \code{virustotal_domain_report}
+#' @keywords internal
 #' @export
 #' @family response classes
 virustotal_domain_report <- function(data) {
@@ -64,6 +68,7 @@ virustotal_domain_report <- function(data) {
 #'
 #' @param data Raw API response data
 #' @return Object of class \code{virustotal_ip_report}
+#' @keywords internal
 #' @export
 #' @family response classes
 virustotal_ip_report <- function(data) {
@@ -77,7 +82,7 @@ virustotal_ip_report <- function(data) {
 #' 
 #' @param x A virustotal_response object
 #' @param ... Additional arguments (unused)
-#' @export
+#' @keywords internal
 print.virustotal_response <- function(x, ...) {
   cat("VirusTotal API Response\n")
   cat("======================\n\n")
@@ -106,7 +111,7 @@ print.virustotal_response <- function(x, ...) {
 #' 
 #' @param x A virustotal_file_report object
 #' @param ... Additional arguments (unused)
-#' @export
+#' @keywords internal
 print.virustotal_file_report <- function(x, ...) {
   NextMethod()
   
@@ -143,7 +148,7 @@ print.virustotal_file_report <- function(x, ...) {
 #' 
 #' @param x A virustotal_domain_report object
 #' @param ... Additional arguments (unused)
-#' @export
+#' @keywords internal
 print.virustotal_domain_report <- function(x, ...) {
   NextMethod()
   
@@ -179,7 +184,7 @@ print.virustotal_domain_report <- function(x, ...) {
 #' 
 #' @param object A virustotal_response object
 #' @param ... Additional arguments (unused)
-#' @export
+#' @keywords internal
 summary.virustotal_response <- function(object, ...) {
   print(object)
   
@@ -208,6 +213,7 @@ summary.virustotal_response <- function(object, ...) {
 #' @param x A virustotal_response object
 #' @param ... Additional arguments (unused)
 #' @return A data.frame representation of the response
+#' @keywords internal
 #' @export
 as.data.frame.virustotal_response <- function(x, ...) {
   # Convert complex nested structure to flat data.frame
