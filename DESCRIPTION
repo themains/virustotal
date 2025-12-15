@@ -11,8 +11,7 @@ Description: Provides a comprehensive R interface to the VirusTotal API (v2 and 
     passive DNS information, IP reputation analysis, and comment/voting systems.
     Implements rate limiting, error handling, and response validation for robust 
     security analysis workflows.
-URL: https://github.com/themains/virustotal, 
-     https://themains.github.io/virustotal/
+URL: https://github.com/themains/virustotal, https://themains.github.io/virustotal/, http://themains.github.io/virustotal/
 BugReports: https://github.com/themains/virustotal/issues
 Depends:
     R (>= 4.0.0)

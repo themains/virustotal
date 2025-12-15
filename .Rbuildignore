@@ -22,3 +22,4 @@
 ^\.git$
 ^\.gitignore$
 ^codecov\.yml$
+^pkgdown$

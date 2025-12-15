@@ -17,6 +17,7 @@ Useful links:
 \itemize{
   \item \url{https://github.com/themains/virustotal}
   \item \url{https://themains.github.io/virustotal/}
+  \item \url{http://themains.github.io/virustotal/}
   \item Report bugs at \url{https://github.com/themains/virustotal/issues}
 }
 
