@@ -25,9 +25,7 @@
 
 ip_report <- function(ip = NULL, ...) {
     # Input validation first (before API key for proper test precedence)
-    if (is.null(ip) || !is.character(ip) || nchar(ip) == 0) {
-        stop("Must specify a valid IP address.\n")
-    }
+    assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
     
     # Check API key after basic validation
     if (identical(Sys.getenv("VirustotalToken"), "")) {

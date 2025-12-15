@@ -22,9 +22,7 @@
 
 get_file_comments <- function(hash = NULL, limit = NULL, cursor = NULL, ...) {
 
-  if (is.null(hash) || !is.character(hash) || nchar(hash) == 0) {
-    stop("Must specify a valid file hash (MD5, SHA1, or SHA256).\n")
-  }
+  assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
 
   res <- virustotal_GET(path = paste0("files/", hash, "/comments"),
                        query = list(limit = limit, cursor = cursor), ...)

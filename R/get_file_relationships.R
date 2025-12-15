@@ -25,13 +25,8 @@
 get_file_relationships <- function(hash = NULL, relationship = NULL, 
                                   limit = NULL, cursor = NULL, ...) {
 
-  if (is.null(hash) || !is.character(hash) || nchar(hash) == 0) {
-    stop("Must specify a valid file hash (MD5, SHA1, or SHA256).\n")
-  }
-
-  if (is.null(relationship) || !is.character(relationship)) {
-    stop("Must specify a relationship type.\n")
-  }
+  assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
+  assert_character(relationship, len = 1, any.missing = FALSE, min.chars = 1)
 
   valid_relationships <- c("behaviours", "bundled_files", "compression_parents", 
                           "contacted_domains", "contacted_ips", "contacted_urls", 
@@ -40,8 +35,7 @@ get_file_relationships <- function(hash = NULL, relationship = NULL,
                           "pe_resource_parents", "similar_files", "submissions")
 
   if (!relationship %in% valid_relationships) {
-    stop("Invalid relationship type. Must be one of: ", 
-         paste(valid_relationships, collapse = ", "), "\n")
+    stop("Invalid relationship type")
   }
 
   res <- virustotal_GET(path = paste0("files/", hash, "/relationships/", relationship),

@@ -22,9 +22,7 @@
 
 download_file <- function(hash = NULL, output_path = NULL, ...) {
 
-  if (is.null(hash) || !is.character(hash) || nchar(hash) == 0) {
-    stop("Must specify a valid file hash (MD5, SHA1, or SHA256).\n")
-  }
+  assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
 
   # Note: This endpoint returns raw file content, not JSON
   res <- GET("https://www.virustotal.com/",
