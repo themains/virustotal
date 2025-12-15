@@ -147,17 +147,23 @@ virustotal2_POST <- function(query=list(), path = path, body=NULL,
 #' @keywords internal
 
 virustotal_check <- function(req) {
-  # Success cases
-  if (req$status_code < 400) return(invisible())
-  
-  # Rate limit errors
+  # Rate limit errors (check before general success cases)
   if (req$status_code == 204 || req$status_code == 429) {
-    retry_after <- as.numeric(httr::headers(req)[["retry-after"]]) %||% 60
+    # Try to get retry-after header, with fallback to 60 if anything fails
+    retry_after <- tryCatch({
+      as.numeric(httr::headers(req)[["retry-after"]]) %||% 60
+    }, error = function(e) {
+      60  # Default fallback
+    })
+    
     stop(virustotal_rate_limit_error(
       message = "Rate limit exceeded. Only 4 requests per minute allowed.",
       retry_after = retry_after
     ))
   }
+  
+  # Success cases (after rate limit check)
+  if (req$status_code < 400) return(invisible())
   
   # Authentication errors
   if (req$status_code == 401 || req$status_code == 403) {

@@ -31,53 +31,26 @@ test_that("error printing works", {
   expect_true(grepl("HTTP Status Code: 404", output[2]))
 })
 
-test_that("virustotal_check handles different HTTP status codes", {
-  skip_if_not_installed("mockery")
-  
-  # Mock response objects
+test_that("virustotal_check handles HTTP status codes", {
+  # Test success - should not error
   success_resp <- list(status_code = 200)
-  rate_limit_resp <- list(status_code = 204, headers = list("retry-after" = "60"))
-  auth_resp <- list(status_code = 401)
-  not_found_resp <- list(status_code = 404)
-  server_error_resp <- list(status_code = 500)
-  
-  # Mock httr::headers function for rate limit test
-  mockery::stub(virustotal_check, "httr::headers", function(x) {
-    if (!is.null(x$headers)) x$headers else list()
-  })
-  
-  # Test success
   expect_silent(virustotal_check(success_resp))
   
-  # Test rate limit
-  expect_error(virustotal_check(rate_limit_resp), class = "virustotal_rate_limit_error")
-  
   # Test auth error  
+  auth_resp <- list(status_code = 401)
   expect_error(virustotal_check(auth_resp), class = "virustotal_auth_error")
   
   # Test not found
+  not_found_resp <- list(status_code = 404)
   expect_error(virustotal_check(not_found_resp), class = "virustotal_error")
   
   # Test server error
+  server_error_resp <- list(status_code = 500)
   expect_error(virustotal_check(server_error_resp), class = "virustotal_error")
+  
+  # Test rate limit - simple case (will use default retry_after = 60)
+  # We don't need to mock httr::headers, just test the basic error flow
+  rate_limit_resp <- list(status_code = 204)
+  expect_error(virustotal_check(rate_limit_resp), class = "virustotal_rate_limit_error")
 })
 
-test_that("virustotal_check handles errors without mocking", {
-  # Basic response structure tests that don't require mocking
-  success_resp <- list(status_code = 200)
-  auth_resp <- list(status_code = 401)
-  not_found_resp <- list(status_code = 404)
-  server_error_resp <- list(status_code = 500)
-  
-  # Test success
-  expect_silent(virustotal_check(success_resp))
-  
-  # Test auth error  
-  expect_error(virustotal_check(auth_resp), class = "virustotal_auth_error")
-  
-  # Test not found
-  expect_error(virustotal_check(not_found_resp), class = "virustotal_error")
-  
-  # Test server error
-  expect_error(virustotal_check(server_error_resp), class = "virustotal_error")
-})
