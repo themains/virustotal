@@ -4,7 +4,7 @@
 \alias{set_key}
 \title{Set VirusTotal API Key}
 \usage{
-set_key(api_key)
+set_key(api_key = NULL)
 }
 \arguments{
 \item{api_key}{VirusTotal API key (character string). Required.}

@@ -28,8 +28,8 @@ report <- file_report(hash = '99017f6eebbac24f351415dd410d522d')
 print(report)
 summary(report)
 
-# Convert to data.frame if needed
-df <- as.data.frame(report)
+# Work with the rich nested structure returned by v3 API
+print(report$data$attributes$last_analysis_stats)
 }
 }
 \references{

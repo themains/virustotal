@@ -9,7 +9,7 @@ sanitize_file_path(file_path, allow_relative = FALSE)
 \arguments{
 \item{file_path}{Character string representing a file path}
 
-\item{allow_relative}{Logical. Whether to allow relative paths (default: FALSE)}
+\item{allow_relative}{Logical. Allow relative paths. Default: FALSE.}
 }
 \value{
 Sanitized file path or throws error if invalid

@@ -16,13 +16,15 @@ The virustotal package provides access to the VirusTotal API v3, allowing you to
 
 To get the current development version from GitHub:
 
-```{r, eval=F, install}
-# Install from CRAN
+```{r, eval=FALSE, install}
 install.packages("virustotal")
+```
 
-# Or install development version
-# library(devtools)
-# install_github("themains/virustotal")
+Or install the development version:
+
+```{r, eval=FALSE, install-dev}
+library(devtools)
+install_github("themains/virustotal")
 ```
 
 #### Load the library:

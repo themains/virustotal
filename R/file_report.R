@@ -24,8 +24,8 @@
 #' print(report)
 #' summary(report)
 #' 
-#' # Convert to data.frame if needed
-#' df <- as.data.frame(report)
+#' # Work with the rich nested structure returned by v3 API
+#' print(report$data$attributes$last_analysis_stats)
 #' }
 
 file_report <- function(hash, ...) {
@@ -49,7 +49,7 @@ file_report <- function(hash, ...) {
   
   # Input validation
   tryCatch({
-    checkmate::assert_character(hash, len = 1, any.missing = FALSE, 
+    assert_character(hash, len = 1, any.missing = FALSE, 
                                  min.chars = 1)
   }, error = function(e) {
     stop(virustotal_validation_error(

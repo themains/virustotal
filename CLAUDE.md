@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an R package (`virustotal`) that provides an R client for the VirusTotal Public API v2.0 and v3.0. VirusTotal is a Google service that analyzes files and URLs for malware, provides domain categorization, and offers passive DNS information.
+This is an R package (`virustotal`) that provides an R client for the VirusTotal Public API v3.0. VirusTotal is a Google service that analyzes files and URLs for malware, provides domain categorization, and offers passive DNS information.
 
 ## Key Development Commands
 
@@ -52,7 +52,6 @@ R -e "pkgdown::build_site()"
 
 2. **HTTP Layer**: `R/virustotal.R` - Contains base GET/POST functions:
    - `virustotal_GET()`, `virustotal_POST()` for v3 API
-   - `virustotal2_GET()`, `virustotal2_POST()` for v2 API
    - `rate_limit()` enforces 4 requests/minute limit
    - `virustotal_check()` handles response validation
 
@@ -67,9 +66,8 @@ R -e "pkgdown::build_site()"
 The package implements automatic rate limiting via environment variable `VT_RATE_LIMIT` that tracks request count and timing to enforce VirusTotal's 4 requests/minute limit.
 
 ### API Versions
-- Most functions use v2 API (`virustotal2_*` functions)
-- Some newer functions use v3 API (`virustotal_*` functions)
-- v3 API uses `x-apikey` header, v2 uses query parameter
+- All functions use v3 API (`virustotal_*` functions)
+- v3 API uses `x-apikey` header for authentication
 
 ## Testing Notes
 

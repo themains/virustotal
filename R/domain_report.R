@@ -30,29 +30,19 @@
 #' summary(report1)
 #' }
 
-domain_report <- function(domain, ...) {
-  # Handle missing argument
-  if (missing(domain)) {
-    stop(virustotal_validation_error(
-      message = "Domain must be provided",
-      parameter = "domain",
-      value = "missing"
-    ))
-  }
-  
-  # Handle NULL before checkmate validation
+domain_report <- function(domain = NULL, ...) {
+  # Handle NULL argument
   if (is.null(domain)) {
     stop(virustotal_validation_error(
-      message = "Domain cannot be NULL",
+      message = "Domain must be provided",
       parameter = "domain",
       value = "NULL"
     ))
   }
-  
+
   # Input validation with proper error handling (before API key for tests)
   tryCatch({
-    checkmate::assert_character(domain, len = 1, any.missing = FALSE,
-                                 min.chars = 1)
+    assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
   }, error = function(e) {
     stop(virustotal_validation_error(
       message = "Domain must be a non-empty character string",
@@ -61,7 +51,7 @@ domain_report <- function(domain, ...) {
     ))
   })
 
-  # Clean up domain (remove protocol, www, and paths for security) before validation
+  # Clean up domain (remove protocol, www, and paths for security)
   domain_clean <- domain
   domain_clean <- gsub("^https?://", "", domain_clean)
   domain_clean <- gsub("^www\\.", "", domain_clean)
@@ -77,7 +67,7 @@ domain_report <- function(domain, ...) {
       value = domain
     ))
   }
-  
+
   # Check API key after all validation
   if (identical(Sys.getenv("VirustotalToken"), "")) {
     stop(virustotal_auth_error(

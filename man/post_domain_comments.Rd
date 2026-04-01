@@ -7,9 +7,9 @@
 post_domain_comments(domain = NULL, comment = NULL, ...)
 }
 \arguments{
-\item{domain}{domain name. String. Required.}
+\item{domain}{domain name. Required.}
 
-\item{comment}{vote. String. Required.  Any word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.}
+\item{comment}{comment text. Required. Words starting with # become tags.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
@@ -23,7 +23,7 @@ Add a comment to an Internet domain
 \dontrun{
 
 # Before calling the function, set the API key using set_key('api_key_here')
-   
+
 post_domain_comments(domain = "https://google.com", comment = "Great!")
 }
 }

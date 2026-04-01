@@ -3,7 +3,7 @@
 #' @description
 #' S3 classes to provide structured responses and better user experience
 #' when working with VirusTotal API results.
-#' 
+#'
 #' @name virustotal-classes
 #' @keywords internal
 #' @family response classes
@@ -80,45 +80,45 @@ virustotal_ip_report <- function(data) {
 }
 
 #' Print method for VirusTotal responses
-#' 
+#'
 #' @param x A virustotal_response object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
 print.virustotal_response <- function(x, ...) {
   cat("VirusTotal API Response\n")
   cat("======================\n\n")
-  
+
   # Get the specific class
   specific_class <- class(x)[1]
   type <- gsub("virustotal_", "", specific_class)
   type <- gsub("_", " ", type)
-  type <- tools::toTitleCase(type)
-  
+  type <- toTitleCase(type)
+
   cat("Type:", type, "\n")
-  
+
   if (!is.null(x$data$id)) {
     cat("ID:", x$data$id, "\n")
   }
-  
+
   if (!is.null(x$data$type)) {
     cat("Resource Type:", x$data$type, "\n")
   }
-  
+
   cat("\n")
   invisible(x)
 }
 
 #' Print method for file reports
-#' 
+#'
 #' @param x A virustotal_file_report object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
 print.virustotal_file_report <- function(x, ...) {
   NextMethod()
-  
+
   if (!is.null(x$data$attributes)) {
     attrs <- x$data$attributes
-    
+
     # Detection summary
     if (!is.null(attrs$last_analysis_stats)) {
       stats <- attrs$last_analysis_stats
@@ -129,33 +129,33 @@ print.virustotal_file_report <- function(x, ...) {
       cat(sprintf("  Harmless: %d\n", stats$harmless %||% 0))
       cat("\n")
     }
-    
+
     # File info
     if (!is.null(attrs$size)) {
       cat(sprintf("File Size: %s bytes\n", format(attrs$size, big.mark = ",")))
     }
-    
+
     if (!is.null(attrs$sha256)) {
       cat(sprintf("SHA256: %s\n", attrs$sha256))
     }
-    
+
     cat("\n")
   }
-  
+
   invisible(x)
 }
 
 #' Print method for domain reports
-#' 
+#'
 #' @param x A virustotal_domain_report object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
 print.virustotal_domain_report <- function(x, ...) {
   NextMethod()
-  
+
   if (!is.null(x$data$attributes)) {
     attrs <- x$data$attributes
-    
+
     # Domain reputation
     if (!is.null(attrs$last_analysis_stats)) {
       stats <- attrs$last_analysis_stats
@@ -166,7 +166,7 @@ print.virustotal_domain_report <- function(x, ...) {
       cat(sprintf("  Harmless: %d\n", stats$harmless %||% 0))
       cat("\n")
     }
-    
+
     # Categories
     if (!is.null(attrs$categories)) {
       cats <- names(attrs$categories)
@@ -174,70 +174,38 @@ print.virustotal_domain_report <- function(x, ...) {
         cat("Categories:", paste(cats, collapse = ", "), "\n")
       }
     }
-    
+
     cat("\n")
   }
-  
+
   invisible(x)
 }
 
 #' Summary method for VirusTotal responses
-#' 
+#'
 #' @param object A virustotal_response object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
 summary.virustotal_response <- function(object, ...) {
   print(object)
-  
-  if (inherits(object, "virustotal_file_report") && !is.null(object$data$attributes$last_analysis_results)) {
-    results <- object$data$attributes$last_analysis_results
-    
-    # Show top detections
+
+  results_attr <- object$data$attributes$last_analysis_results
+  if (inherits(object, "virustotal_file_report") && !is.null(results_attr)) {
+    results <- results_attr
+
     detections <- sapply(results, function(x) x$category %||% "undetected")
     malicious <- names(detections[detections == "malicious"])
-    
+
     if (length(malicious) > 0) {
       cat("Engines detecting as malicious:\n")
-      cat(paste("  -", malicious[1:min(10, length(malicious))]), sep = "\n")
+      n_show <- min(10, length(malicious))
+      cat(paste("  -", malicious[seq_len(n_show)]), sep = "\n")
       if (length(malicious) > 10) {
         cat(sprintf("  ... and %d more\n", length(malicious) - 10))
       }
       cat("\n")
     }
   }
-  
-  invisible(object)
-}
 
-#' Convert VirusTotal response to data.frame
-#' 
-#' @param x A virustotal_response object
-#' @param ... Additional arguments (unused)
-#' @return A data.frame representation of the response
-#' @keywords internal
-#' @export
-as.data.frame.virustotal_response <- function(x, ...) {
-  # Convert complex nested structure to flat data.frame
-  if (!is.null(x$data)) {
-    # Start with basic attributes
-    result <- data.frame(
-      id = x$data$id %||% NA_character_,
-      type = x$data$type %||% NA_character_,
-      stringsAsFactors = FALSE
-    )
-    
-    # Add attributes if available
-    if (!is.null(x$data$attributes)) {
-      attrs <- x$data$attributes
-      
-      # Flatten simple attributes
-      simple_attrs <- attrs[sapply(attrs, function(x) is.atomic(x) && length(x) == 1)]
-      result <- cbind(result, as.data.frame(simple_attrs, stringsAsFactors = FALSE))
-    }
-    
-    return(result)
-  }
-  
-  # Fallback to generic conversion
-  as.data.frame.list(x)
+  invisible(object)
 }

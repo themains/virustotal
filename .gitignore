@@ -11,3 +11,5 @@ tests/testthat/virustotal_api_key
 *.gz
 /docs/
 docs
+/..Rcheck
+.DS_Store

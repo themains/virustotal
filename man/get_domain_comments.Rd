@@ -4,7 +4,7 @@
 \alias{get_domain_comments}
 \title{Retrieve comments for an Internet domain}
 \usage{
-get_domain_comments(domain = NULL, limit = limit, cursor = cursor, ...)
+get_domain_comments(domain = NULL, limit = NULL, cursor = NULL, ...)
 }
 \arguments{
 \item{domain}{domain name. String. Required.}
@@ -16,12 +16,8 @@ get_domain_comments(domain = NULL, limit = limit, cursor = cursor, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-named list with the following possible items:
-\code{`BitDefender category`, undetected_referrer_samples, whois_timestamp,
-detected_downloaded_samples, detected_referrer_samples, `Webutation domain info`, `Alexa category`, undetected_downloaded_samples,
-resolutions, detected_communicating_samples, `Opera domain info`, `TrendMicro category`, categories, domain_siblings, 
-`BitDefender domain info`, whois, `Alexa domain info`, response_code, verbose_msg, `Websense ThreatSeeker category`, subdomains,
-`WOT domain info`, detected_urls, `Alexa rank`, undetected_communicating_samples, `Dr.Web category`, pcaps}
+list containing domain comment data including comment text, authors, dates,
+and any associated metadata from the VirusTotal v3.0 API
 }
 \description{
 Retrieve comments for an Internet domain
@@ -30,7 +26,7 @@ Retrieve comments for an Internet domain
 \dontrun{
 
 # Before calling the function, set the API key using set_key('api_key_here')
-   
+
 get_domain_comments("http://www.google.com")
 get_domain_comments("http://www.goodsfwrfw.com") # Domain not found
 }

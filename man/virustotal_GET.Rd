@@ -2,7 +2,7 @@
 % Please edit documentation in R/virustotal.R
 \name{virustotal_GET}
 \alias{virustotal_GET}
-\title{GET for the Current V3 API}
+\title{Base POST AND GET functions. Not exported.}
 \usage{
 virustotal_GET(path, query = list(), key = Sys.getenv("VirustotalToken"), ...)
 }
@@ -11,7 +11,8 @@ virustotal_GET(path, query = list(), key = Sys.getenv("VirustotalToken"), ...)
 
 \item{query}{query list}
 
-\item{key}{A character string containing Virustotal API Key. The default is retrieved from \code{Sys.getenv("VirustotalToken")}.}
+\item{key}{A character string containing Virustotal API Key.
+Default: \code{Sys.getenv("VirustotalToken")}.}
 
 \item{\dots}{Additional arguments passed to \code{\link[httr]{GET}}.}
 }

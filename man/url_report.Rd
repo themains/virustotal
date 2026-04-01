@@ -34,5 +34,6 @@ url_report("687474703a2f2f7777772e676f6f676c652e636f6d2f")
 \url{https://docs.virustotal.com/reference}
 }
 \seealso{
-\code{\link{set_key}} for setting the API key, \code{\link{scan_url}} for submitting URLs
+\code{\link{set_key}} for setting the API key,
+\code{\link{scan_url}} for submitting URLs
 }

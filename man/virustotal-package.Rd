@@ -7,7 +7,7 @@
 \title{virustotal: Access Virustotal API}
 \description{
 Access virustotal API. See \url{https://www.virustotal.com/}.
-Details about results of calls to the API can be found at \url{https://docs.virustotal.com/reference}.
+Details about API calls: \url{https://docs.virustotal.com/reference}.
 
 You will need credentials to use this application.
 If you haven't already, get the API Key at \url{https://www.virustotal.com/}.
@@ -17,7 +17,6 @@ Useful links:
 \itemize{
   \item \url{https://github.com/themains/virustotal}
   \item \url{https://themains.github.io/virustotal/}
-  \item \url{http://themains.github.io/virustotal/}
   \item Report bugs at \url{https://github.com/themains/virustotal/issues}
 }
 

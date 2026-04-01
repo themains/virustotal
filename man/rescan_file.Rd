@@ -7,7 +7,7 @@
 rescan_file(hash = NULL, ...)
 }
 \arguments{
-\item{hash}{File hash (MD5, SHA1, or SHA256) or file ID. String. Required.}
+\item{hash}{File hash (MD5, SHA1, or SHA256) or file ID. Required.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
@@ -16,7 +16,7 @@ list containing analysis details and ID
 }
 \description{
 Request a new analysis of a file already present in VirusTotal's database.
-Returns an analysis ID that can be used to retrieve the report using \code{\link{file_report}}.
+Returns an analysis ID for use with \code{\link{file_report}}.
 }
 \examples{
 \dontrun{

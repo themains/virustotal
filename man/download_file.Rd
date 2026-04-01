@@ -24,7 +24,7 @@ Download a file from VirusTotal
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-download_file(hash='99017f6eebbac24f351415dd410d522d', 
+download_file(hash='99017f6eebbac24f351415dd410d522d',
               output_path='/tmp/downloaded_file')
 }
 }

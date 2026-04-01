@@ -1,3 +1,36 @@
+# virustotal 0.6.0
+
+## Breaking Changes
+
+* **Removed VirusTotal API v2.0 Support**: Completely removed all v2.0 API functions (`virustotal2_GET()`, `virustotal2_POST()`) and deprecated functions (`add_comments()`). The package now exclusively uses VirusTotal API v3.0.
+
+## New Features
+
+* **Analysis Endpoint**: Added `get_analysis()` to retrieve analysis results by ID.
+
+* **File Behaviour Endpoints**: New functions for sandbox analysis:
+    - `get_file_behaviour_summary()`: Summary of all behaviour reports
+    - `get_file_behaviour_mitre_trees()`: MITRE ATT&CK technique mappings
+    - `get_file_behaviours()`: All behaviour reports for a file
+
+* **Sandbox Report Endpoints**: Access individual sandbox artifacts:
+    - `get_behaviour_report()`: JSON behaviour report
+    - `get_behaviour_html()`: HTML report from sandbox
+    - `get_behaviour_evtx()`: Windows Event Log file
+    - `get_behaviour_pcap()`: Network capture file
+    - `get_behaviour_memdump()`: Memory dump file
+
+## Package Simplification
+
+* **Streamlined Architecture**: Simplified codebase by removing dual API support.
+* **Enhanced Documentation**: Updated all documentation for v3.0-only support.
+
+## Migration Guide
+
+Users upgrading from versions that used v2.0 functions should ensure their code uses the equivalent v3.0 functions.
+
+---
+
 # virustotal 0.5.0
 
 ## Major Updates
