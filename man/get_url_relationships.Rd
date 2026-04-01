@@ -15,9 +15,9 @@ get_url_relationships(
 \arguments{
 \item{url_id}{URL or URL ID from VirusTotal}
 
-\item{relationship}{Type of relationship: "communicating_files", "downloaded_files", "graphs", "last_serving_ip_address", "network_location", "redirecting_urls", "redirects_to", "referrer_urls", "submissions"}
+\item{relationship}{Type of relationship. See VirusTotal docs for options.}
 
-\item{limit}{Number of relationships to retrieve. Integer. Optional. Default is 10.}
+\item{limit}{Number of relationships to retrieve. Optional.}
 
 \item{cursor}{String for pagination. Optional.}
 
@@ -34,7 +34,7 @@ Retrieve relationships for a URL
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-get_url_relationships(url_id='http://www.google.com', 
+get_url_relationships(url_id='http://www.google.com',
                       relationship='communicating_files')
 }
 }

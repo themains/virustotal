@@ -7,7 +7,7 @@
 ip_report(ip = NULL, ...)
 }
 \arguments{
-\item{ip}{a valid IPv4 or IPv6 address; String; Required}
+\item{ip}{a valid IPv4 or IPv6 address. Required.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
@@ -25,7 +25,7 @@ geolocation, ASN information, DNS resolutions, and detected URLs.
 # Before calling the function, set the API key using set_key('api_key_here')
 
 ip_report(ip="8.8.8.8")
-ip_report(ip="2001:4860:4860::8888")  # IPv6 example
+ip_report(ip="2001:4860:4860::8888")
 }
 }
 \references{

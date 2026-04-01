@@ -12,8 +12,7 @@ scan_file(file_path, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}}
 }
 \value{
-A \code{virustotal_file_scan} object containing scan submission results
-with analysis ID and links for tracking the scan progress
+A \code{virustotal_file_scan} object with analysis ID and links
 }
 \description{
 Uploads a file to VirusTotal for malware analysis using the v3 API.
@@ -32,6 +31,7 @@ print(result)
 \url{https://docs.virustotal.com/reference/files-scan}
 }
 \seealso{
-\code{\link{set_key}} for setting the API key, \code{\link{file_report}} for retrieving scan results
+\code{\link{set_key}} for setting the API key,
+\code{\link{file_report}} for retrieving scan results
 }
 \concept{scanning functions}

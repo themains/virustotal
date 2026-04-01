@@ -7,7 +7,7 @@
 rescan_ip(ip = NULL, ...)
 }
 \arguments{
-\item{ip}{IP address to rescan (IPv4 or IPv6). String. Required.}
+\item{ip}{IP address to rescan (IPv4 or IPv6). Required.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
@@ -15,8 +15,8 @@ rescan_ip(ip = NULL, ...)
 list containing analysis details and ID
 }
 \description{
-Request a new analysis of an IP address already present in VirusTotal's database.
-Returns an analysis ID that can be used to retrieve the report using \code{\link{ip_report}}.
+Request a new analysis of an IP address already in VirusTotal's database.
+Returns an analysis ID for use with \code{\link{ip_report}}.
 }
 \examples{
 \dontrun{
@@ -34,5 +34,6 @@ rescan_ip("2001:4860:4860::8888")
 \url{https://docs.virustotal.com/reference}
 }
 \seealso{
-\code{\link{set_key}} for setting the API key, \code{\link{ip_report}} for getting reports
+\code{\link{set_key}} for setting the API key,
+\code{\link{ip_report}} for getting reports
 }

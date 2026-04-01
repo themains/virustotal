@@ -1,9 +1,9 @@
 #' Request rescan of an IP address
 #'
-#' Request a new analysis of an IP address already present in VirusTotal's database.
-#' Returns an analysis ID that can be used to retrieve the report using \code{\link{ip_report}}.
+#' Request a new analysis of an IP address already in VirusTotal's database.
+#' Returns an analysis ID for use with \code{\link{ip_report}}.
 #'
-#' @param ip IP address to rescan (IPv4 or IPv6). String. Required.
+#' @param ip IP address to rescan (IPv4 or IPv6). Required.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #'
 #' @return list containing analysis details and ID
@@ -12,7 +12,8 @@
 #'
 #' @references \url{https://docs.virustotal.com/reference}
 #'
-#' @seealso \code{\link{set_key}} for setting the API key, \code{\link{ip_report}} for getting reports
+#' @seealso \code{\link{set_key}} for setting the API key,
+#'   \code{\link{ip_report}} for getting reports
 #'
 #' @examples \dontrun{
 #'
@@ -43,13 +44,11 @@ rescan_ip <- function(ip = NULL, ...) {
   structure(res, class = c("virustotal_response", "list"))
 }
 
-# Helper function to validate IP addresses
 is_valid_ip <- function(ip) {
-  # Simple regex for IPv4
-  ipv4_pattern <- "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+  ipv4 <- "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}"
+  ipv4 <- paste0(ipv4, "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
 
-  # Simple regex for IPv6 (basic validation)
-  ipv6_pattern <- "^([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}$|^::$|^::1$|^([0-9a-fA-F]{1,4}:){1,6}:$|^::[0-9a-fA-F]{1,4}$|^([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}$"
+  ipv6 <- "^([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}$"
 
-  grepl(ipv4_pattern, ip) || grepl(ipv6_pattern, ip)
+  grepl(ipv4, ip) || grepl(ipv6, ip)
 }

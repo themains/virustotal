@@ -1,9 +1,9 @@
 #' Request rescan of a domain
 #'
-#' Request a new analysis of a domain already present in VirusTotal's database.
-#' Returns an analysis ID that can be used to retrieve the report using \code{\link{domain_report}}.
+#' Request a new analysis of a domain already in VirusTotal's database.
+#' Returns an analysis ID for use with \code{\link{domain_report}}.
 #'
-#' @param domain Domain name to rescan. String. Required.
+#' @param domain Domain name to rescan. Required.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #'
 #' @return list containing analysis details and ID
@@ -12,7 +12,8 @@
 #'
 #' @references \url{https://docs.virustotal.com/reference}
 #'
-#' @seealso \code{\link{set_key}} for setting the API key, \code{\link{domain_report}} for getting reports
+#' @seealso \code{\link{set_key}} for setting the API key,
+#'   \code{\link{domain_report}} for getting reports
 #'
 #' @examples \dontrun{
 #'

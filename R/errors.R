@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Custom error classes for structured error handling in the virustotal package.
-#' 
+#'
 #' @name virustotal-errors
 #' @keywords internal
 #' @family error handling
@@ -19,7 +19,8 @@ NULL
 #' @keywords internal
 #' @export
 #' @family error handling
-virustotal_error <- function(message, status_code = NULL, response = NULL, call = sys.call(-1)) {
+virustotal_error <- function(message, status_code = NULL, response = NULL,
+                             call = sys.call(-1)) {
   structure(
     list(
       message = message,

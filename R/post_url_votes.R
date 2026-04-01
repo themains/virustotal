@@ -33,9 +33,10 @@ post_url_votes <- function(url_id = NULL, verdict = NULL, ...) {
     url_id <- gsub("=+$", "", url_id)  # Remove padding
   }
 
+  vote_body <- list(data = list(type = "vote",
+                                 attributes = list(verdict = verdict)))
   res <- virustotal_POST(path = paste0("urls/", url_id, "/votes"),
-                        body = list(data = list(type = "vote",
-                                               attributes = list(verdict = verdict))), ...)
+                        body = vote_body, ...)
 
   res
 }

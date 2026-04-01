@@ -12,7 +12,8 @@
 #'
 #' @references \url{https://docs.virustotal.com/reference}
 #'
-#' @seealso \code{\link{set_key}} for setting the API key, \code{\link{scan_url}} for submitting URLs
+#' @seealso \code{\link{set_key}} for setting the API key,
+#'   \code{\link{scan_url}} for submitting URLs
 #'
 #' @examples \dontrun{
 #'

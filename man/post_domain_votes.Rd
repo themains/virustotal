@@ -7,9 +7,9 @@
 post_domain_votes(domain = NULL, vote = NULL, ...)
 }
 \arguments{
-\item{domain}{domain name. String. Required.}
+\item{domain}{domain name. Required.}
 
-\item{vote}{vote. String. Required.}
+\item{vote}{vote. Required.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
@@ -23,7 +23,7 @@ Add a vote for a hostname or domain
 \dontrun{
 
 # Before calling the function, set the API key using set_key('api_key_here')
-   
+
 post_domain_votes("http://google.com", vote = "malicious")
 }
 }

@@ -189,16 +189,17 @@ print.virustotal_domain_report <- function(x, ...) {
 summary.virustotal_response <- function(object, ...) {
   print(object)
 
-  if (inherits(object, "virustotal_file_report") && !is.null(object$data$attributes$last_analysis_results)) {
-    results <- object$data$attributes$last_analysis_results
+  results_attr <- object$data$attributes$last_analysis_results
+  if (inherits(object, "virustotal_file_report") && !is.null(results_attr)) {
+    results <- results_attr
 
-    # Show top detections
     detections <- sapply(results, function(x) x$category %||% "undetected")
     malicious <- names(detections[detections == "malicious"])
 
     if (length(malicious) > 0) {
       cat("Engines detecting as malicious:\n")
-      cat(paste("  -", malicious[1:min(10, length(malicious))]), sep = "\n")
+      n_show <- min(10, length(malicious))
+      cat(paste("  -", malicious[seq_len(n_show)]), sep = "\n")
       if (length(malicious) > 10) {
         cat(sprintf("  ... and %d more\n", length(malicious) - 10))
       }

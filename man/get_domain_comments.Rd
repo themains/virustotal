@@ -4,7 +4,7 @@
 \alias{get_domain_comments}
 \title{Retrieve comments for an Internet domain}
 \usage{
-get_domain_comments(domain = NULL, limit = limit, cursor = cursor, ...)
+get_domain_comments(domain = NULL, limit = NULL, cursor = NULL, ...)
 }
 \arguments{
 \item{domain}{domain name. String. Required.}
@@ -26,7 +26,7 @@ Retrieve comments for an Internet domain
 \dontrun{
 
 # Before calling the function, set the API key using set_key('api_key_here')
-   
+
 get_domain_comments("http://www.google.com")
 get_domain_comments("http://www.goodsfwrfw.com") # Domain not found
 }

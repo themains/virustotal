@@ -1,8 +1,7 @@
 #' Add a comment to an IP address
 #'
-#'
-#' @param ip IP address. String. Required.
-#' @param comment Comment. String. Required.
+#' @param ip IP address. Required.
+#' @param comment Comment. Required.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #'
 #' @return named list
@@ -24,10 +23,15 @@ post_ip_comments <- function(ip = NULL, comment = NULL, ...) {
     assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
     assert_character(comment, len = 1, any.missing = FALSE, min.chars = 1)
 
-	comment_r = list("data" = list("type" = "comment", "attributes" = list("text" = comment)))
+    comment_body <- list(
+      data = list(
+        type = "comment",
+        attributes = list(text = comment)
+      )
+    )
 
-    res   <- virustotal_POST(path = paste0("ip_addresses/", ip, "/comments"),
-                             body  = comment_r,...)
+    res <- virustotal_POST(path = paste0("ip_addresses/", ip, "/comments"),
+                           body = comment_body, ...)
 
     res
 }

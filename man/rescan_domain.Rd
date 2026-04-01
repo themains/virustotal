@@ -7,7 +7,7 @@
 rescan_domain(domain = NULL, ...)
 }
 \arguments{
-\item{domain}{Domain name to rescan. String. Required.}
+\item{domain}{Domain name to rescan. Required.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
@@ -15,8 +15,8 @@ rescan_domain(domain = NULL, ...)
 list containing analysis details and ID
 }
 \description{
-Request a new analysis of a domain already present in VirusTotal's database.
-Returns an analysis ID that can be used to retrieve the report using \code{\link{domain_report}}.
+Request a new analysis of a domain already in VirusTotal's database.
+Returns an analysis ID for use with \code{\link{domain_report}}.
 }
 \examples{
 \dontrun{
@@ -31,5 +31,6 @@ rescan_domain("google.com")
 \url{https://docs.virustotal.com/reference}
 }
 \seealso{
-\code{\link{set_key}} for setting the API key, \code{\link{domain_report}} for getting reports
+\code{\link{set_key}} for setting the API key,
+\code{\link{domain_report}} for getting reports
 }

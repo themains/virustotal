@@ -5,15 +5,15 @@
 #' @param file_path Required; Path to the file to be scanned
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}
 #'
-#' @return A \code{virustotal_file_scan} object containing scan submission results
-#'   with analysis ID and links for tracking the scan progress
+#' @return A \code{virustotal_file_scan} object with analysis ID and links
 #'
 #' @export
 #' @family scanning functions
 #'
 #' @references \url{https://docs.virustotal.com/reference/files-scan}
 #'
-#' @seealso \code{\link{set_key}} for setting the API key, \code{\link{file_report}} for retrieving scan results
+#' @seealso \code{\link{set_key}} for setting the API key,
+#'   \code{\link{file_report}} for retrieving scan results
 #'
 #' @examples \dontrun{
 #' # Set API key first

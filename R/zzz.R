@@ -6,18 +6,16 @@ NULL
 
 #' @importFrom utils packageDescription
 .onLoad <- function(libname, pkgname) {
-  # Initialize rate limiting state when package loads
   init_rate_limit()
-  
-  # Optionally set a default API key if environment variable exists
-  # (but don't override if already set)
-  if (Sys.getenv("VirustotalToken") == "" && Sys.getenv("VIRUSTOTAL_API_KEY") != "") {
-    Sys.setenv(VirustotalToken = Sys.getenv("VIRUSTOTAL_API_KEY"))
+
+  vt_token <- Sys.getenv("VirustotalToken")
+  vt_api_key <- Sys.getenv("VIRUSTOTAL_API_KEY")
+  if (vt_token == "" && vt_api_key != "") {
+    Sys.setenv(VirustotalToken = vt_api_key)
   }
 }
 
 .onUnload <- function(libpath) {
-  # Clean up rate limiting state
   if (exists(".virustotal_state", envir = asNamespace("virustotal"))) {
     rm(list = ls(.virustotal_state), envir = .virustotal_state)
   }

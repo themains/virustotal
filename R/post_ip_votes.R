@@ -1,8 +1,7 @@
-#' Add a vote for a IP address
+#' Add a vote for an IP address
 #'
-#'
-#' @param ip IP address. String. Required.
-#' @param vote vote. String. Required.
+#' @param ip IP address. Required.
+#' @param vote vote. Required.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #'
 #' @return named list
@@ -24,10 +23,15 @@ post_ip_votes <- function(ip = NULL, vote = NULL, ...) {
     assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
     assert_character(vote, len = 1, any.missing = FALSE, min.chars = 1)
 
-	vote_r = list("data" = list("type" = "vote", "attributes" = list("verdict" = vote)))
+    vote_body <- list(
+      data = list(
+        type = "vote",
+        attributes = list(verdict = vote)
+      )
+    )
 
-    res   <- virustotal_POST(path = paste0("ip_addresses/", ip, "/votes"),
-                             body  = vote_r,...)
+    res <- virustotal_POST(path = paste0("ip_addresses/", ip, "/votes"),
+                            body = vote_body, ...)
 
     res
 }

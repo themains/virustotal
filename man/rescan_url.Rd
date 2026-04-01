@@ -7,7 +7,7 @@
 rescan_url(url_id = NULL, ...)
 }
 \arguments{
-\item{url_id}{URL or URL ID (base64 encoded URL without padding). String. Required.}
+\item{url_id}{URL or URL ID (base64 encoded URL without padding). Required.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
@@ -16,7 +16,7 @@ list containing analysis details and ID
 }
 \description{
 Request a new analysis of a URL already present in VirusTotal's database.
-Returns an analysis ID that can be used to retrieve the report using \code{\link{url_report}}.
+Returns an analysis ID for use with \code{\link{url_report}}.
 }
 \examples{
 \dontrun{
@@ -26,7 +26,7 @@ Returns an analysis ID that can be used to retrieve the report using \code{\link
 # Request rescan using URL
 rescan_url("http://www.google.com")
 
-# Request rescan using URL ID  
+# Request rescan using URL ID
 rescan_url("687474703a2f2f7777772e676f6f676c652e636f6d2f")
 }
 }
@@ -34,5 +34,6 @@ rescan_url("687474703a2f2f7777772e676f6f676c652e636f6d2f")
 \url{https://docs.virustotal.com/reference}
 }
 \seealso{
-\code{\link{set_key}} for setting the API key, \code{\link{url_report}} for getting reports
+\code{\link{set_key}} for setting the API key,
+\code{\link{url_report}} for getting reports
 }

@@ -7,9 +7,9 @@
 post_ip_comments(ip = NULL, comment = NULL, ...)
 }
 \arguments{
-\item{ip}{IP address. String. Required.}
+\item{ip}{IP address. Required.}
 
-\item{comment}{Comment. String. Required.}
+\item{comment}{Comment. Required.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
@@ -23,7 +23,7 @@ Add a comment to an IP address
 \dontrun{
 
 # Before calling the function, set the API key using set_key('api_key_here')
-   
+
 post_ip_comments(ip = "64.233.160.0", comment = "test")
 }
 }

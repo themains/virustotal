@@ -9,7 +9,7 @@ get_url_comments(url_id = NULL, limit = NULL, cursor = NULL, ...)
 \arguments{
 \item{url_id}{URL or URL ID from VirusTotal}
 
-\item{limit}{Number of comments to retrieve. Integer. Optional. Default is 10.}
+\item{limit}{Number of comments to retrieve. Optional.}
 
 \item{cursor}{String for pagination. Optional.}
 

@@ -15,7 +15,7 @@ NULL
 #' and ensure safe file operations.
 #'
 #' @param file_path Character string representing a file path
-#' @param allow_relative Logical. Whether to allow relative paths (default: FALSE)
+#' @param allow_relative Logical. Allow relative paths. Default: FALSE.
 #' @return Sanitized file path or throws error if invalid
 #' @keywords internal
 #' @family security
@@ -145,7 +145,7 @@ sanitize_hash <- function(hash) {
   valid_lengths <- c(32, 40, 64)
   if (!nchar(hash) %in% valid_lengths && nchar(hash) < 32) {
     stop(virustotal_validation_error(
-      message = sprintf("Hash length (%d) does not match MD5 (32), SHA1 (40), or SHA256 (64)", nchar(hash)),
+      message = sprintf("Hash length (%d) invalid", nchar(hash)),
       parameter = "hash",
       value = hash
     ))
@@ -199,7 +199,7 @@ sanitize_domain <- function(domain) {
     ))
   }
 
-  # Note: Allow private domains - users may want to analyze them in enterprise environments
+  # Allow private domains for enterprise environments
 
   return(domain)
 }
@@ -233,7 +233,7 @@ sanitize_ip <- function(ip) {
     ))
   }
 
-  # Note: Allow private/reserved IPs - users may want to analyze them in enterprise environments
+  # Allow private/reserved IPs for enterprise environments
 
   return(ip)
 }

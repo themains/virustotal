@@ -45,13 +45,13 @@ validate_input <- function(input) {
 is_safe_environment <- function() {
   # Check if we're in an interactive session
   if (!interactive()) {
-    warning("Running in non-interactive mode. Be cautious with file operations.")
+    warning("Running in non-interactive mode. Be cautious with files.")
   }
 
   # Check for common CI environments where we should be extra careful
   ci_vars <- c("CI", "GITHUB_ACTIONS", "TRAVIS", "APPVEYOR", "GITLAB_CI")
   if (any(Sys.getenv(ci_vars) != "")) {
-    message("Detected CI environment. Some functions may be disabled for security.")
+    message("CI environment detected. Some functions may be disabled.")
     return(FALSE)
   }
 

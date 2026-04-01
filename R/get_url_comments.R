@@ -1,7 +1,7 @@
 #' Retrieve comments for a URL
 #'
 #' @param url_id URL or URL ID from VirusTotal
-#' @param limit Number of comments to retrieve. Integer. Optional. Default is 10.
+#' @param limit Number of comments to retrieve. Optional.
 #' @param cursor String for pagination. Optional.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #'

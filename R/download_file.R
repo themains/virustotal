@@ -3,20 +3,20 @@
 #' @param hash File hash (MD5, SHA1, or SHA256)
 #' @param output_path Local path to save the downloaded file. Optional.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
-#' 
+#'
 #' @return Raw file content or saves file to specified path
-#'  
+#'
 #' @export
-#' 
+#'
 #' @references \url{https://docs.virustotal.com/reference}
-#' 
+#'
 #' @seealso \code{\link{set_key}} for setting the API key
 #'
 #' @examples \dontrun{
-#' 
+#'
 #' # Before calling the function, set the API key using set_key('api_key_here')
-#' 
-#' download_file(hash='99017f6eebbac24f351415dd410d522d', 
+#'
+#' download_file(hash='99017f6eebbac24f351415dd410d522d',
 #'               output_path='/tmp/downloaded_file')
 #' }
 
@@ -24,7 +24,10 @@ download_file <- function(hash = NULL, output_path = NULL, ...) {
 
   assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
 
-  # Note: This endpoint returns raw file content, not JSON
+  if (!is.null(output_path)) {
+    assert_character(output_path, len = 1, any.missing = FALSE, min.chars = 1)
+  }
+
   res <- GET("https://www.virustotal.com/",
              path = paste0("api/v3/files/", hash, "/download"),
              add_headers("x-apikey" = Sys.getenv("VirustotalToken")), ...)

@@ -31,9 +31,10 @@ post_url_comments <- function(url_id = NULL, comment = NULL, ...) {
     url_id <- gsub("=+$", "", url_id)  # Remove padding
   }
 
+  comment_body <- list(data = list(type = "comment",
+                                    attributes = list(text = comment)))
   res <- virustotal_POST(path = paste0("urls/", url_id, "/comments"),
-                        body = list(data = list(type = "comment",
-                                               attributes = list(text = comment))), ...)
+                        body = comment_body, ...)
 
   res
 }

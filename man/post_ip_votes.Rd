@@ -2,14 +2,14 @@
 % Please edit documentation in R/post_ip_votes.R
 \name{post_ip_votes}
 \alias{post_ip_votes}
-\title{Add a vote for a IP address}
+\title{Add a vote for an IP address}
 \usage{
 post_ip_votes(ip = NULL, vote = NULL, ...)
 }
 \arguments{
-\item{ip}{IP address. String. Required.}
+\item{ip}{IP address. Required.}
 
-\item{vote}{vote. String. Required.}
+\item{vote}{vote. Required.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }
@@ -17,13 +17,13 @@ post_ip_votes(ip = NULL, vote = NULL, ...)
 named list
 }
 \description{
-Add a vote for a IP address
+Add a vote for an IP address
 }
 \examples{
 \dontrun{
 
 # Before calling the function, set the API key using set_key('api_key_here')
-   
+
 post_ip_votes(ip = "64.233.160.0", vote = "malicious")
 }
 }

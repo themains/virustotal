@@ -7,9 +7,9 @@
 get_ip_info(ip = NULL, limit = NULL, cursor = NULL, ...)
 }
 \arguments{
-\item{ip}{IP address. String. Required.}
+\item{ip}{IP address. Required.}
 
-\item{limit}{Number of entries. Integer. Optional.  Default is 10.}
+\item{limit}{Number of entries. Optional.}
 
 \item{cursor}{String. Optional.}
 
@@ -19,14 +19,13 @@ get_ip_info(ip = NULL, limit = NULL, cursor = NULL, ...)
 named list
 }
 \description{
-Retrieves report on a given domain, including passive DNS, urls detected by at least one url scanner.
-Gives category of the domain from bitdefender.
+Retrieves report on a given IP address.
 }
 \examples{
 \dontrun{
 
 # Before calling the function, set the API key using set_key('api_key_here')
-   
+
 get_ip_info("64.233.160.0")
 }
 }
