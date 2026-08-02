@@ -8,10 +8,10 @@ Modern rate limiting implementation that properly manages API request limits.
 VirusTotal public API allows 4 requests per minute.
 }
 \seealso{
-Other rate limiting: 
-\code{\link{get_rate_limit_status}()},
-\code{\link{rate_limit}()},
-\code{\link{reset_rate_limit}()}
+Other rate limiting:
+\code{\link[=get_rate_limit_status]{get_rate_limit_status()}},
+\code{\link[=rate_limit]{rate_limit()}},
+\code{\link[=reset_rate_limit]{reset_rate_limit()}}
 }
 \concept{rate limiting}
 \keyword{internal}

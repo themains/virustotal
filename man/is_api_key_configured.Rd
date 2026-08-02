@@ -13,12 +13,12 @@ Logical indicating if API key is configured
 Verifies that the API key is set and appears to be valid format.
 }
 \seealso{
-Other security: 
-\code{\link{sanitize_domain}()},
-\code{\link{sanitize_file_path}()},
-\code{\link{sanitize_hash}()},
-\code{\link{sanitize_ip}()},
-\code{\link{sanitize_url}()},
+Other security:
+\code{\link[=sanitize_domain]{sanitize_domain()}},
+\code{\link[=sanitize_file_path]{sanitize_file_path()}},
+\code{\link[=sanitize_hash]{sanitize_hash()}},
+\code{\link[=sanitize_ip]{sanitize_ip()}},
+\code{\link[=sanitize_url]{sanitize_url()}},
 \code{\link{security-utilities}}
 }
 \concept{security}

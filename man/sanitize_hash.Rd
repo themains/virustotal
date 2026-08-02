@@ -17,12 +17,12 @@ Validates hash inputs to ensure they conform to expected formats
 (MD5, SHA1, SHA256) and contain only valid hexadecimal characters.
 }
 \seealso{
-Other security: 
-\code{\link{is_api_key_configured}()},
-\code{\link{sanitize_domain}()},
-\code{\link{sanitize_file_path}()},
-\code{\link{sanitize_ip}()},
-\code{\link{sanitize_url}()},
+Other security:
+\code{\link[=is_api_key_configured]{is_api_key_configured()}},
+\code{\link[=sanitize_domain]{sanitize_domain()}},
+\code{\link[=sanitize_file_path]{sanitize_file_path()}},
+\code{\link[=sanitize_ip]{sanitize_ip()}},
+\code{\link[=sanitize_url]{sanitize_url()}},
 \code{\link{security-utilities}}
 }
 \concept{security}

@@ -29,8 +29,7 @@ post_url_votes <- function(url_id = NULL, verdict = NULL, ...) {
 
   # If it looks like a URL, encode it to base64 (VirusTotal v3 requirement)
   if (grepl("^https?://", url_id)) {
-    url_id <- base64encode(charToRaw(url_id))
-    url_id <- gsub("=+$", "", url_id)  # Remove padding
+    url_id <- vt_url_id(url_id)
   }
 
   vote_body <- list(data = list(type = "vote",

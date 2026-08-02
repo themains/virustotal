@@ -17,12 +17,12 @@ Validates and sanitizes URLs to prevent malicious inputs while preserving
 legitimate URLs for analysis.
 }
 \seealso{
-Other security: 
-\code{\link{is_api_key_configured}()},
-\code{\link{sanitize_domain}()},
-\code{\link{sanitize_file_path}()},
-\code{\link{sanitize_hash}()},
-\code{\link{sanitize_ip}()},
+Other security:
+\code{\link[=is_api_key_configured]{is_api_key_configured()}},
+\code{\link[=sanitize_domain]{sanitize_domain()}},
+\code{\link[=sanitize_file_path]{sanitize_file_path()}},
+\code{\link[=sanitize_hash]{sanitize_hash()}},
+\code{\link[=sanitize_ip]{sanitize_ip()}},
 \code{\link{security-utilities}}
 }
 \concept{security}

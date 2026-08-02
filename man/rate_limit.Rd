@@ -17,10 +17,10 @@ Uses a sliding window approach to track requests and enforce limits.
 This replaces the old environment variable-based approach.
 }
 \seealso{
-Other rate limiting: 
-\code{\link{get_rate_limit_status}()},
+Other rate limiting:
+\code{\link[=get_rate_limit_status]{get_rate_limit_status()}},
 \code{\link{rate-limiting}},
-\code{\link{reset_rate_limit}()}
+\code{\link[=reset_rate_limit]{reset_rate_limit()}}
 }
 \concept{rate limiting}
 \keyword{internal}

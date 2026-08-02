@@ -43,6 +43,7 @@ scan_file <- function(file_path, ...) {
     res <- virustotal_POST(
       path = "files",
       body = list(file = upload_file(file_path)),
+      encode = "multipart",
       ...
     )
 
