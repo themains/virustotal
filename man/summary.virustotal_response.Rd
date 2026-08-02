@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments (unused)}
 }
+\value{
+The object, invisibly. Called for the side effect of printing a summary of the API response.
+}
 \description{
 Summary method for VirusTotal responses
 }

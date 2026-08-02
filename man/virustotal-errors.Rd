@@ -7,12 +7,12 @@
 Custom error classes for structured error handling in the virustotal package.
 }
 \seealso{
-Other error handling: 
-\code{\link{virustotal_auth_error}()},
-\code{\link{virustotal_check}()},
-\code{\link{virustotal_error}()},
-\code{\link{virustotal_rate_limit_error}()},
-\code{\link{virustotal_validation_error}()}
+Other error handling:
+\code{\link[=virustotal_auth_error]{virustotal_auth_error()}},
+\code{\link[=virustotal_check]{virustotal_check()}},
+\code{\link[=virustotal_error]{virustotal_error()}},
+\code{\link[=virustotal_rate_limit_error]{virustotal_rate_limit_error()}},
+\code{\link[=virustotal_validation_error]{virustotal_validation_error()}}
 }
 \concept{error handling}
 \keyword{internal}

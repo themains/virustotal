@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments (unused)}
 }
+\value{
+The object, invisibly. Called for the side effect of printing the error.
+}
 \description{
 Print method for VirusTotal errors
 }

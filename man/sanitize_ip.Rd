@@ -17,12 +17,12 @@ Validates IP addresses (IPv4 and IPv6) and checks for private ranges
 that shouldn't be submitted to VirusTotal.
 }
 \seealso{
-Other security: 
-\code{\link{is_api_key_configured}()},
-\code{\link{sanitize_domain}()},
-\code{\link{sanitize_file_path}()},
-\code{\link{sanitize_hash}()},
-\code{\link{sanitize_url}()},
+Other security:
+\code{\link[=is_api_key_configured]{is_api_key_configured()}},
+\code{\link[=sanitize_domain]{sanitize_domain()}},
+\code{\link[=sanitize_file_path]{sanitize_file_path()}},
+\code{\link[=sanitize_hash]{sanitize_hash()}},
+\code{\link[=sanitize_url]{sanitize_url()}},
 \code{\link{security-utilities}}
 }
 \concept{security}

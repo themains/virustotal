@@ -10,10 +10,10 @@ reset_rate_limit()
 Clears all rate limiting history. Useful for testing.
 }
 \seealso{
-Other rate limiting: 
-\code{\link{get_rate_limit_status}()},
+Other rate limiting:
+\code{\link[=get_rate_limit_status]{get_rate_limit_status()}},
 \code{\link{rate-limiting}},
-\code{\link{rate_limit}()}
+\code{\link[=rate_limit]{rate_limit()}}
 }
 \concept{rate limiting}
 \keyword{internal}

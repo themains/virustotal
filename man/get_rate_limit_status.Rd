@@ -13,10 +13,10 @@ List with current status information
 Get current rate limit status
 }
 \seealso{
-Other rate limiting: 
+Other rate limiting:
 \code{\link{rate-limiting}},
-\code{\link{rate_limit}()},
-\code{\link{reset_rate_limit}()}
+\code{\link[=rate_limit]{rate_limit()}},
+\code{\link[=reset_rate_limit]{reset_rate_limit()}}
 }
 \concept{rate limiting}
 \keyword{internal}

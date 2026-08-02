@@ -27,7 +27,7 @@ get_domain_votes <- function(domain = NULL, limit = NULL, cursor = NULL, ...) {
     # Validate domain using checkmate
     assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
 
-    domain <- gsub("^http://", "", domain)
+    domain <- gsub("^http://|^https://", "", domain)
 
     res   <- virustotal_GET(path = paste0("domains/", domain, "/votes"),
                                              query = list(limit = limit, cursor = cursor), ...)

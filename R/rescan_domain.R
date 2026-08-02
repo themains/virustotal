@@ -35,7 +35,7 @@ rescan_domain <- function(domain = NULL, ...) {
   domain <- gsub("^www\\.", "", domain)
   domain <- gsub("/.*$", "", domain)
 
-  res <- virustotal_POST(path = paste0("domains/", domain, "/rescan"), ...)
+  res <- virustotal_POST(path = paste0("domains/", domain, "/analyse"), ...)
 
   # Return structured response
   structure(res, class = c("virustotal_response", "list"))

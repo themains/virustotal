@@ -41,8 +41,7 @@ get_url_relationships <- function(url_id = NULL, relationship = NULL,
   }
 
   if (grepl("^https?://", url_id)) {
-    url_id <- base64encode(charToRaw(url_id))
-    url_id <- gsub("=+$", "", url_id)
+    url_id <- vt_url_id(url_id)
   }
 
   path <- paste0("urls/", url_id, "/relationships/", relationship)

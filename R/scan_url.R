@@ -25,7 +25,8 @@ scan_url <- function(url = NULL, ...) {
 
   assert_character(url, len = 1, any.missing = FALSE, min.chars = 1)
 
-  res <- virustotal_POST(path = "urls", body = list(url = url), ...)
+  res <- virustotal_POST(path = "urls", body = list(url = url),
+                          encode = "form", ...)
 
   res
 }

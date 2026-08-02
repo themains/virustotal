@@ -61,12 +61,15 @@ virustotal_GET <- function(path, query = list(),
 #' @param query query list
 #' @param key A character string containing Virustotal API Key.
 #'   Default: \code{Sys.getenv("VirustotalToken")}.
+#' @param encode Body encoding, passed to \code{\link[httr]{POST}}. One of
+#'   \code{"json"} (the default), \code{"form"} or \code{"multipart"}.
 #' @param \dots Additional arguments passed to \code{\link[httr]{POST}}.
 #' @return list
 #' @keywords internal
 
 virustotal_POST <- function(path, body = NULL, query = list(),
-                           key = Sys.getenv("VirustotalToken"), ...) {
+                           key = Sys.getenv("VirustotalToken"),
+                           encode = "json", ...) {
 
   if (identical(key, "")) {
         stop("Please set application key via set_key(key='key')).\n")
@@ -77,7 +80,7 @@ virustotal_POST <- function(path, body = NULL, query = list(),
   res <- POST("https://www.virustotal.com/",
               path = paste0("api/v3/", path),
               body = body,
-              encode = "json",
+              encode = encode,
               query = query,
               add_headers("x-apikey" = key), ...)
 
@@ -104,7 +107,14 @@ virustotal_check <- function(req) {
     retry_after <- tryCatch({
       # Check if this is a real httr response or a mock object
       if (inherits(req, "response")) {
-        as.numeric(headers(req)[["retry-after"]]) %||% 60
+        # An absent header yields NULL, and as.numeric(NULL) is numeric(0),
+        # which %||% does not treat as missing. Test the header itself.
+        hdr <- headers(req)[["retry-after"]]
+        if (is.null(hdr) || !nzchar(hdr) || is.na(suppressWarnings(as.numeric(hdr)))) {
+          60
+        } else {
+          as.numeric(hdr)
+        }
       } else {
         # For test mock objects, use a default
         60
@@ -157,5 +167,19 @@ virustotal_check <- function(req) {
 
 # Helper operator for default values
 `%||%` <- function(x, y) if (is.null(x)) y else x
+
+#' Encode a URL as a VirusTotal v3 URL identifier
+#'
+#' The API identifies a URL by its unpadded URL-safe base64 encoding, i.e.
+#' \code{base64.urlsafe_b64encode(url).strip("=")}. The standard base64
+#' alphabet is not interchangeable: a \code{/} in the identifier would be read
+#' as a path separator and the request would address no endpoint.
+#'
+#' @param url A character string containing the URL.
+#' @return A character string containing the URL identifier.
+#' @keywords internal
+vt_url_id <- function(url) {
+  chartr("+/", "-_", gsub("=+$", "", base64encode(charToRaw(url))))
+}
 
 # The rate limiting function is now implemented in rate_limiting.R

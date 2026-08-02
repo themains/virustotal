@@ -8,12 +8,12 @@ S3 classes to provide structured responses and better user experience
 when working with VirusTotal API results.
 }
 \seealso{
-Other response classes: 
-\code{\link{virustotal_domain_report}()},
-\code{\link{virustotal_file_report}()},
-\code{\link{virustotal_file_scan}()},
-\code{\link{virustotal_ip_report}()},
-\code{\link{virustotal_url_scan}()}
+Other response classes:
+\code{\link[=virustotal_domain_report]{virustotal_domain_report()}},
+\code{\link[=virustotal_file_report]{virustotal_file_report()}},
+\code{\link[=virustotal_file_scan]{virustotal_file_scan()}},
+\code{\link[=virustotal_ip_report]{virustotal_ip_report()}},
+\code{\link[=virustotal_url_scan]{virustotal_url_scan()}}
 }
 \concept{response classes}
 \keyword{internal}

@@ -104,6 +104,8 @@ virustotal_validation_error <- function(message, parameter = NULL, value = NULL,
 #' @param x A virustotal_error object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
+#' @return The object, invisibly. Called for the side effect of printing the error.
+#' @export
 print.virustotal_error <- function(x, ...) {
   cat("VirusTotal API Error: ", x$message, "\n", sep = "")
   if (!is.null(x$status_code)) {
