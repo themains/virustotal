@@ -33,7 +33,7 @@ get_behaviour_pcap <- function(sandbox_id = NULL, output_path = NULL, ...) {
     assert_character(output_path, len = 1, any.missing = FALSE, min.chars = 1)
   }
 
-  raw_body <- virustotal_GET_raw(paste0("file_behaviours/", sandbox_id, "/pcap"))
+  raw_body <- virustotal_GET_raw(paste0("file_behaviours/", sandbox_id, "/pcap"), ...)
 
   if (!is.null(output_path)) {
     writeBin(raw_body, output_path)

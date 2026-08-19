@@ -29,7 +29,7 @@ download_file <- function(hash = NULL, output_path = NULL, ...) {
     assert_character(output_path, len = 1, any.missing = FALSE, min.chars = 1)
   }
 
-  raw_body <- virustotal_GET_raw(paste0("files/", hash, "/download"))
+  raw_body <- virustotal_GET_raw(paste0("files/", hash, "/download"), ...)
 
   if (!is.null(output_path)) {
     writeBin(raw_body, output_path)

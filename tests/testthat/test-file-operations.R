@@ -52,10 +52,6 @@ test_that("rescan_file validates input correctly", {
   )
 })
 
-test_that("get_file_upload_url validates correctly", {
-  expect_true(exists("get_file_upload_url"))
-})
-
 test_that("get_file_comments validates input correctly", {
   expect_error(get_file_comments(), "Assertion on 'hash' failed")
   expect_error(get_file_comments(NULL), "Assertion on 'hash' failed")

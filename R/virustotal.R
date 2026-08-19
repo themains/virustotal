@@ -60,7 +60,15 @@ vt_request <- function(path, key = vt_key()) {
   req <- req_retry(
     req,
     max_tries = getOption("virustotal.max_tries", 3),
-    retry_on_failure = FALSE
+    retry_on_failure = FALSE,
+    # Retry-After is the server's number and can be an hour. Honor it, but
+    # cap it: blocking an interactive session for 3600s to avoid raising a
+    # rate-limit error the caller can already handle is not a good trade.
+    after = function(resp) {
+      ra <- suppressWarnings(as.numeric(resp_header(resp, "retry-after")))
+      if (!length(ra) || is.na(ra)) return(NULL)
+      min(ra, getOption("virustotal.max_retry_wait", 60))
+    }
   )
   if (isTRUE(getOption("virustotal.throttle", TRUE))) {
     req <- req_throttle(
@@ -74,10 +82,71 @@ vt_request <- function(path, key = vt_key()) {
 }
 
 vt_perform <- function(req) {
-  resp <- req_perform(req)
-  virustotal_check(resp)
+  # A transport failure (DNS, refused connection, timeout) is raised by httr2
+  # as httr2_failure before any status handling runs. Re-raise it in the
+  # package's own hierarchy so tryCatch(virustotal_error = ) means what the
+  # documentation says it means.
+  resp <- tryCatch(
+    req_perform(req),
+    httr2_failure = function(cnd) {
+      stop(virustotal_error(
+        message = paste("Could not reach VirusTotal:", conditionMessage(cnd))
+      ))
+    }
+  )
+  # Recorded before the status check: a 404 or 429 reached the API and spent
+  # quota, so the usage log has to count it.
   record_request()
+  virustotal_check(resp)
   resp
+}
+
+# resp_body_string() aborts on a zero-length body, and fromJSON() aborts on
+# anything that is not JSON -- both as raw httr2/jsonlite conditions carrying
+# no status code. A 200 interstitial from a CDN during an incident is the
+# realistic case.
+vt_body_json <- function(resp) {
+  # Force before the tryCatch below. Callers pass vt_perform(req), so `resp`
+  # arrives as a promise: forcing it inside the tryCatch let that handler
+  # swallow the virustotal_* condition the request itself raised, and the
+  # next use of `resp` re-forced the promise and fired a second request.
+  force(resp)
+  txt <- tryCatch(resp_body_string(resp), error = function(e) "")
+  if (!nzchar(trimws(txt))) {
+    stop(virustotal_error(
+      message = "VirusTotal returned an empty response body.",
+      status_code = resp_status(resp),
+      response = resp
+    ))
+  }
+  tryCatch(
+    fromJSON(txt, simplifyVector = FALSE),
+    error = function(e) {
+      stop(virustotal_error(
+        message = paste(
+          "VirusTotal returned a body that is not JSON:", conditionMessage(e)
+        ),
+        status_code = resp_status(resp),
+        response = resp
+      ))
+    }
+  )
+}
+
+# The ... that endpoints still accept reaches no HTTP call any more. Silently
+# dropping it turns a typo -- get_file_comments(hash, cursors = "x") -- into a
+# caller that paginates page one forever.
+warn_ignored_dots <- function(...) {
+  n <- ...length()
+  if (n == 0) return(invisible(NULL))
+  nms <- ...names()
+  nms <- if (is.null(nms)) rep("<unnamed>", n) else ifelse(nzchar(nms), nms, "<unnamed>")
+  warning(
+    "Ignoring argument(s): ", paste(nms, collapse = ", "),
+    ". Requests are configured with options(virustotal.*); see ?virustotal.",
+    call. = FALSE
+  )
+  invisible(NULL)
 }
 
 #'
@@ -98,10 +167,10 @@ vt_perform <- function(req) {
 # would churn every endpoint file and the test mocks for zero behavior.
 virustotal_GET <- function(path, query = list(), # nolint: object_name_linter.
                            key = vt_key(), ...) {
+  warn_ignored_dots(...)
   req <- vt_request(path, key)
   if (length(query)) req <- req_url_query(req, !!!query)
-  resp <- vt_perform(req)
-  fromJSON(resp_body_string(resp), simplifyVector = FALSE)
+  vt_body_json(vt_perform(req))
 }
 
 
@@ -125,6 +194,7 @@ virustotal_GET <- function(path, query = list(), # nolint: object_name_linter.
 virustotal_POST <- function(path, body = NULL, query = list(), # nolint: object_name_linter.
                             key = vt_key(),
                             encode = "json", ...) {
+  warn_ignored_dots(...)
   req <- vt_request(path, key)
   if (length(query)) req <- req_url_query(req, !!!query)
   req <- if (is.null(body)) {
@@ -141,8 +211,7 @@ virustotal_POST <- function(path, body = NULL, query = list(), # nolint: object_
       ))
     )
   }
-  resp <- vt_perform(req)
-  fromJSON(resp_body_string(resp), simplifyVector = FALSE)
+  vt_body_json(vt_perform(req))
 }
 
 #' GET a binary body from the V3 API
@@ -155,7 +224,8 @@ virustotal_POST <- function(path, body = NULL, query = list(), # nolint: object_
 #' @param key A character string containing the VirusTotal API key.
 #' @return A raw vector.
 #' @keywords internal
-virustotal_GET_raw <- function(path, key = vt_key()) { # nolint: object_name_linter.
+virustotal_GET_raw <- function(path, key = vt_key(), ...) { # nolint: object_name_linter.
+  warn_ignored_dots(...)
   resp <- vt_perform(vt_request(path, key))
   resp_body_raw(resp)
 }

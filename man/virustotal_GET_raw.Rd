@@ -4,7 +4,7 @@
 \alias{virustotal_GET_raw}
 \title{GET a binary body from the V3 API}
 \usage{
-virustotal_GET_raw(path, key = vt_key())
+virustotal_GET_raw(path, key = vt_key(), ...)
 }
 \arguments{
 \item{path}{Path below \code{/api/v3}.}

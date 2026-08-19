@@ -10,7 +10,8 @@
 
 skip_if_not_installed("httptest2")
 # Not shipped in the tarball (see .Rbuildignore): the recorded paths are
-# longer than a tarball can portably store.
+# longer than a tarball can portably store. So these skip under R CMD check
+# and run in the coverage job, which installs from the source checkout.
 skip_if_not(dir.exists("_fixtures"), "Fixtures not present in this build")
 
 test_that("a domain report parses into its class from a recorded response", {

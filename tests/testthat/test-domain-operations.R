@@ -11,10 +11,17 @@ test_that("domain_report validates input correctly", {
   )
 })
 
-test_that("domain cleaning works correctly", {
-  expect_equal(gsub("^https?://", "", "http://example.com"), "example.com")
-  expect_equal(gsub("^www\\.", "", "www.example.com"), "example.com")
-  expect_equal(gsub("/.*$", "", "example.com/path"), "example.com")
+test_that("domain_report strips a scheme before building the path", {
+  # Was asserting base R's gsub() against literals, which would still pass if
+  # domain_report() stopped cleaning domains altogether. Exercise the package.
+  cap <- new_capture()
+  use_capture(cap)
+
+  domain_report("https://example.com")
+  expect_equal(cap$last()$path, "domains/example.com")
+
+  domain_report("http://example.com")
+  expect_equal(cap$last()$path, "domains/example.com")
 })
 
 test_that("get_domain_comments validates input correctly", {

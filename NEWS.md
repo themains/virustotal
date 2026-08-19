@@ -35,6 +35,23 @@
 
 ## Bug fixes
 
+* Network failures (DNS, refused connections, timeouts) now raise a
+  `virustotal_error` instead of escaping as a raw httr2 condition, so
+  `tryCatch(virustotal_error = )` covers them as documented.
+* A 200 response with an empty or non-JSON body (a CDN interstitial during an
+  incident, say) raises a `virustotal_error` carrying the status code, rather
+  than a bare jsonlite parse error.
+* A server's `Retry-After` is capped at 60 seconds by default
+  (`options(virustotal.max_retry_wait=)`). A `Retry-After: 3600` would
+  otherwise have blocked the session for an hour before raising.
+* Extra arguments passed to API functions now warn instead of vanishing
+  silently, so a typo such as `cursors =` cannot leave a caller paginating
+  the first page forever.
+* `virustotal_info()` reports usage against the configured pace; it showed
+  "used 10/4, remaining -6" for anyone who raised
+  `virustotal.requests_per_minute`. Requests that reached the API and failed
+  (404, 429) are now counted, since they spend quota.
+
 * `print()` on a domain report showed the *vendors* who categorized the
   domain under the heading "Categories" — `google.com` reported
   "Categories: BitDefender, Forcepoint ThreatSeeker, Sophos, ..." The API

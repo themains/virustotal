@@ -66,7 +66,12 @@ get_rate_limit_status <- function() {
   current_time <- as.numeric(Sys.time())
 
   window_size <- .virustotal_state$window_size %||% 60
-  max_requests <- .virustotal_state$max_requests %||% 4
+  # Read the pace at call time: a premium key that set
+  # virustotal.requests_per_minute = 1000 was otherwise reported against the
+  # public allowance, printing things like "used 10/4, remaining -6".
+  max_requests <- getOption(
+    "virustotal.requests_per_minute", .virustotal_state$max_requests %||% 4
+  )
   requests <- .virustotal_state$requests %||% numeric(0)
 
   window_start <- current_time - window_size

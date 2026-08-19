@@ -81,10 +81,11 @@ test_that("a base64url identifier survives URL assembly verbatim", {
 
 test_that("requests carry the retry policy, tunable by option", {
   # httr2's own suite covers that the retry loop honors 429/503 and
-  # Retry-After, and that loop runs independent of the is_error override
-  # (mocked responses bypass it entirely, so it cannot be replayed here).
-  # What is ours to verify is the wiring: the policy is present and reads
-  # the option.
+  # Retry-After. It cannot be replayed here: req_perform() returns a mocked
+  # response through handle_resp() before it ever enters the retry loop, so
+  # mocks exercise status handling (which is why the 429 test below works)
+  # and never the backoff path. What is ours to verify is the wiring -- the
+  # policy is present, reads the option, and caps the server's delay.
   req <- vt_request("files/abc", key = "fake")
   expect_false(is.null(req$policies$retry_max_tries))
   expect_equal(req$policies$retry_max_tries, 3)
@@ -118,4 +119,42 @@ test_that("a mocked success flows through the full GET path", {
   ))
   res <- virustotal_GET("files/abc", key = "fake")
   expect_equal(res$data$id, "x")
+})
+
+test_that("the status report honors a raised request-per-minute option", {
+  # Reported "used 10/4, remaining -6" for any premium pace, because the
+  # ceiling was frozen at init time instead of read at call time.
+  withr::with_options(list(virustotal.requests_per_minute = 60), {
+    reset_rate_limit()
+    for (i in 1:10) record_request()
+    status <- get_rate_limit_status()
+    expect_equal(status$max_requests, 60)
+    expect_equal(status$requests_used, 10)
+    expect_equal(status$requests_remaining, 50)
+  })
+  reset_rate_limit()
+})
+
+test_that("a request that reached the API is logged even when it failed", {
+  # A 404 or 429 spends quota; the usage log has to count it.
+  withr::local_envvar(c(VIRUSTOTAL_API_KEY = strrep("a", 64)))
+  reset_rate_limit()
+  httr2::local_mocked_responses(list(httr2::response(404)))
+  expect_error(virustotal_GET("files/x"), class = "virustotal_error")
+  expect_equal(get_rate_limit_status()$requests_used, 1)
+  reset_rate_limit()
+})
+
+test_that("a server's Retry-After is capped, not obeyed blindly", {
+  # Retry-After: 3600 would otherwise block the session for an hour.
+  req <- vt_request("files/x", key = "fake")
+  delay <- req$policies$retry_after(
+    httr2::response(429, headers = list(`retry-after` = "3600"))
+  )
+  expect_equal(delay, 60)
+
+  delay <- req$policies$retry_after(
+    httr2::response(429, headers = list(`retry-after` = "5"))
+  )
+  expect_equal(delay, 5)
 })

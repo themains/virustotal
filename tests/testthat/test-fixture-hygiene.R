@@ -17,5 +17,8 @@ test_that("no fixture contains the API key", {
     function(f) any(grepl(key, readLines(f, warn = FALSE), fixed = TRUE)),
     files
   )
-  expect_equal(leaked, list())
+  # Filter() over a character vector returns character(0), not list() --
+  # comparing it to list() made this guard fail on the one machine that runs
+  # it (the maintainer's, while re-recording), leak or no leak.
+  expect_length(leaked, 0)
 })

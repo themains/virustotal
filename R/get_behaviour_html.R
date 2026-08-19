@@ -33,7 +33,7 @@ get_behaviour_html <- function(sandbox_id = NULL, output_path = NULL, ...) {
     assert_character(output_path, len = 1, any.missing = FALSE, min.chars = 1)
   }
 
-  raw_body <- virustotal_GET_raw(paste0("file_behaviours/", sandbox_id, "/html"))
+  raw_body <- virustotal_GET_raw(paste0("file_behaviours/", sandbox_id, "/html"), ...)
 
   if (!is.null(output_path)) {
     writeBin(raw_body, output_path)
