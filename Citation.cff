@@ -1,9 +1,49 @@
+# ------------------------------------------------
+# CITATION.cff file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# ------------------------------------------------
+ 
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+message: 'To cite package "virustotal" in publications use:'
+type: software
+license: MIT
+title: 'virustotal: R Client for the ''VirusTotal'' API'
+version: 0.7.0
+identifiers:
+- type: doi
+  value: 10.32614/CRAN.package.virustotal
+abstract: Provides a comprehensive R interface to the 'VirusTotal' API v3.0 <https://docs.virustotal.com/>,
+  a Google service that analyzes files and URLs for viruses, worms, trojans and other
+  malware. Features include file/URL scanning, domain categorization, passive DNS
+  information, IP reputation analysis, IoC relationships, sandbox analysis, and comment/voting
+  systems. Implements rate limiting, error handling, and response validation for robust
+  security analysis workflows.
 authors:
-- family-names: "Sood"
-  given-names: "Gaurav"
-title: "virustotal: R Client for the VirusTotal Public API v3.0"
-version: 0.6.0
-date-released: 2025-12-15
-url: "https://github.com/themains/virustotal"
+- family-names: Sood
+  given-names: Gaurav
+  email: gsood07@gmail.com
+preferred-citation:
+  type: manual
+  title: 'virustotal: R Client for the ''VirusTotal'' API'
+  authors:
+  - family-names: Sood
+    given-names: Gaurav
+    email: gsood07@gmail.com
+  year: '2026'
+  notes: R package version 0.7.0
+  url: https://github.com/themains/virustotal
+repository: https://CRAN.R-project.org/package=virustotal
+repository-code: https://github.com/themains/virustotal
+url: https://themains.github.io/virustotal/
+contact:
+- family-names: Sood
+  given-names: Gaurav
+  email: gsood07@gmail.com
+keywords:
+- cran
+- cybersecurity
+- r
+- scan-files
+- trojans
+- virustotal
+

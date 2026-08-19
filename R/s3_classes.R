@@ -177,7 +177,7 @@ print.virustotal_domain_report <- function(x, ...) {
     }
 
     # Categories. The API keys this field by vendor and stores the category
-    # as the value, so the names are vendors -- printing them labelled
+    # as the value, so the names are vendors -- printing them labeled
     # "Categories" reported "BitDefender, Sophos, ..." for a domain every
     # vendor agreed was a search engine.
     if (!is.null(attrs$categories)) {

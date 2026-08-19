@@ -40,12 +40,12 @@ pak::pak("themains/virustotal")
 
 ### Quick start
 
-Get a key from your [VirusTotal profile](https://www.virustotal.com/),
-then:
+Get a key from [your VirusTotal API key
+page](https://www.virustotal.com/gui/my-apikey), then:
 
 ``` r
 library(virustotal)
-set_key("your_api_key")   # or set VIRUSTOTAL_API_KEY in .Renviron
+set_key("your_api_key") # or set VIRUSTOTAL_API_KEY in .Renviron
 
 # What does VirusTotal know about a domain, an IP, a file hash, a URL?
 domain_report("google.com")
@@ -59,9 +59,10 @@ scan_file("suspicious.exe")
 
 # Errors are typed conditions
 tryCatch(
-  file_report("no_such_hash_0000"),
+  file_report("0123456789abcdef0123456789abcdef"),
   virustotal_error = function(e) message("VT said: ", conditionMessage(e))
 )
+#> VT said: Resource not found.
 ```
 
 Public API keys are limited to 4 requests/minute and 500/day; the

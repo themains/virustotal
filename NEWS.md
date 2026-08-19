@@ -1,4 +1,4 @@
-# virustotal (development version)
+# virustotal 0.7.0
 
 ## Breaking changes
 
@@ -12,6 +12,13 @@
   instead of an httr one. The condition classes themselves are unchanged.
 * Requires R >= 4.1.0. Dependencies httr, dplyr and base64enc were dropped;
   httr2, curl and openssl were added.
+* Loading the package no longer copies `VIRUSTOTAL_API_KEY` into
+  `VirustotalToken`. Both variables still work for this package, and
+  `set_key()` sets both. But code that reads `VirustotalToken` directly no
+  longer sees a key set only under the canonical name — including
+  `rdomains::virustotal_cat()`, which reports "VirusTotal API key not found"
+  in that case. Setting `VirustotalToken`, or passing the key to that
+  function directly, works as before.
 
 ## New features
 
