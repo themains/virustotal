@@ -1,6 +1,6 @@
 Package: virustotal
 Title: R Client for the 'VirusTotal' API
-Version: 0.6.0
+Version: 0.6.0.9000
 Authors@R: person("Gaurav", "Sood", email = "gsood07@gmail.com",
                   role = c("aut", "cre"))
 Description: Provides a comprehensive R interface to the 'VirusTotal' API v3.0

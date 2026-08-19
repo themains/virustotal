@@ -1,3 +1,5 @@
+# virustotal (development version)
+
 # virustotal 0.6.0
 
 ## Breaking Changes
@@ -28,8 +30,6 @@
 ## Migration Guide
 
 Users upgrading from versions that used v2.0 functions should ensure their code uses the equivalent v3.0 functions.
-
----
 
 # virustotal 0.5.0
 
@@ -85,8 +85,6 @@ Users upgrading from versions that used v2.0 functions should ensure their code 
 * Added `virustotal_info()` function for package configuration diagnostics
 * Enhanced rate limit status reporting with `get_rate_limit_status()`
 * Improved temporary file management with security-focused utilities
-
----
 
 # virustotal 0.3.0
 
