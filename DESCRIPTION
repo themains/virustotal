@@ -16,7 +16,6 @@ BugReports: https://github.com/themains/virustotal/issues
 Depends:
     R (>= 4.1.0)
 License: MIT + file LICENSE
-LazyData: false
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-US
