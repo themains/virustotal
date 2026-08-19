@@ -122,19 +122,59 @@ test_that("get_file_download_url validates input correctly", {
   )
 })
 
-test_that("file operations work with mocked responses", {
-  skip_if_not_installed("httptest")
-  skip_if(Sys.getenv("VirustotalToken") == "", "API key not set")
+test_that("file endpoints request the documented v3 paths and bodies", {
+  cap <- new_capture()
+  use_capture(cap)
+  hash <- "99017f6eebbac24f351415dd410d522d"
 
-  expect_true(exists("scan_file"))
-  expect_true(exists("file_report"))
-  expect_true(exists("rescan_file"))
-  expect_true(exists("get_file_upload_url"))
-  expect_true(exists("get_file_comments"))
-  expect_true(exists("post_file_comments"))
-  expect_true(exists("get_file_votes"))
-  expect_true(exists("post_file_votes"))
-  expect_true(exists("get_file_relationships"))
-  expect_true(exists("download_file"))
-  expect_true(exists("get_file_download_url"))
+  file_report(hash)
+  expect_equal(cap$last()$path, paste0("files/", hash))
+  expect_equal(cap$last()$verb, "GET")
+
+  get_file_upload_url()
+  expect_equal(cap$last()$path, "files/upload_url")
+
+  get_file_download_url(hash)
+  expect_equal(cap$last()$path, paste0("files/", hash, "/download_url"))
+
+  get_file_comments(hash)
+  expect_equal(cap$last()$path, paste0("files/", hash, "/comments"))
+
+  post_file_comments(hash, "a comment")
+  expect_equal(cap$last()$path, paste0("files/", hash, "/comments"))
+  expect_equal(cap$last()$body$data$type, "comment")
+
+  get_file_votes(hash)
+  expect_equal(cap$last()$path, paste0("files/", hash, "/votes"))
+
+  post_file_votes(hash, "malicious")
+  expect_equal(cap$last()$path, paste0("files/", hash, "/votes"))
+  expect_equal(cap$last()$body$data$type, "vote")
+
+  get_file_relationships(hash, "behaviours")
+  expect_equal(
+    cap$last()$path, paste0("files/", hash, "/relationships/behaviours")
+  )
+})
+
+test_that("file_report wraps the response in its S3 class", {
+  hash <- "99017f6eebbac24f351415dd410d522d"
+  cap <- new_capture(response = list(
+    data = list(
+      id = hash,
+      type = "file",
+      attributes = list(
+        size = 68,
+        sha256 = strrep("ab", 32),
+        last_analysis_stats = list(
+          malicious = 61L, suspicious = 0L, undetected = 4L, harmless = 0L
+        )
+      )
+    )
+  ))
+  use_capture(cap)
+
+  report <- file_report(hash)
+  expect_s3_class(report, "virustotal_file_report")
+  expect_equal(report$data$attributes$last_analysis_stats$malicious, 61L)
 })
