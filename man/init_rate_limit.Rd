@@ -2,11 +2,11 @@
 % Please edit documentation in R/rate_limiting.R
 \name{init_rate_limit}
 \alias{init_rate_limit}
-\title{Initialize rate limiting state}
+\title{Initialize the request log}
 \usage{
 init_rate_limit()
 }
 \description{
-Initialize rate limiting state
+Initialize the request log
 }
 \keyword{internal}

@@ -1,0 +1,92 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Edit that file, then knit. -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+## virustotal: R Client for the VirusTotal API v3
+
+[![R-CMD-check](https://github.com/themains/virustotal/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/themains/virustotal/actions/workflows/R-CMD-check.yml)
+[![lint](https://github.com/themains/virustotal/actions/workflows/lint.yml/badge.svg)](https://github.com/themains/virustotal/actions/workflows/lint.yml)
+[![codecov](https://codecov.io/gh/themains/virustotal/branch/master/graph/badge.svg)](https://app.codecov.io/gh/themains/virustotal)
+[![CRAN status](https://www.r-pkg.org/badges/version/virustotal)](https://cran.r-project.org/package=virustotal)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+![](https://cranlogs.r-pkg.org/badges/grand-total/virustotal)
+
+Use [VirusTotal](https://www.virustotal.com), a Google service that analyzes
+files and URLs for viruses, worms, trojans and other malware, categorizes the
+content hosted by a domain using a variety of prominent services, and provides
+passive DNS information, among other things.
+
+The package covers the VirusTotal API v3: file, URL, domain and IP reports;
+scanning and rescanning; IoC relationships; sandbox behaviour artifacts;
+comments and votes. Requests are paced to the public API's 4-per-minute
+allowance automatically, transient failures are retried honoring the server's
+`Retry-After`, and API failures surface as typed R conditions you can
+`tryCatch` on.
+
+### Installation
+
+From CRAN:
+
+```{r}
+install.packages("virustotal")
+```
+
+Development version from GitHub:
+
+```{r}
+# install.packages("pak")
+pak::pak("themains/virustotal")
+```
+
+### Quick start
+
+Get a key from your [VirusTotal profile](https://www.virustotal.com/), then:
+
+```{r}
+library(virustotal)
+set_key("your_api_key") # or set VIRUSTOTAL_API_KEY in .Renviron
+
+# What does VirusTotal know about a domain, an IP, a file hash, a URL?
+domain_report("google.com")
+ip_report("8.8.8.8")
+file_report("99017f6eebbac24f351415dd410d522d")
+url_report("http://www.google.com")
+
+# Submit new things for analysis
+scan_url("https://example.org")
+scan_file("suspicious.exe")
+
+# Errors are typed conditions
+tryCatch(
+  file_report("no_such_hash_0000"),
+  virustotal_error = function(e) message("VT said: ", conditionMessage(e))
+)
+```
+
+Public API keys are limited to 4 requests/minute and 500/day; the package
+throttles itself to match. Premium keys can raise the pace:
+
+```{r}
+options(virustotal.requests_per_minute = 1000)
+```
+
+The [vignette](https://themains.github.io/virustotal/articles/using_virustotal.html)
+walks through the full surface:
+
+```{r}
+vignette("using_virustotal", package = "virustotal")
+```
+
+### License
+
+Released under the [MIT License](https://opensource.org/license/mit).

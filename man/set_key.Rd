@@ -16,16 +16,27 @@ Invisibly returns TRUE on success
 Stores your VirusTotal API key in an environment variable for use by other
 package functions. Get your API key from \url{https://www.virustotal.com/}.
 }
+\details{
+The canonical environment variable is \code{VIRUSTOTAL_API_KEY}; the
+historical \code{VirustotalToken} is also set for compatibility with code
+that reads it directly. Setting either variable before loading the package
+works without calling this function at all.
+}
 \examples{
 \dontrun{
 # Set your API key
 set_key('your_64_character_api_key_here')
 
 # Verify it's set
-Sys.getenv("VirustotalToken")
+Sys.getenv("VIRUSTOTAL_API_KEY")
 }
 }
 \references{
 \url{https://docs.virustotal.com/reference}
+}
+\seealso{
+Other authentication:
+\code{\link[=has_vt_key]{has_vt_key()}},
+\code{\link[=vt_key]{vt_key()}}
 }
 \concept{authentication}

@@ -19,20 +19,19 @@
 #'
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
-#' ip_report(ip="8.8.8.8")
-#' ip_report(ip="2001:4860:4860::8888")
+#' ip_report(ip = "8.8.8.8")
+#' ip_report(ip = "2001:4860:4860::8888")
 #' }
-
 ip_report <- function(ip = NULL, ...) {
-    assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
+  assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
 
-    if (identical(Sys.getenv("VirustotalToken"), "")) {
-        stop(virustotal_auth_error(
-            message = "Authentication failed. Please check your API key."
-        ))
-    }
+  if (!has_vt_key()) {
+    stop(virustotal_auth_error(
+      message = "Authentication failed. Please check your API key."
+    ))
+  }
 
-    res <- virustotal_GET(path = paste0("ip_addresses/", ip), ...)
+  res <- virustotal_GET(path = paste0("ip_addresses/", ip), ...)
 
-    res
+  res
 }

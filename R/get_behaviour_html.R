@@ -4,7 +4,8 @@
 #'
 #' @param sandbox_id Sandbox report ID (character string). Required.
 #' @param output_path Local path to save the HTML file. Optional.
-#' @param \dots Additional arguments passed to httr::GET.
+#' @param \dots Ignored. Configure requests with the package options
+#'   instead (see \code{\link{virustotal}}).
 #'
 #' @return Raw HTML content or saves to file if output_path specified
 #'
@@ -19,29 +20,25 @@
 #'
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
-#' html <- get_behaviour_html(sandbox_id='hash_sandboxname')
-#' get_behaviour_html(sandbox_id='hash_sandboxname',
-#'                    output_path='/tmp/report.html')
+#' html <- get_behaviour_html(sandbox_id = 'hash_sandboxname')
+#' get_behaviour_html(
+#'   sandbox_id = 'hash_sandboxname',
+#'   output_path = '/tmp/report.html'
+#' )
 #' }
-
 get_behaviour_html <- function(sandbox_id = NULL, output_path = NULL, ...) {
-
   assert_character(sandbox_id, len = 1, any.missing = FALSE, min.chars = 1)
 
   if (!is.null(output_path)) {
     assert_character(output_path, len = 1, any.missing = FALSE, min.chars = 1)
   }
 
-  res <- GET("https://www.virustotal.com/",
-             path = paste0("api/v3/file_behaviours/", sandbox_id, "/html"),
-             add_headers("x-apikey" = Sys.getenv("VirustotalToken")), ...)
-
-  virustotal_check(res)
+  raw_body <- virustotal_GET_raw(paste0("file_behaviours/", sandbox_id, "/html"), ...)
 
   if (!is.null(output_path)) {
-    writeBin(content(res, "raw"), output_path)
-    return(paste("HTML report saved to:", output_path))
+    writeBin(raw_body, output_path)
+    paste("HTML report saved to:", output_path)
   } else {
-    return(content(res, "raw"))
+    raw_body
   }
 }

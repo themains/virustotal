@@ -42,9 +42,9 @@ virustotal_error <- function(message, status_code = NULL, response = NULL,
 #' @keywords internal
 #' @export
 #' @family error handling
-virustotal_rate_limit_error <- function(message = "Rate limit exceeded", 
-                                       retry_after = 60, 
-                                       call = sys.call(-1)) {
+virustotal_rate_limit_error <- function(message = "Rate limit exceeded",
+                                        retry_after = 60,
+                                        call = sys.call(-1)) {
   structure(
     list(
       message = message,
@@ -64,8 +64,8 @@ virustotal_rate_limit_error <- function(message = "Rate limit exceeded",
 #' @keywords internal
 #' @export
 #' @family error handling
-virustotal_auth_error <- function(message = "Invalid or missing API key", 
-                                 call = sys.call(-1)) {
+virustotal_auth_error <- function(message = "Invalid or missing API key",
+                                  call = sys.call(-1)) {
   structure(
     list(
       message = message,
@@ -86,8 +86,8 @@ virustotal_auth_error <- function(message = "Invalid or missing API key",
 #' @keywords internal
 #' @export
 #' @family error handling
-virustotal_validation_error <- function(message, parameter = NULL, value = NULL, 
-                                       call = sys.call(-1)) {
+virustotal_validation_error <- function(message, parameter = NULL, value = NULL,
+                                        call = sys.call(-1)) {
   structure(
     list(
       message = message,
@@ -100,7 +100,7 @@ virustotal_validation_error <- function(message, parameter = NULL, value = NULL,
 }
 
 #' Print method for VirusTotal errors
-#' 
+#'
 #' @param x A virustotal_error object
 #' @param ... Additional arguments (unused)
 #' @keywords internal

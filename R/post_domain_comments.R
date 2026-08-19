@@ -17,23 +17,23 @@
 #'
 #' post_domain_comments(domain = "https://google.com", comment = "Great!")
 #' }
-
 post_domain_comments <- function(domain = NULL, comment = NULL, ...) {
+  assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
+  assert_character(comment, len = 1, any.missing = FALSE, min.chars = 1)
 
-    assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
-    assert_character(comment, len = 1, any.missing = FALSE, min.chars = 1)
+  domain <- gsub("^http://|^https://", "", domain)
 
-    domain <- gsub("^http://|^https://", "", domain)
-
-    comment_body <- list(
-      data = list(
-        type = "comment",
-        attributes = list(text = comment)
-      )
+  comment_body <- list(
+    data = list(
+      type = "comment",
+      attributes = list(text = comment)
     )
+  )
 
-    res <- virustotal_POST(path = paste0("domains/", domain, "/comments"),
-                           body = comment_body, ...)
+  res <- virustotal_POST(
+    path = paste0("domains/", domain, "/comments"),
+    body = comment_body, ...
+  )
 
-    res
+  res
 }

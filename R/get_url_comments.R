@@ -17,11 +17,9 @@
 #'
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
-#' get_url_comments(url_id='http://www.google.com')
+#' get_url_comments(url_id = 'http://www.google.com')
 #' }
-
 get_url_comments <- function(url_id = NULL, limit = NULL, cursor = NULL, ...) {
-
   assert_character(url_id, len = 1, any.missing = FALSE, min.chars = 1)
 
   # If it looks like a URL, encode it to base64 (VirusTotal v3 requirement)
@@ -29,8 +27,10 @@ get_url_comments <- function(url_id = NULL, limit = NULL, cursor = NULL, ...) {
     url_id <- vt_url_id(url_id)
   }
 
-  res <- virustotal_GET(path = paste0("urls/", url_id, "/comments"),
-                       query = list(limit = limit, cursor = cursor), ...)
+  res <- virustotal_GET(
+    path = paste0("urls/", url_id, "/comments"),
+    query = list(limit = limit, cursor = cursor), ...
+  )
 
   res
 }

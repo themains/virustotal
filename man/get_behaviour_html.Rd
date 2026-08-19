@@ -11,7 +11,8 @@ get_behaviour_html(sandbox_id = NULL, output_path = NULL, ...)
 
 \item{output_path}{Local path to save the HTML file. Optional.}
 
-\item{\dots}{Additional arguments passed to httr::GET.}
+\item{\dots}{Ignored. Configure requests with the package options
+instead (see \code{\link{virustotal}}).}
 }
 \value{
 Raw HTML content or saves to file if output_path specified
@@ -24,9 +25,11 @@ Retrieves a detailed HTML report from a sandbox analysis.
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-html <- get_behaviour_html(sandbox_id='hash_sandboxname')
-get_behaviour_html(sandbox_id='hash_sandboxname',
-                   output_path='/tmp/report.html')
+html <- get_behaviour_html(sandbox_id = 'hash_sandboxname')
+get_behaviour_html(
+  sandbox_id = 'hash_sandboxname',
+  output_path = '/tmp/report.html'
+)
 }
 }
 \references{

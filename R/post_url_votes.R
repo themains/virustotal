@@ -16,11 +16,9 @@
 #'
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
-#' post_url_votes(url_id='http://www.google.com', verdict='harmless')
+#' post_url_votes(url_id = 'http://www.google.com', verdict = 'harmless')
 #' }
-
 post_url_votes <- function(url_id = NULL, verdict = NULL, ...) {
-
   assert_character(url_id, len = 1, any.missing = FALSE, min.chars = 1)
 
   if (is.null(verdict) || !verdict %in% c("harmless", "malicious")) {
@@ -32,10 +30,14 @@ post_url_votes <- function(url_id = NULL, verdict = NULL, ...) {
     url_id <- vt_url_id(url_id)
   }
 
-  vote_body <- list(data = list(type = "vote",
-                                 attributes = list(verdict = verdict)))
-  res <- virustotal_POST(path = paste0("urls/", url_id, "/votes"),
-                        body = vote_body, ...)
+  vote_body <- list(data = list(
+    type = "vote",
+    attributes = list(verdict = verdict)
+  ))
+  res <- virustotal_POST(
+    path = paste0("urls/", url_id, "/votes"),
+    body = vote_body, ...
+  )
 
   res
 }

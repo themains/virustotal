@@ -23,7 +23,7 @@ Returns an analysis ID for use with \code{\link{file_report}}.
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-rescan_file(hash='99017f6eebbac24f351415dd410d522d')
+rescan_file(hash = '99017f6eebbac24f351415dd410d522d')
 }
 }
 \references{

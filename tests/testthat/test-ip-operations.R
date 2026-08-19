@@ -65,15 +65,26 @@ test_that("rescan_ip validates input correctly", {
   )
 })
 
-test_that("ip operations work with mocked responses", {
-  skip_if_not_installed("httptest")
-  skip_if(Sys.getenv("VirustotalToken") == "", "API key not set")
+test_that("ip endpoints request the documented v3 paths and bodies", {
+  cap <- new_capture()
+  use_capture(cap)
 
-  expect_true(exists("ip_report"))
-  expect_true(exists("get_ip_comments"))
-  expect_true(exists("post_ip_comments"))
-  expect_true(exists("get_ip_votes"))
-  expect_true(exists("post_ip_votes"))
-  expect_true(exists("get_ip_info"))
-  expect_true(exists("rescan_ip"))
+  ip_report("8.8.8.8")
+  expect_equal(cap$last()$path, "ip_addresses/8.8.8.8")
+  expect_equal(cap$last()$verb, "GET")
+
+  get_ip_comments("8.8.8.8")
+  expect_equal(cap$last()$path, "ip_addresses/8.8.8.8/comments")
+
+  post_ip_comments("8.8.8.8", "a comment")
+  expect_equal(cap$last()$path, "ip_addresses/8.8.8.8/comments")
+  expect_equal(cap$last()$body$data$type, "comment")
+
+  get_ip_votes("8.8.8.8")
+  expect_equal(cap$last()$path, "ip_addresses/8.8.8.8/votes")
+
+  post_ip_votes("8.8.8.8", "harmless")
+  expect_equal(cap$last()$path, "ip_addresses/8.8.8.8/votes")
+  expect_equal(cap$last()$body$data$type, "vote")
+  expect_equal(cap$last()$body$data$attributes$verdict, "harmless")
 })

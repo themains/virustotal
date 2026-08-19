@@ -25,9 +25,9 @@ Retrieve votes for an Internet domain
 \dontrun{
 
 # Before calling the function, set the API key using set_key('api_key_here')
-   
+
 get_domain_votes("http://www.google.com")
-get_domain_votes("http://www.goodsfwrfw.com") # Domain not found
+get_domain_votes("https://www.example.com") # Domain not found
 }
 }
 \references{

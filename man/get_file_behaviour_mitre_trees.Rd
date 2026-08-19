@@ -22,7 +22,7 @@ Retrieves MITRE ATT&CK techniques observed in file behaviour reports.
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-get_file_behaviour_mitre_trees(hash='99017f6eebbac24f351415dd410d522d')
+get_file_behaviour_mitre_trees(hash = '99017f6eebbac24f351415dd410d522d')
 }
 }
 \references{

@@ -16,19 +16,23 @@
 #'
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
-#' post_file_comments(hash='99017f6eebbac24f351415dd410d522d',
-#'                    comment='This file appears to be suspicious')
+#' post_file_comments(
+#'   hash = '99017f6eebbac24f351415dd410d522d',
+#'   comment = 'This file appears to be suspicious'
+#' )
 #' }
-
 post_file_comments <- function(hash = NULL, comment = NULL, ...) {
-
   assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
   assert_character(comment, len = 1, any.missing = FALSE, min.chars = 1)
 
-  comment_body <- list(data = list(type = "comment",
-                                    attributes = list(text = comment)))
-  res <- virustotal_POST(path = paste0("files/", hash, "/comments"),
-                        body = comment_body, ...)
+  comment_body <- list(data = list(
+    type = "comment",
+    attributes = list(text = comment)
+  ))
+  res <- virustotal_POST(
+    path = paste0("files/", hash, "/comments"),
+    body = comment_body, ...
+  )
 
   res
 }

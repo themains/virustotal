@@ -11,7 +11,8 @@ get_behaviour_memdump(sandbox_id = NULL, output_path = NULL, ...)
 
 \item{output_path}{Local path to save the memory dump file. Optional.}
 
-\item{\dots}{Additional arguments passed to httr::GET.}
+\item{\dots}{Ignored. Configure requests with the package options
+instead (see \code{\link{virustotal}}).}
 }
 \value{
 Raw memory dump content or saves to file if output_path specified
@@ -24,9 +25,11 @@ Retrieves the memory dump file from a sandbox analysis.
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-memdump <- get_behaviour_memdump(sandbox_id='hash_sandboxname')
-get_behaviour_memdump(sandbox_id='hash_sandboxname',
-                      output_path='/tmp/memory.dmp')
+memdump <- get_behaviour_memdump(sandbox_id = 'hash_sandboxname')
+get_behaviour_memdump(
+  sandbox_id = 'hash_sandboxname',
+  output_path = '/tmp/memory.dmp'
+)
 }
 }
 \references{

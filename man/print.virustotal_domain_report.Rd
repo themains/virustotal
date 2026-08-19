@@ -12,7 +12,8 @@
 \item{...}{Additional arguments (unused)}
 }
 \value{
-The object, invisibly. Called for the side effect of printing a summary of the domain report.
+The object, invisibly. Called for the side effect of printing
+a summary of the domain report.
 }
 \description{
 Print method for domain reports

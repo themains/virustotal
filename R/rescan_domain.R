@@ -22,9 +22,7 @@
 #' # Request rescan of a domain
 #' rescan_domain("google.com")
 #' }
-
 rescan_domain <- function(domain = NULL, ...) {
-
   assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
 
   # Validate and clean domain input

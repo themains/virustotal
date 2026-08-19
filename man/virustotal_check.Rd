@@ -4,10 +4,10 @@
 \alias{virustotal_check}
 \title{Request Response Verification}
 \usage{
-virustotal_check(req)
+virustotal_check(resp)
 }
 \arguments{
-\item{req}{HTTP response object from httr}
+\item{resp}{An \code{httr2} response object}
 }
 \value{
 Invisible NULL on success, throws structured errors on failure

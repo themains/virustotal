@@ -1,0 +1,972 @@
+{
+    "data": {
+        "id": "dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf",
+        "type": "url",
+        "links": {
+            "self": "https://www.virustotal.com/api/v3/urls/dd014af5ed6b38d9130e3f466f850e46d21b951199d53a18ef29ee9341614eaf"
+        },
+        "attributes": {
+            "outgoing_links": [
+                "https://about.google/?fg=1&utm_source=google-US&utm_medium=referral&utm_campaign=hp-header",
+                "https://store.google.com/US?utm_source=hp_header&utm_medium=google_ooo&utm_campaign=GS100042&hl=en-US",
+                "https://mail.google.com/mail/&ogbl",
+                "https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/&ec=futura_exp_og_so_72776762_e",
+                "https://google.com/search/howsearchworks/?fg=1",
+                "https://ai.google/helpful-tools/?utm_source=googlehpfooter&utm_medium=housepromos&utm_campaign=bottom-footer",
+                "https://policies.google.com/privacy?hl=en&fg=1",
+                "https://policies.google.com/terms?hl=en&fg=1",
+                "https://support.google.com/websearch/?p=ws_results_help&hl=en&fg=1",
+                "https://ssl.gstatic.com/gb/images/bar/al-icon.png",
+                "https://www.gstatic.com/og/_/js/k=og.asy.en_US.9C_aYAMawPk.2019.O/rt=j/m=_ac,_awd,ada,lldp,qads,abld/exm=/d=1/ed=1/rs=AA2YrTv58eEANmbU_qdMUP5cuXjwAlxw7g",
+                "https://www.gstatic.com/og/_/js/k=og.asy.en_US.9C_aYAMawPk.2019.O/rt=j/m=_ac",
+                "https://www.gstatic.com/og/_/ss/k=og.asy.rcGq2oSDJxE.L.F4.O/m=ll_tdm",
+                "https://lh3.googleusercontent.com/ogw/default-user=s83",
+                "https://ogs.google.com/widget/app/so?eom=1",
+                "https://ogs.google.com/widget/callout?eom=1",
+                "https://ogads-pa.clients6.google.com",
+                "https://trends.google.com/hottrends",
+                "https://artsandculture.google.com/asset/girl-with-a-pearl-earring-johannes-vermeer/3QFHLJgXCmQm2Q",
+                "https://artsandculture.google.com/asset/sights-in-and-around-kyoto-unknown/8QHASebeKxBYFA",
+                "https://artsandculture.google.com/asset/radha-and-krishna-in-the-boat-of-love-nihal-chand/FgEEOnrrqsn9OA",
+                "https://artsandculture.google.com/asset/the-starry-night/bgEuwDxel93-Pg",
+                "https://artsandculture.google.com/asset/maple-viewers-kano-hideyori/oQF0nQM_PVBZeQ",
+                "https://artsandculture.google.com/asset/saint-john-the-baptist-ii-kehinde-wiley/twHIJUf9gllKbw",
+                "https://artsandculture.google.com/asset/lady-with-an-ermine-leonardo-da-vinci/HwHUpggDy_HxNQ",
+                "https://artsandculture.google.com/asset/the-water-lily-pond-claude-monet/nQExbyttj8z58A",
+                "https://artsandculture.google.com/asset/jadeite-cabbage-unknown/TgGKKWQUwn0sRA",
+                "https://artsandculture.google.com/asset/the-two-fridas-frida-kahlo/zAHG4EZ1WrwVYg",
+                "https://artsandculture.google.com/asset/the-rosetta-stone/DgH6pMM1guUUPA",
+                "https://artsandculture.google.com/partner/smithsonian-national-museum-of-natural-history",
+                "https://artsandculture.google.com/partner/the-munch-museum-oslo",
+                "https://artsandculture.google.com/partner/african-artists-foundation",
+                "https://artsandculture.google.com/partner/unep-united-nations-environment-programme",
+                "https://artsandculture.google.com/partner/nasa",
+                "https://artsandculture.google.com/partner/archaeological-survey-of-india",
+                "https://artsandculture.google.com/partner/museu-do-futebol",
+                "https://artsandculture.google.com/partner/national-gallery-of-art-washington-dc",
+                "https://artsandculture.google.com/partner/unesco",
+                "https://artsandculture.google.com/partner/grotte-chauvet",
+                "https://artsandculture.google.com/partner/sydney-opera-house",
+                "https://google.com/doodles/122nd-birthday-of-charlie-chaplin",
+                "https://support.google.com/chrome/?p",
+                "http://www.w3.org/2000/svg"
+            ],
+            "console_messages": [
+
+            ],
+            "last_http_response_headers": {
+                "x-frame-options": "SAMEORIGIN",
+                "x-xss-protection": "0",
+                "cache-control": "private, max-age=0",
+                "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+                "report-to": "{\"group\":\"gws\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/gws/other\"}]}",
+                "p3p": "CP=\"This is not a P3P policy! See g.co/p3phelp for more info.\"",
+                "expires": "-1",
+                "content-type": "text/html; charset=UTF-8",
+                "server": "gws",
+                "content-security-policy-report-only": "object-src 'none';base-uri 'self';script-src 'nonce-iU-9K7cUzw3UJ4uOkexZlQ' 'strict-dynamic' 'report-sample' 'unsafe-eval' 'unsafe-inline' https: http:;report-uri https://csp.withgoogle.com/csp/gws/other-hp",
+                "accept-ch": "Sec-CH-Prefers-Color-Scheme",
+                "strict-transport-security": "max-age=31536000",
+                "date": "Wed, 19 Aug 2026 15:32:00 GMT",
+                "content-encoding": "br",
+                "cross-origin-opener-policy": "same-origin-allow-popups; report-to=\"gws\"",
+                "content-length": "67262"
+            },
+            "last_http_response_cookies_extended": [
+                {
+                    "expires": 1802705520,
+                    "priority": "COOKIE_PRIORITY_MEDIUM",
+                    "domain": ".google.com",
+                    "value": "CgQIzKEB",
+                    "session": false,
+                    "name": "SEARCH_SAMESITE",
+                    "secure": false,
+                    "size": 23,
+                    "http_only": false
+                },
+                {
+                    "expires": 1787153820,
+                    "priority": "COOKIE_PRIORITY_MEDIUM",
+                    "domain": ".google.com",
+                    "value": "ANmZwa1NfUwc_0HR58wMNzP1tWz-Vt-MVTexNY0ROmg5IEPdjUi6jd5PwDwtN9cWka6Iw5GGjnF4qgA-B8FJGzS7lZC3MnQ8upoO",
+                    "session": false,
+                    "name": "__Secure-STRP",
+                    "secure": true,
+                    "size": 113,
+                    "http_only": false
+                },
+                {
+                    "expires": 1802705520,
+                    "priority": "COOKIE_PRIORITY_MEDIUM",
+                    "domain": ".google.com",
+                    "value": "AdJVEauxyp24FVX3QMjxcFGOBZvgVYZeHiovQEfaLFIOqwJ7Ot0si2ffag",
+                    "session": false,
+                    "name": "AEC",
+                    "secure": true,
+                    "size": 61,
+                    "http_only": true
+                },
+                {
+                    "expires": 1802964720,
+                    "priority": "COOKIE_PRIORITY_MEDIUM",
+                    "domain": ".google.com",
+                    "value": "534=W52MDv1bn0RWp1pF3R3-KIBO21SXzap7yscwc4m5XVKa_J83LfV5xfbdgMVEzu0Ds_CVhGFPjLy57JCZFpwOB7fVzy5TJB9YT_6GTkvZlZVEuIugJDjbSB0JhbFJESS3fNlX6OuJLt0VuFHN9szsHknI6MBhMStwFQ-irUihY0pQmHjjvYOYY0_8dOwxLDCt-KZ21gFXS9BZFOt4c0rti2ErCStyQLr049Xg",
+                    "session": false,
+                    "name": "NID",
+                    "secure": true,
+                    "size": 235,
+                    "http_only": true
+                }
+            ],
+            "last_analysis_stats": {
+                "malicious": 0,
+                "suspicious": 0,
+                "undetected": 28,
+                "harmless": 64,
+                "timeout": 0
+            },
+            "last_http_response_content_length": 227150,
+            "times_submitted": 712067,
+            "reputation": 5912,
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0",
+            "categories": {
+                "BitDefender": "searchengines",
+                "Sophos": "search engines",
+                "Forcepoint ThreatSeeker": "search engines and portals"
+            },
+            "last_analysis_results": {
+                "Acronis": {
+                    "method": "blacklist",
+                    "engine_name": "Acronis",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Abusix": {
+                    "method": "blacklist",
+                    "engine_name": "Abusix",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "ADMINUSLabs": {
+                    "method": "blacklist",
+                    "engine_name": "ADMINUSLabs",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Lionic": {
+                    "method": "blacklist",
+                    "engine_name": "Lionic",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Criminal IP": {
+                    "method": "blacklist",
+                    "engine_name": "Criminal IP",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "AILabs (MONITORAPP)": {
+                    "method": "blacklist",
+                    "engine_name": "AILabs (MONITORAPP)",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "AlienVault": {
+                    "method": "blacklist",
+                    "engine_name": "AlienVault",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "alphaMountain.ai": {
+                    "method": "blacklist",
+                    "engine_name": "alphaMountain.ai",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "AlphaSOC": {
+                    "method": "blacklist",
+                    "engine_name": "AlphaSOC",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Antiy-AVL": {
+                    "method": "blacklist",
+                    "engine_name": "Antiy-AVL",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "ArcSight Threat Intelligence": {
+                    "method": "blacklist",
+                    "engine_name": "ArcSight Threat Intelligence",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "AutoShun": {
+                    "method": "blacklist",
+                    "engine_name": "AutoShun",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Bfore.Ai PreCrime": {
+                    "method": "blacklist",
+                    "engine_name": "Bfore.Ai PreCrime",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "BitDefender": {
+                    "method": "blacklist",
+                    "engine_name": "BitDefender",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Bkav": {
+                    "method": "blacklist",
+                    "engine_name": "Bkav",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "BlockList": {
+                    "method": "blacklist",
+                    "engine_name": "BlockList",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Blueliv": {
+                    "method": "blacklist",
+                    "engine_name": "Blueliv",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Certego": {
+                    "method": "blacklist",
+                    "engine_name": "Certego",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "ChainPatrol": {
+                    "method": "blacklist",
+                    "engine_name": "ChainPatrol",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Chong Lua Dao": {
+                    "method": "blacklist",
+                    "engine_name": "Chong Lua Dao",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "CINS Army": {
+                    "method": "blacklist",
+                    "engine_name": "CINS Army",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Snort IP sample list": {
+                    "method": "blacklist",
+                    "engine_name": "Snort IP sample list",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Cluster25": {
+                    "method": "blacklist",
+                    "engine_name": "Cluster25",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Xcitium Verdict Cloud": {
+                    "method": "blacklist",
+                    "engine_name": "Xcitium Verdict Cloud",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "CRDF": {
+                    "method": "blacklist",
+                    "engine_name": "CRDF",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "CSIS Security Group": {
+                    "method": "blacklist",
+                    "engine_name": "CSIS Security Group",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Cyan": {
+                    "method": "blacklist",
+                    "engine_name": "Cyan",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Cyble": {
+                    "method": "blacklist",
+                    "engine_name": "Cyble",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "CyRadar": {
+                    "method": "blacklist",
+                    "engine_name": "CyRadar",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "desenmascara.me": {
+                    "method": "blacklist",
+                    "engine_name": "desenmascara.me",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "DNS8": {
+                    "method": "blacklist",
+                    "engine_name": "DNS8",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Dr.Web": {
+                    "method": "blacklist",
+                    "engine_name": "Dr.Web",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Emsisoft": {
+                    "method": "blacklist",
+                    "engine_name": "Emsisoft",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Ermes": {
+                    "method": "blacklist",
+                    "engine_name": "Ermes",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "ESET": {
+                    "method": "blacklist",
+                    "engine_name": "ESET",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "ESTsecurity": {
+                    "method": "blacklist",
+                    "engine_name": "ESTsecurity",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "EmergingThreats": {
+                    "method": "blacklist",
+                    "engine_name": "EmergingThreats",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Fortinet": {
+                    "method": "blacklist",
+                    "engine_name": "Fortinet",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "G-Data": {
+                    "method": "blacklist",
+                    "engine_name": "G-Data",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Google Safe Browsing": {
+                    "method": "blacklist",
+                    "engine_name": "Google Safe Browsing",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "GCP Abuse Intelligence": {
+                    "method": "blacklist",
+                    "engine_name": "GCP Abuse Intelligence",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "GreenSnow": {
+                    "method": "blacklist",
+                    "engine_name": "GreenSnow",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "GreyNoise": {
+                    "method": "blacklist",
+                    "engine_name": "GreyNoise",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Gridinsoft": {
+                    "method": "blacklist",
+                    "engine_name": "Gridinsoft",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Guardpot": {
+                    "method": "blacklist",
+                    "engine_name": "Guardpot",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Heimdal Security": {
+                    "method": "blacklist",
+                    "engine_name": "Heimdal Security",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Hunt.io Intelligence": {
+                    "method": "blacklist",
+                    "engine_name": "Hunt.io Intelligence",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "IPsum": {
+                    "method": "blacklist",
+                    "engine_name": "IPsum",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Juniper Networks": {
+                    "method": "blacklist",
+                    "engine_name": "Juniper Networks",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "K7AntiVirus": {
+                    "method": "blacklist",
+                    "engine_name": "K7AntiVirus",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Kaspersky": {
+                    "method": "blacklist",
+                    "engine_name": "Kaspersky",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Lumu": {
+                    "method": "blacklist",
+                    "engine_name": "Lumu",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Malwared": {
+                    "method": "blacklist",
+                    "engine_name": "Malwared",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "MalwareURL": {
+                    "method": "blacklist",
+                    "engine_name": "MalwareURL",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "MalwarePatrol": {
+                    "method": "blacklist",
+                    "engine_name": "MalwarePatrol",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "CTX AI": {
+                    "method": "blacklist",
+                    "engine_name": "CTX AI",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Mimecast": {
+                    "method": "blacklist",
+                    "engine_name": "Mimecast",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Netcraft": {
+                    "method": "blacklist",
+                    "engine_name": "Netcraft",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "OpenPhish": {
+                    "method": "blacklist",
+                    "engine_name": "OpenPhish",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "0xSI_f33d": {
+                    "method": "blacklist",
+                    "engine_name": "0xSI_f33d",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Phishing Database": {
+                    "method": "blacklist",
+                    "engine_name": "Phishing Database",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "PhishFort": {
+                    "method": "blacklist",
+                    "engine_name": "PhishFort",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Fortra": {
+                    "method": "blacklist",
+                    "engine_name": "Fortra",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Phishtank": {
+                    "method": "blacklist",
+                    "engine_name": "Phishtank",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "PREBYTES": {
+                    "method": "blacklist",
+                    "engine_name": "PREBYTES",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "PrecisionSec": {
+                    "method": "blacklist",
+                    "engine_name": "PrecisionSec",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Quick Heal": {
+                    "method": "blacklist",
+                    "engine_name": "Quick Heal",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Quttera": {
+                    "method": "blacklist",
+                    "engine_name": "Quttera",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Rising": {
+                    "method": "blacklist",
+                    "engine_name": "Rising",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "SafeToOpen": {
+                    "method": "blacklist",
+                    "engine_name": "SafeToOpen",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Sangfor": {
+                    "method": "blacklist",
+                    "engine_name": "Sangfor",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Sansec eComscan": {
+                    "method": "blacklist",
+                    "engine_name": "Sansec eComscan",
+                    "category": "undetected",
+                    "result": "unrated"
+                },
+                "Scantitan": {
+                    "method": "blacklist",
+                    "engine_name": "Scantitan",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "SCUMWARE.org": {
+                    "method": "blacklist",
+                    "engine_name": "SCUMWARE.org",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Seclookup": {
+                    "method": "blacklist",
+                    "engine_name": "Seclookup",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "SOCRadar": {
+                    "method": "blacklist",
+                    "engine_name": "SOCRadar",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Sophos": {
+                    "method": "blacklist",
+                    "engine_name": "Sophos",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "StopForumSpam": {
+                    "method": "blacklist",
+                    "engine_name": "StopForumSpam",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Sucuri SiteCheck": {
+                    "method": "blacklist",
+                    "engine_name": "Sucuri SiteCheck",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "ThreatHive": {
+                    "method": "blacklist",
+                    "engine_name": "ThreatHive",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "LevelBlue": {
+                    "method": "blacklist",
+                    "engine_name": "LevelBlue",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "URLhaus": {
+                    "method": "blacklist",
+                    "engine_name": "URLhaus",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "URLQuery": {
+                    "method": "blacklist",
+                    "engine_name": "URLQuery",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Viettel Threat Intelligence": {
+                    "method": "blacklist",
+                    "engine_name": "Viettel Threat Intelligence",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "VIPRE": {
+                    "method": "blacklist",
+                    "engine_name": "VIPRE",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "ViriBack": {
+                    "method": "blacklist",
+                    "engine_name": "ViriBack",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "VX Vault": {
+                    "method": "blacklist",
+                    "engine_name": "VX Vault",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Webroot": {
+                    "method": "blacklist",
+                    "engine_name": "Webroot",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Forcepoint ThreatSeeker": {
+                    "method": "blacklist",
+                    "engine_name": "Forcepoint ThreatSeeker",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "Yandex Safebrowsing": {
+                    "method": "blacklist",
+                    "engine_name": "Yandex Safebrowsing",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "ZeroCERT": {
+                    "method": "blacklist",
+                    "engine_name": "ZeroCERT",
+                    "category": "harmless",
+                    "result": "clean"
+                },
+                "ZeroFox": {
+                    "method": "blacklist",
+                    "engine_name": "ZeroFox",
+                    "category": "harmless",
+                    "result": "clean"
+                }
+            },
+            "url": "http://www.google.com/",
+            "last_final_url": "https://www.google.com/",
+            "last_http_response_cookies": {
+                "SEARCH_SAMESITE": "CgQIzKEB",
+                "__Secure-STRP": "ANmZwa1NfUwc_0HR58wMNzP1tWz-Vt-MVTexNY0ROmg5IEPdjUi6jd5PwDwtN9cWka6Iw5GGjnF4qgA-B8FJGzS7lZC3MnQ8upoO",
+                "AEC": "AdJVEauxyp24FVX3QMjxcFGOBZvgVYZeHiovQEfaLFIOqwJ7Ot0si2ffag",
+                "NID": "534=W52MDv1bn0RWp1pF3R3-KIBO21SXzap7yscwc4m5XVKa_J83LfV5xfbdgMVEzu0Ds_CVhGFPjLy57JCZFpwOB7fVzy5TJB9YT_6GTkvZlZVEuIugJDjbSB0JhbFJESS3fNlX6OuJLt0VuFHN9szsHknI6MBhMStwFQ-irUihY0pQmHjjvYOYY0_8dOwxLDCt-KZ21gFXS9BZFOt4c0rti2ErCStyQLr049Xg"
+            },
+            "last_submission_date": 1787153516,
+            "html_meta": {
+                "referrer": [
+                    "origin"
+                ]
+            },
+            "last_http_response_code": 200,
+            "proxy_country": "US",
+            "last_modification_date": 1787153536,
+            "javascript_variables": [
+                {
+                    "sha256": "a9dc16a7a3875d174c1af4f923f261cafc124357f2322493a59ee0d14fcd10db",
+                    "type": null,
+                    "value": null,
+                    "name": "event"
+                },
+                {
+                    "sha256": "a9dc16a7a3875d174c1af4f923f261cafc124357f2322493a59ee0d14fcd10db",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "oncommand"
+                },
+                {
+                    "sha256": "a9dc16a7a3875d174c1af4f923f261cafc124357f2322493a59ee0d14fcd10db",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "onanimationcancel"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "crashReport"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "sharedStorage"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_FUNCTION",
+                    "value": null,
+                    "name": "fetchLater"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "viewport"
+                },
+                {
+                    "sha256": "a9dc16a7a3875d174c1af4f923f261cafc124357f2322493a59ee0d14fcd10db",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "onpageswap"
+                },
+                {
+                    "sha256": "a9dc16a7a3875d174c1af4f923f261cafc124357f2322493a59ee0d14fcd10db",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "onpagereveal"
+                },
+                {
+                    "sha256": "a9dc16a7a3875d174c1af4f923f261cafc124357f2322493a59ee0d14fcd10db",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "fence"
+                },
+                {
+                    "sha256": "a9dc16a7a3875d174c1af4f923f261cafc124357f2322493a59ee0d14fcd10db",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "onscrollsnapchange"
+                },
+                {
+                    "sha256": "a9dc16a7a3875d174c1af4f923f261cafc124357f2322493a59ee0d14fcd10db",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "onscrollsnapchanging"
+                },
+                {
+                    "sha256": "a9dc16a7a3875d174c1af4f923f261cafc124357f2322493a59ee0d14fcd10db",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "ongamepadconnected"
+                },
+                {
+                    "sha256": "a9dc16a7a3875d174c1af4f923f261cafc124357f2322493a59ee0d14fcd10db",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "ongamepaddisconnected"
+                },
+                {
+                    "sha256": "db88400e0cb34690f50ede9c7fb26e46796ccc7cada3b459a666ac75b3df5e9d",
+                    "type": "JS_TYPE_NUMBER",
+                    "value": "1.787153520765e+12",
+                    "name": "_hst"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_FUNCTION",
+                    "value": null,
+                    "name": "jsac_init"
+                },
+                {
+                    "sha256": "911ad3066bf54dfe2f779b02e0d39fac5bae743d66c638ba9306ea11ed5744a2",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "gws_wizbind"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_FUNCTION",
+                    "value": null,
+                    "name": "_rtf"
+                },
+                {
+                    "sha256": "2a5b50d78a0113c851638222c20e7209e75d263ffe0885cd606c6a8b76c1f7d4",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "_"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_FUNCTION",
+                    "value": null,
+                    "name": "_DumpException"
+                },
+                {
+                    "sha256": "2a5b50d78a0113c851638222c20e7209e75d263ffe0885cd606c6a8b76c1f7d4",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "_s"
+                },
+                {
+                    "sha256": "2a5b50d78a0113c851638222c20e7209e75d263ffe0885cd606c6a8b76c1f7d4",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "_qs"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_FUNCTION",
+                    "value": null,
+                    "name": "loaded_h_0"
+                },
+                {
+                    "sha256": "10c0e213886f8c8f3c92c794238eb7eabfe9b624b3cb696c389f953bef42f595",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "_xjs_toggles"
+                },
+                {
+                    "sha256": "10c0e213886f8c8f3c92c794238eb7eabfe9b624b3cb696c389f953bef42f595",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "_F_toggles"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_FUNCTION",
+                    "value": null,
+                    "name": "_F_installCss"
+                },
+                {
+                    "sha256": "91967387a7eb03d51dc21f61049bf8ea5981cc5dab9e0d45a99b347a5c729d3a",
+                    "type": "JS_TYPE_STRING",
+                    "value": "/xjs/_/js/k=xjs.hd.en.UyGvFeSFFIo.2019.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIIAAAABAEAAAAAAAAAAAAAAABAACAAAAAAAAAAAAAAAAAAAIEAQAAAQAAAAAAAAAAAIAAAAAAAEAAAAAAAwAIAAEQAEAADAAAAAAAAAAAAAAAAAAAAAAABABAAAgAAAA_GGAEQAAAAAAAAAAJAAAAAAAAAAAAAsAACACAAAAEAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAKAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAIACAAgAABAAAAQAAAAAAAAAAAAAAAAAAAwAAAMAIAAAAAAAAAAAAAAAAAAAAAQAIAARAAAAAAAAAAAAIABAAAACADoDAAwypKQAAAAAAAAAAAAAAAAAAAAAAAAAAEEAB7EIKCIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg5AQAAAAAAwEI/d=1/ed=1/dg=4/br=1/rs=ACT90oF7QCLcoRXg3hiBNUWmefOFW0Hc-w/ee=ALeJib:B8gLwd;AfeaP:TkrAjf;BMxAGc:E5bFse;BgS6mb:fidj5d;BjwMce:cXX2Wb;CIZTGb:Kqhykb;CxXAWb:YyRLvc;DQEued:Fevhcf;DULqB:RKfG5c;Dkk6ge:JZmW9e;DpcR3d:zL72xf;EABSZ:MXZt9d;ESrPQc:mNTJvc;EVNhjf:pw70Gc;EjXHpb:pSHqh;EmZ2Bf:zr1jrb;EnlcNd:WeHg4;F54IAe:ZgsFh;F9mqte:UoRcbe;FSxmUe:fiZR8b;Fkukfc:i8H2c;Fmv9Nc:O1Tzwc;G0KhTb:LIaoZ;GleZL:J1A7Od;HMDDWe:G8QUdb;HtPxrd:Gx8jAb;IBADCc:RYquRb;IoGlCf:b5lhvb;IsdWVc:qzxzOb;JXJSm:ii1RG",
+                    "name": "_F_jsUrl"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_FUNCTION",
+                    "value": null,
+                    "name": "sbmlhf"
+                },
+                {
+                    "sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+                    "type": "JS_TYPE_NUMBER",
+                    "value": "3",
+                    "name": "U3bHHf"
+                },
+                {
+                    "sha256": "9addc47298b468f8a847ab397d747310f5922713e47f9f62cb1cf1c8a91727f7",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "__gr"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "W_jd"
+                },
+                {
+                    "sha256": "94917bab05b8c0141e16f2f22378b5db6e6755f3dcde7b3db00a73150667f29c",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "WIZ_global_data"
+                },
+                {
+                    "sha256": "2e1ab1b4610f245bab216f3ab43bfe8fdab2f4e50ecd4741aee37a37e3039811",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "IJ_values"
+                },
+                {
+                    "sha256": "36172b8666d8d19347109c683d9868c3b70082f6032ea62fb8be8adab9e4fa71",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "jsl"
+                },
+                {
+                    "sha256": "ce7ce73c545446ccb6365e54c4d70f8683e639370c415c5b79eb35812f8fc396",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "Aᶜstate"
+                },
+                {
+                    "sha256": "58391baea0be3cb2baf4681927a4de5321754f663bbef0099fe1c224c3428444",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "silk"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_FUNCTION",
+                    "value": null,
+                    "name": "_F_installCssProto"
+                },
+                {
+                    "sha256": "52133ddfcd583280388a8bbfb67a417b6b660f75bc63ec1b01beec811d4498ef",
+                    "type": "JS_TYPE_FUNCTION",
+                    "value": null,
+                    "name": "wiz_progress"
+                },
+                {
+                    "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "_F_toggles_gbar_"
+                },
+                {
+                    "sha256": "bcc55ceae4e6110e8ae5c7550a6d033f6b41c7fbda3f92a4076e8174bc1def64",
+                    "type": "JS_TYPE_OBJECT",
+                    "value": null,
+                    "name": "userfeedback"
+                }
+            ],
+            "title": "Google",
+            "tld": "com",
+            "web_category": "unspecified",
+            "threat_names": [
+
+            ],
+            "last_analysis_date": 1787153516,
+            "total_votes": {
+                "harmless": 13700,
+                "malicious": 9076
+            },
+            "redirection_chain": [
+                "http://www.google.com/",
+                "https://www.google.com/"
+            ],
+            "tags": [
+                "external-resources"
+            ],
+            "first_submission_date": 1275400795,
+            "last_http_response_content_sha256": "36b521199019f26c847a1159ce299cd3fde7821837ae363028fc4db134279c16"
+        }
+    }
+}
