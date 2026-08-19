@@ -38,7 +38,7 @@
         Undetected: 25
         Harmless: 68
       
-      Categories: Vendor A, Vendor B 
+      Categories: search engines, computers and internet
       
 
 # summary.virustotal_response lists malicious engines

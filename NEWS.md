@@ -33,6 +33,14 @@
 * A missing key now raises a `virustotal_auth_error` instead of a bare
   `stop()`.
 
+## Bug fixes
+
+* `print()` on a domain report showed the *vendors* who categorized the
+  domain under the heading "Categories" — `google.com` reported
+  "Categories: BitDefender, Forcepoint ThreatSeeker, Sophos, ..." The API
+  keys that field by vendor and stores the category as the value, so it now
+  prints the distinct categories ("search engines", ...), capped at five.
+
 ## Housekeeping
 
 * Removed the stale `CRAN-RELEASE`/`CRAN-SUBMISSION` files, a Travis-era

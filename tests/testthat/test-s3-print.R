@@ -49,6 +49,30 @@ test_that("summary.virustotal_response lists malicious engines", {
   expect_snapshot(summary(fake_file_report()))
 })
 
+test_that("domain categories print the categories, not the vendor names", {
+  # The API keys `categories` by vendor with the category as the value.
+  # Printing names() reported "BitDefender, Sophos, ..." as the categories
+  # of a domain every one of them called a search engine.
+  report <- virustotal_domain_report(list(
+    data = list(
+      id = "example.com",
+      type = "domain",
+      attributes = list(categories = list(
+        `Vendor A` = "search engines",
+        `Vendor B` = "search engines",
+        `Vendor C` = "computers and internet"
+      ))
+    )
+  ))
+
+  out <- paste(capture.output(print(report)), collapse = "\n")
+  expect_match(out, "search engines")
+  expect_match(out, "computers and internet")
+  expect_false(grepl("Vendor A", out, fixed = TRUE))
+  # Two vendors agreed; the category is worth saying once.
+  expect_equal(lengths(regmatches(out, gregexpr("search engines", out))), 1L)
+})
+
 test_that("print.virustotal_error output is stable", {
   expect_snapshot({
     print(virustotal_error("Resource not found.", status_code = 404))

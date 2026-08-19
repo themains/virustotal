@@ -3,5 +3,6 @@ linters: linters_with_defaults(
     object_name_linter(styles = c("snake_case", "dotted.case"))
   )
 exclusions: list(
-    "R/RcppExports.R"
+    "R/RcppExports.R",
+    "tests/testthat/_fixtures"
   )

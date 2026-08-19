@@ -176,11 +176,19 @@ print.virustotal_domain_report <- function(x, ...) {
       cat("\n")
     }
 
-    # Categories
+    # Categories. The API keys this field by vendor and stores the category
+    # as the value, so the names are vendors -- printing them labelled
+    # "Categories" reported "BitDefender, Sophos, ..." for a domain every
+    # vendor agreed was a search engine.
     if (!is.null(attrs$categories)) {
-      cats <- names(attrs$categories)
+      cats <- unique(unlist(attrs$categories, use.names = FALSE))
       if (length(cats) > 0) {
-        cat("Categories:", paste(cats, collapse = ", "), "\n")
+        shown <- cats[seq_len(min(5, length(cats)))]
+        cat("Categories:", paste(shown, collapse = ", "))
+        if (length(cats) > 5) {
+          cat(sprintf(" ... and %d more", length(cats) - 5))
+        }
+        cat("\n")
       }
     }
 

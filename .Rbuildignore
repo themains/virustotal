@@ -19,3 +19,8 @@
 ^\.DS_Store$
 ^\.git$
 ^\.gitignore$
+# httptest2 mirrors the full request URL into each fixture path, which runs
+# past the 100 bytes a tarball can portably store. The replay tests are a CI
+# asset: they run from a git checkout on all five platforms, and skip when
+# the directory is absent.
+^tests/testthat/_fixtures$

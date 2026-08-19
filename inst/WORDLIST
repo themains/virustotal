@@ -6,6 +6,7 @@ ATT
 behaviour
 behaviours
 bitdefender
+BitDefender
 CMD
 codebase
 codecov
@@ -13,6 +14,7 @@ covrpage
 DNS
 dplyr
 EVTX
+Forcepoint
 geolocation
 hostname
 httr
@@ -25,6 +27,7 @@ lifecycle
 MITRE
 oldrel
 openssl
+pak
 param
 params
 pcap
@@ -36,6 +39,8 @@ rescanning
 roxygen
 sanitization
 SHA
+Sophos
+ThreatSeeker
 trojans
 tunable
 unpadded
