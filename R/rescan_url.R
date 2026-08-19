@@ -25,9 +25,7 @@
 #' # Request rescan using URL ID
 #' rescan_url("687474703a2f2f7777772e676f6f676c652e636f6d2f")
 #' }
-
 rescan_url <- function(url_id = NULL, ...) {
-
   assert_character(url_id, len = 1, any.missing = FALSE, min.chars = 1)
 
   url_id <- validate_input(url_id)

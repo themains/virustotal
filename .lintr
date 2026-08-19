@@ -1,11 +1,7 @@
-cache_directory: ".lintr_cache"
 linters: linters_with_defaults(
-    line_length_linter = NULL,
-    object_name_linter = NULL,
-    indentation_linter = NULL,
-    return_linter = NULL,
-    trailing_whitespace_linter = NULL
+    line_length_linter(100L),
+    object_name_linter(styles = c("snake_case", "dotted.case"))
   )
 exclusions: list(
-    "tests/_covrpage.Rmd"
+    "R/RcppExports.R"
   )

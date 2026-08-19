@@ -22,15 +22,15 @@
 #' get_domain_comments("http://www.google.com")
 #' get_domain_comments("http://www.goodsfwrfw.com") # Domain not found
 #' }
-
 get_domain_comments <- function(domain = NULL, limit = NULL, cursor = NULL, ...) {
+  assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
 
-    assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
+  domain <- gsub("^http://|^https://", "", domain)
 
-    domain <- gsub("^http://|^https://", "", domain)
+  res <- virustotal_GET(
+    path = paste0("domains/", domain, "/comments"),
+    query = list(limit = limit, cursor = cursor), ...
+  )
 
-    res   <- virustotal_GET(path = paste0("domains/", domain, "/comments"),
-                                             query = list(limit = limit, cursor = cursor), ...)
-
-    res
+  res
 }

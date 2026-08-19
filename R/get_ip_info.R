@@ -21,13 +21,13 @@
 #'
 #' get_ip_info("64.233.160.0")
 #' }
-
 get_ip_info <- function(ip = NULL, limit = NULL, cursor = NULL, ...) {
+  assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
 
-    assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
+  res <- virustotal_GET(
+    path = paste0("ip_addresses/", ip),
+    query = list(limit = limit, cursor = cursor), ...
+  )
 
-    res <- virustotal_GET(path = paste0("ip_addresses/", ip),
-                          query = list(limit = limit, cursor = cursor), ...)
-
-    res
+  res
 }

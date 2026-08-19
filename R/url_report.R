@@ -25,9 +25,7 @@
 #' # Get report using URL ID (base64 encoded URL without padding)
 #' url_report("687474703a2f2f7777772e676f6f676c652e636f6d2f")
 #' }
-
 url_report <- function(url_id = NULL, ...) {
-
   # Validate URL ID using checkmate
   assert_character(url_id, len = 1, any.missing = FALSE, min.chars = 1)
 

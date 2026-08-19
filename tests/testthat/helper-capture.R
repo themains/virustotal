@@ -9,14 +9,18 @@ new_capture <- function(response = list(data = list(id = "x", type = "file"))) {
   cap <- new.env(parent = emptyenv())
   cap$calls <- list()
   cap$get <- function(path, query = list(), key = "fake", ...) {
-    cap$calls[[length(cap$calls) + 1L]] <- list(verb = "GET", path = path,
-                                                query = query, dots = list(...))
+    cap$calls[[length(cap$calls) + 1L]] <- list(
+      verb = "GET", path = path,
+      query = query, dots = list(...)
+    )
     response
   }
   cap$post <- function(path, body = NULL, query = list(), key = "fake", ...) {
-    cap$calls[[length(cap$calls) + 1L]] <- list(verb = "POST", path = path,
-                                                query = query, body = body,
-                                                dots = list(...))
+    cap$calls[[length(cap$calls) + 1L]] <- list(
+      verb = "POST", path = path,
+      query = query, body = body,
+      dots = list(...)
+    )
     response
   }
   cap$last <- function() cap$calls[[length(cap$calls)]]
@@ -28,9 +32,11 @@ use_capture <- function(cap, env = parent.frame()) {
     c(VIRUSTOTAL_API_KEY = strrep("a", 64)),
     .local_envir = env
   )
-  testthat::local_mocked_bindings(virustotal_GET = cap$get,
-                                  virustotal_POST = cap$post,
-                                  .package = "virustotal", .env = env)
+  testthat::local_mocked_bindings(
+    virustotal_GET = cap$get,
+    virustotal_POST = cap$post,
+    .package = "virustotal", .env = env
+  )
 }
 
 # The reference implementation of a v3 URL identifier:

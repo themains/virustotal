@@ -94,8 +94,10 @@ vt_perform <- function(req) {
 #' @return list
 #' @keywords internal
 
-virustotal_GET <- function(path, query = list(),
-                          key = vt_key(), ...) {
+# The HTTP-verb casing is deliberate and predates the lint standard; renaming
+# would churn every endpoint file and the test mocks for zero behavior.
+virustotal_GET <- function(path, query = list(), # nolint: object_name_linter.
+                           key = vt_key(), ...) {
   req <- vt_request(path, key)
   if (length(query)) req <- req_url_query(req, !!!query)
   resp <- vt_perform(req)
@@ -120,9 +122,9 @@ virustotal_GET <- function(path, query = list(),
 #' @return list
 #' @keywords internal
 
-virustotal_POST <- function(path, body = NULL, query = list(),
-                           key = vt_key(),
-                           encode = "json", ...) {
+virustotal_POST <- function(path, body = NULL, query = list(), # nolint: object_name_linter.
+                            key = vt_key(),
+                            encode = "json", ...) {
   req <- vt_request(path, key)
   if (length(query)) req <- req_url_query(req, !!!query)
   req <- if (is.null(body)) {
@@ -153,7 +155,7 @@ virustotal_POST <- function(path, body = NULL, query = list(),
 #' @param key A character string containing the VirusTotal API key.
 #' @return A raw vector.
 #' @keywords internal
-virustotal_GET_raw <- function(path, key = vt_key()) {
+virustotal_GET_raw <- function(path, key = vt_key()) { # nolint: object_name_linter.
   resp <- vt_perform(vt_request(path, key))
   resp_body_raw(resp)
 }

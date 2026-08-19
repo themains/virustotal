@@ -23,11 +23,16 @@ retrieve comprehensive threat analysis reports.
 
 ### Installation
 
-From CRAN, or the development version from GitHub:
+From CRAN:
 
 ```{r install}
 install.packages("virustotal")
-# install.packages("pak"); pak::pak("themains/virustotal")
+```
+
+Or the development version from GitHub, with pak:
+
+```{r install_dev}
+pak::pak("themains/virustotal")
 ```
 
 #### Load the library
@@ -140,10 +145,10 @@ server's `Retry-After` header. Four options control this:
 
 ```{r options}
 options(
-  virustotal.requests_per_minute = 1000,  # premium keys can go faster
-  virustotal.max_tries = 3,               # attempts per request
-  virustotal.timeout = 60,                # seconds
-  virustotal.throttle = TRUE              # FALSE disables client-side pacing
+  virustotal.requests_per_minute = 1000, # premium keys can go faster
+  virustotal.max_tries = 3, # attempts per request
+  virustotal.timeout = 60, # seconds
+  virustotal.throttle = TRUE # FALSE disables client-side pacing
 )
 ```
 

@@ -16,12 +16,12 @@
 #'
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
-#' post_url_comments(url_id='http://www.google.com',
-#'                   comment='This URL appears suspicious')
+#' post_url_comments(
+#'   url_id = 'http://www.google.com',
+#'   comment = 'This URL appears suspicious'
+#' )
 #' }
-
 post_url_comments <- function(url_id = NULL, comment = NULL, ...) {
-
   assert_character(url_id, len = 1, any.missing = FALSE, min.chars = 1)
   assert_character(comment, len = 1, any.missing = FALSE, min.chars = 1)
 
@@ -30,10 +30,14 @@ post_url_comments <- function(url_id = NULL, comment = NULL, ...) {
     url_id <- vt_url_id(url_id)
   }
 
-  comment_body <- list(data = list(type = "comment",
-                                    attributes = list(text = comment)))
-  res <- virustotal_POST(path = paste0("urls/", url_id, "/comments"),
-                        body = comment_body, ...)
+  comment_body <- list(data = list(
+    type = "comment",
+    attributes = list(text = comment)
+  ))
+  res <- virustotal_POST(
+    path = paste0("urls/", url_id, "/comments"),
+    body = comment_body, ...
+  )
 
   res
 }

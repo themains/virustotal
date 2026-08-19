@@ -84,7 +84,8 @@ virustotal_ip_report <- function(data) {
 #' @param x A virustotal_response object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
-#' @return The object, invisibly. Called for the side effect of printing a summary of the API response.
+#' @return The object, invisibly. Called for the side effect of printing
+#'   a summary of the API response.
 #' @export
 print.virustotal_response <- function(x, ...) {
   cat("VirusTotal API Response\n")
@@ -115,7 +116,8 @@ print.virustotal_response <- function(x, ...) {
 #' @param x A virustotal_file_report object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
-#' @return The object, invisibly. Called for the side effect of printing a summary of the file report.
+#' @return The object, invisibly. Called for the side effect of printing
+#'   a summary of the file report.
 #' @export
 print.virustotal_file_report <- function(x, ...) {
   NextMethod()
@@ -154,7 +156,8 @@ print.virustotal_file_report <- function(x, ...) {
 #' @param x A virustotal_domain_report object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
-#' @return The object, invisibly. Called for the side effect of printing a summary of the domain report.
+#' @return The object, invisibly. Called for the side effect of printing
+#'   a summary of the domain report.
 #' @export
 print.virustotal_domain_report <- function(x, ...) {
   NextMethod()
@@ -192,7 +195,8 @@ print.virustotal_domain_report <- function(x, ...) {
 #' @param object A virustotal_response object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
-#' @return The object, invisibly. Called for the side effect of printing a summary of the API response.
+#' @return The object, invisibly. Called for the side effect of printing
+#'   a summary of the API response.
 #' @export
 summary.virustotal_response <- function(object, ...) {
   print(object)

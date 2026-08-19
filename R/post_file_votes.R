@@ -16,11 +16,9 @@
 #'
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
-#' post_file_votes(hash='99017f6eebbac24f351415dd410d522d', verdict='malicious')
+#' post_file_votes(hash = '99017f6eebbac24f351415dd410d522d', verdict = 'malicious')
 #' }
-
 post_file_votes <- function(hash = NULL, verdict = NULL, ...) {
-
   assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
   assert_character(verdict, len = 1, any.missing = FALSE)
 
@@ -32,10 +30,14 @@ post_file_votes <- function(hash = NULL, verdict = NULL, ...) {
     ))
   }
 
-  vote_body <- list(data = list(type = "vote",
-                                 attributes = list(verdict = verdict)))
-  res <- virustotal_POST(path = paste0("files/", hash, "/votes"),
-                        body = vote_body, ...)
+  vote_body <- list(data = list(
+    type = "vote",
+    attributes = list(verdict = verdict)
+  ))
+  res <- virustotal_POST(
+    path = paste0("files/", hash, "/votes"),
+    body = vote_body, ...
+  )
 
   res
 }

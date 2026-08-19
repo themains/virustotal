@@ -18,11 +18,9 @@
 #'
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
-#' get_behaviour_report(sandbox_id='hash_sandboxname')
+#' get_behaviour_report(sandbox_id = 'hash_sandboxname')
 #' }
-
 get_behaviour_report <- function(sandbox_id = NULL, ...) {
-
   assert_character(sandbox_id, len = 1, any.missing = FALSE, min.chars = 1)
 
   res <- virustotal_GET(path = paste0("file_behaviours/", sandbox_id), ...)

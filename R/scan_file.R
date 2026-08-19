@@ -23,7 +23,6 @@
 #' result <- scan_file(file_path = 'suspicious_file.exe')
 #' print(result)
 #' }
-
 scan_file <- function(file_path, ...) {
   # Input validation using checkmate
   assert_character(file_path, len = 1, any.missing = FALSE)
@@ -39,23 +38,26 @@ scan_file <- function(file_path, ...) {
     ))
   }
 
-  tryCatch({
-    res <- virustotal_POST(
-      path = "files",
-      body = list(file = form_file(file_path)),
-      encode = "multipart",
-      ...
-    )
+  tryCatch(
+    {
+      res <- virustotal_POST(
+        path = "files",
+        body = list(file = form_file(file_path)),
+        encode = "multipart",
+        ...
+      )
 
-    # Return structured response
-    virustotal_file_scan(res)
-  }, error = function(e) {
-    if (!inherits(e, "virustotal_error")) {
-      stop(virustotal_error(
-        message = paste("Failed to upload file:", e$message),
-        response = NULL
-      ))
+      # Return structured response
+      virustotal_file_scan(res)
+    },
+    error = function(e) {
+      if (!inherits(e, "virustotal_error")) {
+        stop(virustotal_error(
+          message = paste("Failed to upload file:", e$message),
+          response = NULL
+        ))
+      }
+      stop(e)
     }
-    stop(e)
-  })
+  )
 }

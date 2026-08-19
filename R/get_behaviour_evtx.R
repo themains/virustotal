@@ -20,13 +20,13 @@
 #'
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
-#' evtx <- get_behaviour_evtx(sandbox_id='hash_sandboxname')
-#' get_behaviour_evtx(sandbox_id='hash_sandboxname',
-#'                    output_path='/tmp/events.evtx')
+#' evtx <- get_behaviour_evtx(sandbox_id = 'hash_sandboxname')
+#' get_behaviour_evtx(
+#'   sandbox_id = 'hash_sandboxname',
+#'   output_path = '/tmp/events.evtx'
+#' )
 #' }
-
 get_behaviour_evtx <- function(sandbox_id = NULL, output_path = NULL, ...) {
-
   assert_character(sandbox_id, len = 1, any.missing = FALSE, min.chars = 1)
 
   if (!is.null(output_path)) {
@@ -37,8 +37,8 @@ get_behaviour_evtx <- function(sandbox_id = NULL, output_path = NULL, ...) {
 
   if (!is.null(output_path)) {
     writeBin(raw_body, output_path)
-    return(paste("EVTX file saved to:", output_path))
+    paste("EVTX file saved to:", output_path)
   } else {
-    return(raw_body)
+    raw_body
   }
 }

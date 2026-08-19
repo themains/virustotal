@@ -17,12 +17,12 @@
 #'
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
-#' download_file(hash='99017f6eebbac24f351415dd410d522d',
-#'               output_path='/tmp/downloaded_file')
+#' download_file(
+#'   hash = '99017f6eebbac24f351415dd410d522d',
+#'   output_path = '/tmp/downloaded_file'
+#' )
 #' }
-
 download_file <- function(hash = NULL, output_path = NULL, ...) {
-
   assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
 
   if (!is.null(output_path)) {
@@ -33,8 +33,8 @@ download_file <- function(hash = NULL, output_path = NULL, ...) {
 
   if (!is.null(output_path)) {
     writeBin(raw_body, output_path)
-    return(paste("File downloaded to:", output_path))
+    paste("File downloaded to:", output_path)
   } else {
-    return(raw_body)
+    raw_body
   }
 }

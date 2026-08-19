@@ -54,7 +54,7 @@ Get a key from your [VirusTotal profile](https://www.virustotal.com/), then:
 
 ```{r}
 library(virustotal)
-set_key("your_api_key")   # or set VIRUSTOTAL_API_KEY in .Renviron
+set_key("your_api_key") # or set VIRUSTOTAL_API_KEY in .Renviron
 
 # What does VirusTotal know about a domain, an IP, a file hash, a URL?
 domain_report("google.com")

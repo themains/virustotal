@@ -23,7 +23,6 @@
 #' # Verify it's set
 #' Sys.getenv("VIRUSTOTAL_API_KEY")
 #' }
-
 set_key <- function(api_key = NULL) {
   if (is.null(api_key)) {
     stop(virustotal_validation_error(
@@ -33,15 +32,18 @@ set_key <- function(api_key = NULL) {
     ))
   }
 
-  tryCatch({
-    assert_character(api_key, len = 1, any.missing = FALSE, min.chars = 1)
-  }, error = function(e) {
-    stop(virustotal_validation_error(
-      message = "API key must be a non-empty character string",
-      parameter = "api_key",
-      value = if (is.null(api_key)) "NULL" else class(api_key)[1]
-    ))
-  })
+  tryCatch(
+    {
+      assert_character(api_key, len = 1, any.missing = FALSE, min.chars = 1)
+    },
+    error = function(e) {
+      stop(virustotal_validation_error(
+        message = "API key must be a non-empty character string",
+        parameter = "api_key",
+        value = if (is.null(api_key)) "NULL" else class(api_key)[1]
+      ))
+    }
+  )
 
   if (nchar(api_key) < 32) {
     stop(virustotal_validation_error(
