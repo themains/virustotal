@@ -42,7 +42,7 @@ scan_file <- function(file_path, ...) {
   tryCatch({
     res <- virustotal_POST(
       path = "files",
-      body = list(file = upload_file(file_path)),
+      body = list(file = form_file(file_path)),
       encode = "multipart",
       ...
     )

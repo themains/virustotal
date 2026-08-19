@@ -1,8 +1,12 @@
 #' Rate Limiting for VirusTotal API
 #'
 #' @description
-#' Modern rate limiting implementation that properly manages API request limits.
-#' VirusTotal public API allows 4 requests per minute.
+#' Pacing is enforced by \code{httr2::req_throttle()} inside the shared
+#' request builder (see \code{vt_request}), tunable via
+#' \code{options(virustotal.requests_per_minute=)} and switchable via
+#' \code{options(virustotal.throttle=)}. What lives here is a passive log of
+#' request times, kept so \code{virustotal_info()} can report usage against
+#' the public API's 4-per-minute allowance.
 #'
 #' @name rate-limiting
 #' @keywords internal
@@ -11,7 +15,7 @@ NULL
 
 .virustotal_state <- new.env(parent = emptyenv())
 
-#' Initialize rate limiting state
+#' Initialize the request log
 #'
 #' @keywords internal
 init_rate_limit <- function() {
@@ -21,7 +25,7 @@ init_rate_limit <- function() {
   .virustotal_state$initialized <- TRUE
 }
 
-#' Check if rate limiting is properly initialized
+#' Is the request log initialized?
 #'
 #' @keywords internal
 is_rate_limit_initialized <- function() {
@@ -31,66 +35,21 @@ is_rate_limit_initialized <- function() {
     !is.null(.virustotal_state$max_requests)
 }
 
-#' Modern rate limiting implementation
+#' Record a performed request
 #'
-#' Uses a sliding window approach to track requests and enforce limits.
-#' This replaces the old environment variable-based approach.
+#' Appends a timestamp to the log. Called after each successful
+#' \code{req_perform()}; enforcement is httr2's job, not this function's.
 #'
-#' @param force_wait Logical. If TRUE, will wait even if under limit
 #' @return Invisible TRUE
 #' @keywords internal
 #' @family rate limiting
-rate_limit <- function(force_wait = FALSE) {
+record_request <- function() {
   if (!is_rate_limit_initialized()) {
     init_rate_limit()
   }
-
-  current_time <- as.numeric(Sys.time())
-  window_size <- .virustotal_state$window_size
-  if (is.null(window_size)) window_size <- 60
-
-  window_start <- current_time - window_size
-
-  requests <- .virustotal_state$requests
-  if (is.null(requests)) requests <- numeric(0)
-
-  if (length(requests) > 0) {
-    active_requests <- requests[requests > window_start]
-  } else {
-    active_requests <- numeric(0)
-  }
-  .virustotal_state$requests <- active_requests
-
-  max_requests <- .virustotal_state$max_requests
-  if (is.null(max_requests)) max_requests <- 4
-
-  if (length(.virustotal_state$requests) >= max_requests || force_wait) {
-    if (length(.virustotal_state$requests) > 0) {
-      oldest_request <- min(active_requests)
-      wait_time <- max(0, window_size - (current_time - oldest_request))
-
-      if (wait_time > 0) {
-        message(sprintf("Rate limit reached. Waiting %.1f seconds...",
-                        wait_time))
-        Sys.sleep(wait_time + 0.1)
-
-        current_time <- as.numeric(Sys.time())
-        window_start <- current_time - window_size
-
-        requests_after_wait <- .virustotal_state$requests
-        if (!is.null(requests_after_wait) && length(requests_after_wait) > 0) {
-          keep <- requests_after_wait > window_start
-          active_after <- requests_after_wait[keep]
-        } else {
-          active_after <- numeric(0)
-        }
-        .virustotal_state$requests <- active_after
-      }
-    }
-  }
-
-  .virustotal_state$requests <- c(.virustotal_state$requests, current_time)
-
+  .virustotal_state$requests <- c(
+    .virustotal_state$requests, as.numeric(Sys.time())
+  )
   invisible(TRUE)
 }
 
@@ -106,22 +65,12 @@ get_rate_limit_status <- function() {
 
   current_time <- as.numeric(Sys.time())
 
-  window_size <- .virustotal_state$window_size
-  if (is.null(window_size)) window_size <- 60
-
-  max_requests <- .virustotal_state$max_requests
-  if (is.null(max_requests)) max_requests <- 4
-
-  requests <- .virustotal_state$requests
-  if (is.null(requests)) requests <- numeric(0)
+  window_size <- .virustotal_state$window_size %||% 60
+  max_requests <- .virustotal_state$max_requests %||% 4
+  requests <- .virustotal_state$requests %||% numeric(0)
 
   window_start <- current_time - window_size
-
-  if (length(requests) > 0) {
-    active_requests <- requests[requests > window_start]
-  } else {
-    active_requests <- numeric(0)
-  }
+  active_requests <- requests[requests > window_start]
 
   list(
     requests_used = length(active_requests),
@@ -136,14 +85,13 @@ get_rate_limit_status <- function() {
   )
 }
 
-#' Reset rate limiting state
+#' Reset the request log
 #'
-#' Clears all rate limiting history. Useful for testing.
+#' Clears all recorded request times. Useful for testing.
 #'
 #' @keywords internal
 #' @family rate limiting
 reset_rate_limit <- function() {
   init_rate_limit()
-  message("Rate limiting state reset.")
   invisible(TRUE)
 }

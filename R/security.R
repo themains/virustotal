@@ -102,7 +102,7 @@ sanitize_url <- function(url) {
   }
 
   # Basic URL validation
-  parsed <- try(parse_url(url), silent = TRUE)
+  parsed <- try(url_parse(url), silent = TRUE)
   if (inherits(parsed, "try-error") || is.null(parsed$hostname)) {
     stop(virustotal_validation_error(
       message = "Invalid URL format",

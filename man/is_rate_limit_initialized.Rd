@@ -2,11 +2,11 @@
 % Please edit documentation in R/rate_limiting.R
 \name{is_rate_limit_initialized}
 \alias{is_rate_limit_initialized}
-\title{Check if rate limiting is properly initialized}
+\title{Is the request log initialized?}
 \usage{
 is_rate_limit_initialized()
 }
 \description{
-Check if rate limiting is properly initialized
+Is the request log initialized?
 }
 \keyword{internal}

@@ -12,6 +12,19 @@ Details about API calls: \url{https://docs.virustotal.com/reference}.
 You will need credentials to use this application.
 If you haven't already, get the API Key at \url{https://www.virustotal.com/}.
 }
+\section{Options}{
+
+\describe{
+\item{\code{virustotal.timeout}}{Request timeout in seconds. Default 60.}
+\item{\code{virustotal.max_tries}}{Maximum attempts per request; retries
+honor HTTP 429/503 and their \code{Retry-After} header. Default 3.}
+\item{\code{virustotal.requests_per_minute}}{Client-side throttle.
+Default 4, the public API allowance; premium keys can raise it.}
+\item{\code{virustotal.throttle}}{Set \code{FALSE} to disable the
+client-side throttle entirely. Default \code{TRUE}.}
+}
+}
+
 \seealso{
 Useful links:
 \itemize{

@@ -2,18 +2,18 @@
 % Please edit documentation in R/rate_limiting.R
 \name{reset_rate_limit}
 \alias{reset_rate_limit}
-\title{Reset rate limiting state}
+\title{Reset the request log}
 \usage{
 reset_rate_limit()
 }
 \description{
-Clears all rate limiting history. Useful for testing.
+Clears all recorded request times. Useful for testing.
 }
 \seealso{
 Other rate limiting:
 \code{\link[=get_rate_limit_status]{get_rate_limit_status()}},
 \code{\link{rate-limiting}},
-\code{\link[=rate_limit]{rate_limit()}}
+\code{\link[=record_request]{record_request()}}
 }
 \concept{rate limiting}
 \keyword{internal}

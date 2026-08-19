@@ -11,7 +11,8 @@ get_behaviour_pcap(sandbox_id = NULL, output_path = NULL, ...)
 
 \item{output_path}{Local path to save the PCAP file. Optional.}
 
-\item{\dots}{Additional arguments passed to httr::GET.}
+\item{\dots}{Ignored. Configure requests with the package options
+instead (see \code{\link{virustotal}}).}
 }
 \value{
 Raw PCAP content or saves to file if output_path specified

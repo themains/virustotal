@@ -11,7 +11,8 @@ download_file(hash = NULL, output_path = NULL, ...)
 
 \item{output_path}{Local path to save the downloaded file. Optional.}
 
-\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
+\item{\dots}{Ignored. Configure requests with the package options
+instead (see \code{\link{virustotal}}).}
 }
 \value{
 Raw file content or saves file to specified path

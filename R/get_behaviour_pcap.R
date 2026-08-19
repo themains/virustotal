@@ -4,7 +4,8 @@
 #'
 #' @param sandbox_id Sandbox report ID (character string). Required.
 #' @param output_path Local path to save the PCAP file. Optional.
-#' @param \dots Additional arguments passed to httr::GET.
+#' @param \dots Ignored. Configure requests with the package options
+#'   instead (see \code{\link{virustotal}}).
 #'
 #' @return Raw PCAP content or saves to file if output_path specified
 #'
@@ -32,16 +33,12 @@ get_behaviour_pcap <- function(sandbox_id = NULL, output_path = NULL, ...) {
     assert_character(output_path, len = 1, any.missing = FALSE, min.chars = 1)
   }
 
-  res <- GET("https://www.virustotal.com/",
-             path = paste0("api/v3/file_behaviours/", sandbox_id, "/pcap"),
-             add_headers("x-apikey" = vt_key()), ...)
-
-  virustotal_check(res)
+  raw_body <- virustotal_GET_raw(paste0("file_behaviours/", sandbox_id, "/pcap"))
 
   if (!is.null(output_path)) {
-    writeBin(content(res, "raw"), output_path)
+    writeBin(raw_body, output_path)
     return(paste("PCAP file saved to:", output_path))
   } else {
-    return(content(res, "raw"))
+    return(raw_body)
   }
 }

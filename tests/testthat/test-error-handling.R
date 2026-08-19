@@ -32,21 +32,41 @@ test_that("error printing works", {
 })
 
 test_that("virustotal_check handles HTTP status codes", {
-  success_resp <- list(status_code = 200)
-  expect_silent(virustotal_check(success_resp))
+  expect_silent(virustotal_check(httr2::response(200)))
 
-  auth_resp <- list(status_code = 401)
-  expect_error(virustotal_check(auth_resp), class = "virustotal_auth_error")
-
-  not_found_resp <- list(status_code = 404)
-  expect_error(virustotal_check(not_found_resp), class = "virustotal_error")
-
-  server_error_resp <- list(status_code = 500)
-  expect_error(virustotal_check(server_error_resp), class = "virustotal_error")
-
-  rate_limit_resp <- list(status_code = 204)
   expect_error(
-    virustotal_check(rate_limit_resp),
+    virustotal_check(httr2::response(401)),
+    class = "virustotal_auth_error"
+  )
+  expect_error(
+    virustotal_check(httr2::response(403)),
+    class = "virustotal_auth_error"
+  )
+  expect_error(
+    virustotal_check(httr2::response(404)),
+    class = "virustotal_error"
+  )
+  expect_error(
+    virustotal_check(httr2::response(500)),
+    class = "virustotal_error"
+  )
+  expect_error(
+    virustotal_check(httr2::response(204)),
     class = "virustotal_rate_limit_error"
   )
+  expect_error(
+    virustotal_check(httr2::response(429)),
+    class = "virustotal_rate_limit_error"
+  )
+})
+
+test_that("a 429 carries its Retry-After into the condition object", {
+  e <- tryCatch(
+    virustotal_check(
+      httr2::response(429, headers = list(`retry-after` = "37"))
+    ),
+    error = function(e) e
+  )
+  expect_s3_class(e, "virustotal_rate_limit_error")
+  expect_equal(e$retry_after, 37)
 })

@@ -2,7 +2,8 @@
 #'
 #' @param hash File hash (MD5, SHA1, or SHA256)
 #' @param output_path Local path to save the downloaded file. Optional.
-#' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
+#' @param \dots Ignored. Configure requests with the package options
+#'   instead (see \code{\link{virustotal}}).
 #'
 #' @return Raw file content or saves file to specified path
 #'
@@ -28,16 +29,12 @@ download_file <- function(hash = NULL, output_path = NULL, ...) {
     assert_character(output_path, len = 1, any.missing = FALSE, min.chars = 1)
   }
 
-  res <- GET("https://www.virustotal.com/",
-             path = paste0("api/v3/files/", hash, "/download"),
-             add_headers("x-apikey" = vt_key()), ...)
-
-  virustotal_check(res)
+  raw_body <- virustotal_GET_raw(paste0("files/", hash, "/download"))
 
   if (!is.null(output_path)) {
-    writeBin(content(res, "raw"), output_path)
+    writeBin(raw_body, output_path)
     return(paste("File downloaded to:", output_path))
   } else {
-    return(content(res, "raw"))
+    return(raw_body)
   }
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/virustotal.R
 \name{virustotal_GET}
 \alias{virustotal_GET}
-\title{Base POST AND GET functions. Not exported.}
+\title{GET for the Current V3 API}
 \usage{
 virustotal_GET(path, query = list(), key = vt_key(), ...)
 }
@@ -15,7 +15,9 @@ virustotal_GET(path, query = list(), key = vt_key(), ...)
 Default: \code{vt_key()}, which reads \code{VIRUSTOTAL_API_KEY} and then
 the historical \code{VirustotalToken}.}
 
-\item{\dots}{Additional arguments passed to \code{\link[httr]{GET}}.}
+\item{\dots}{Ignored. Earlier versions forwarded these to
+\code{httr::GET}; configure requests with the package options instead
+(see \code{\link{virustotal}}).}
 }
 \value{
 list

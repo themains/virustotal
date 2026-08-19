@@ -4,13 +4,17 @@
 \alias{rate-limiting}
 \title{Rate Limiting for VirusTotal API}
 \description{
-Modern rate limiting implementation that properly manages API request limits.
-VirusTotal public API allows 4 requests per minute.
+Pacing is enforced by \code{httr2::req_throttle()} inside the shared
+request builder (see \code{vt_request}), tunable via
+\code{options(virustotal.requests_per_minute=)} and switchable via
+\code{options(virustotal.throttle=)}. What lives here is a passive log of
+request times, kept so \code{virustotal_info()} can report usage against
+the public API's 4-per-minute allowance.
 }
 \seealso{
 Other rate limiting:
 \code{\link[=get_rate_limit_status]{get_rate_limit_status()}},
-\code{\link[=rate_limit]{rate_limit()}},
+\code{\link[=record_request]{record_request()}},
 \code{\link[=reset_rate_limit]{reset_rate_limit()}}
 }
 \concept{rate limiting}

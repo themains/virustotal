@@ -15,7 +15,7 @@ Get current rate limit status
 \seealso{
 Other rate limiting:
 \code{\link{rate-limiting}},
-\code{\link[=rate_limit]{rate_limit()}},
+\code{\link[=record_request]{record_request()}},
 \code{\link[=reset_rate_limit]{reset_rate_limit()}}
 }
 \concept{rate limiting}

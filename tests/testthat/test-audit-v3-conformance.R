@@ -28,8 +28,22 @@ use_capture <- function(cap, env = parent.frame()) {
 
 # The reference implementation of a v3 URL identifier:
 #   base64.urlsafe_b64encode(url.encode()).decode().strip("=")
+# Base64 is computed here in plain R, sharing no code with the package's
+# openssl-based implementation, so agreement between the two is evidence.
 urlsafe_id <- function(u) {
-  chartr("+/", "-_", gsub("=+$", "", base64enc::base64encode(charToRaw(u))))
+  alphabet <- c(LETTERS, letters, as.character(0:9), "-", "_")
+  bytes <- as.integer(charToRaw(u))
+  bits <- as.vector(vapply(
+    bytes, function(b) as.integer(intToBits(b))[8:1], integer(8)
+  ))
+  pad <- (6 - length(bits) %% 6) %% 6
+  bits <- c(bits, rep(0L, pad))
+  idx <- vapply(
+    seq(1, length(bits), by = 6),
+    function(i) sum(bits[i:(i + 5)] * 2^(5:0)),
+    numeric(1)
+  )
+  paste(alphabet[idx + 1], collapse = "")
 }
 
 test_that("URL identifiers use the URL-safe base64 alphabet", {
@@ -140,19 +154,14 @@ test_that("print dispatches for a caller outside the package namespace", {
 })
 
 test_that("retry_after falls back to 60 when the header is absent", {
-  # as.numeric(NULL) is numeric(0), not NULL, so the %||% fallback never fired
+  # as.numeric(NULL) is numeric(0), not NULL, so a %||% fallback never fired
   # and a zero-length value propagated into the condition object.
-  mkresp <- function(code, hdrs = list()) {
-    structure(list(url = "u", status_code = code,
-                   headers = httr:::insensitive(hdrs), all_headers = list(),
-                   cookies = data.frame(), content = raw(0), date = Sys.time(),
-                   times = c(total = 0), request = NULL, handle = NULL),
-              class = "response")
-  }
   check <- get("virustotal_check", envir = asNamespace("virustotal"))
-  e <- tryCatch(check(mkresp(429)), error = function(e) e)
+  e <- tryCatch(check(httr2::response(429)), error = function(e) e)
   expect_equal(e$retry_after, 60)
-  e <- tryCatch(check(mkresp(429, list("retry-after" = "37"))),
-                error = function(e) e)
+  e <- tryCatch(
+    check(httr2::response(429, headers = list("retry-after" = "37"))),
+    error = function(e) e
+  )
   expect_equal(e$retry_after, 37)
 })

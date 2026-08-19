@@ -81,15 +81,14 @@ test_that("rescan_url validates input correctly", {
   )
 })
 
-test_that("URL encoding works correctly", {
-  skip_if_not_installed("base64enc")
-
-  test_url <- "http://www.google.com"
-  encoded <- base64enc::base64encode(charToRaw(test_url))
-  encoded <- gsub("=+$", "", encoded)
-
-  expect_true(nchar(encoded) > 0)
-  expect_false(grepl("=", encoded))
+test_that("vt_url_id matches the documented identifier for a known URL", {
+  # Fixed vocabulary from the v3 API docs: the identifier of
+  # http://www.google.com is its unpadded URL-safe base64 encoding.
+  expect_identical(
+    vt_url_id("http://www.google.com"),
+    "aHR0cDovL3d3dy5nb29nbGUuY29t"
+  )
+  expect_false(grepl("[=+/]", vt_url_id("https://example.org/a?b=c&d=e")))
 })
 
 test_that("URL operations work with mocked responses", {
