@@ -178,3 +178,38 @@ test_that("file_report wraps the response in its S3 class", {
   expect_s3_class(report, "virustotal_file_report")
   expect_equal(report$data$attributes$last_analysis_stats$malicious, 61L)
 })
+
+test_that("download_file returns raw bytes or writes them to a path", {
+  withr::local_envvar(c(VIRUSTOTAL_API_KEY = strrep("a", 64)))
+  payload <- as.raw(c(0x4d, 0x5a, 0x90, 0x00))
+  httr2::local_mocked_responses(list(
+    httr2::response(200, body = payload),
+    httr2::response(200, body = payload)
+  ))
+
+  expect_identical(download_file("abc123"), payload)
+
+  out <- tempfile()
+  withr::defer(unlink(out))
+  msg <- download_file("abc123", output_path = out)
+  expect_match(msg, "File downloaded to:")
+  expect_identical(readBin(out, "raw", n = 10), payload)
+})
+
+test_that("a failed download raises before anything reaches output_path", {
+  withr::local_envvar(c(VIRUSTOTAL_API_KEY = strrep("a", 64)))
+  httr2::local_mocked_responses(list(httr2::response(404)))
+  out <- tempfile()
+  withr::defer(unlink(out))
+  expect_error(download_file("abc123", output_path = out),
+    class = "virustotal_error"
+  )
+  expect_false(file.exists(out))
+})
+
+test_that("behaviour artifact endpoints return raw bodies", {
+  withr::local_envvar(c(VIRUSTOTAL_API_KEY = strrep("a", 64)))
+  payload <- charToRaw("<html></html>")
+  httr2::local_mocked_responses(list(httr2::response(200, body = payload)))
+  expect_identical(get_behaviour_html("id_sandbox"), payload)
+})

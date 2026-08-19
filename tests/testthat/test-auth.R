@@ -70,3 +70,9 @@ test_that("API functions require API key", {
   expect_error(ip_report("8.8.8.8"), class = "virustotal_auth_error")
   expect_error(domain_report("example.com"), class = "virustotal_auth_error")
 })
+
+test_that("vt_key errors as a typed condition when nothing is set", {
+  withr::local_envvar(c(VIRUSTOTAL_API_KEY = NA, VirustotalToken = NA))
+  expect_error(vt_key(), class = "virustotal_auth_error")
+  expect_false(has_vt_key())
+})
