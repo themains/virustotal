@@ -8,39 +8,46 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r, include = FALSE}
+# Every chunk shows code without running it: the API needs a key and a
+# network, and CRAN has neither. Sample output shown inline was captured
+# from real responses.
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 ## Using virustotal
 
-The virustotal package provides access to the VirusTotal API v3, allowing you to scan files and URLs for malware, get domain and IP intelligence, and retrieve comprehensive threat analysis reports.
+The virustotal package provides access to the VirusTotal API v3, allowing you
+to scan files and URLs for malware, get domain and IP intelligence, and
+retrieve comprehensive threat analysis reports.
 
 ### Installation
 
-To get the current development version from GitHub:
+From CRAN, or the development version from GitHub:
 
-```{r, eval=FALSE, install}
+```{r install}
 install.packages("virustotal")
+# install.packages("pak"); pak::pak("themains/virustotal")
 ```
 
-Or install the development version:
+#### Load the library
 
-```{r, eval=FALSE, install-dev}
-library(devtools)
-install_github("themains/virustotal")
-```
-
-#### Load the library:
-
-```{r, eval=F, load}
+```{r load}
 library(virustotal)
 ```
 
 #### Authentication
 
 1. Get your free API key from [VirusTotal](https://www.virustotal.com/)
-2. Set the API key in your R session:
+2. Set it once per session:
 
-```{r, eval=F, api_key}
+```{r api_key}
 set_key("your_api_key_here")
 ```
+
+Or set the `VIRUSTOTAL_API_KEY` environment variable (for example in
+`~/.Renviron`) and skip `set_key()` entirely. The historical
+`VirustotalToken` variable is still honored.
 
 ### Core Functions
 
@@ -48,28 +55,43 @@ set_key("your_api_key_here")
 
 **Scan a file for malware:**
 
-```{r, eval=F, scan_file}
-# Submit a file for analysis
+```{r scan_file}
 result <- scan_file("path/to/suspicious_file.exe")
 analysis_id <- result$data$id
 ```
 
 **Get file analysis report:**
 
-```{r, eval=F, file_report}
-# Get analysis results using file hash
+```{r file_report}
 report <- file_report("99017f6eebbac24f351415dd410d522d")
+report
+```
 
-# Access scan results
+```
+## VirusTotal API Response
+## ======================
+##
+## Type: File Report
+## ID: 99017f6eebbac24f351415dd410d522d
+## Resource Type: file
+##
+## Detection Summary:
+##   Malicious: 61
+##   Suspicious: 0
+##   Undetected: 4
+##   Harmless: 0
+```
+
+The raw response stays a list underneath:
+
+```{r file_report_raw}
 scan_results <- report$data$attributes$last_analysis_results
-total_engines <- length(scan_results)
 detections <- sum(sapply(scan_results, function(x) x$category == "malicious"))
 ```
 
 **Request file rescan:**
 
-```{r, eval=F, rescan_file}
-# Request new analysis of existing file
+```{r rescan_file}
 rescan_result <- rescan_file("99017f6eebbac24f351415dd410d522d")
 new_analysis_id <- rescan_result$data$id
 ```
@@ -78,56 +100,69 @@ new_analysis_id <- rescan_result$data$id
 
 **Scan a URL:**
 
-```{r, eval=F, scan_url}
-# Submit URL for analysis
+```{r scan_url}
 url_result <- scan_url("http://suspicious-site.com")
 analysis_id <- url_result$data$id
 ```
 
 **Get URL analysis report:**
 
-```{r, eval=F, url_report}
-# Get analysis results using URL
+```{r url_report}
 report <- url_report("http://www.google.com")
-
-# Access scan results
 scan_results <- report$data$attributes$last_analysis_results
-threat_score <- report$data$attributes$stats
 ```
 
 #### Domain Intelligence
 
-**Get domain information:**
-
-```{r, eval=F, domain}
-# Get comprehensive domain analysis
+```{r domain}
 domain_info <- domain_report("google.com")
 
-# Access various data points
 categories <- domain_info$data$attributes$categories
 whois_data <- domain_info$data$attributes$whois
-dns_records <- domain_info$data$attributes$dns_records
+dns_records <- domain_info$data$attributes$last_dns_records
 ```
 
 #### IP Address Intelligence
 
-**Get IP address information:**
-
-```{r, eval=F, ip}
-# Get IP analysis including geolocation and ASN
+```{r ip}
 ip_info <- ip_report("8.8.8.8")
 
-# Access geo and network information
 country <- ip_info$data$attributes$country
 asn <- ip_info$data$attributes$asn
 network <- ip_info$data$attributes$network
 ```
 
-### Rate Limiting
+### Rate Limiting, Retries and Timeouts
 
-The package automatically handles VirusTotal's rate limits (4 requests per minute for free accounts). You don't need to implement your own rate limiting.
+The package paces itself to the public API's allowance (4 requests per
+minute) and retries transient failures (HTTP 429 and 503), honoring the
+server's `Retry-After` header. Four options control this:
+
+```{r options}
+options(
+  virustotal.requests_per_minute = 1000,  # premium keys can go faster
+  virustotal.max_tries = 3,               # attempts per request
+  virustotal.timeout = 60,                # seconds
+  virustotal.throttle = TRUE              # FALSE disables client-side pacing
+)
+```
 
 ### Error Handling
 
-All functions include comprehensive input validation and will provide clear error messages for common issues like missing API keys or invalid parameters.
+API failures are typed conditions, so specific failures can be handled
+without string-matching messages:
 
+```{r errors}
+tryCatch(
+  file_report("0000000000000000000000000000000000000000"),
+  virustotal_rate_limit_error = function(e) {
+    message("Out of quota; retry after ", e$retry_after, "s")
+  },
+  virustotal_auth_error = function(e) message("Check the API key"),
+  virustotal_error = function(e) message("VT error: ", conditionMessage(e))
+)
+```
+
+The classes are `virustotal_auth_error`, `virustotal_rate_limit_error` (with
+a `retry_after` field), `virustotal_validation_error` (bad input, thrown
+before any network traffic), and their parent `virustotal_error`.

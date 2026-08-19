@@ -1,5 +1,48 @@
 # virustotal (development version)
 
+## Breaking changes
+
+* The HTTP layer moved from httr to httr2. Extra arguments (`...`) to API
+  functions are no longer forwarded to `httr::GET()`/`httr::POST()` — they
+  are ignored. Configure requests with options instead:
+  `virustotal.timeout` (seconds, default 60), `virustotal.max_tries`
+  (default 3), `virustotal.requests_per_minute` (default 4) and
+  `virustotal.throttle` (default `TRUE`).
+* Error conditions now carry an httr2 response object in `$response`
+  instead of an httr one. The condition classes themselves are unchanged.
+* Requires R >= 4.1.0. Dependencies httr, dplyr and base64enc were dropped;
+  httr2, curl and openssl were added.
+
+## New features
+
+* Requests identify the package with a user agent, time out after a
+  configurable limit, and retry transient failures (HTTP 429/503) honoring
+  the server's `Retry-After` header.
+* Rate limiting moved from a hand-rolled sliding window that slept in-process
+  to `httr2::req_throttle()`; the "Rate limit reached. Waiting..." message is
+  gone (httr2 waits silently), and premium keys can finally raise the pace
+  via `options(virustotal.requests_per_minute=)`.
+* `download_file()`, `get_behaviour_html()`, `get_behaviour_evtx()`,
+  `get_behaviour_pcap()` and `get_behaviour_memdump()` now go through the
+  shared HTTP core: they gain rate limiting, retries and the package's
+  error classes, none of which applied to them before.
+* The API key is resolved lazily at call time. `VIRUSTOTAL_API_KEY` is the
+  canonical environment variable and wins when both are set;
+  `VirustotalToken` remains honored, and `set_key()` sets both. Loading the
+  package no longer mutates environment variables.
+* A missing key now raises a `virustotal_auth_error` instead of a bare
+  `stop()`.
+
+## Housekeeping
+
+* Removed the stale `CRAN-RELEASE`/`CRAN-SUBMISSION` files, a Travis-era
+  encrypted API key with no decryption code, covrpage leftovers that
+  shipped in the tarball, and a permanently-skipped integration test
+  (replaced by one gated on `VT_INTEGRATION=true`).
+* `inst/CITATION` no longer reads a `Date` field the DESCRIPTION never had.
+* Internal helpers no longer emit `message()`/`warning()` chatter during
+  normal operation.
+
 # virustotal 0.6.0
 
 ## Breaking Changes
