@@ -25,9 +25,11 @@ Retrieves a detailed HTML report from a sandbox analysis.
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-html <- get_behaviour_html(sandbox_id='hash_sandboxname')
-get_behaviour_html(sandbox_id='hash_sandboxname',
-                   output_path='/tmp/report.html')
+html <- get_behaviour_html(sandbox_id = 'hash_sandboxname')
+get_behaviour_html(
+  sandbox_id = 'hash_sandboxname',
+  output_path = '/tmp/report.html'
+)
 }
 }
 \references{

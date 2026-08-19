@@ -24,7 +24,7 @@ Add a vote to a file
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-post_file_votes(hash='99017f6eebbac24f351415dd410d522d', verdict='malicious')
+post_file_votes(hash = '99017f6eebbac24f351415dd410d522d', verdict = 'malicious')
 }
 }
 \references{

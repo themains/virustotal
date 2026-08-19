@@ -202,7 +202,7 @@ virustotal_info <- function() {
     cat("\u26A0 CI/Non-interactive\n")
   }
 
-  cat("\nFor help, see: ?virustotal or https://docs.virustotal.com/reference\n")
+  cat("\nFor help, see: ?virustotal or <https://docs.virustotal.com/reference>\n")
 
   invisible(NULL)
 }

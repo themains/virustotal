@@ -26,7 +26,7 @@ Retrieve votes for a URL
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-get_url_votes(url_id='http://www.google.com')
+get_url_votes(url_id = 'http://www.google.com')
 }
 }
 \references{

@@ -25,9 +25,11 @@ Retrieves the EVTX (Windows Event Log) file from a sandbox analysis.
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-evtx <- get_behaviour_evtx(sandbox_id='hash_sandboxname')
-get_behaviour_evtx(sandbox_id='hash_sandboxname',
-                   output_path='/tmp/events.evtx')
+evtx <- get_behaviour_evtx(sandbox_id = 'hash_sandboxname')
+get_behaviour_evtx(
+  sandbox_id = 'hash_sandboxname',
+  output_path = '/tmp/events.evtx'
+)
 }
 }
 \references{

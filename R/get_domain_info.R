@@ -19,7 +19,7 @@
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
 #' get_domain_info("http://www.google.com")
-#' get_domain_info("http://www.goodsfwrfw.com") # Domain not found
+#' get_domain_info("https://www.example.com") # Domain not found
 #' }
 get_domain_info <- function(domain = NULL, limit = NULL, cursor = NULL, ...) {
   # Validate domain using checkmate

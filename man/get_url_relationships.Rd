@@ -34,8 +34,10 @@ Retrieve relationships for a URL
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-get_url_relationships(url_id='http://www.google.com',
-                      relationship='communicating_files')
+get_url_relationships(
+  url_id = 'http://www.google.com',
+  relationship = 'communicating_files'
+)
 }
 }
 \references{

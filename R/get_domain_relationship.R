@@ -20,7 +20,7 @@
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
 #' get_domain_relationship("https://www.google.com")
-#' get_domain_relationship("https://www.goodsfwrfw.com") # Domain not found
+#' get_domain_relationship("https://www.example.com") # Domain not found
 #' }
 get_domain_relationship <- function(domain = NULL, relationship = "subdomains",
                                     limit = NULL, cursor = NULL, ...) {

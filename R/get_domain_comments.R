@@ -20,7 +20,7 @@
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
 #' get_domain_comments("http://www.google.com")
-#' get_domain_comments("http://www.goodsfwrfw.com") # Domain not found
+#' get_domain_comments("https://www.example.com") # Domain not found
 #' }
 get_domain_comments <- function(domain = NULL, limit = NULL, cursor = NULL, ...) {
   assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)

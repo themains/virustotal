@@ -106,7 +106,7 @@ new_analysis_id <- rescan_result$data$id
 **Scan a URL:**
 
 ```{r scan_url}
-url_result <- scan_url("http://suspicious-site.com")
+url_result <- scan_url("http://www.example.com")
 analysis_id <- url_result$data$id
 ```
 

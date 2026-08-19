@@ -26,8 +26,8 @@ Retrieves all behaviour reports for a file from various sandboxes.
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-get_file_behaviours(hash='99017f6eebbac24f351415dd410d522d')
-get_file_behaviours(hash='99017f6eebbac24f351415dd410d522d', limit=5)
+get_file_behaviours(hash = '99017f6eebbac24f351415dd410d522d')
+get_file_behaviours(hash = '99017f6eebbac24f351415dd410d522d', limit = 5)
 }
 }
 \references{
