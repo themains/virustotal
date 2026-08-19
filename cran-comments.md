@@ -4,10 +4,7 @@
 * win-builder (R-release)
 
 ## R CMD check results
-0 errors | 0 warnings | 1 note
-
-* NOTE: "IoC" flagged as possibly misspelled in DESCRIPTION
-  - This is intentional: IoC = "Indicator of Compromise" (standard security term)
+0 errors | 0 warnings | 0 notes
 
 ## New in this version
 * Removed VirusTotal API v2.0 support (package now uses v3.0 exclusively)
