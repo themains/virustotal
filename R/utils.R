@@ -43,19 +43,11 @@ validate_input <- function(input) {
 #' @keywords internal
 #' @family utilities
 is_safe_environment <- function() {
-  # Check if we're in an interactive session
-  if (!interactive()) {
-    warning("Running in non-interactive mode. Be cautious with files.")
-  }
-
-  # Check for common CI environments where we should be extra careful
+  # CI environments are where file-handling caution matters most; being
+  # non-interactive alone is not worth a warning (it fires in every
+  # R CMD check run).
   ci_vars <- c("CI", "GITHUB_ACTIONS", "TRAVIS", "APPVEYOR", "GITLAB_CI")
-  if (any(Sys.getenv(ci_vars) != "")) {
-    message("CI environment detected. Some functions may be disabled.")
-    return(FALSE)
-  }
-
-  return(TRUE)
+  !any(Sys.getenv(ci_vars) != "")
 }
 
 #' Convert file size to human readable format
@@ -122,7 +114,6 @@ create_safe_temp_dir <- function() {
     Sys.chmod(temp_dir, mode = "0700")
   }
 
-  message("Created secure temporary directory: ", temp_dir)
   return(temp_dir)
 }
 
@@ -147,7 +138,6 @@ cleanup_temp_files <- function(paths) {
         } else {
           file.remove(path)
         }
-        message("Cleaned up: ", path)
       }, error = function(e) {
         warning("Failed to clean up ", path, ": ", e$message)
         success <<- FALSE

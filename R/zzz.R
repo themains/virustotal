@@ -6,13 +6,9 @@ NULL
 
 #' @importFrom utils packageDescription
 .onLoad <- function(libname, pkgname) {
+  # The key is resolved lazily by vt_key() at call time, so loading the
+  # package no longer mutates the environment.
   init_rate_limit()
-
-  vt_token <- Sys.getenv("VirustotalToken")
-  vt_api_key <- Sys.getenv("VIRUSTOTAL_API_KEY")
-  if (vt_token == "" && vt_api_key != "") {
-    Sys.setenv(VirustotalToken = vt_api_key)
-  }
 }
 
 .onUnload <- function(libpath) {

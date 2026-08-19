@@ -30,7 +30,7 @@ download_file <- function(hash = NULL, output_path = NULL, ...) {
 
   res <- GET("https://www.virustotal.com/",
              path = paste0("api/v3/files/", hash, "/download"),
-             add_headers("x-apikey" = Sys.getenv("VirustotalToken")), ...)
+             add_headers("x-apikey" = vt_key()), ...)
 
   virustotal_check(res)
 

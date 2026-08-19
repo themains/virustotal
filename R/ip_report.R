@@ -26,7 +26,7 @@
 ip_report <- function(ip = NULL, ...) {
     assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
 
-    if (identical(Sys.getenv("VirustotalToken"), "")) {
+    if (!has_vt_key()) {
         stop(virustotal_auth_error(
             message = "Authentication failed. Please check your API key."
         ))

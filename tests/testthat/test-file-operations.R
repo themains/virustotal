@@ -38,13 +38,8 @@ test_that("file_report validates input correctly", {
   expect_error(file_report(123), class = "virustotal_validation_error")
   expect_error(file_report(""), class = "virustotal_validation_error")
 
-  old_key <- Sys.getenv("VirustotalToken")
-  Sys.unsetenv("VirustotalToken")
+  withr::local_envvar(c(VIRUSTOTAL_API_KEY = NA, VirustotalToken = NA))
   expect_error(file_report("dummy_hash"), class = "virustotal_auth_error")
-
-  if (old_key != "") {
-    Sys.setenv(VirustotalToken = old_key)
-  }
 })
 
 test_that("rescan_file validates input correctly", {

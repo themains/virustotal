@@ -26,18 +26,15 @@
 #'
 #' @param path  path to the specific API service url
 #' @param query query list
-#' @param key A character string containing Virustotal API Key.
-#'   Default: \code{Sys.getenv("VirustotalToken")}.
+#' @param key A character string containing the VirusTotal API key.
+#'   Default: \code{vt_key()}, which reads \code{VIRUSTOTAL_API_KEY} and then
+#'   the historical \code{VirustotalToken}.
 #' @param \dots Additional arguments passed to \code{\link[httr]{GET}}.
 #' @return list
 #' @keywords internal
 
 virustotal_GET <- function(path, query = list(),
-                          key = Sys.getenv("VirustotalToken"), ...) {
-
-  if (identical(key, "")) {
-        stop("Please set application key via set_key(key='key')).\n")
-  }
+                          key = vt_key(), ...) {
 
   rate_limit()
 
@@ -59,8 +56,9 @@ virustotal_GET <- function(path, query = list(),
 #' @param path  path to the specific API service url
 #' @param body request body (file upload or JSON data)
 #' @param query query list
-#' @param key A character string containing Virustotal API Key.
-#'   Default: \code{Sys.getenv("VirustotalToken")}.
+#' @param key A character string containing the VirusTotal API key.
+#'   Default: \code{vt_key()}, which reads \code{VIRUSTOTAL_API_KEY} and then
+#'   the historical \code{VirustotalToken}.
 #' @param encode Body encoding, passed to \code{\link[httr]{POST}}. One of
 #'   \code{"json"} (the default), \code{"form"} or \code{"multipart"}.
 #' @param \dots Additional arguments passed to \code{\link[httr]{POST}}.
@@ -68,12 +66,8 @@ virustotal_GET <- function(path, query = list(),
 #' @keywords internal
 
 virustotal_POST <- function(path, body = NULL, query = list(),
-                           key = Sys.getenv("VirustotalToken"),
+                           key = vt_key(),
                            encode = "json", ...) {
-
-  if (identical(key, "")) {
-        stop("Please set application key via set_key(key='key')).\n")
-  }
 
   rate_limit()
 

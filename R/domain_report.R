@@ -69,7 +69,7 @@ domain_report <- function(domain = NULL, ...) {
   }
 
   # Check API key after all validation
-  if (identical(Sys.getenv("VirustotalToken"), "")) {
+  if (!has_vt_key()) {
     stop(virustotal_auth_error(
       message = "Authentication failed. Please check your API key."
     ))

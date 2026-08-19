@@ -60,7 +60,7 @@ file_report <- function(hash, ...) {
   })
   
   # Check API key after basic validation
-  if (identical(Sys.getenv("VirustotalToken"), "")) {
+  if (!has_vt_key()) {
     stop(virustotal_auth_error(
       message = "Authentication failed. Please check your API key."
     ))

@@ -247,7 +247,7 @@ sanitize_ip <- function(ip) {
 #' @export
 #' @family security
 is_api_key_configured <- function() {
-  key <- Sys.getenv("VirustotalToken")
+  key <- if (has_vt_key()) vt_key() else ""
   if (key == "" || is.null(key)) {
     return(FALSE)
   }

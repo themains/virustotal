@@ -3,6 +3,11 @@
 #' Stores your VirusTotal API key in an environment variable for use by other
 #' package functions. Get your API key from \url{https://www.virustotal.com/}.
 #'
+#' The canonical environment variable is \code{VIRUSTOTAL_API_KEY}; the
+#' historical \code{VirustotalToken} is also set for compatibility with code
+#' that reads it directly. Setting either variable before loading the package
+#' works without calling this function at all.
+#'
 #' @param api_key VirusTotal API key (character string). Required.
 #'
 #' @return Invisibly returns TRUE on success
@@ -16,7 +21,7 @@
 #' set_key('your_64_character_api_key_here')
 #'
 #' # Verify it's set
-#' Sys.getenv("VirustotalToken")
+#' Sys.getenv("VIRUSTOTAL_API_KEY")
 #' }
 
 set_key <- function(api_key = NULL) {
@@ -59,7 +64,7 @@ set_key <- function(api_key = NULL) {
     ))
   }
 
-  Sys.setenv(VirustotalToken = api_key)
+  Sys.setenv(VIRUSTOTAL_API_KEY = api_key, VirustotalToken = api_key)
 
   message("VirusTotal API key successfully set.")
   invisible(TRUE)

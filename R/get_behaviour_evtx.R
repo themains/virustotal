@@ -34,7 +34,7 @@ get_behaviour_evtx <- function(sandbox_id = NULL, output_path = NULL, ...) {
 
   res <- GET("https://www.virustotal.com/",
              path = paste0("api/v3/file_behaviours/", sandbox_id, "/evtx"),
-             add_headers("x-apikey" = Sys.getenv("VirustotalToken")), ...)
+             add_headers("x-apikey" = vt_key()), ...)
 
   virustotal_check(res)
 

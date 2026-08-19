@@ -8,7 +8,7 @@ virustotal_POST(
   path,
   body = NULL,
   query = list(),
-  key = Sys.getenv("VirustotalToken"),
+  key = vt_key(),
   encode = "json",
   ...
 )
@@ -20,8 +20,9 @@ virustotal_POST(
 
 \item{query}{query list}
 
-\item{key}{A character string containing Virustotal API Key.
-Default: \code{Sys.getenv("VirustotalToken")}.}
+\item{key}{A character string containing the VirusTotal API key.
+Default: \code{vt_key()}, which reads \code{VIRUSTOTAL_API_KEY} and then
+the historical \code{VirustotalToken}.}
 
 \item{encode}{Body encoding, passed to \code{\link[httr]{POST}}. One of
 \code{"json"} (the default), \code{"form"} or \code{"multipart"}.}

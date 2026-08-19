@@ -4,15 +4,16 @@
 \alias{virustotal_GET}
 \title{Base POST AND GET functions. Not exported.}
 \usage{
-virustotal_GET(path, query = list(), key = Sys.getenv("VirustotalToken"), ...)
+virustotal_GET(path, query = list(), key = vt_key(), ...)
 }
 \arguments{
 \item{path}{path to the specific API service url}
 
 \item{query}{query list}
 
-\item{key}{A character string containing Virustotal API Key.
-Default: \code{Sys.getenv("VirustotalToken")}.}
+\item{key}{A character string containing the VirusTotal API key.
+Default: \code{vt_key()}, which reads \code{VIRUSTOTAL_API_KEY} and then
+the historical \code{VirustotalToken}.}
 
 \item{\dots}{Additional arguments passed to \code{\link[httr]{GET}}.}
 }

@@ -35,8 +35,9 @@ Suggests:
     httptest (>= 4.0.0),
     covr,
     pkgdown,
-    spelling
-RoxygenNote: 7.3.3
+    spelling,
+    withr
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
 Config/Needs/website: pkgdown
+Config/roxygen2/version: 8.0.0
