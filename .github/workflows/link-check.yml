@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   links:
-    uses: gojiplus/r-canon/.github/workflows/reusable-link-check.yml@v1
+    uses: gojiplus/r-canon/.github/workflows/reusable-link-check.yml@v2
     with:
       # The API base URL answers 404 to an unauthenticated GET by design.
       exclude: |
