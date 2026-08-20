@@ -16,12 +16,12 @@ Object of class \code{virustotal_url_scan}
 Create a VirusTotal URL scan result
 }
 \seealso{
-Other response classes: 
+Other response classes:
 \code{\link{virustotal-classes}},
-\code{\link{virustotal_domain_report}()},
-\code{\link{virustotal_file_report}()},
-\code{\link{virustotal_file_scan}()},
-\code{\link{virustotal_ip_report}()}
+\code{\link[=virustotal_domain_report]{virustotal_domain_report()}},
+\code{\link[=virustotal_file_report]{virustotal_file_report()}},
+\code{\link[=virustotal_file_scan]{virustotal_file_scan()}},
+\code{\link[=virustotal_ip_report]{virustotal_ip_report()}}
 }
 \concept{response classes}
 \keyword{internal}

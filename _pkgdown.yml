@@ -1,4 +1,79 @@
-url: http://themains.github.io/virustotal/
+url: https://themains.github.io/virustotal/
 template:
   bootstrap: 5
 
+reference:
+- title: Authentication
+  contents:
+  - set_key
+  - is_api_key_configured
+
+- title: Reports
+  desc: Look up what VirusTotal already knows about a file, URL, domain or IP.
+  contents:
+  - file_report
+  - url_report
+  - domain_report
+  - ip_report
+  - get_analysis
+
+- title: Scanning and rescanning
+  contents:
+  - scan_file
+  - scan_url
+  - starts_with("rescan_")
+  - get_file_upload_url
+
+- title: Comments and votes
+  contents:
+  - matches("comments$")
+  - matches("votes$")
+
+- title: Relationships and object info
+  contents:
+  - get_domain_info
+  - get_ip_info
+  - get_domain_relationship
+  - get_file_relationships
+  - get_url_relationships
+
+- title: File downloads
+  contents:
+  - download_file
+  - get_file_download_url
+
+- title: Sandbox behaviour
+  contents:
+  - get_file_behaviour_summary
+  - get_file_behaviour_mitre_trees
+  - get_file_behaviours
+  - get_behaviour_report
+  - get_behaviour_html
+  - get_behaviour_evtx
+  - get_behaviour_pcap
+  - get_behaviour_memdump
+
+- title: Response classes
+  contents:
+  - virustotal_file_report
+  - virustotal_domain_report
+  - virustotal_ip_report
+  - virustotal_file_scan
+  - virustotal_url_scan
+  - print.virustotal_response
+  - print.virustotal_file_report
+  - print.virustotal_domain_report
+  - summary.virustotal_response
+
+- title: Errors
+  contents:
+  - virustotal_error
+  - virustotal_auth_error
+  - virustotal_rate_limit_error
+  - virustotal_validation_error
+  - print.virustotal_error
+
+- title: Package utilities
+  contents:
+  - virustotal_info
+  - virustotal_version

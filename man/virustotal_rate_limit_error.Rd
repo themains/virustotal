@@ -24,12 +24,12 @@ An error object of class \code{virustotal_rate_limit_error}
 Create a rate limit error
 }
 \seealso{
-Other error handling: 
+Other error handling:
 \code{\link{virustotal-errors}},
-\code{\link{virustotal_auth_error}()},
-\code{\link{virustotal_check}()},
-\code{\link{virustotal_error}()},
-\code{\link{virustotal_validation_error}()}
+\code{\link[=virustotal_auth_error]{virustotal_auth_error()}},
+\code{\link[=virustotal_check]{virustotal_check()}},
+\code{\link[=virustotal_error]{virustotal_error()}},
+\code{\link[=virustotal_validation_error]{virustotal_validation_error()}}
 }
 \concept{error handling}
 \keyword{internal}

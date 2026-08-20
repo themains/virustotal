@@ -16,14 +16,14 @@ Logical indicating if response structure is valid
 Checks if a response from VirusTotal API has the expected structure.
 }
 \seealso{
-Other utilities: 
-\code{\link{cleanup_temp_files}()},
-\code{\link{create_safe_temp_dir}()},
-\code{\link{format_file_size}()},
-\code{\link{is_safe_environment}()},
+Other utilities:
+\code{\link[=cleanup_temp_files]{cleanup_temp_files()}},
+\code{\link[=create_safe_temp_dir]{create_safe_temp_dir()}},
+\code{\link[=format_file_size]{format_file_size()}},
+\code{\link[=is_safe_environment]{is_safe_environment()}},
 \code{\link{utilities}},
-\code{\link{virustotal_info}()},
-\code{\link{virustotal_version}()}
+\code{\link[=virustotal_info]{virustotal_info()}},
+\code{\link[=virustotal_version]{virustotal_version()}}
 }
 \concept{utilities}
 \keyword{internal}

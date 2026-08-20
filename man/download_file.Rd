@@ -11,7 +11,8 @@ download_file(hash = NULL, output_path = NULL, ...)
 
 \item{output_path}{Local path to save the downloaded file. Optional.}
 
-\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
+\item{\dots}{Ignored. Configure requests with the package options
+instead (see \code{\link{virustotal}}).}
 }
 \value{
 Raw file content or saves file to specified path
@@ -24,8 +25,10 @@ Download a file from VirusTotal
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-download_file(hash='99017f6eebbac24f351415dd410d522d',
-              output_path='/tmp/downloaded_file')
+download_file(
+  hash = '99017f6eebbac24f351415dd410d522d',
+  output_path = '/tmp/downloaded_file'
+)
 }
 }
 \references{

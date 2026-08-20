@@ -1,49 +1,85 @@
-## virustotal: R Client for the VirusTotal Public API v3.0
+
+<!-- README.md is generated from README.Rmd. Edit that file, then knit. -->
+
+## virustotal: R Client for the VirusTotal API v3
 
 [![R-CMD-check](https://github.com/themains/virustotal/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/themains/virustotal/actions/workflows/R-CMD-check.yml)
-[![pkgdown](https://github.com/themains/virustotal/actions/workflows/pkgdown.yml/badge.svg)](https://github.com/themains/virustotal/actions/workflows/pkgdown.yml)
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/virustotal)](https://cran.r-project.org/package=virustotal)
+[![lint](https://github.com/themains/virustotal/actions/workflows/lint.yml/badge.svg)](https://github.com/themains/virustotal/actions/workflows/lint.yml)
+[![codecov](https://codecov.io/gh/themains/virustotal/branch/master/graph/badge.svg)](https://app.codecov.io/gh/themains/virustotal)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/virustotal)](https://cran.r-project.org/package=virustotal)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 ![](https://cranlogs.r-pkg.org/badges/grand-total/virustotal)
 
+Use [VirusTotal](https://www.virustotal.com), a Google service that
+analyzes files and URLs for viruses, worms, trojans and other malware,
+categorizes the content hosted by a domain using a variety of prominent
+services, and provides passive DNS information, among other things.
 
-Use [VirusTotal](https://www.virustotal.com), a Google service that analyzes files and URLs for viruses, worms, trojans etc., provides category of the content hosted by a domain from a variety of prominent services, provides passive DNS information, among other things.
-
-This package provides comprehensive support for the VirusTotal API v3.0, which offers richer data including IoC relationships, sandbox dynamic analysis, static file information, YARA rules, and comprehensive threat intelligence.
-
-**API Rate Limits:**
-- **Public API**: 500 requests/day, 4 requests/minute
-- **Premium API**: No daily or rate limitations
-
-**Supported Operations:**
-- **Files**: Upload, scan, get reports, download, comments, votes, relationships
-- **URLs**: Submit for analysis, get reports, comments, votes, relationships  
-- **Domains**: Get reports, comments, votes, relationships, WHOIS data
-- **IP Addresses**: Get reports, comments, votes, relationships, passive DNS
-
-See [https://www.virustotal.com](https://www.virustotal.com) for more information. 
+The package covers the VirusTotal API v3: file, URL, domain and IP
+reports; scanning and rescanning; IoC relationships; sandbox behaviour
+artifacts; comments and votes. Requests are paced to the public API’s
+4-per-minute allowance automatically, transient failures are retried
+honoring the server’s `Retry-After`, and API failures surface as typed R
+conditions you can `tryCatch` on.
 
 ### Installation
 
-To get the current released version from CRAN:
-```r
+From CRAN:
+
+``` r
 install.packages("virustotal")
 ```
 
-To get the current development version from GitHub:
+Development version from GitHub:
 
-```r
-install.packages("devtools")
-devtools::install_github("themains/virustotal", build_vignettes = TRUE)
+``` r
+# install.packages("pak")
+pak::pak("themains/virustotal")
 ```
 
-### Usage
+### Quick start
 
-To learn about how to use the package, read the [vignette](vignettes/using_virustotal.Rmd). Or launch the vignette within R:
+Get a key from [your VirusTotal API key
+page](https://www.virustotal.com/gui/my-apikey), then:
 
-```r
-# Using virustotal
+``` r
+library(virustotal)
+set_key("your_api_key") # or set VIRUSTOTAL_API_KEY in .Renviron
+
+# What does VirusTotal know about a domain, an IP, a file hash, a URL?
+domain_report("google.com")
+ip_report("8.8.8.8")
+file_report("99017f6eebbac24f351415dd410d522d")
+url_report("http://www.google.com")
+
+# Submit new things for analysis
+scan_url("https://example.org")
+scan_file("suspicious.exe")
+
+# Errors are typed conditions
+tryCatch(
+  file_report("0123456789abcdef0123456789abcdef"),
+  virustotal_error = function(e) message("VT said: ", conditionMessage(e))
+)
+#> VT said: Resource not found.
+```
+
+Public API keys are limited to 4 requests/minute and 500/day; the
+package throttles itself to match. Premium keys can raise the pace:
+
+``` r
+options(virustotal.requests_per_minute = 1000)
+```
+
+The
+[vignette](https://themains.github.io/virustotal/articles/using_virustotal.html)
+walks through the full surface:
+
+``` r
 vignette("using_virustotal", package = "virustotal")
 ```
 
 ### License
-Scripts are released under the [MIT License](https://opensource.org/licenses/MIT).
+
+Released under the [MIT License](https://opensource.org/license/mit).

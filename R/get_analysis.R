@@ -17,11 +17,9 @@
 #'
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
-#' get_analysis(id='NjY0MjRlOTFjMDIyYTkyNWM0NjU2NWQzYWNlMzFmZmI6MTI4NTk')
+#' get_analysis(id = 'NjY0MjRlOTFjMDIyYTkyNWM0NjU2NWQzYWNlMzFmZmI6MTI4NTk')
 #' }
-
 get_analysis <- function(id = NULL, ...) {
-
   assert_character(id, len = 1, any.missing = FALSE, min.chars = 1)
 
   res <- virustotal_GET(path = paste0("analyses/", id), ...)

@@ -36,6 +36,7 @@ print(report$data$attributes$last_analysis_stats)
 \url{https://docs.virustotal.com/reference/files}
 }
 \seealso{
-\code{\link{set_key}} for setting the API key, \code{\link{scan_file}} for submitting files
+\code{\link{set_key}} for setting the API key,
+\code{\link{scan_file}} for submitting files
 }
 \concept{file operations}

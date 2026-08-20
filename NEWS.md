@@ -1,3 +1,80 @@
+# virustotal 0.7.0
+
+## Breaking changes
+
+* The HTTP layer moved from httr to httr2. Extra arguments (`...`) to API
+  functions are no longer forwarded to `httr::GET()`/`httr::POST()` — they
+  are ignored. Configure requests with options instead:
+  `virustotal.timeout` (seconds, default 60), `virustotal.max_tries`
+  (default 3), `virustotal.requests_per_minute` (default 4) and
+  `virustotal.throttle` (default `TRUE`).
+* Error conditions now carry an httr2 response object in `$response`
+  instead of an httr one. The condition classes themselves are unchanged.
+* Requires R >= 4.1.0. Dependencies httr, dplyr and base64enc were dropped;
+  httr2, curl and openssl were added.
+* Loading the package no longer copies `VIRUSTOTAL_API_KEY` into
+  `VirustotalToken`. Both variables still work for this package, and
+  `set_key()` sets both. But code that reads `VirustotalToken` directly no
+  longer sees a key set only under the canonical name — including
+  `rdomains::virustotal_cat()`, which reports "VirusTotal API key not found"
+  in that case. Setting `VirustotalToken`, or passing the key to that
+  function directly, works as before.
+
+## New features
+
+* Requests identify the package with a user agent, time out after a
+  configurable limit, and retry transient failures (HTTP 429/503) honoring
+  the server's `Retry-After` header.
+* Rate limiting moved from a hand-rolled sliding window that slept in-process
+  to `httr2::req_throttle()`; the "Rate limit reached. Waiting..." message is
+  gone (httr2 waits silently), and premium keys can finally raise the pace
+  via `options(virustotal.requests_per_minute=)`.
+* `download_file()`, `get_behaviour_html()`, `get_behaviour_evtx()`,
+  `get_behaviour_pcap()` and `get_behaviour_memdump()` now go through the
+  shared HTTP core: they gain rate limiting, retries and the package's
+  error classes, none of which applied to them before.
+* The API key is resolved lazily at call time. `VIRUSTOTAL_API_KEY` is the
+  canonical environment variable and wins when both are set;
+  `VirustotalToken` remains honored, and `set_key()` sets both. Loading the
+  package no longer mutates environment variables.
+* A missing key now raises a `virustotal_auth_error` instead of a bare
+  `stop()`.
+
+## Bug fixes
+
+* Network failures (DNS, refused connections, timeouts) now raise a
+  `virustotal_error` instead of escaping as a raw httr2 condition, so
+  `tryCatch(virustotal_error = )` covers them as documented.
+* A 200 response with an empty or non-JSON body (a CDN interstitial during an
+  incident, say) raises a `virustotal_error` carrying the status code, rather
+  than a bare jsonlite parse error.
+* A server's `Retry-After` is capped at 60 seconds by default
+  (`options(virustotal.max_retry_wait=)`). A `Retry-After: 3600` would
+  otherwise have blocked the session for an hour before raising.
+* Extra arguments passed to API functions now warn instead of vanishing
+  silently, so a typo such as `cursors =` cannot leave a caller paginating
+  the first page forever.
+* `virustotal_info()` reports usage against the configured pace; it showed
+  "used 10/4, remaining -6" for anyone who raised
+  `virustotal.requests_per_minute`. Requests that reached the API and failed
+  (404, 429) are now counted, since they spend quota.
+
+* `print()` on a domain report showed the *vendors* who categorized the
+  domain under the heading "Categories" — `google.com` reported
+  "Categories: BitDefender, Forcepoint ThreatSeeker, Sophos, ..." The API
+  keys that field by vendor and stores the category as the value, so it now
+  prints the distinct categories ("search engines", ...), capped at five.
+
+## Housekeeping
+
+* Removed the stale `CRAN-RELEASE`/`CRAN-SUBMISSION` files, a Travis-era
+  encrypted API key with no decryption code, covrpage leftovers that
+  shipped in the tarball, and a permanently-skipped integration test
+  (replaced by one gated on `VT_INTEGRATION=true`).
+* `inst/CITATION` no longer reads a `Date` field the DESCRIPTION never had.
+* Internal helpers no longer emit `message()`/`warning()` chatter during
+  normal operation.
+
 # virustotal 0.6.0
 
 ## Breaking Changes
@@ -28,8 +105,6 @@
 ## Migration Guide
 
 Users upgrading from versions that used v2.0 functions should ensure their code uses the equivalent v3.0 functions.
-
----
 
 # virustotal 0.5.0
 
@@ -85,8 +160,6 @@ Users upgrading from versions that used v2.0 functions should ensure their code 
 * Added `virustotal_info()` function for package configuration diagnostics
 * Enhanced rate limit status reporting with `get_rate_limit_status()`
 * Improved temporary file management with security-focused utilities
-
----
 
 # virustotal 0.3.0
 

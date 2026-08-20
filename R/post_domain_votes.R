@@ -18,23 +18,23 @@
 #'
 #' post_domain_votes("http://google.com", vote = "malicious")
 #' }
-
 post_domain_votes <- function(domain = NULL, vote = NULL, ...) {
+  assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
+  assert_character(vote, len = 1, any.missing = FALSE, min.chars = 1)
 
-    assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
-    assert_character(vote, len = 1, any.missing = FALSE, min.chars = 1)
+  domain <- gsub("^http://|^https://", "", domain)
 
-    domain <- gsub("^http://|^https://", "", domain)
-
-    vote_body <- list(
-      data = list(
-        type = "vote",
-        attributes = list(verdict = vote)
-      )
+  vote_body <- list(
+    data = list(
+      type = "vote",
+      attributes = list(verdict = vote)
     )
+  )
 
-    res <- virustotal_POST(path = paste0("domains/", domain, "/votes"),
-                           body = vote_body, ...)
+  res <- virustotal_POST(
+    path = paste0("domains/", domain, "/votes"),
+    body = vote_body, ...
+  )
 
-    res
+  res
 }

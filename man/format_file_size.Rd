@@ -16,14 +16,14 @@ Character string with human-readable size
 Convert file size to human readable format
 }
 \seealso{
-Other utilities: 
-\code{\link{cleanup_temp_files}()},
-\code{\link{create_safe_temp_dir}()},
-\code{\link{is_safe_environment}()},
+Other utilities:
+\code{\link[=cleanup_temp_files]{cleanup_temp_files()}},
+\code{\link[=create_safe_temp_dir]{create_safe_temp_dir()}},
+\code{\link[=is_safe_environment]{is_safe_environment()}},
 \code{\link{utilities}},
-\code{\link{validate_vt_response}()},
-\code{\link{virustotal_info}()},
-\code{\link{virustotal_version}()}
+\code{\link[=validate_vt_response]{validate_vt_response()}},
+\code{\link[=virustotal_info]{virustotal_info()}},
+\code{\link[=virustotal_version]{virustotal_version()}}
 }
 \concept{utilities}
 \keyword{internal}

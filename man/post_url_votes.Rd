@@ -24,7 +24,7 @@ Add a vote to a URL
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-post_url_votes(url_id='http://www.google.com', verdict='harmless')
+post_url_votes(url_id = 'http://www.google.com', verdict = 'harmless')
 }
 }
 \references{

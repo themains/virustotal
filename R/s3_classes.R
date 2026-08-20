@@ -84,6 +84,9 @@ virustotal_ip_report <- function(data) {
 #' @param x A virustotal_response object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
+#' @return The object, invisibly. Called for the side effect of printing
+#'   a summary of the API response.
+#' @export
 print.virustotal_response <- function(x, ...) {
   cat("VirusTotal API Response\n")
   cat("======================\n\n")
@@ -113,6 +116,9 @@ print.virustotal_response <- function(x, ...) {
 #' @param x A virustotal_file_report object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
+#' @return The object, invisibly. Called for the side effect of printing
+#'   a summary of the file report.
+#' @export
 print.virustotal_file_report <- function(x, ...) {
   NextMethod()
 
@@ -150,6 +156,9 @@ print.virustotal_file_report <- function(x, ...) {
 #' @param x A virustotal_domain_report object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
+#' @return The object, invisibly. Called for the side effect of printing
+#'   a summary of the domain report.
+#' @export
 print.virustotal_domain_report <- function(x, ...) {
   NextMethod()
 
@@ -167,11 +176,19 @@ print.virustotal_domain_report <- function(x, ...) {
       cat("\n")
     }
 
-    # Categories
+    # Categories. The API keys this field by vendor and stores the category
+    # as the value, so the names are vendors -- printing them labeled
+    # "Categories" reported "BitDefender, Sophos, ..." for a domain every
+    # vendor agreed was a search engine.
     if (!is.null(attrs$categories)) {
-      cats <- names(attrs$categories)
+      cats <- unique(unlist(attrs$categories, use.names = FALSE))
       if (length(cats) > 0) {
-        cat("Categories:", paste(cats, collapse = ", "), "\n")
+        shown <- cats[seq_len(min(5, length(cats)))]
+        cat("Categories:", paste(shown, collapse = ", "))
+        if (length(cats) > 5) {
+          cat(sprintf(" ... and %d more", length(cats) - 5))
+        }
+        cat("\n")
       }
     }
 
@@ -186,6 +203,9 @@ print.virustotal_domain_report <- function(x, ...) {
 #' @param object A virustotal_response object
 #' @param ... Additional arguments (unused)
 #' @keywords internal
+#' @return The object, invisibly. Called for the side effect of printing
+#'   a summary of the API response.
+#' @export
 summary.virustotal_response <- function(object, ...) {
   print(object)
 

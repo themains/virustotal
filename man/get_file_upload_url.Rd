@@ -27,5 +27,6 @@ get_file_upload_url()
 \url{https://docs.virustotal.com/reference}
 }
 \seealso{
-\code{\link{set_key}} for setting the API key, \code{\link{scan_file}} for regular file uploads
+\code{\link{set_key}} for setting the API key,
+\code{\link{scan_file}} for regular file uploads
 }

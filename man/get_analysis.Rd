@@ -22,7 +22,7 @@ Retrieves the results of a file or URL analysis by its analysis ID.
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-get_analysis(id='NjY0MjRlOTFjMDIyYTkyNWM0NjU2NWQzYWNlMzFmZmI6MTI4NTk')
+get_analysis(id = 'NjY0MjRlOTFjMDIyYTkyNWM0NjU2NWQzYWNlMzFmZmI6MTI4NTk')
 }
 }
 \references{

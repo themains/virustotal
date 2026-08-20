@@ -25,9 +25,7 @@
 #' # Request rescan of an IPv6 address
 #' rescan_ip("2001:4860:4860::8888")
 #' }
-
 rescan_ip <- function(ip = NULL, ...) {
-
   assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
 
   # Validate IP address format
@@ -38,7 +36,7 @@ rescan_ip <- function(ip = NULL, ...) {
     stop("Invalid IP address format. Must be a valid IPv4 or IPv6 address.\n")
   }
 
-  res <- virustotal_POST(path = paste0("ip_addresses/", ip, "/rescan"), ...)
+  res <- virustotal_POST(path = paste0("ip_addresses/", ip, "/analyse"), ...)
 
   # Return structured response
   structure(res, class = c("virustotal_response", "list"))

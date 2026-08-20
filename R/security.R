@@ -55,7 +55,7 @@ sanitize_file_path <- function(file_path, allow_relative = FALSE) {
     }
   }
 
-  return(normalized_path)
+  normalized_path
 }
 
 #' Sanitize URL input
@@ -80,7 +80,7 @@ sanitize_url <- function(url) {
     "vbscript:",
     "file:",
     "ftp:",
-    "\\x00",  # null bytes
+    "\\x00", # null bytes
     "<script",
     "</script"
   )
@@ -102,7 +102,7 @@ sanitize_url <- function(url) {
   }
 
   # Basic URL validation
-  parsed <- try(parse_url(url), silent = TRUE)
+  parsed <- try(url_parse(url), silent = TRUE)
   if (inherits(parsed, "try-error") || is.null(parsed$hostname)) {
     stop(virustotal_validation_error(
       message = "Invalid URL format",
@@ -111,7 +111,7 @@ sanitize_url <- function(url) {
     ))
   }
 
-  return(url)
+  url
 }
 
 #' Sanitize hash input
@@ -151,7 +151,7 @@ sanitize_hash <- function(hash) {
     ))
   }
 
-  return(hash)
+  hash
 }
 
 #' Sanitize domain input
@@ -190,8 +190,8 @@ sanitize_domain <- function(domain) {
   # Validate domain format
   # Basic regex for domain names (simplified)
   if (!grepl("^[a-z0-9][a-z0-9.-]*[a-z0-9]$", domain) ||
-      grepl("\\.\\.", domain) ||
-      grepl("^[.-]|[.-]$", domain)) {
+        grepl("\\.\\.", domain) ||
+        grepl("^[.-]|[.-]$", domain)) {
     stop(virustotal_validation_error(
       message = "Invalid domain format",
       parameter = "domain",
@@ -201,7 +201,7 @@ sanitize_domain <- function(domain) {
 
   # Allow private domains for enterprise environments
 
-  return(domain)
+  domain
 }
 
 #' Sanitize IP address input
@@ -222,8 +222,8 @@ sanitize_ip <- function(ip) {
   # Basic IP validation (IPv4 and IPv6)
   is_ipv4 <- grepl("^([0-9]{1,3}\\.){3}[0-9]{1,3}$", ip)
   is_ipv6 <- grepl("^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$", ip) ||
-             grepl("^::1$", ip) ||
-             grepl("^::", ip)
+    grepl("^::1$", ip) ||
+    grepl("^::", ip)
 
   if (!is_ipv4 && !is_ipv6) {
     stop(virustotal_validation_error(
@@ -235,7 +235,7 @@ sanitize_ip <- function(ip) {
 
   # Allow private/reserved IPs for enterprise environments
 
-  return(ip)
+  ip
 }
 
 #' Check if API key is properly configured
@@ -247,7 +247,7 @@ sanitize_ip <- function(ip) {
 #' @export
 #' @family security
 is_api_key_configured <- function() {
-  key <- Sys.getenv("VirustotalToken")
+  key <- if (has_vt_key()) vt_key() else ""
   if (key == "" || is.null(key)) {
     return(FALSE)
   }
@@ -257,5 +257,5 @@ is_api_key_configured <- function() {
     return(FALSE)
   }
 
-  return(TRUE)
+  TRUE
 }

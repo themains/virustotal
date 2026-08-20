@@ -29,7 +29,6 @@
 #' print(report1)
 #' summary(report1)
 #' }
-
 domain_report <- function(domain = NULL, ...) {
   # Handle NULL argument
   if (is.null(domain)) {
@@ -41,22 +40,25 @@ domain_report <- function(domain = NULL, ...) {
   }
 
   # Input validation with proper error handling (before API key for tests)
-  tryCatch({
-    assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
-  }, error = function(e) {
-    stop(virustotal_validation_error(
-      message = "Domain must be a non-empty character string",
-      parameter = "domain",
-      value = if (is.null(domain)) "NULL" else class(domain)[1]
-    ))
-  })
+  tryCatch(
+    {
+      assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
+    },
+    error = function(e) {
+      stop(virustotal_validation_error(
+        message = "Domain must be a non-empty character string",
+        parameter = "domain",
+        value = if (is.null(domain)) "NULL" else class(domain)[1]
+      ))
+    }
+  )
 
   # Clean up domain (remove protocol, www, and paths for security)
   domain_clean <- domain
   domain_clean <- gsub("^https?://", "", domain_clean)
   domain_clean <- gsub("^www\\.", "", domain_clean)
-  domain_clean <- gsub("/.*$", "", domain_clean)  # Remove any path
-  domain_clean <- gsub("\\.$", "", domain_clean)  # Remove trailing dot
+  domain_clean <- gsub("/.*$", "", domain_clean) # Remove any path
+  domain_clean <- gsub("\\.$", "", domain_clean) # Remove trailing dot
 
   # Basic domain validation (before API key check for test precedence)
   if (!grepl("^[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]$", domain_clean) ||
@@ -69,24 +71,27 @@ domain_report <- function(domain = NULL, ...) {
   }
 
   # Check API key after all validation
-  if (identical(Sys.getenv("VirustotalToken"), "")) {
+  if (!has_vt_key()) {
     stop(virustotal_auth_error(
       message = "Authentication failed. Please check your API key."
     ))
   }
 
-  tryCatch({
-    res <- virustotal_GET(path = paste0("domains/", domain_clean), ...)
+  tryCatch(
+    {
+      res <- virustotal_GET(path = paste0("domains/", domain_clean), ...)
 
-    # Return structured response
-    virustotal_domain_report(res)
-  }, error = function(e) {
-    if (!inherits(e, "virustotal_error")) {
-      stop(virustotal_error(
-        message = paste("Failed to retrieve domain report:", e$message),
-        response = NULL
-      ))
+      # Return structured response
+      virustotal_domain_report(res)
+    },
+    error = function(e) {
+      if (!inherits(e, "virustotal_error")) {
+        stop(virustotal_error(
+          message = paste("Failed to retrieve domain report:", e$message),
+          response = NULL
+        ))
+      }
+      stop(e)
     }
-    stop(e)
-  })
+  )
 }

@@ -11,10 +11,17 @@ test_that("domain_report validates input correctly", {
   )
 })
 
-test_that("domain cleaning works correctly", {
-  expect_equal(gsub("^https?://", "", "http://example.com"), "example.com")
-  expect_equal(gsub("^www\\.", "", "www.example.com"), "example.com")
-  expect_equal(gsub("/.*$", "", "example.com/path"), "example.com")
+test_that("domain_report strips a scheme before building the path", {
+  # Was asserting base R's gsub() against literals, which would still pass if
+  # domain_report() stopped cleaning domains altogether. Exercise the package.
+  cap <- new_capture()
+  use_capture(cap)
+
+  domain_report("https://example.com")
+  expect_equal(cap$last()$path, "domains/example.com")
+
+  domain_report("http://example.com")
+  expect_equal(cap$last()$path, "domains/example.com")
 })
 
 test_that("get_domain_comments validates input correctly", {
@@ -84,16 +91,51 @@ test_that("rescan_domain validates input correctly", {
   )
 })
 
-test_that("domain operations work with mocked responses", {
-  skip_if_not_installed("httptest")
-  skip_if(Sys.getenv("VirustotalToken") == "", "API key not set")
+test_that("domain endpoints request the documented v3 paths and bodies", {
+  cap <- new_capture()
+  use_capture(cap)
 
-  expect_true(exists("domain_report"))
-  expect_true(exists("get_domain_comments"))
-  expect_true(exists("post_domain_comments"))
-  expect_true(exists("get_domain_votes"))
-  expect_true(exists("post_domain_votes"))
-  expect_true(exists("get_domain_info"))
-  expect_true(exists("get_domain_relationship"))
-  expect_true(exists("rescan_domain"))
+  domain_report("google.com")
+  expect_equal(cap$last()$path, "domains/google.com")
+  expect_equal(cap$last()$verb, "GET")
+
+  get_domain_comments("google.com")
+  expect_equal(cap$last()$path, "domains/google.com/comments")
+
+  post_domain_comments("google.com", "a comment")
+  expect_equal(cap$last()$path, "domains/google.com/comments")
+  expect_equal(cap$last()$verb, "POST")
+  expect_equal(cap$last()$body$data$type, "comment")
+  expect_equal(cap$last()$body$data$attributes$text, "a comment")
+
+  get_domain_votes("google.com")
+  expect_equal(cap$last()$path, "domains/google.com/votes")
+
+  post_domain_votes("google.com", "malicious")
+  expect_equal(cap$last()$path, "domains/google.com/votes")
+  expect_equal(cap$last()$body$data$type, "vote")
+  expect_equal(cap$last()$body$data$attributes$verdict, "malicious")
+
+  get_domain_relationship("google.com", "resolutions")
+  expect_equal(cap$last()$path, "domains/google.com/relationships/resolutions")
+})
+
+test_that("domain_report wraps the response in its S3 class", {
+  cap <- new_capture(response = list(
+    data = list(
+      id = "google.com",
+      type = "domain",
+      attributes = list(
+        last_analysis_stats = list(
+          malicious = 0L, suspicious = 0L, undetected = 20L, harmless = 70L
+        )
+      )
+    )
+  ))
+  use_capture(cap)
+
+  report <- domain_report("google.com")
+  expect_s3_class(report, "virustotal_domain_report")
+  expect_s3_class(report, "virustotal_response")
+  expect_equal(report$data$id, "google.com")
 })

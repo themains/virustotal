@@ -18,14 +18,12 @@
 #'
 #' # Before calling the function, set the API key using set_key('api_key_here')
 #'
-#' rescan_file(hash='99017f6eebbac24f351415dd410d522d')
+#' rescan_file(hash = '99017f6eebbac24f351415dd410d522d')
 #' }
-
 rescan_file <- function(hash = NULL, ...) {
+  assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
 
-    assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
+  res <- virustotal_POST(path = paste0("files/", hash, "/analyse"), ...)
 
-    res <- virustotal_POST(path = paste0("files/", hash, "/analyse"), ...)
-
-    res
+  res
 }

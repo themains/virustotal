@@ -13,13 +13,13 @@ Character string with package version
 Get package version information
 }
 \seealso{
-Other utilities: 
-\code{\link{cleanup_temp_files}()},
-\code{\link{create_safe_temp_dir}()},
-\code{\link{format_file_size}()},
-\code{\link{is_safe_environment}()},
+Other utilities:
+\code{\link[=cleanup_temp_files]{cleanup_temp_files()}},
+\code{\link[=create_safe_temp_dir]{create_safe_temp_dir()}},
+\code{\link[=format_file_size]{format_file_size()}},
+\code{\link[=is_safe_environment]{is_safe_environment()}},
 \code{\link{utilities}},
-\code{\link{validate_vt_response}()},
-\code{\link{virustotal_info}()}
+\code{\link[=validate_vt_response]{validate_vt_response()}},
+\code{\link[=virustotal_info]{virustotal_info()}}
 }
 \concept{utilities}

@@ -18,20 +18,23 @@ NULL
 #' @keywords internal
 validate_input <- function(input) {
   # Use checkmate for consistent validation
-  tryCatch({
-    assert_character(input, len = 1, any.missing = FALSE, min.chars = 1)
-  }, error = function(e) {
-    stop(virustotal_validation_error(
-      message = "Input must be a single non-empty character string",
-      parameter = "input",
-      value = input
-    ))
-  })
+  tryCatch(
+    {
+      assert_character(input, len = 1, any.missing = FALSE, min.chars = 1)
+    },
+    error = function(e) {
+      stop(virustotal_validation_error(
+        message = "Input must be a single non-empty character string",
+        parameter = "input",
+        value = input
+      ))
+    }
+  )
 
   # Basic cleanup - remove leading/trailing whitespace
   input <- trimws(input)
 
-  return(input)
+  input
 }
 
 #' Check if running in a safe environment
@@ -43,19 +46,11 @@ validate_input <- function(input) {
 #' @keywords internal
 #' @family utilities
 is_safe_environment <- function() {
-  # Check if we're in an interactive session
-  if (!interactive()) {
-    warning("Running in non-interactive mode. Be cautious with files.")
-  }
-
-  # Check for common CI environments where we should be extra careful
+  # CI environments are where file-handling caution matters most; being
+  # non-interactive alone is not worth a warning (it fires in every
+  # R CMD check run).
   ci_vars <- c("CI", "GITHUB_ACTIONS", "TRAVIS", "APPVEYOR", "GITLAB_CI")
-  if (any(Sys.getenv(ci_vars) != "")) {
-    message("CI environment detected. Some functions may be disabled.")
-    return(FALSE)
-  }
-
-  return(TRUE)
+  !any(Sys.getenv(ci_vars) != "")
 }
 
 #' Convert file size to human readable format
@@ -102,7 +97,7 @@ validate_vt_response <- function(response) {
     return(FALSE)
   }
 
-  return(TRUE)
+  TRUE
 }
 
 #' Create a safe temporary directory for file operations
@@ -115,15 +110,14 @@ validate_vt_response <- function(response) {
 #' @family utilities
 create_safe_temp_dir <- function() {
   temp_dir <- tempfile(pattern = "virustotal_")
-  dir.create(temp_dir, mode = "0700")  # Owner read/write/execute only
+  dir.create(temp_dir, mode = "0700") # Owner read/write/execute only
 
   # Set stricter permissions if on Unix-like system
   if (.Platform$OS.type == "unix") {
     Sys.chmod(temp_dir, mode = "0700")
   }
 
-  message("Created secure temporary directory: ", temp_dir)
-  return(temp_dir)
+  temp_dir
 }
 
 #' Clean up temporary files and directories
@@ -141,21 +135,23 @@ cleanup_temp_files <- function(paths) {
   success <- TRUE
   for (path in paths) {
     if (file.exists(path)) {
-      tryCatch({
-        if (file.info(path)$isdir) {
-          unlink(path, recursive = TRUE, force = TRUE)
-        } else {
-          file.remove(path)
+      tryCatch(
+        {
+          if (file.info(path)$isdir) {
+            unlink(path, recursive = TRUE, force = TRUE)
+          } else {
+            file.remove(path)
+          }
+        },
+        error = function(e) {
+          warning("Failed to clean up ", path, ": ", e$message)
+          success <<- FALSE
         }
-        message("Cleaned up: ", path)
-      }, error = function(e) {
-        warning("Failed to clean up ", path, ": ", e$message)
-        success <<- FALSE
-      })
+      )
     }
   }
 
-  return(success)
+  success
 }
 
 #' Get package version information
@@ -192,8 +188,10 @@ virustotal_info <- function() {
   # Rate limiting status
   rate_status <- get_rate_limit_status()
   cat("Rate Limit Status:\n")
-  cat(sprintf("  Requests used: %d/%d\n",
-             rate_status$requests_used, rate_status$max_requests))
+  cat(sprintf(
+    "  Requests used: %d/%d\n",
+    rate_status$requests_used, rate_status$max_requests
+  ))
   cat(sprintf("  Requests remaining: %d\n", rate_status$requests_remaining))
 
   # Environment info
@@ -204,7 +202,7 @@ virustotal_info <- function() {
     cat("\u26A0 CI/Non-interactive\n")
   }
 
-  cat("\nFor help, see: ?virustotal or https://docs.virustotal.com/reference\n")
+  cat("\nFor help, see: ?virustotal or <https://docs.virustotal.com/reference>\n")
 
   invisible(NULL)
 }

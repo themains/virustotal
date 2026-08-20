@@ -15,7 +15,11 @@ get_file_relationships(
 \arguments{
 \item{hash}{File hash (MD5, SHA1, or SHA256)}
 
-\item{relationship}{Type of relationship: "behaviours", "bundled_files", "compression_parents", "contacted_domains", "contacted_ips", "contacted_urls", "dropped_files", "execution_parents", "itw_domains", "itw_ips", "itw_urls", "overlay_parents", "pcap_parents", "pe_resource_parents", "similar_files", "submissions"}
+\item{relationship}{Type of relationship: "behaviours", "bundled_files",
+"compression_parents", "contacted_domains", "contacted_ips",
+"contacted_urls", "dropped_files", "execution_parents", "itw_domains",
+"itw_ips", "itw_urls", "overlay_parents", "pcap_parents",
+"pe_resource_parents", "similar_files", "submissions"}
 
 \item{limit}{Number of relationships to retrieve. Integer. Optional. Default is 10.}
 
@@ -34,8 +38,10 @@ Retrieve relationships for a file
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-get_file_relationships(hash='99017f6eebbac24f351415dd410d522d', 
-                       relationship='contacted_domains')
+get_file_relationships(
+  hash = '99017f6eebbac24f351415dd410d522d',
+  relationship = 'contacted_domains'
+)
 }
 }
 \references{

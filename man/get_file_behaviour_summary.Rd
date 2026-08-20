@@ -22,7 +22,7 @@ Retrieves a summary of all behaviour reports for a file.
 
 # Before calling the function, set the API key using set_key('api_key_here')
 
-get_file_behaviour_summary(hash='99017f6eebbac24f351415dd410d522d')
+get_file_behaviour_summary(hash = '99017f6eebbac24f351415dd410d522d')
 }
 }
 \references{
