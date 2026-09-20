@@ -21,14 +21,12 @@ abstract: Provides a comprehensive R interface to the 'VirusTotal' API v3.0 <htt
 authors:
 - family-names: Sood
   given-names: Gaurav
-  email: gsood07@gmail.com
 preferred-citation:
   type: manual
   title: 'virustotal: R Client for the ''VirusTotal'' API'
   authors:
   - family-names: Sood
     given-names: Gaurav
-    email: gsood07@gmail.com
   year: '2026'
   notes: R package version 0.7.0
   url: https://github.com/themains/virustotal
@@ -38,7 +36,6 @@ url: https://themains.github.io/virustotal/
 contact:
 - family-names: Sood
   given-names: Gaurav
-  email: gsood07@gmail.com
 keywords:
 - cran
 - cybersecurity
