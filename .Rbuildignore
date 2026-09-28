@@ -13,7 +13,7 @@
 ^\.lintr$
 ^\.github$
 ^CLAUDE\.md$
-^Citation\.cff$
+^CITATION\.cff$
 ^\.claude$
 ^README\.Rmd$
 ^\.DS_Store$
