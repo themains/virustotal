@@ -8,4 +8,5 @@ on:
 
 jobs:
   check:
-    uses: gojiplus/r-canon/.github/workflows/reusable-check.yml@v2
+    # The v2 tag predates the Ubuntu sudo-rs fix in r-lib/actions.
+    uses: gojiplus/r-canon/.github/workflows/reusable-check.yml@6acf709ac1160e2327c716a1a0a386d7abdd8ceb
