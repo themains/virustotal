@@ -25,7 +25,7 @@ Imports:
     openssl,
     jsonlite (>= 1.7.0),
     checkmate (>= 2.0.0),
-    ipaddress (>= 1.0.0),
+    checkstring (>= 0.2.1),
     rlang (>= 1.0.0)
 Suggests:
     knitr (>= 1.30),

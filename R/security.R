@@ -206,7 +206,7 @@ sanitize_domain <- function(domain) {
 
 #' Sanitize IP address input
 #'
-#' Validates IPv4 and IPv6 addresses using the ipaddress parser.
+#' Validates IPv4 and IPv6 addresses using checkstring.
 #' Private and reserved addresses are allowed.
 #'
 #' @param ip Character string representing an IP address
@@ -219,8 +219,7 @@ sanitize_ip <- function(ip) {
   # Remove whitespace
   ip <- trimws(ip)
 
-  parsed <- suppressWarnings(ipaddress::ip_address(ip))
-  if (is.na(parsed)) {
+  if (!checkstring::is_ipv4(ip) && !checkstring::is_ipv6(ip)) {
     stop(virustotal_validation_error(
       message = "Invalid IP address format",
       parameter = "ip",

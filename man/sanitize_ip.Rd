@@ -13,7 +13,7 @@ sanitize_ip(ip)
 Sanitized IP address or throws error if invalid
 }
 \description{
-Validates IPv4 and IPv6 addresses using the ipaddress parser.
+Validates IPv4 and IPv6 addresses using checkstring.
 Private and reserved addresses are allowed.
 }
 \seealso{

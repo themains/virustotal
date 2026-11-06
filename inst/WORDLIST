@@ -9,6 +9,7 @@ behaviours
 bitdefender
 BitDefender
 CDN
+checkstring
 CMD
 codebase
 codecov
@@ -22,7 +23,6 @@ hostname
 httr
 IoC
 ip
-ipaddress
 ips
 IPv
 itw

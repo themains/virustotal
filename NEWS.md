@@ -5,8 +5,9 @@
   `virustotal.max_retry_wait` is documented and validated.
 * Sandbox report and artifact requests correctly escape spaces and reserved
   characters in report IDs.
-* IP endpoints use the `ipaddress` parser consistently, accepting IPv4-embedded
-  IPv6 addresses and rejecting malformed addresses before sending requests.
+* IP endpoints use `checkstring` for platform-independent validation, accepting
+  IPv4-embedded IPv6 addresses and rejecting malformed addresses before sending
+  requests on all supported operating systems.
 * `scan_file()` obtains a single-use upload URL for files larger than 32 MiB.
   These uploads retain the shared timeout, authentication, throttle and error
   handling, but are not automatically replayed or redirected.

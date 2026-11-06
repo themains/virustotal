@@ -83,6 +83,10 @@ test_that("large uploads send the multipart file over HTTPS exactly once", {
   server <- webfakes::new_app_process(app, port = "0s")
   withr::defer(server$stop())
   local_mocked_bindings(vt_base_url = server$url("/api/v3", https = TRUE))
+  # curl on Windows otherwise prefers its native trust store over the test CA.
+  withr::local_envvar(
+    CURL_CA_BUNDLE = system.file("cert/localhost/ca.crt", package = "webfakes")
+  )
   perform <- httr2::req_perform
   local_mocked_bindings(req_perform = function(req) {
     req <- httr2::req_options(
@@ -116,6 +120,10 @@ test_that("a failed single-use upload is not automatically replayed", {
   server <- webfakes::new_app_process(app, port = "0s")
   withr::defer(server$stop())
   local_mocked_bindings(vt_base_url = server$url("/api/v3", https = TRUE))
+  # curl on Windows otherwise prefers its native trust store over the test CA.
+  withr::local_envvar(
+    CURL_CA_BUNDLE = system.file("cert/localhost/ca.crt", package = "webfakes")
+  )
   perform <- httr2::req_perform
   local_mocked_bindings(req_perform = function(req) {
     req <- httr2::req_options(
