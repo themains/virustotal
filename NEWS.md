@@ -1,4 +1,19 @@
-# virustotal (development version)
+# virustotal 0.7.1
+
+* Requires httr2 >= 1.2.2 for the throttle API used by the package.
+* Retries now handle missing, malformed and HTTP-date `Retry-After` headers;
+  `virustotal.max_retry_wait` is documented and validated.
+* Sandbox report and artifact requests correctly escape spaces and reserved
+  characters in report IDs.
+* IP endpoints use the `ipaddress` parser consistently, accepting IPv4-embedded
+  IPv6 addresses and rejecting malformed addresses before sending requests.
+* `scan_file()` obtains a single-use upload URL for files larger than 32 MiB.
+  These uploads retain the shared timeout, authentication, throttle and error
+  handling, but are not automatically replayed or redirected.
+* `virustotal_info()` counts every HTTP response, including retries. Old
+  request timestamps are discarded as the reporting window advances.
+* Scan and rescan documentation now directs analysis IDs to `get_analysis()`;
+  file reports accept file hashes, and URL-ID examples use base64url.
 
 # virustotal 0.7.0
 

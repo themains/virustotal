@@ -16,7 +16,7 @@ list containing analysis details and ID
 }
 \description{
 Request a new analysis of an IP address already in VirusTotal's database.
-Returns an analysis ID for use with \code{\link{ip_report}}.
+Returns an analysis ID for use with \code{\link{get_analysis}}.
 }
 \examples{
 \dontrun{

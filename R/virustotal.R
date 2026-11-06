@@ -11,16 +11,20 @@
 #'   \item{\code{virustotal.timeout}}{Request timeout in seconds. Default 60.}
 #'   \item{\code{virustotal.max_tries}}{Maximum attempts per request; retries
 #'     honor HTTP 429/503 and their \code{Retry-After} header. Default 3.}
+#'   \item{\code{virustotal.max_retry_wait}}{Maximum wait in seconds for a
+#'     server's \code{Retry-After} header. A finite non-negative number.
+#'     Default 60. Missing or invalid headers use httr2's backoff policy.}
 #'   \item{\code{virustotal.requests_per_minute}}{Client-side throttle.
 #'     Default 4, the public API allowance; premium keys can raise it.}
 #'   \item{\code{virustotal.throttle}}{Set \code{FALSE} to disable the
 #'     client-side throttle entirely. Default \code{TRUE}.}
 #' }
 #'
-#' @importFrom httr2 request req_url_path_append req_headers_redacted req_user_agent req_timeout
+#' @importFrom httr2 request req_url_path req_headers_redacted req_user_agent req_timeout
 #' @importFrom httr2 req_error req_retry req_throttle req_url_query req_method
 #' @importFrom httr2 req_body_json req_body_form req_body_multipart req_perform
 #' @importFrom httr2 resp_status resp_header resp_body_string resp_body_raw url_parse
+#' @importFrom httr2 resp_retry_after
 #' @importFrom jsonlite fromJSON
 #' @importFrom curl form_file
 #' @importFrom openssl base64_encode
@@ -45,7 +49,7 @@ vt_base_url <- "https://www.virustotal.com/api/v3"
 #' @keywords internal
 vt_request <- function(path, key = vt_key()) {
   req <- request(vt_base_url)
-  req <- req_url_path_append(req, path)
+  req <- req_url_path(req, url_parse(vt_base_url)$path, path)
   req <- req_headers_redacted(req, `x-apikey` = key)
   req <- req_user_agent(req, paste0(
     "virustotal-r/", packageVersion("virustotal"),
@@ -57,6 +61,13 @@ vt_request <- function(path, key = vt_key()) {
   # req_retry() still honors 429/503 and Retry-After before we ever see the
   # response; its transience logic is independent of is_error.
   req <- req_error(req, is_error = function(resp) FALSE)
+  max_retry_wait <- getOption("virustotal.max_retry_wait", 60)
+  if (!checkmate::test_number(max_retry_wait, lower = 0, finite = TRUE)) {
+    stop(virustotal_validation_error(
+      message = "virustotal.max_retry_wait must be a finite non-negative number",
+      parameter = "virustotal.max_retry_wait", value = max_retry_wait
+    ))
+  }
   req <- req_retry(
     req,
     max_tries = getOption("virustotal.max_tries", 3),
@@ -65,9 +76,9 @@ vt_request <- function(path, key = vt_key()) {
     # cap it: blocking an interactive session for 3600s to avoid raising a
     # rate-limit error the caller can already handle is not a good trade.
     after = function(resp) {
-      ra <- suppressWarnings(as.numeric(resp_header(resp, "retry-after")))
-      if (!length(ra) || is.na(ra)) return(NULL)
-      min(ra, getOption("virustotal.max_retry_wait", 60))
+      ra <- suppressWarnings(resp_retry_after(resp))
+      if (is.na(ra) || !is.finite(ra)) return(NA_real_)
+      max(0, min(ra, max_retry_wait))
     }
   )
   if (isTRUE(getOption("virustotal.throttle", TRUE))) {
@@ -82,6 +93,17 @@ vt_request <- function(path, key = vt_key()) {
 }
 
 vt_perform <- function(req) {
+  recorded <- FALSE
+  req <- req_retry(
+    req,
+    max_tries = req$policies$retry_max_tries %||% 1,
+    after = req$policies$retry_after,
+    is_transient = function(resp) {
+      record_request()
+      recorded <<- TRUE
+      resp_status(resp) %in% c(429, 503)
+    }
+  )
   # A transport failure (DNS, refused connection, timeout) is raised by httr2
   # as httr2_failure before any status handling runs. Re-raise it in the
   # package's own hierarchy so tryCatch(virustotal_error = ) means what the
@@ -94,9 +116,8 @@ vt_perform <- function(req) {
       ))
     }
   )
-  # Recorded before the status check: a 404 or 429 reached the API and spent
-  # quota, so the usage log has to count it.
-  record_request()
+  # Mocked responses bypass the retry callback but still need one log entry.
+  if (!recorded) record_request()
   virustotal_check(resp)
   resp
 }
@@ -246,16 +267,16 @@ virustotal_check <- function(resp) {
   # this package calls returns 204, so keeping the branch is harmless and
   # protects anyone still probing v2 behavior. Revisit for removal.
   if (status == 204 || status == 429) {
-    hdr <- resp_header(resp, "retry-after")
-    retry_after <- suppressWarnings(as.numeric(hdr))
-    if (!length(retry_after) || is.na(retry_after)) retry_after <- 60
+    retry_after <- suppressWarnings(resp_retry_after(resp))
+    if (is.na(retry_after) || !is.finite(retry_after)) retry_after <- 60
+    retry_after <- max(0, retry_after)
     stop(virustotal_rate_limit_error(
-      message = "Rate limit exceeded. Only 4 requests per minute allowed.",
+      message = "VirusTotal rate limit exceeded.",
       retry_after = retry_after
     ))
   }
 
-  if (status < 400) return(invisible())
+  if (status >= 200 && status < 300) return(invisible())
 
   if (status == 401 || status == 403) {
     stop(virustotal_auth_error(

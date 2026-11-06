@@ -206,8 +206,8 @@ sanitize_domain <- function(domain) {
 
 #' Sanitize IP address input
 #'
-#' Validates IP addresses (IPv4 and IPv6) and checks for private ranges
-#' that shouldn't be submitted to VirusTotal.
+#' Validates IPv4 and IPv6 addresses using the ipaddress parser.
+#' Private and reserved addresses are allowed.
 #'
 #' @param ip Character string representing an IP address
 #' @return Sanitized IP address or throws error if invalid
@@ -219,13 +219,8 @@ sanitize_ip <- function(ip) {
   # Remove whitespace
   ip <- trimws(ip)
 
-  # Basic IP validation (IPv4 and IPv6)
-  is_ipv4 <- grepl("^([0-9]{1,3}\\.){3}[0-9]{1,3}$", ip)
-  is_ipv6 <- grepl("^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$", ip) ||
-    grepl("^::1$", ip) ||
-    grepl("^::", ip)
-
-  if (!is_ipv4 && !is_ipv6) {
+  parsed <- suppressWarnings(ipaddress::ip_address(ip))
+  if (is.na(parsed)) {
     stop(virustotal_validation_error(
       message = "Invalid IP address format",
       parameter = "ip",

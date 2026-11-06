@@ -9,7 +9,8 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/virustotal)](https://cran.r-project.org/package=virustotal)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-![](https://cranlogs.r-pkg.org/badges/grand-total/virustotal)
+![Total CRAN
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/virustotal)
 
 Use [VirusTotal](https://www.virustotal.com), a Google service that
 analyzes files and URLs for viruses, worms, trojans and other malware,
@@ -21,7 +22,8 @@ reports; scanning and rescanning; IoC relationships; sandbox behaviour
 artifacts; comments and votes. Requests are paced to the public API’s
 4-per-minute allowance automatically, transient failures are retried
 honoring the server’s `Retry-After`, and API failures surface as typed R
-conditions you can `tryCatch` on.
+conditions you can `tryCatch` on. Files larger than 32 MiB use a
+single-use upload URL; these uploads are not automatically retried.
 
 ### Installation
 
@@ -65,8 +67,8 @@ tryCatch(
 #> VT said: Resource not found.
 ```
 
-Public API keys are limited to 4 requests/minute and 500/day; the
-package throttles itself to match. Premium keys can raise the pace:
+The package defaults to 4 requests per minute. Daily quotas are enforced
+by VirusTotal. Premium keys can raise the request rate:
 
 ``` r
 options(virustotal.requests_per_minute = 1000)

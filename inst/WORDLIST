@@ -3,6 +3,7 @@ API’s
 AppVeyor
 ASN
 ATT
+backoff
 behaviour
 behaviours
 bitdefender
@@ -21,11 +22,13 @@ hostname
 httr
 IoC
 ip
+ipaddress
 ips
 IPv
 itw
 jsonlite
 lifecycle
+MiB
 MITRE
 oldrel
 openssl

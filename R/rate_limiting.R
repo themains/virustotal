@@ -37,8 +37,8 @@ is_rate_limit_initialized <- function() {
 
 #' Record a performed request
 #'
-#' Appends a timestamp to the log. Called after each successful
-#' \code{req_perform()}; enforcement is httr2's job, not this function's.
+#' Records each HTTP response, including retries, and discards timestamps
+#' outside the current window. Enforcement is httr2's job.
 #'
 #' @return Invisible TRUE
 #' @keywords internal
@@ -47,8 +47,10 @@ record_request <- function() {
   if (!is_rate_limit_initialized()) {
     init_rate_limit()
   }
+  now <- as.numeric(Sys.time())
+  requests <- .virustotal_state$requests
   .virustotal_state$requests <- c(
-    .virustotal_state$requests, as.numeric(Sys.time())
+    requests[requests > now - .virustotal_state$window_size], now
   )
   invisible(TRUE)
 }

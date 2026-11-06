@@ -1,6 +1,6 @@
 Package: virustotal
 Title: R Client for the 'VirusTotal' API
-Version: 0.7.0.9000
+Version: 0.7.1
 Authors@R: person("Gaurav", "Sood", email = "gsood07@gmail.com",
                   role = c("aut", "cre"))
 Description: Provides a comprehensive R interface to the 'VirusTotal' API v3.0
@@ -20,21 +20,23 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-US
 Imports:
-    httr2 (>= 1.1.0),
+    httr2 (>= 1.2.2),
     curl,
     openssl,
     jsonlite (>= 1.7.0),
     checkmate (>= 2.0.0),
+    ipaddress (>= 1.0.0),
     rlang (>= 1.0.0)
 Suggests:
     knitr (>= 1.30),
     rmarkdown (>= 2.0),
-    testthat (>= 3.0.0),
+    testthat (>= 3.2.1),
     httptest2 (>= 1.0.0),
     covr,
     pkgdown,
     spelling,
-    withr
+    withr,
+    webfakes
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
 Config/Needs/website: pkgdown

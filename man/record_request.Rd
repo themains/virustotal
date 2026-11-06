@@ -10,8 +10,8 @@ record_request()
 Invisible TRUE
 }
 \description{
-Appends a timestamp to the log. Called after each successful
-\code{req_perform()}; enforcement is httr2's job, not this function's.
+Records each HTTP response, including retries, and discards timestamps
+outside the current window. Enforcement is httr2's job.
 }
 \seealso{
 Other rate limiting:

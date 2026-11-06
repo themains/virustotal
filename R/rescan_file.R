@@ -1,7 +1,7 @@
 #' Request rescan of a file
 #'
 #' Request a new analysis of a file already present in VirusTotal's database.
-#' Returns an analysis ID for use with \code{\link{file_report}}.
+#' Returns an analysis ID for use with \code{\link{get_analysis}}.
 #'
 #' @param hash File hash (MD5, SHA1, or SHA256) or file ID. Required.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.

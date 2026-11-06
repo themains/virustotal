@@ -7,7 +7,8 @@
 file_report(hash, ...)
 }
 \arguments{
-\item{hash}{File hash (MD5, SHA1, or SHA256) or analysis ID}
+\item{hash}{File hash (MD5, SHA1, or SHA256). For analysis IDs returned
+by scans, use \code{\link{get_analysis}}.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}}
 }

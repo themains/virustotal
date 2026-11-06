@@ -13,8 +13,8 @@ sanitize_ip(ip)
 Sanitized IP address or throws error if invalid
 }
 \description{
-Validates IP addresses (IPv4 and IPv6) and checks for private ranges
-that shouldn't be submitted to VirusTotal.
+Validates IPv4 and IPv6 addresses using the ipaddress parser.
+Private and reserved addresses are allowed.
 }
 \seealso{
 Other security:

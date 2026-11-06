@@ -16,7 +16,7 @@ list containing analysis details and ID
 }
 \description{
 Submit a URL for analysis. Returns analysis details including an ID that
-can be used to retrieve the report using \code{\link{url_report}}
+can be used to retrieve the analysis using \code{\link{get_analysis}}.
 }
 \examples{
 \dontrun{

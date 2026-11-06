@@ -18,7 +18,7 @@
 #' post_ip_votes(ip = "64.233.160.0", vote = "malicious")
 #' }
 post_ip_votes <- function(ip = NULL, vote = NULL, ...) {
-  assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
+  ip <- sanitize_ip(ip)
   assert_character(vote, len = 1, any.missing = FALSE, min.chars = 1)
 
   vote_body <- list(

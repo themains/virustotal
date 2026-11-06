@@ -1,7 +1,7 @@
 #' Submit URL for scanning
 #'
 #' Submit a URL for analysis. Returns analysis details including an ID that
-#' can be used to retrieve the report using \code{\link{url_report}}
+#' can be used to retrieve the analysis using \code{\link{get_analysis}}.
 #'
 #' @param url URL to scan; string; required
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.

@@ -16,7 +16,7 @@ list containing analysis details and ID
 }
 \description{
 Request a new analysis of a URL already present in VirusTotal's database.
-Returns an analysis ID for use with \code{\link{url_report}}.
+Returns an analysis ID for use with \code{\link{get_analysis}}.
 }
 \examples{
 \dontrun{
@@ -27,7 +27,7 @@ Returns an analysis ID for use with \code{\link{url_report}}.
 rescan_url("http://www.google.com")
 
 # Request rescan using URL ID
-rescan_url("687474703a2f2f7777772e676f6f676c652e636f6d2f")
+rescan_url("aHR0cDovL3d3dy5nb29nbGUuY29tLw")
 }
 }
 \references{

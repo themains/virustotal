@@ -8,7 +8,7 @@ message: 'To cite package "virustotal" in publications use:'
 type: software
 license: MIT
 title: 'virustotal: R Client for the ''VirusTotal'' API'
-version: 0.7.0
+version: 0.7.1
 identifiers:
 - type: doi
   value: 10.32614/CRAN.package.virustotal
@@ -28,7 +28,7 @@ preferred-citation:
   - family-names: Sood
     given-names: Gaurav
   year: '2026'
-  notes: R package version 0.7.0
+  notes: R package version 0.7.1
   url: https://github.com/themains/virustotal
 repository: https://CRAN.R-project.org/package=virustotal
 repository-code: https://github.com/themains/virustotal
