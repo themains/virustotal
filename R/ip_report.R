@@ -23,7 +23,7 @@
 #' ip_report(ip = "2001:4860:4860::8888")
 #' }
 ip_report <- function(ip = NULL, ...) {
-  assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
+  ip <- sanitize_ip(ip)
 
   if (!has_vt_key()) {
     stop(virustotal_auth_error(

@@ -1,36 +1,20 @@
 ## Test environments
 
-* local macOS 15.5 (aarch64), R 4.6.0
-* win-builder (devel and release)
-* GitHub Actions: ubuntu-latest (release, devel, oldrel-1), macOS-latest
-  (release), windows-latest (release)
+* Local macOS 27.0.1 (aarch64), R 4.6.0.
+* GitHub Actions: Ubuntu R 4.6.2 and R 4.5.3; macOS and Windows R 4.6.2.
+* R-hub: Ubuntu clang R-devel and Windows R-devel.
 
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
 
+The offline suite passes with current httr2 and the minimum supported version,
+1.2.2. Retry and multipart-upload tests run against local HTTP/HTTPS servers.
+Live VirusTotal tests require credentials and are skipped.
+
 ## Reverse dependencies
 
-virustotal has one reverse dependency, rdomains, which imports `set_key()`
-and `domain_report()`. Both keep their signatures and return values in this
-release. Checked against rdomains with this version installed: its
-`virustotal_cat()` runs and returns the expected frame, and the single test
-failure in its suite is an unrelated end-to-end network test about archive
-fallback.
-
-One behavioral change is worth flagging. Earlier versions copied the
-`VIRUSTOTAL_API_KEY` environment variable into `VirustotalToken` when the
-package loaded; this release resolves the key when a request is made instead,
-so loading the package no longer modifies the user's environment. Both
-variable names still work, and `set_key()` sets both. Code outside this
-package that reads `VirustotalToken` directly, as `rdomains::virustotal_cat()`
-does, will not see a key set only under the canonical name and will ask for
-one. The change is documented in NEWS.md, and rdomains will be updated to
-read the key through this package's accessor.
-
-## Notes on this release
-
-The HTTP layer moved from httr to httr2, which brings request throttling,
-retries that honor `Retry-After`, and a package user agent. Extra arguments
-to API functions are no longer forwarded to the HTTP call and now warn; the
-equivalent settings are package options, documented in `?virustotal`.
+Full R CMD check --as-cran checks of CRAN rdomains 0.6.1 were compared using
+virustotal 0.7.0 and 0.7.1 in separate libraries. There are no new errors,
+warnings, or notes; both test runs pass 518 assertions. Both checks report
+the same incoming-version warning because rdomains 0.6.1 is already on CRAN.

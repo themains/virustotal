@@ -3,11 +3,13 @@ API’s
 AppVeyor
 ASN
 ATT
+backoff
 behaviour
 behaviours
 bitdefender
 BitDefender
 CDN
+checkstring
 CMD
 codebase
 codecov
@@ -26,6 +28,7 @@ IPv
 itw
 jsonlite
 lifecycle
+MiB
 MITRE
 oldrel
 openssl

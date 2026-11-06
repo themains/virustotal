@@ -23,7 +23,7 @@
 #' url_report("http://www.google.com")
 #'
 #' # Get report using URL ID (base64 encoded URL without padding)
-#' url_report("687474703a2f2f7777772e676f6f676c652e636f6d2f")
+#' url_report("aHR0cDovL3d3dy5nb29nbGUuY29tLw")
 #' }
 url_report <- function(url_id = NULL, ...) {
   # Validate URL ID using checkmate

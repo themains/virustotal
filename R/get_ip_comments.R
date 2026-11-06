@@ -19,7 +19,7 @@
 #' get_ip_comments("64.233.160.0")
 #' }
 get_ip_comments <- function(ip = NULL, limit = NULL, cursor = NULL, ...) {
-  assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
+  ip <- sanitize_ip(ip)
 
   res <- virustotal_GET(
     path = paste0("ip_addresses/", ip, "/comments"),

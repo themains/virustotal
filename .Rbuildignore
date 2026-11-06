@@ -16,6 +16,7 @@
 ^CITATION\.cff$
 ^\.claude$
 ^README\.Rmd$
+^README\.html$
 ^\.DS_Store$
 ^\.git$
 ^\.gitignore$

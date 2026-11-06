@@ -1,7 +1,7 @@
 #' Request rescan of a domain
 #'
 #' Request a new analysis of a domain already in VirusTotal's database.
-#' Returns an analysis ID for use with \code{\link{domain_report}}.
+#' Returns an analysis ID for use with \code{\link{get_analysis}}.
 #'
 #' @param domain Domain name to rescan. Required.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.

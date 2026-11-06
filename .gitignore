@@ -13,3 +13,4 @@ tests/testthat/virustotal_api_key
 docs
 /..Rcheck
 .DS_Store
+/README.html

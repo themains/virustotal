@@ -16,6 +16,10 @@ A \code{virustotal_file_scan} object with analysis ID and links
 }
 \description{
 Uploads a file to VirusTotal for malware analysis using the v3 API.
+Files larger than 32 MiB use a single-use upload URL; the maximum accepted
+size is 650 MiB (one MiB is \eqn{1024^2} bytes). The final upload to a
+single-use URL is not automatically retried. Retrieve the returned analysis
+ID with \code{\link{get_analysis}}.
 }
 \examples{
 \dontrun{

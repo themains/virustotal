@@ -86,3 +86,27 @@ test_that("behaviour functions exist and are exported", {
   expect_true(exists("get_behaviour_pcap"))
   expect_true(exists("get_behaviour_memdump"))
 })
+
+test_that("sandbox IDs use escaped paths for reports and binary artifacts", {
+  withr::local_envvar(c(VIRUSTOTAL_API_KEY = strrep("a", 64)))
+  id <- paste0(strrep("a", 64), "_VirusTotal Jujubox")
+  seen <- character()
+  httr2::local_mocked_responses(function(req) {
+    seen <<- c(seen, req$url)
+    httr2::response(200, body = charToRaw('{"data":{"id":"fixture"}}'))
+  })
+  get_behaviour_report(id)
+  for (suffix in c("html", "evtx", "pcap", "memdump")) {
+    do.call(paste0("get_behaviour_", suffix), list(id))
+  }
+  base <- paste0("https://www.virustotal.com/api/v3/file_behaviours/",
+                 strrep("a", 64), "_VirusTotal%20Jujubox")
+  expect_equal(seen, c(base, paste0(base, "/", c("html", "evtx", "pcap", "memdump"))))
+})
+
+test_that("path encoding preserves IPv6 and escapes literal reserved characters", {
+  expect_equal(vt_request("ip_addresses/2001:db8::1", key = "fake")$url,
+               "https://www.virustotal.com/api/v3/ip_addresses/2001:db8::1")
+  expect_equal(vt_request("file_behaviours/id_%?#\u00e9", key = "fake")$url,
+               "https://www.virustotal.com/api/v3/file_behaviours/id_%25%3F%23%C3%A9")
+})

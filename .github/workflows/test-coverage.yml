@@ -8,6 +8,7 @@ on:
 
 jobs:
   coverage:
-    uses: gojiplus/r-canon/.github/workflows/reusable-coverage.yml@v2
+    # The v2 tag predates the Ubuntu sudo-rs fix in r-lib/actions.
+    uses: gojiplus/r-canon/.github/workflows/reusable-coverage.yml@6acf709ac1160e2327c716a1a0a386d7abdd8ceb
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

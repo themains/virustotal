@@ -19,4 +19,5 @@ jobs:
       contents: read
       pages: write
       id-token: write
-    uses: gojiplus/r-canon/.github/workflows/reusable-pkgdown.yml@v2
+    # The v2 tag predates the Ubuntu sudo-rs fix in r-lib/actions.
+    uses: gojiplus/r-canon/.github/workflows/reusable-pkgdown.yml@6acf709ac1160e2327c716a1a0a386d7abdd8ceb

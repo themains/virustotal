@@ -18,7 +18,7 @@
 #' post_ip_comments(ip = "64.233.160.0", comment = "test")
 #' }
 post_ip_comments <- function(ip = NULL, comment = NULL, ...) {
-  assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
+  ip <- sanitize_ip(ip)
   assert_character(comment, len = 1, any.missing = FALSE, min.chars = 1)
 
   comment_body <- list(

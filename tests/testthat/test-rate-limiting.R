@@ -69,7 +69,7 @@ test_that("requests carry a throttle policy unless the option disables it", {
 })
 
 test_that("a base64url identifier survives URL assembly verbatim", {
-  # req_url_path_append() must not escape or split the identifier; a mangled
+  # URL construction must not escape or split the identifier; a mangled
   # character here addresses a nonexistent endpoint.
   id <- vt_url_id("https://shop.example.org/cart?sku=99&ref=abc")
   req <- vt_request(paste0("urls/", id), key = "fake")
@@ -80,12 +80,7 @@ test_that("a base64url identifier survives URL assembly verbatim", {
 })
 
 test_that("requests carry the retry policy, tunable by option", {
-  # httr2's own suite covers that the retry loop honors 429/503 and
-  # Retry-After. It cannot be replayed here: req_perform() returns a mocked
-  # response through handle_resp() before it ever enters the retry loop, so
-  # mocks exercise status handling (which is why the 429 test below works)
-  # and never the backoff path. What is ours to verify is the wiring -- the
-  # policy is present, reads the option, and caps the server's delay.
+  # Real HTTP retry behavior is covered in test-http-retries.R.
   req <- vt_request("files/abc", key = "fake")
   expect_false(is.null(req$policies$retry_max_tries))
   expect_equal(req$policies$retry_max_tries, 3)
@@ -157,4 +152,40 @@ test_that("a server's Retry-After is capped, not obeyed blindly", {
     httr2::response(429, headers = list(`retry-after` = "5"))
   )
   expect_equal(delay, 5)
+})
+
+test_that("retry delays handle missing, date, malformed, and past headers", {
+  withr::local_locale(c(LC_TIME = "C"))
+  req <- vt_request("files/x", key = "fake")
+  after <- req$policies$retry_after
+  expect_true(is.na(after(httr2::response(503))))
+  expect_true(is.na(after(httr2::response(429, headers = list(`retry-after` = "invalid")))))
+  for (seconds in c(-10, 25, 3600)) {
+    resp <- httr2::response(429, headers = list(
+      date = "Thu, 05 Nov 2026 12:00:00 GMT",
+      `retry-after` = format(
+        as.POSIXct("2026-11-05 12:00:00", tz = "GMT") + seconds,
+        "%a, %d %b %Y %H:%M:%S GMT", tz = "GMT", usetz = FALSE
+      )
+    ))
+    expect_equal(after(resp), max(0, min(seconds, 60)))
+    error <- tryCatch(virustotal_check(resp), virustotal_rate_limit_error = identity)
+    expect_s3_class(error, "virustotal_rate_limit_error")
+    expect_equal(error$retry_after, max(0, seconds))
+  }
+})
+
+test_that("invalid retry wait caps fail before a request is made", {
+  for (cap in list(-1, NA_real_, Inf, c(1, 2), "60")) {
+    withr::local_options(virustotal.max_retry_wait = cap)
+    expect_error(vt_request("files/x", key = "fake"), class = "virustotal_validation_error")
+  }
+})
+
+test_that("request logs retain only the current window", {
+  reset_rate_limit()
+  withr::defer(reset_rate_limit())
+  .virustotal_state$requests <- rep(as.numeric(Sys.time()) - 120, 20)
+  record_request()
+  expect_length(.virustotal_state$requests, 1)
 })

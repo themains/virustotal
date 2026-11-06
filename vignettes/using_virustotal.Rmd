@@ -15,7 +15,7 @@ vignette: >
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-## Using virustotal
+## Overview
 
 The virustotal package provides access to the VirusTotal API v3, allowing you
 to scan files and URLs for malware, get domain and IP intelligence, and
@@ -63,6 +63,7 @@ Or set the `VIRUSTOTAL_API_KEY` environment variable (for example in
 ```{r scan_file}
 result <- scan_file("path/to/suspicious_file.exe")
 analysis_id <- result$data$id
+analysis <- get_analysis(analysis_id)
 ```
 
 **Get file analysis report:**
@@ -108,6 +109,7 @@ new_analysis_id <- rescan_result$data$id
 ```{r scan_url}
 url_result <- scan_url("http://www.example.com")
 analysis_id <- url_result$data$id
+analysis <- get_analysis(analysis_id)
 ```
 
 **Get URL analysis report:**

@@ -71,7 +71,12 @@ The package implements automatic rate limiting via environment variable `VT_RATE
 
 ## Testing Notes
 
-Tests require a VirusTotal API key stored in `tests/testthat/virustotal_api_key.enc`. Tests are skipped on CRAN and only run when API key is available.
+The offline suite uses mocks and local HTTP/HTTPS servers and needs no API key.
+Live tests require `VT_INTEGRATION=true` and a configured API key.
+
+On Windows, start a fresh R process with `CURL_SSL_BACKEND=openssl` before
+running `devtools::test()` so the HTTPS fixtures can use their private CA
+bundle. `R CMD check` sets this in `tests/testthat.R` before loading curl.
 
 ## Package Structure
 

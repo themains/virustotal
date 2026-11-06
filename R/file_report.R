@@ -2,7 +2,8 @@
 #'
 #' Retrieves detailed analysis results for a file from VirusTotal using the v3 API.
 #'
-#' @param hash File hash (MD5, SHA1, or SHA256) or analysis ID
+#' @param hash File hash (MD5, SHA1, or SHA256). For analysis IDs returned
+#'   by scans, use \code{\link{get_analysis}}.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}
 #'
 #' @return A \code{virustotal_file_report} object containing file analysis results
@@ -72,14 +73,11 @@ file_report <- function(hash, ...) {
   }
 
   # Validate hash format (basic check)
-  # MD5, SHA1, SHA256, or analysis ID lengths
+  # MD5, SHA1, or SHA256 lengths
   if (!grepl("^[a-fA-F0-9]+$", hash) ||
-        (!nchar(hash) %in% c(32, 40, 64, 40))) {
+        (!nchar(hash) %in% c(32, 40, 64))) {
     stop(virustotal_validation_error(
-      message = paste(
-        "Hash must be a valid MD5 (32), SHA1 (40),",
-        "SHA256 (64), or analysis ID"
-      ),
+      message = "Hash must be a valid MD5 (32), SHA1 (40), or SHA256 (64)",
       parameter = "hash",
       value = hash
     ))

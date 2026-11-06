@@ -1,7 +1,7 @@
 #' Request rescan of an IP address
 #'
 #' Request a new analysis of an IP address already in VirusTotal's database.
-#' Returns an analysis ID for use with \code{\link{ip_report}}.
+#' Returns an analysis ID for use with \code{\link{get_analysis}}.
 #'
 #' @param ip IP address to rescan (IPv4 or IPv6). Required.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
@@ -26,27 +26,10 @@
 #' rescan_ip("2001:4860:4860::8888")
 #' }
 rescan_ip <- function(ip = NULL, ...) {
-  assert_character(ip, len = 1, any.missing = FALSE, min.chars = 1)
-
-  # Validate IP address format
-  ip <- validate_input(ip)
-
-  # Basic IP validation (IPv4 and IPv6)
-  if (!is_valid_ip(ip)) {
-    stop("Invalid IP address format. Must be a valid IPv4 or IPv6 address.\n")
-  }
+  ip <- sanitize_ip(ip)
 
   res <- virustotal_POST(path = paste0("ip_addresses/", ip, "/analyse"), ...)
 
   # Return structured response
   structure(res, class = c("virustotal_response", "list"))
-}
-
-is_valid_ip <- function(ip) {
-  ipv4 <- "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}"
-  ipv4 <- paste0(ipv4, "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
-
-  ipv6 <- "^([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}$"
-
-  grepl(ipv4, ip) || grepl(ipv6, ip)
 }
