@@ -104,12 +104,12 @@
 * **Analysis Endpoint**: Added `get_analysis()` to retrieve analysis results by ID.
 
 * **File Behaviour Endpoints**: New functions for sandbox analysis:
-    - `get_file_behaviour_summary()`: Summary of all behaviour reports
+    - `get_file_behaviour_summary()`: Summary of all behavior reports
     - `get_file_behaviour_mitre_trees()`: MITRE ATT&CK technique mappings
-    - `get_file_behaviours()`: All behaviour reports for a file
+    - `get_file_behaviours()`: All behavior reports for a file
 
 * **Sandbox Report Endpoints**: Access individual sandbox artifacts:
-    - `get_behaviour_report()`: JSON behaviour report
+    - `get_behaviour_report()`: JSON behavior report
     - `get_behaviour_html()`: HTML report from sandbox
     - `get_behaviour_evtx()`: Windows Event Log file
     - `get_behaviour_pcap()`: Network capture file

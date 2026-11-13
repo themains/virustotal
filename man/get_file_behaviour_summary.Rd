@@ -12,10 +12,10 @@ get_file_behaviour_summary(hash = NULL, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-list containing behaviour summary from all sandboxes
+list containing behavior summary from all sandboxes
 }
 \description{
-Retrieves a summary of all behaviour reports for a file.
+Retrieves a summary of all behavior reports for a file.
 }
 \examples{
 \dontrun{
@@ -30,5 +30,5 @@ get_file_behaviour_summary(hash = '99017f6eebbac24f351415dd410d522d')
 }
 \seealso{
 \code{\link{set_key}} for setting the API key,
-\code{\link{get_file_behaviours}} for full behaviour reports
+\code{\link{get_file_behaviours}} for full behavior reports
 }

@@ -15,7 +15,7 @@ get_file_behaviour_mitre_trees(hash = NULL, ...)
 list containing MITRE ATT&CK technique mappings
 }
 \description{
-Retrieves MITRE ATT&CK techniques observed in file behaviour reports.
+Retrieves MITRE ATT&CK techniques observed in file behavior reports.
 }
 \examples{
 \dontrun{
@@ -30,5 +30,5 @@ get_file_behaviour_mitre_trees(hash = '99017f6eebbac24f351415dd410d522d')
 }
 \seealso{
 \code{\link{set_key}} for setting the API key,
-\code{\link{get_file_behaviour_summary}} for behaviour summary
+\code{\link{get_file_behaviour_summary}} for behavior summary
 }

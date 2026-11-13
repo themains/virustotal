@@ -12,10 +12,10 @@ get_behaviour_report(sandbox_id = NULL, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-list containing detailed behaviour report from the sandbox
+list containing detailed behavior report from the sandbox
 }
 \description{
-Retrieves a specific behaviour report from a sandbox analysis.
+Retrieves a specific behavior report from a sandbox analysis.
 }
 \examples{
 \dontrun{
@@ -30,5 +30,5 @@ get_behaviour_report(sandbox_id = 'hash_sandboxname')
 }
 \seealso{
 \code{\link{set_key}} for setting the API key,
-\code{\link{get_file_behaviours}} for listing all behaviour reports
+\code{\link{get_file_behaviours}} for listing all behavior reports
 }
