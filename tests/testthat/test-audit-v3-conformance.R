@@ -34,7 +34,7 @@ test_that("no assembled path contains a stray slash in its identifier", {
 })
 
 test_that("rescan endpoints use the v3 /analyse verb", {
-  # /rescan is the v2 path. rescan_file() already used /analyse.
+  # /rescan is the v2 path. rescan_file() already used /analyze.
   cap <- new_capture()
   use_capture(cap)
   rescan_domain("google.com")

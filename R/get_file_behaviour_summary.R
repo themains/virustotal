@@ -1,18 +1,18 @@
 #' Get File Behaviour Summary
 #'
-#' Retrieves a summary of all behaviour reports for a file.
+#' Retrieves a summary of all behavior reports for a file.
 #'
 #' @param hash File hash (MD5, SHA1, or SHA256). Required.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #'
-#' @return list containing behaviour summary from all sandboxes
+#' @return list containing behavior summary from all sandboxes
 #'
 #' @export
 #'
 #' @references \url{https://docs.virustotal.com/reference/file-all-behaviours-summary}
 #'
 #' @seealso \code{\link{set_key}} for setting the API key,
-#'   \code{\link{get_file_behaviours}} for full behaviour reports
+#'   \code{\link{get_file_behaviours}} for full behavior reports
 #'
 #' @examples \dontrun{
 #'

@@ -1,13 +1,13 @@
 #' Get File Behaviours
 #'
-#' Retrieves all behaviour reports for a file from various sandboxes.
+#' Retrieves all behavior reports for a file from various sandboxes.
 #'
 #' @param hash File hash (MD5, SHA1, or SHA256). Required.
 #' @param limit Number of reports to retrieve. Integer. Optional.
 #' @param cursor String for pagination. Optional.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #'
-#' @return list containing behaviour reports from various sandboxes
+#' @return list containing behavior reports from various sandboxes
 #'
 #' @export
 #'

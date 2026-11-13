@@ -18,7 +18,7 @@ categorizes the content hosted by a domain using a variety of prominent
 services, and provides passive DNS information, among other things.
 
 The package covers the VirusTotal API v3: file, URL, domain and IP
-reports; scanning and rescanning; IoC relationships; sandbox behaviour
+reports; scanning and rescanning; IoC relationships; sandbox behavior
 artifacts; comments and votes. Requests are paced to the public API’s
 4-per-minute allowance automatically, transient failures are retried
 honoring the server’s `Retry-After`, and API failures surface as typed R

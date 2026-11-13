@@ -26,3 +26,4 @@
 # coverage job, which installs from the checkout where the fixtures exist
 # (verified with a sentinel, not assumed).
 ^tests/testthat/_fixtures$
+^\.codespellrc$

@@ -1,6 +1,6 @@
 #' Get File Behaviour MITRE ATT&CK Trees
 #'
-#' Retrieves MITRE ATT&CK techniques observed in file behaviour reports.
+#' Retrieves MITRE ATT&CK techniques observed in file behavior reports.
 #'
 #' @param hash File hash (MD5, SHA1, or SHA256). Required.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
@@ -12,7 +12,7 @@
 #' @references \url{https://docs.virustotal.com/reference}
 #'
 #' @seealso \code{\link{set_key}} for setting the API key,
-#'   \code{\link{get_file_behaviour_summary}} for behaviour summary
+#'   \code{\link{get_file_behaviour_summary}} for behavior summary
 #'
 #' @examples \dontrun{
 #'

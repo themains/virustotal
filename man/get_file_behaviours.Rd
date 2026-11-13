@@ -16,10 +16,10 @@ get_file_behaviours(hash = NULL, limit = NULL, cursor = NULL, ...)
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-list containing behaviour reports from various sandboxes
+list containing behavior reports from various sandboxes
 }
 \description{
-Retrieves all behaviour reports for a file from various sandboxes.
+Retrieves all behavior reports for a file from various sandboxes.
 }
 \examples{
 \dontrun{
