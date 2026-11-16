@@ -27,3 +27,4 @@
 # (verified with a sentinel, not assumed).
 ^tests/testthat/_fixtures$
 ^\.codespellrc$
+^lychee\.toml$
