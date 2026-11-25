@@ -13,7 +13,14 @@ The development suite passed 632 assertions with httr2 1.2.2 and again
 with httr2 1.3.0. Two checks that require a configured VirusTotal key
 were skipped in each run.
 
+## Windows R-devel
+
+R-hub checked the release on Windows with R-devel r90926 (ucrt).
+R CMD check completed with Status: OK.
+
 ## Reverse dependency
 
 CRAN rdomains 0.6.1 passed R CMD check in separate libraries using
 virustotal 0.7.1 and 0.8.0. Both runs passed 518 assertions and skipped 23.
+An additional revdepcheck comparison found zero new problems and zero
+packages that failed to check.
