@@ -113,3 +113,13 @@ test_that("ignored dots warn instead of vanishing", {
   expect_warning(virustotal_GET("files/x", cursors = "typo"), "Ignoring argument")
   expect_no_warning(virustotal_GET("files/x"))
 })
+
+test_that("authentication and permission errors retain distinct messages and HTTP details", {
+  for (code in c(401L, 403L)) {
+    resp <- httr2::response(code)
+    error <- tryCatch(virustotal_check(resp), virustotal_auth_error = identity)
+    expect_identical(error$status_code, code)
+    expect_identical(error$response, resp)
+    expect_match(conditionMessage(error), if (code == 401L) "API key" else "permission")
+  }
+})

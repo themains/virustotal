@@ -1,16 +1,12 @@
 #' Retrieve relationships for a file
 #'
 #' @param hash File hash (MD5, SHA1, or SHA256)
-#' @param relationship Type of relationship: "behaviours", "bundled_files",
-#'   "compression_parents", "contacted_domains", "contacted_ips",
-#'   "contacted_urls", "dropped_files", "execution_parents", "itw_domains",
-#'   "itw_ips", "itw_urls", "overlay_parents", "pcap_parents",
-#'   "pe_resource_parents", "similar_files", "submissions"
+#' @param relationship A VirusTotal relationship name such as `graphs`.
 #' @param limit Number of relationships to retrieve. Integer. Optional. Default is 10.
 #' @param cursor String for pagination. Optional.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #'
-#' @return list containing file relationships
+#' @return A list containing the IDs and types of the related objects.
 #'
 #' @export
 #'
@@ -30,19 +26,7 @@
 get_file_relationships <- function(hash = NULL, relationship = NULL,
                                    limit = NULL, cursor = NULL, ...) {
   assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
-  assert_character(relationship, len = 1, any.missing = FALSE, min.chars = 1)
-
-  valid_relationships <- c(
-    "behaviours", "bundled_files", "compression_parents",
-    "contacted_domains", "contacted_ips", "contacted_urls",
-    "dropped_files", "execution_parents", "itw_domains",
-    "itw_ips", "itw_urls", "overlay_parents", "pcap_parents",
-    "pe_resource_parents", "similar_files", "submissions"
-  )
-
-  if (!relationship %in% valid_relationships) {
-    stop("Invalid relationship type")
-  }
+  validate_relationship(relationship)
 
   res <- virustotal_GET(
     path = paste0("files/", hash, "/relationships/", relationship),

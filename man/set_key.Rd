@@ -7,7 +7,8 @@
 set_key(api_key = NULL)
 }
 \arguments{
-\item{api_key}{VirusTotal API key (character string). Required.}
+\item{api_key}{VirusTotal API key. After trimming surrounding whitespace, the
+key must contain at least 32 ASCII letters or digits.}
 }
 \value{
 Invisibly returns TRUE on success
@@ -28,7 +29,7 @@ works without calling this function at all.
 set_key('your_64_character_api_key_here')
 
 # Verify it's set
-Sys.getenv("VIRUSTOTAL_API_KEY")
+is_api_key_configured()
 }
 }
 \references{

@@ -136,3 +136,49 @@ test_that("retry_after falls back to 60 when the header is absent", {
   )
   expect_equal(e$retry_after, 37)
 })
+
+test_that("URL operations accept mixed-case schemes and preserve the original URL bytes", {
+  cap <- new_capture()
+  use_capture(cap)
+  url <- "HtTpS://www.example.com/Case"
+  url_report(url)
+  rescan_url(url)
+  get_url_votes(url)
+  post_url_votes(url, "harmless")
+  get_url_comments(url)
+  post_url_comments(url, "test")
+  get_url_relationships(url, "graphs")
+  paths <- vapply(cap$calls, `[[`, character(1), "path")
+  expect_equal(paths, paste0("urls/", urlsafe_id(url), c(
+    "", "/analyse", "/votes", "/votes", "/comments", "/comments", "/relationships/graphs"
+  )))
+})
+
+test_that("relationship queries accept names added by the service", {
+  cap <- new_capture()
+  use_capture(cap)
+  get_file_relationships("hash", "graphs")
+  expect_identical(cap$last()$path, "files/hash/relationships/graphs")
+  get_url_relationships("id", "related_comments")
+  expect_identical(cap$last()$path, "urls/id/relationships/related_comments")
+})
+
+test_that("domain and IP votes reject unsupported verdicts before sending", {
+  cap <- new_capture()
+  use_capture(cap)
+  expect_error(post_domain_votes("example.com", "unknown"), class = "virustotal_validation_error")
+  expect_error(post_ip_votes("8.8.8.8", "unknown"), class = "virustotal_validation_error")
+  expect_length(cap$calls, 0L)
+})
+
+test_that("single-object lookups warn on pagination options and omit them from the URL", {
+  withr::local_envvar(c(VIRUSTOTAL_API_KEY = strrep("a", 64)))
+  urls <- character()
+  httr2::local_mocked_responses(function(req) {
+    urls <<- c(urls, req$url)
+    httr2::response(200, body = charToRaw('{"data":{}}'))
+  })
+  expect_warning(get_domain_info("example.com", 10, "next"), "Ignoring argument")
+  expect_warning(get_ip_info("8.8.8.8", cursor = "next"), "Ignoring argument")
+  expect_equal(urls, paste0(vt_base_url, c("/domains/example.com", "/ip_addresses/8.8.8.8")))
+})

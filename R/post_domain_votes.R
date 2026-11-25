@@ -1,7 +1,7 @@
 #' Add a vote for a hostname or domain
 #'
-#' @param domain domain name. Required.
-#' @param vote vote. Required.
+#' @inheritParams domain_report
+#' @param vote Either `harmless` or `malicious`.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #'
 #' @return named list
@@ -19,10 +19,10 @@
 #' post_domain_votes("http://google.com", vote = "malicious")
 #' }
 post_domain_votes <- function(domain = NULL, vote = NULL, ...) {
-  assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
+  domain <- sanitize_domain(domain)
   assert_character(vote, len = 1, any.missing = FALSE, min.chars = 1)
 
-  domain <- gsub("^http://|^https://", "", domain)
+  validate_verdict(vote, "vote")
 
   vote_body <- list(
     data = list(

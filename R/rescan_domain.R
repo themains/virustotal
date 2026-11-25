@@ -3,7 +3,7 @@
 #' Request a new analysis of a domain already in VirusTotal's database.
 #' Returns an analysis ID for use with \code{\link{get_analysis}}.
 #'
-#' @param domain Domain name to rescan. Required.
+#' @inheritParams domain_report
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #'
 #' @return list containing analysis details and ID
@@ -23,15 +23,7 @@
 #' rescan_domain("google.com")
 #' }
 rescan_domain <- function(domain = NULL, ...) {
-  assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
-
-  # Validate and clean domain input
-  domain <- validate_input(domain)
-
-  # Clean domain (remove protocol, www, paths)
-  domain <- gsub("^https?://", "", domain)
-  domain <- gsub("^www\\.", "", domain)
-  domain <- gsub("/.*$", "", domain)
+  domain <- sanitize_domain(domain)
 
   res <- virustotal_POST(path = paste0("domains/", domain, "/analyse"), ...)
 

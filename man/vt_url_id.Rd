@@ -2,7 +2,7 @@
 % Please edit documentation in R/virustotal.R
 \name{vt_url_id}
 \alias{vt_url_id}
-\title{Encode a URL as a VirusTotal v3 URL identifier}
+\title{Return a VirusTotal v3 identifier for a URL or an existing ID}
 \usage{
 vt_url_id(url)
 }

@@ -25,10 +25,7 @@ post_url_comments <- function(url_id = NULL, comment = NULL, ...) {
   assert_character(url_id, len = 1, any.missing = FALSE, min.chars = 1)
   assert_character(comment, len = 1, any.missing = FALSE, min.chars = 1)
 
-  # If it looks like a URL, encode it to base64 (VirusTotal v3 requirement)
-  if (grepl("^https?://", url_id)) {
-    url_id <- vt_url_id(url_id)
-  }
+  url_id <- vt_url_id(url_id)
 
   comment_body <- list(data = list(
     type = "comment",

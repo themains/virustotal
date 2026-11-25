@@ -95,7 +95,7 @@ test_that("get_file_relationships validates input correctly", {
     "Assertion on 'relationship' failed"
   )
   expect_error(
-    get_file_relationships("hash123", "invalid"),
+    get_file_relationships("hash123", "invalid/name"),
     "Invalid relationship type"
   )
 })
@@ -208,4 +208,39 @@ test_that("behaviour artifact endpoints return raw bodies", {
   payload <- charToRaw("<html></html>")
   httr2::local_mocked_responses(list(httr2::response(200, body = payload)))
   expect_identical(get_behaviour_html("id_sandbox"), payload)
+})
+
+test_that("binary downloads follow signed HTTPS locations without the API key", {
+  withr::local_envvar(c(VIRUSTOTAL_API_KEY = strrep("a", 64)))
+  signed <- "https://storage.example.com/file?sig=a%2Fb&part=1&part=2"
+  payload <- charToRaw("sample fixture")
+  calls <- list()
+  reset_rate_limit()
+  withr::defer(reset_rate_limit())
+  httr2::local_mocked_responses(function(req) {
+    calls[[length(calls) + 1L]] <<- req
+    if (length(calls) == 1L) return(httr2::response(302, headers = list(location = signed)))
+    if (length(calls) == 2L) return(httr2::response(307, headers = list(location = "/final")))
+    httr2::response(200, body = payload)
+  })
+  expect_identical(download_file(strrep("a", 64)), payload)
+  expect_identical(calls[[2]]$url, signed)
+  expect_true("x-apikey" %in% names(calls[[1]]$headers))
+  expect_false("x-apikey" %in% names(calls[[2]]$headers))
+  expect_false("x-apikey" %in% names(calls[[3]]$headers))
+  expect_identical(calls[[3]]$url, "https://storage.example.com/final")
+  expect_true(all(vapply(calls, function(req) identical(req$options$followlocation, FALSE),
+                         logical(1))))
+  expect_equal(get_rate_limit_status()$requests_used, 1)
+})
+
+test_that("downloads refuse a non-HTTPS location before writing", {
+  withr::local_envvar(c(VIRUSTOTAL_API_KEY = strrep("a", 64)))
+  out <- withr::local_tempfile()
+  writeBin(charToRaw("original"), out)
+  httr2::local_mocked_responses(list(
+    httr2::response(302, headers = list(location = "http://storage.example.com/file"))
+  ))
+  expect_error(download_file(strrep("a", 64), out), "HTTPS")
+  expect_identical(readBin(out, "raw", 8), charToRaw("original"))
 })

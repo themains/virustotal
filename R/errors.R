@@ -58,6 +58,8 @@ virustotal_rate_limit_error <- function(message = "Rate limit exceeded",
 #' Create an authentication error
 #'
 #' @param message Error message
+#' @param status_code HTTP status code, when available
+#' @param response HTTP response, when available
 #' @param call The calling function (automatically detected)
 #'
 #' @return An error object of class \code{virustotal_auth_error}
@@ -65,10 +67,12 @@ virustotal_rate_limit_error <- function(message = "Rate limit exceeded",
 #' @export
 #' @family error handling
 virustotal_auth_error <- function(message = "Invalid or missing API key",
-                                  call = sys.call(-1)) {
+                                  call = sys.call(-1), status_code = NULL, response = NULL) {
   structure(
     list(
       message = message,
+      status_code = status_code,
+      response = response,
       call = call
     ),
     class = c("virustotal_auth_error", "virustotal_error", "error", "condition")

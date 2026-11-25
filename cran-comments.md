@@ -1,20 +1,26 @@
-## Test environments
+## Reason for update
 
-* Local macOS 27.0.1 (aarch64), R 4.6.0.
-* GitHub Actions: Ubuntu R 4.6.2 and R 4.5.3; macOS and Windows R 4.6.2.
-* R-hub: Ubuntu clang R-devel and Windows R-devel.
+This release keeps the API key on the VirusTotal API origin during file
+transfers and corrects the hostname used for domain reports and rescans.
+It also bundles the URL, relationship, vote, and error-handling fixes
+documented in NEWS.
 
-## R CMD check results
+## Local checks for 0.8.0
 
-0 errors | 0 warnings | 0 notes
+On macOS 27.0.1 (arm64), R 4.6.0, the built source package passed
+R CMD check --as-cran with 0 errors, 0 warnings, and 0 notes.
+The development suite passed 632 assertions with httr2 1.2.2 and again
+with httr2 1.3.0. Two checks that require a configured VirusTotal key
+were skipped in each run.
 
-The offline suite passes with current httr2 and the minimum supported version,
-1.2.2. Retry and multipart-upload tests run against local HTTP/HTTPS servers.
-Live VirusTotal tests require credentials and are skipped.
+## Windows R-devel
 
-## Reverse dependencies
+R-hub checked the release on Windows with R-devel r90926 (ucrt).
+R CMD check completed with Status: OK.
 
-Full R CMD check --as-cran checks of CRAN rdomains 0.6.1 were compared using
-virustotal 0.7.0 and 0.7.1 in separate libraries. There are no new errors,
-warnings, or notes; both test runs pass 518 assertions. Both checks report
-the same incoming-version warning because rdomains 0.6.1 is already on CRAN.
+## Reverse dependency
+
+CRAN rdomains 0.6.1 passed R CMD check in separate libraries using
+virustotal 0.7.1 and 0.8.0. Both runs passed 518 assertions and skipped 23.
+An additional revdepcheck comparison found zero new problems and zero
+packages that failed to check.

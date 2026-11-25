@@ -1,6 +1,6 @@
 #' Add a comment to an Internet domain
 #'
-#' @param domain domain name. Required.
+#' @inheritParams domain_report
 #' @param comment comment text. Required. Words starting with # become tags.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #'
@@ -18,10 +18,8 @@
 #' post_domain_comments(domain = "https://google.com", comment = "Great!")
 #' }
 post_domain_comments <- function(domain = NULL, comment = NULL, ...) {
-  assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
+  domain <- sanitize_domain(domain)
   assert_character(comment, len = 1, any.missing = FALSE, min.chars = 1)
-
-  domain <- gsub("^http://|^https://", "", domain)
 
   comment_body <- list(
     data = list(

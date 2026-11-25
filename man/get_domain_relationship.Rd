@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_domain_relationship.R
 \name{get_domain_relationship}
 \alias{get_domain_relationship}
-\title{Retrieve related objects to an Internet domain}
+\title{Retrieve related object IDs for an Internet domain}
 \usage{
 get_domain_relationship(
   domain = NULL,
@@ -13,10 +13,10 @@ get_domain_relationship(
 )
 }
 \arguments{
-\item{domain}{domain name. String. Required.}
+\item{domain}{Hostname or HTTP(S) URL. The full hostname, including any subdomain,
+identifies the VirusTotal domain object.}
 
-\item{relationship}{relationship name. String. Required. Default is \code{subdomains}.
-For all the options see \url{https://docs.virustotal.com/reference}}
+\item{relationship}{A VirusTotal relationship name such as \code{subdomains}.}
 
 \item{limit}{Number of entries. Integer. Optional.  Default is 10.}
 
@@ -25,10 +25,10 @@ For all the options see \url{https://docs.virustotal.com/reference}}
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-named list
+A list containing the IDs and types of the related objects.
 }
 \description{
-Retrieve related objects to an Internet domain
+Retrieve related object IDs for an Internet domain
 }
 \examples{
 \dontrun{

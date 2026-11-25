@@ -21,16 +21,16 @@ test_that("set_key handles whitespace correctly", {
   withr::local_envvar(c(VIRUSTOTAL_API_KEY = NA, VirustotalToken = NA))
 
   expect_warning(
-    set_key("  valid_32_character_api_key_1234567  "),
+    set_key("  abcdefghijklmnopqrstuvwxyz1234567  "),
     "Removed leading/trailing whitespace"
   )
   expect_equal(
     Sys.getenv("VIRUSTOTAL_API_KEY"),
-    "valid_32_character_api_key_1234567"
+    "abcdefghijklmnopqrstuvwxyz1234567"
   )
   expect_equal(
     Sys.getenv("VirustotalToken"),
-    "valid_32_character_api_key_1234567"
+    "abcdefghijklmnopqrstuvwxyz1234567"
   )
 })
 
@@ -38,17 +38,17 @@ test_that("set_key sets both environment variables", {
   withr::local_envvar(c(VIRUSTOTAL_API_KEY = NA, VirustotalToken = NA))
 
   expect_message(
-    result <- set_key("valid_32_character_api_key_1234567890"),
+    result <- set_key("abcdefghijklmnopqrstuvwxyz1234567890"),
     "VirusTotal API key successfully set"
   )
   expect_true(result)
   expect_equal(
     Sys.getenv("VIRUSTOTAL_API_KEY"),
-    "valid_32_character_api_key_1234567890"
+    "abcdefghijklmnopqrstuvwxyz1234567890"
   )
   expect_equal(
     Sys.getenv("VirustotalToken"),
-    "valid_32_character_api_key_1234567890"
+    "abcdefghijklmnopqrstuvwxyz1234567890"
   )
 })
 
@@ -75,4 +75,26 @@ test_that("vt_key errors as a typed condition when nothing is set", {
   withr::local_envvar(c(VIRUSTOTAL_API_KEY = NA, VirustotalToken = NA))
   expect_error(vt_key(), class = "virustotal_auth_error")
   expect_false(has_vt_key())
+})
+
+test_that("an invalid replacement key leaves the configured key intact", {
+  key <- strrep("a", 64)
+  withr::local_envvar(c(VIRUSTOTAL_API_KEY = key, VirustotalToken = key))
+  for (invalid in c(strrep(" ", 64), paste0(strrep(" ", 32), "short"))) {
+    expect_error(set_key(invalid), class = "virustotal_validation_error")
+    expect_identical(Sys.getenv("VIRUSTOTAL_API_KEY"), key)
+    expect_identical(Sys.getenv("VirustotalToken"), key)
+  }
+})
+
+test_that("single-object lookups honor a key supplied for one request", {
+  withr::local_envvar(c(VIRUSTOTAL_API_KEY = NA, VirustotalToken = NA))
+  key <- strrep("a", 64)
+  httr2::local_mocked_responses(function(req) {
+    headers <- httr2::req_get_headers(req, redacted = "reveal")
+    expect_identical(headers[["x-apikey"]], key)
+    httr2::response(200, body = charToRaw('{"data":{}}'))
+  })
+  expect_no_error(get_domain_info("example.com", key = key))
+  expect_no_error(get_ip_info("8.8.8.8", key = key))
 })

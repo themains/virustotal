@@ -1,13 +1,12 @@
-#' Retrieve related objects to an Internet domain
+#' Retrieve related object IDs for an Internet domain
 #'
-#' @param domain domain name. String. Required.
+#' @inheritParams domain_report
 #' @param limit  Number of entries. Integer. Optional.  Default is 10.
 #' @param cursor String. Optional.
-#' @param relationship relationship name. String. Required. Default is \code{subdomains}.
-#' For all the options see \url{https://docs.virustotal.com/reference}
+#' @param relationship A VirusTotal relationship name such as `subdomains`.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #'
-#' @return named list
+#' @return A list containing the IDs and types of the related objects.
 #'
 #' @export
 #'
@@ -24,10 +23,8 @@
 #' }
 get_domain_relationship <- function(domain = NULL, relationship = "subdomains",
                                     limit = NULL, cursor = NULL, ...) {
-  # Validate domain using checkmate
-  assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
-
-  domain <- gsub("^http://|^https://", "", domain)
+  domain <- sanitize_domain(domain)
+  validate_relationship(relationship)
 
   res <- virustotal_GET(
     path = paste0("domains/", domain, "/relationships/", relationship),

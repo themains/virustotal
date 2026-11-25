@@ -99,3 +99,9 @@ test_that("url_report requests the identifier path and GET verb", {
   expect_equal(cap$last()$verb, "GET")
   expect_equal(cap$last()$path, "urls/aHR0cDovL3d3dy5nb29nbGUuY29t")
 })
+
+test_that("URL identifiers are independent of the R string encoding", {
+  url <- "https://example.com/\u00e9"
+  latin1 <- iconv(url, "UTF-8", "latin1")
+  expect_identical(vt_url_id(latin1), urlsafe_id(enc2utf8(url)))
+})

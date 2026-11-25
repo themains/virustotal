@@ -166,42 +166,18 @@ sanitize_hash <- function(hash) {
 sanitize_domain <- function(domain) {
   assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
 
-  # Remove whitespace
-  domain <- trimws(domain)
-
-  # Convert to lowercase for consistency
-  domain <- tolower(domain)
-
-  # Remove protocol if present
-  domain <- gsub("^https?://", "", domain)
-  domain <- gsub("^ftp://", "", domain)
-
-  # Remove www prefix
-  domain <- gsub("^www\\.", "", domain)
-
-  # Remove paths, queries, and fragments
-  domain <- gsub("/.*$", "", domain)
-  domain <- gsub("\\?.*$", "", domain)
-  domain <- gsub("#.*$", "", domain)
-
-  # Remove trailing dots
-  domain <- gsub("\\.$", "", domain)
-
-  # Validate domain format
-  # Basic regex for domain names (simplified)
-  if (!grepl("^[a-z0-9][a-z0-9.-]*[a-z0-9]$", domain) ||
-        grepl("\\.\\.", domain) ||
-        grepl("^[.-]|[.-]$", domain)) {
-    stop(virustotal_validation_error(
-      message = "Invalid domain format",
-      parameter = "domain",
-      value = domain
-    ))
+  input <- trimws(domain)
+  if (grepl("^(https?|ftp)://[^/?#]", input, ignore.case = TRUE)) {
+    host <- tryCatch(url_parse(input)$hostname, error = function(e) "")
+  } else {
+    host <- sub("[/?#].*$", "", input)
   }
-
-  # Allow private domains for enterprise environments
-
-  domain
+  host <- sub("\\.$", "", tolower(host))
+  label <- "[[:alnum:]]([[:alnum:]-]*[[:alnum:]])?"
+  if (!grepl(paste0("^", label, "(\\.", label, ")*$"), host)) {
+    stop(virustotal_validation_error("Invalid domain format", "domain", domain))
+  }
+  host
 }
 
 #' Sanitize IP address input
@@ -241,15 +217,9 @@ sanitize_ip <- function(ip) {
 #' @export
 #' @family security
 is_api_key_configured <- function() {
-  key <- if (has_vt_key()) vt_key() else ""
-  if (key == "" || is.null(key)) {
-    return(FALSE)
-  }
+  has_vt_key() && valid_vt_key(vt_key())
+}
 
-  # Basic format check
-  if (nchar(key) < 32 || !grepl("^[a-zA-Z0-9]+$", key)) {
-    return(FALSE)
-  }
-
-  TRUE
+valid_vt_key <- function(key) {
+  grepl("^[a-zA-Z0-9]{32,}$", key)
 }

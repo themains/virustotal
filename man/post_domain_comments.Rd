@@ -7,7 +7,8 @@
 post_domain_comments(domain = NULL, comment = NULL, ...)
 }
 \arguments{
-\item{domain}{domain name. Required.}
+\item{domain}{Hostname or HTTP(S) URL. The full hostname, including any subdomain,
+identifies the VirusTotal domain object.}
 
 \item{comment}{comment text. Required. Words starting with # become tags.}
 

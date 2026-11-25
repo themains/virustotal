@@ -9,7 +9,7 @@ post_ip_votes(ip = NULL, vote = NULL, ...)
 \arguments{
 \item{ip}{IP address. Required.}
 
-\item{vote}{vote. Required.}
+\item{vote}{Either \code{harmless} or \code{malicious}.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }

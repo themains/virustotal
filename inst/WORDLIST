@@ -20,6 +20,7 @@ EVTX
 Forcepoint
 geolocation
 hostname
+HTTPS
 httr
 IoC
 ip

@@ -22,13 +22,7 @@ post_file_votes <- function(hash = NULL, verdict = NULL, ...) {
   assert_character(hash, len = 1, any.missing = FALSE, min.chars = 1)
   assert_character(verdict, len = 1, any.missing = FALSE)
 
-  if (!verdict %in% c("harmless", "malicious")) {
-    stop(virustotal_validation_error(
-      message = "Verdict must be either 'harmless' or 'malicious'",
-      parameter = "verdict",
-      value = verdict
-    ))
-  }
+  validate_verdict(verdict)
 
   vote_body <- list(data = list(
     type = "vote",
