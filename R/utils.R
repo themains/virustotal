@@ -206,3 +206,21 @@ virustotal_info <- function() {
 
   invisible(NULL)
 }
+
+validate_relationship <- function(relationship) {
+  assert_character(relationship, len = 1, any.missing = FALSE, min.chars = 1)
+  if (!grepl("^[a-z][a-z0-9_]*$", relationship)) {
+    stop(virustotal_validation_error("Invalid relationship type", "relationship", relationship))
+  }
+}
+
+validate_verdict <- function(verdict, parameter = "verdict") {
+  if (!checkmate::test_string(verdict) || !verdict %in% c("harmless", "malicious")) {
+    stop(virustotal_validation_error(
+      message = "Verdict must be either 'harmless' or 'malicious'",
+      parameter = parameter,
+      value = verdict
+    ))
+  }
+  invisible(verdict)
+}

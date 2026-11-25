@@ -4,16 +4,14 @@
 \alias{get_ip_info}
 \title{Retrieve information about an IP address}
 \usage{
-get_ip_info(ip = NULL, limit = NULL, cursor = NULL, ...)
+get_ip_info(ip = NULL, ..., key = vt_key())
 }
 \arguments{
 \item{ip}{IP address. Required.}
 
-\item{limit}{Number of entries. Optional.}
+\item{\dots}{Unused. Extra arguments trigger a warning.}
 
-\item{cursor}{String. Optional.}
-
-\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
+\item{key}{API key for this request. Defaults to the configured key.}
 }
 \value{
 named list

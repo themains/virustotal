@@ -1,3 +1,25 @@
+# virustotal 0.8.0
+
+* Domain requests preserve the full hostname. In particular,
+  `domain_report("www.example.com")` and `rescan_domain("www.example.com")`
+  now target `www.example.com`. Pass `example.com` to request the parent.
+  Domain lookups, comments, votes, relationships, and rescans all extract
+  the same hostname when given an HTTP or HTTPS URL.
+* Requests carrying the API key disable automatic redirects. Binary downloads
+  follow HTTPS redirects without the key. Single-use file uploads require
+  the VirusTotal API's HTTPS host and port.
+* `set_key()` validates the trimmed key before updating either environment
+  variable. HTTP 401 and 403 errors now retain the response and status code.
+  A 403 reports that the account lacks permission for the operation.
+* URL lookups, comments, votes, relationships, and rescans recognize HTTP
+  and HTTPS schemes regardless of case and encode the original URL in UTF-8.
+* File and URL relationship queries accept relationship names supported by
+  VirusTotal, including `graphs` for files and `related_comments` for URLs.
+  The relationship endpoints return object IDs and types.
+* Domain and IP votes validate the verdict before sending. Single-object
+  domain and IP lookups warn if passed pagination arguments. Collection
+  endpoints continue to accept `limit` and `cursor`.
+
 # virustotal 0.7.1
 
 * Requires httr2 >= 1.2.2 for the throttle API used by the package.

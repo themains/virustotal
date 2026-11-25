@@ -6,13 +6,19 @@
 \usage{
 virustotal_auth_error(
   message = "Invalid or missing API key",
-  call = sys.call(-1)
+  call = sys.call(-1),
+  status_code = NULL,
+  response = NULL
 )
 }
 \arguments{
 \item{message}{Error message}
 
 \item{call}{The calling function (automatically detected)}
+
+\item{status_code}{HTTP status code, when available}
+
+\item{response}{HTTP response, when available}
 }
 \value{
 An error object of class \code{virustotal_auth_error}

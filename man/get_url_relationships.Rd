@@ -15,7 +15,7 @@ get_url_relationships(
 \arguments{
 \item{url_id}{URL or URL ID from VirusTotal}
 
-\item{relationship}{Type of relationship. See VirusTotal docs for options.}
+\item{relationship}{A VirusTotal relationship name such as \code{graphs}.}
 
 \item{limit}{Number of relationships to retrieve. Optional.}
 
@@ -24,7 +24,7 @@ get_url_relationships(
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-list containing URL relationships
+A list containing the IDs and types of the related objects.
 }
 \description{
 Retrieve relationships for a URL

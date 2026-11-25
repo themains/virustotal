@@ -1,10 +1,9 @@
 #' Retrieve information about an Internet domain
 #'
 #'
-#' @param domain domain name. String. Required.
-#' @param limit  Number of entries. Integer. Optional.  Default is 10.
-#' @param cursor String. Optional.
-#' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
+#' @inheritParams domain_report
+#' @param key API key for this request. Defaults to the configured key.
+#' @param \dots Unused. Extra arguments trigger a warning.
 #'
 #' @return named list
 #'
@@ -21,16 +20,9 @@
 #' get_domain_info("http://www.google.com")
 #' get_domain_info("https://www.example.com") # Domain not found
 #' }
-get_domain_info <- function(domain = NULL, limit = NULL, cursor = NULL, ...) {
-  # Validate domain using checkmate
-  assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
+get_domain_info <- function(domain = NULL, ..., key = vt_key()) {
+  domain <- sanitize_domain(domain)
 
-  domain <- gsub("^http://|^https://", "", domain)
-
-  res <- virustotal_GET(
-    path = paste0("domains/", domain),
-    query = list(limit = limit, cursor = cursor), ...
-  )
-
-  res
+  warn_ignored_dots(...)
+  virustotal_GET(paste0("domains/", domain), key = key)
 }

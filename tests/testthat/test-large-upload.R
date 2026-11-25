@@ -35,6 +35,7 @@ test_that("file uploads choose the correct endpoint at size boundaries", {
       expect_length(calls, 2)
       expect_equal(calls[[1]]$url, "https://www.virustotal.com/api/v3/files/upload_url")
       expect_equal(calls[[2]]$url, upload_url)
+      expect_true("x-apikey" %in% names(calls[[2]]$headers))
       expect_equal(calls[[2]]$policies$retry_max_tries, 1)
     }
     expect_equal(tail(calls, 1)[[1]]$body$type, "multipart")
@@ -177,4 +178,13 @@ test_that("a single-use upload redirect is an error instead of an apparent succe
   expect_s3_class(error, "virustotal_error")
   expect_equal(error$status_code, 307)
   expect_equal(calls, 2L)
+})
+
+test_that("single-use uploads are restricted to the VirusTotal HTTPS origin", {
+  f <- withr::local_tempfile()
+  writeBin(charToRaw("upload fixture"), f)
+  httr2::local_mocked_responses(function(req) stop("unexpected upload"))
+  for (url in c("https://storage.example.com/file", "https://www.virustotal.com:8443/file")) {
+    expect_error(vt_upload_file(f, url, key = "fixture"), "origin", class = "virustotal_error")
+  }
 })

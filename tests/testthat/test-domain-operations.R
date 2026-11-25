@@ -11,17 +11,32 @@ test_that("domain_report validates input correctly", {
   )
 })
 
-test_that("domain_report strips a scheme before building the path", {
-  # Was asserting base R's gsub() against literals, which would still pass if
-  # domain_report() stopped cleaning domains altogether. Exercise the package.
+test_that("all domain operations target the full hostname", {
   cap <- new_capture()
   use_capture(cap)
 
-  domain_report("https://example.com")
-  expect_equal(cap$last()$path, "domains/example.com")
+  hosts <- c(
+    "example.com" = "example.com",
+    "www.example.com" = "www.example.com",
+    "http://www.example.com/path" = "www.example.com",
+    "HTTPS://WWW.Shop.Example.com.:8443/path?q=1#section" = "www.shop.example.com"
+  )
+  for (input in names(hosts)) {
+    cap$calls <- list()
+    domain_report(input)
+    get_domain_info(input)
+    rescan_domain(input)
+    get_domain_comments(input)
+    post_domain_comments(input, "a comment")
+    get_domain_votes(input)
+    post_domain_votes(input, "harmless")
+    get_domain_relationship(input, "subdomains")
 
-  domain_report("http://example.com")
-  expect_equal(cap$last()$path, "domains/example.com")
+    paths <- vapply(cap$calls, `[[`, character(1), "path")
+    suffixes <- c("", "", "/analyse", "/comments", "/comments",
+                  "/votes", "/votes", "/relationships/subdomains")
+    expect_equal(paths, paste0("domains/", hosts[[input]], suffixes), info = input)
+  }
 })
 
 test_that("get_domain_comments validates input correctly", {

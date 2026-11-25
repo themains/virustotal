@@ -30,12 +30,7 @@ rescan_url <- function(url_id = NULL, ...) {
 
   url_id <- validate_input(url_id)
 
-  # If it looks like a URL, encode it to base64 (VirusTotal v3 requirement),
-  # the same way url_report() and the other URL endpoints do. Percent-encoding
-  # is not an accepted identifier form.
-  if (grepl("^https?://", url_id)) {
-    url_id <- vt_url_id(url_id)
-  }
+  url_id <- vt_url_id(url_id)
 
   path <- paste0("urls/", url_id, "/analyse")
   res <- virustotal_POST(path = path, ...)

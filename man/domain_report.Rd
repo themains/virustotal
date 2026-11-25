@@ -7,7 +7,8 @@
 domain_report(domain = NULL, ...)
 }
 \arguments{
-\item{domain}{Domain name (character string). Required.}
+\item{domain}{Hostname or HTTP(S) URL. The full hostname, including any subdomain,
+identifies the VirusTotal domain object.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}}
 }

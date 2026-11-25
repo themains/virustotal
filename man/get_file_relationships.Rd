@@ -15,11 +15,7 @@ get_file_relationships(
 \arguments{
 \item{hash}{File hash (MD5, SHA1, or SHA256)}
 
-\item{relationship}{Type of relationship: "behaviours", "bundled_files",
-"compression_parents", "contacted_domains", "contacted_ips",
-"contacted_urls", "dropped_files", "execution_parents", "itw_domains",
-"itw_ips", "itw_urls", "overlay_parents", "pcap_parents",
-"pe_resource_parents", "similar_files", "submissions"}
+\item{relationship}{A VirusTotal relationship name such as \code{graphs}.}
 
 \item{limit}{Number of relationships to retrieve. Integer. Optional. Default is 10.}
 
@@ -28,7 +24,7 @@ get_file_relationships(
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
 }
 \value{
-list containing file relationships
+A list containing the IDs and types of the related objects.
 }
 \description{
 Retrieve relationships for a file

@@ -4,7 +4,8 @@
 #' WHOIS information, DNS resolutions, detected URLs, and threat intelligence
 #' data.
 #'
-#' @param domain Domain name (character string). Required.
+#' @param domain Hostname or HTTP(S) URL. The full hostname, including any subdomain,
+#'   identifies the VirusTotal domain object.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}
 #'
 #' @return A \code{virustotal_domain_report} object containing domain analysis
@@ -53,22 +54,7 @@ domain_report <- function(domain = NULL, ...) {
     }
   )
 
-  # Clean up domain (remove protocol, www, and paths for security)
-  domain_clean <- domain
-  domain_clean <- gsub("^https?://", "", domain_clean)
-  domain_clean <- gsub("^www\\.", "", domain_clean)
-  domain_clean <- gsub("/.*$", "", domain_clean) # Remove any path
-  domain_clean <- gsub("\\.$", "", domain_clean) # Remove trailing dot
-
-  # Basic domain validation (before API key check for test precedence)
-  if (!grepl("^[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]$", domain_clean) ||
-        grepl("\\.\\.", domain_clean)) {
-    stop(virustotal_validation_error(
-      message = "Invalid domain format",
-      parameter = "domain",
-      value = domain
-    ))
-  }
+  domain <- sanitize_domain(domain)
 
   # Check API key after all validation
   if (!has_vt_key()) {
@@ -79,7 +65,7 @@ domain_report <- function(domain = NULL, ...) {
 
   tryCatch(
     {
-      res <- virustotal_GET(path = paste0("domains/", domain_clean), ...)
+      res <- virustotal_GET(path = paste0("domains/", domain), ...)
 
       # Return structured response
       virustotal_domain_report(res)

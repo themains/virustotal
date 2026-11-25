@@ -7,9 +7,10 @@
 post_domain_votes(domain = NULL, vote = NULL, ...)
 }
 \arguments{
-\item{domain}{domain name. Required.}
+\item{domain}{Hostname or HTTP(S) URL. The full hostname, including any subdomain,
+identifies the VirusTotal domain object.}
 
-\item{vote}{vote. Required.}
+\item{vote}{Either \code{harmless} or \code{malicious}.}
 
 \item{\dots}{Additional arguments passed to \code{\link{virustotal_POST}}.}
 }

@@ -7,7 +7,8 @@
 get_domain_comments(domain = NULL, limit = NULL, cursor = NULL, ...)
 }
 \arguments{
-\item{domain}{domain name. String. Required.}
+\item{domain}{Hostname or HTTP(S) URL. The full hostname, including any subdomain,
+identifies the VirusTotal domain object.}
 
 \item{limit}{Number of entries. Integer. Optional.  Default is 10.}
 

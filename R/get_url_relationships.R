@@ -1,12 +1,12 @@
 #' Retrieve relationships for a URL
 #'
 #' @param url_id URL or URL ID from VirusTotal
-#' @param relationship Type of relationship. See VirusTotal docs for options.
+#' @param relationship A VirusTotal relationship name such as `graphs`.
 #' @param limit Number of relationships to retrieve. Optional.
 #' @param cursor String for pagination. Optional.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
 #'
-#' @return list containing URL relationships
+#' @return A list containing the IDs and types of the related objects.
 #'
 #' @export
 #'
@@ -26,25 +26,9 @@
 get_url_relationships <- function(url_id = NULL, relationship = NULL,
                                   limit = NULL, cursor = NULL, ...) {
   assert_character(url_id, len = 1, any.missing = FALSE, min.chars = 1)
-  assert_character(relationship, len = 1, any.missing = FALSE, min.chars = 1)
+  validate_relationship(relationship)
 
-  valid_relationships <- c(
-    "communicating_files", "downloaded_files", "graphs",
-    "last_serving_ip_address", "network_location",
-    "redirecting_urls", "redirects_to", "referrer_urls",
-    "submissions"
-  )
-
-  if (!relationship %in% valid_relationships) {
-    stop(
-      "Invalid relationship type. Must be one of: ",
-      paste(valid_relationships, collapse = ", "), "\n"
-    )
-  }
-
-  if (grepl("^https?://", url_id)) {
-    url_id <- vt_url_id(url_id)
-  }
+  url_id <- vt_url_id(url_id)
 
   path <- paste0("urls/", url_id, "/relationships/", relationship)
   res <- virustotal_GET(

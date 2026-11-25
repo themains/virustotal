@@ -75,8 +75,9 @@ vt_upload_file <- function(file_path, url, key = vt_key(), ...) {
   parsed <- if (checkmate::test_string(url, min.chars = 1)) {
     tryCatch(url_parse(url), error = function(e) NULL)
   }
-  if (identical(parsed$scheme, "http") &&
-        identical(parsed$hostname, url_parse(vt_base_url)$hostname)) {
+  origin <- url_parse(vt_base_url)
+  same_host <- identical(tolower(parsed$hostname), tolower(origin$hostname))
+  if (identical(parsed$scheme, "http") && same_host) {
     url <- httr2::url_modify(url, scheme = "https")
     parsed <- url_parse(url)
   }
@@ -87,9 +88,12 @@ vt_upload_file <- function(file_path, url, key = vt_key(), ...) {
     stop(virustotal_error("VirusTotal returned an invalid HTTPS upload URL."))
   }
 
+  if (!same_host || !identical(parsed$port %||% "443", origin$port %||% "443")) {
+    stop(virustotal_error("The upload URL must use the VirusTotal API origin."))
+  }
+
   req <- httr2::req_url(vt_request("files", key), url)
   req <- req_body_multipart(req, file = form_file(file_path))
   req <- req_retry(req, max_tries = 1)
-  req <- httr2::req_options(req, followlocation = FALSE)
   vt_body_json(vt_perform(req))
 }

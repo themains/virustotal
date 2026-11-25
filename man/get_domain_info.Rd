@@ -4,16 +4,15 @@
 \alias{get_domain_info}
 \title{Retrieve information about an Internet domain}
 \usage{
-get_domain_info(domain = NULL, limit = NULL, cursor = NULL, ...)
+get_domain_info(domain = NULL, ..., key = vt_key())
 }
 \arguments{
-\item{domain}{domain name. String. Required.}
+\item{domain}{Hostname or HTTP(S) URL. The full hostname, including any subdomain,
+identifies the VirusTotal domain object.}
 
-\item{limit}{Number of entries. Integer. Optional.  Default is 10.}
+\item{\dots}{Unused. Extra arguments trigger a warning.}
 
-\item{cursor}{String. Optional.}
-
-\item{\dots}{Additional arguments passed to \code{\link{virustotal_GET}}.}
+\item{key}{API key for this request. Defaults to the configured key.}
 }
 \value{
 named list

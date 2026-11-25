@@ -1,7 +1,7 @@
 #' Retrieve comments for an Internet domain
 #'
 #'
-#' @param domain domain name. String. Required.
+#' @inheritParams domain_report
 #' @param limit  Number of entries. Integer. Optional.  Default is 10.
 #' @param cursor String. Optional.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_GET}}.
@@ -23,9 +23,7 @@
 #' get_domain_comments("https://www.example.com") # Domain not found
 #' }
 get_domain_comments <- function(domain = NULL, limit = NULL, cursor = NULL, ...) {
-  assert_character(domain, len = 1, any.missing = FALSE, min.chars = 1)
-
-  domain <- gsub("^http://|^https://", "", domain)
+  domain <- sanitize_domain(domain)
 
   res <- virustotal_GET(
     path = paste0("domains/", domain, "/comments"),

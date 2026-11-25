@@ -51,6 +51,8 @@ vt_request <- function(path, key = vt_key()) {
   req <- request(vt_base_url)
   req <- req_url_path(req, url_parse(vt_base_url)$path, path)
   req <- req_headers_redacted(req, `x-apikey` = key)
+  # curl forwards custom headers on redirects. Only binary GETs follow a signed link.
+  req <- httr2::req_options(req, followlocation = FALSE)
   req <- req_user_agent(req, paste0(
     "virustotal-r/", packageVersion("virustotal"),
     " (https://github.com/themains/virustotal)"
@@ -92,14 +94,17 @@ vt_request <- function(path, key = vt_key()) {
   req
 }
 
-vt_perform <- function(req) {
+vt_redirect_status <- c(301L, 302L, 303L, 307L, 308L)
+
+vt_perform <- function(req, allow_redirect = FALSE) {
+  authenticated <- !is.null(req$headers[["x-apikey"]])
   recorded <- FALSE
   req <- req_retry(
     req,
     max_tries = req$policies$retry_max_tries %||% 1,
     after = req$policies$retry_after,
     is_transient = function(resp) {
-      record_request()
+      if (authenticated) record_request()
       recorded <<- TRUE
       resp_status(resp) %in% c(429, 503)
     }
@@ -117,7 +122,8 @@ vt_perform <- function(req) {
     }
   )
   # Mocked responses bypass the retry callback but still need one log entry.
-  if (!recorded) record_request()
+  if (authenticated && !recorded) record_request()
+  if (allow_redirect && resp_status(resp) %in% vt_redirect_status) return(resp)
   virustotal_check(resp)
   resp
 }
@@ -247,8 +253,25 @@ virustotal_POST <- function(path, body = NULL, query = list(), # nolint: object_
 #' @keywords internal
 virustotal_GET_raw <- function(path, key = vt_key(), ...) { # nolint: object_name_linter.
   warn_ignored_dots(...)
-  resp <- vt_perform(vt_request(path, key))
-  resp_body_raw(resp)
+  req <- vt_request(path, key)
+  for (hop in 0:10) {
+    resp <- vt_perform(req, allow_redirect = hop < 10)
+    if (!resp_status(resp) %in% vt_redirect_status) return(resp_body_raw(resp))
+
+    location <- resp_header(resp, "Location")
+    target <- if (checkmate::test_string(location, min.chars = 1)) {
+      tryCatch(
+        curl::curl_parse_url(location, baseurl = req$url, decode = FALSE, params = FALSE),
+        error = function(e) NULL
+      )
+    }
+    if (!identical(target$scheme, "https") || !is.null(target$user) || !is.null(target$password)) {
+      stop(virustotal_error("VirusTotal returned an invalid HTTPS download location."))
+    }
+    # The signed URL authorizes the download, including on subsequent redirects.
+    req <- httr2::req_headers(req, `x-apikey` = NULL)
+    req <- httr2::req_url(req, target$url)
+  }
 }
 
 #' Request Response Verification
@@ -279,9 +302,12 @@ virustotal_check <- function(resp) {
   if (status >= 200 && status < 300) return(invisible())
 
   if (status == 401 || status == 403) {
-    stop(virustotal_auth_error(
-      message = "Authentication failed. Please check your API key."
-    ))
+    message <- if (status == 403) {
+      "Your account does not have permission for this operation."
+    } else {
+      "Authentication failed. Please check your API key."
+    }
+    stop(virustotal_auth_error(message, status_code = status, response = resp))
   }
 
   if (status == 404) {
@@ -307,7 +333,7 @@ virustotal_check <- function(resp) {
   ))
 }
 
-#' Encode a URL as a VirusTotal v3 URL identifier
+#' Return a VirusTotal v3 identifier for a URL or an existing ID
 #'
 #' The API identifies a URL by its unpadded URL-safe base64 encoding, i.e.
 #' \code{base64.urlsafe_b64encode(url).strip("=")}. The standard base64
@@ -318,5 +344,6 @@ virustotal_check <- function(resp) {
 #' @return A character string containing the URL identifier.
 #' @keywords internal
 vt_url_id <- function(url) {
-  chartr("+/", "-_", gsub("=+$", "", base64_encode(charToRaw(url))))
+  if (!grepl("^https?://", url, ignore.case = TRUE)) return(url)
+  chartr("+/", "-_", gsub("=+$", "", base64_encode(charToRaw(enc2utf8(url)))))
 }

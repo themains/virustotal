@@ -1,7 +1,7 @@
 #' Add a vote for an IP address
 #'
 #' @param ip IP address. Required.
-#' @param vote vote. Required.
+#' @param vote Either `harmless` or `malicious`.
 #' @param \dots Additional arguments passed to \code{\link{virustotal_POST}}.
 #'
 #' @return named list
@@ -20,6 +20,8 @@
 post_ip_votes <- function(ip = NULL, vote = NULL, ...) {
   ip <- sanitize_ip(ip)
   assert_character(vote, len = 1, any.missing = FALSE, min.chars = 1)
+
+  validate_verdict(vote, "vote")
 
   vote_body <- list(
     data = list(

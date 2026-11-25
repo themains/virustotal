@@ -8,7 +8,8 @@
 #' that reads it directly. Setting either variable before loading the package
 #' works without calling this function at all.
 #'
-#' @param api_key VirusTotal API key (character string). Required.
+#' @param api_key VirusTotal API key. After trimming surrounding whitespace, the
+#'   key must contain at least 32 ASCII letters or digits.
 #'
 #' @return Invisibly returns TRUE on success
 #' @export
@@ -21,7 +22,7 @@
 #' set_key('your_64_character_api_key_here')
 #'
 #' # Verify it's set
-#' Sys.getenv("VIRUSTOTAL_API_KEY")
+#' is_api_key_configured()
 #' }
 set_key <- function(api_key = NULL) {
   if (is.null(api_key)) {
@@ -45,28 +46,17 @@ set_key <- function(api_key = NULL) {
     }
   )
 
-  if (nchar(api_key) < 32) {
+  key <- trimws(api_key)
+  if (!valid_vt_key(key)) {
     stop(virustotal_validation_error(
-      message = "API key appears too short. VirusTotal keys are 64 characters.",
+      message = "API key must contain at least 32 letters or digits.",
       parameter = "api_key",
-      value = paste("Length:", nchar(api_key))
+      value = paste("Length:", nchar(key))
     ))
   }
+  if (!identical(key, api_key)) warning("Removed leading/trailing whitespace from API key.")
 
-  if (grepl("^[[:space:]]+|[[:space:]]+$", api_key)) {
-    api_key <- trimws(api_key)
-    warning("Removed leading/trailing whitespace from API key.")
-  }
-
-  if (api_key == "your_api_key_here" || api_key == "api_key_here") {
-    stop(virustotal_validation_error(
-      message = "Please replace placeholder with your actual API key",
-      parameter = "api_key",
-      value = api_key
-    ))
-  }
-
-  Sys.setenv(VIRUSTOTAL_API_KEY = api_key, VirustotalToken = api_key)
+  Sys.setenv(VIRUSTOTAL_API_KEY = key, VirustotalToken = key)
 
   message("VirusTotal API key successfully set.")
   invisible(TRUE)

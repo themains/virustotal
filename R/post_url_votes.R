@@ -21,14 +21,9 @@
 post_url_votes <- function(url_id = NULL, verdict = NULL, ...) {
   assert_character(url_id, len = 1, any.missing = FALSE, min.chars = 1)
 
-  if (is.null(verdict) || !verdict %in% c("harmless", "malicious")) {
-    stop("Verdict must be either 'harmless' or 'malicious'.\n")
-  }
+  validate_verdict(verdict)
 
-  # If it looks like a URL, encode it to base64 (VirusTotal v3 requirement)
-  if (grepl("^https?://", url_id)) {
-    url_id <- vt_url_id(url_id)
-  }
+  url_id <- vt_url_id(url_id)
 
   vote_body <- list(data = list(
     type = "vote",
